@@ -558,115 +558,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/Higher%20Order%20Funcrtions/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
-      <meta itemprop="name" content="XuandYu000">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="viewoverlook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/07/02/Higher%20Order%20Funcrtions/" class="post-title-link" itemprop="url">Higher Order Funcrtions</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:12:33" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/csdiy/" itemprop="url" rel="index"><span itemprop="name">csdiy</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/csdiy/cs61A/" itemprop="url" rel="index"><span itemprop="name">cs61A</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Higher-Order-Funcrtions"><a href="#Higher-Order-Funcrtions" class="headerlink" title="Higher Order Funcrtions"></a>Higher Order Funcrtions</h1><p>让我们做一个功能组合</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">combine_funcs</span>(<span class="params">op</span>):</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;&quot;&quot;combine funcs(OP)(f,g)(x)=OP(f(x),g(x))&quot;&quot;&quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>	<span class="keyword">def</span> <span class="title function_">combine</span>(<span class="params">f,g</span>):</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>		<span class="keyword">def</span> <span class="title function_">val</span>(<span class="params">x</span>):</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>			<span class="keyword">return</span> op(f(x),g(x))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>		<span class="keyword">return</span> val</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>	<span class="keyword">return</span> combined</span><br></pre></td></tr></table></figure>
-
-<p>功能实例</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">combine_func</span>(<span class="params">op</span>):</span><br><span class="line">	<span class="keyword">def</span> <span class="title function_">combined</span>(<span class="params">f,g</span>):</span><br><span class="line">		<span class="keyword">def</span> <span class="title function_">val</span>(<span class="params">x</span>):</span><br><span class="line">			<span class="keyword">return</span> op(f(x),g(x))</span><br><span class="line">		<span class="keyword">return</span> val</span><br><span class="line">	<span class="keyword">return</span> combined</span><br><span class="line"><span class="keyword">from</span> operator <span class="keyword">import</span> add</span><br><span class="line">add_func=combine_func(add)</span><br><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> sin,cos,pi</span><br><span class="line">h=add_func(sin,cos)</span><br><span class="line">h(pi/<span class="number">4</span>)</span><br></pre></td></tr></table></figure>
-
-<p>为什么要返回val和combined，而不是val(x),combined(f,g)?<br>combined直至<code>h=add_func(sin,cos)</code>之前都没有赋值，这里的<code>return combined</code>是返回combined函数本身而不是调用后的结果，同样的在没对val赋值时返回的也只是函数val</p>
-<h4 id="challenge-Conditional-Function"><a href="#challenge-Conditional-Function" class="headerlink" title="challenge: Conditional Function"></a>challenge: Conditional Function</h4><p>是否可以写一个python函数<code>if_func</code>: <code>if_func(x/1,x&gt;0,0)</code><br>使得返回值和条件语句<code>1/x if x&gt;0 else 0</code> </p>
-<ul>
-<li>答案是不行的，函数调用时会计算操作数也就是已经计算好了<code>1/x</code></li>
-</ul>
-<p>但是我们可以这样写</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">define if_func(then_expr,condition,else_expr):</span><br><span class="line">	<span class="keyword">return</span> then_expr() <span class="keyword">if</span> condition <span class="keyword">else</span> else_expr()</span><br></pre></td></tr></table></figure>
-
-<p>之后这样调用:</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if_func(<span class="keyword">lambda</span>: <span class="number">1</span>/x,x&gt;<span class="number">0</span>,<span class="keyword">lambda</span>:<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">到目前为止，每当我们想要定义一个新函数时，都需要给它取一个名字。但是对于其他类型的表达式，我们不需要将中间值与名称相关联。也就是说，我们可以计算 `a * b + c * d` 而不必命名子表达式 `a*b` 或 `c*d` 或完整的表达式。在 Python 中，我们可以使用 lambda 表达式临时创建函数，这些表达式会计算为未命名的函数。一个 lambda 表达式的计算结果是一个函数，它仅有一个返回表达式作为主体。不允许使用赋值和控制语句。</span><br></pre></td></tr></table></figure>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">compose1</span>(<span class="params">f,g</span>):</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">return</span> <span class="keyword">lambda</span> x: f(g(x))</span><br></pre></td></tr></table></figure>
-<p>可以构造相应的句子理解:</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">lambda</span>           x       :           f(g(x))</span><br><span class="line">A function that  takes x <span class="keyword">and</span> returns f(g(x))</span><br></pre></td></tr></table></figure>
-
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/Intro/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -778,7 +669,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/Lecture%202%20Shell%20Tools%20and%20Scripting/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/Higher%20Order%20Funcrtions/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
@@ -792,7 +683,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/07/02/Lecture%202%20Shell%20Tools%20and%20Scripting/" class="post-title-link" itemprop="url">Lecture 2 Shell Tools and Scripting</a>
+            <a href="/2023/07/02/Higher%20Order%20Funcrtions/" class="post-title-link" itemprop="url">Higher Order Funcrtions</a>
         </h2>
 
         <div class="post-meta">
@@ -803,7 +694,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:10:56" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
+              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:12:33" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -815,7 +706,7 @@
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/csdiy/missing-semester/" itemprop="url" rel="index"><span itemprop="name">missing semester</span></a>
+                  <a href="/categories/csdiy/cs61A/" itemprop="url" rel="index"><span itemprop="name">cs61A</span></a>
                 </span>
             </span>
 
@@ -825,148 +716,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>4.1k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Lecture-2-Shell-Tools-and-Scripting"><a href="#Lecture-2-Shell-Tools-and-Scripting" class="headerlink" title="Lecture 2 Shell Tools and Scripting"></a>Lecture 2 Shell Tools and Scripting</h1><p>homework:</p>
-<p>1.Read man ls and write an ls command that lists files in the following manner<br>读取 man ls 并编写按以下方式列出文件的 ls 命令</p>
-<p>Includes all files, including hidden files<br>包括所有文件，包括隐藏文件<br>Sizes are listed in human readable format (e.g. 454M instead of 454279954)<br>尺寸以人类可读的格式列出（例如 454M 而不是 454279954）<br>Files are ordered by recency 文件按新近度排序<br>Output is colorized 输出已着色<br>A sample output would look like this<br>示例输出如下所示</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-rw-r--r--   1 user group 1.1M Jan 14 09:53 baz</span><br><span class="line">drwxr-xr-x   5 user group  160 Jan 14 09:53 .</span><br><span class="line">-rw-r--r--   1 user group  514 Jan 14 06:42 bar</span><br><span class="line">-rw-r--r--   1 user group 106M Jan 13 12:12 foo</span><br><span class="line">drwx------+ 47 user group 1.5K Jan 12 18:08 ..</span><br></pre></td></tr></table></figure>
-<blockquote>
-<ol>
-<li>先man ls找具体命令要用 -l -h -t -c</li>
-<li>执行<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l -h -t -c</span><br></pre></td></tr></table></figure>
-效果：<img src="https://raw.githubusercontent.com/XuandYu000/picture/main/1.png"/></li>
-</ol>
-</blockquote>
-<ol start="2">
-<li>Write bash functions marco and polo that do the following. Whenever you execute marco the current working directory should be saved in some manner, then when you execute polo, no matter what directory you are in, polo should cd you back to the directory where you executed marco. For ease of debugging you can write the code in a file marco.sh and (re)load the definitions to your shell by executing source marco.sh.<br>编写执行以下操作的 bash 函数 marco 和 polo 。每当你执行 marco 时，当前工作目录应该以某种方式保存，那么当你执行 polo 时，无论你在哪个目录， polo 都应该 cd 你回到你执行 marco 的目录。为了便于调试，您可以将代码编写在文件 marco.sh 中，并通过执行 source marco.sh 将定义（重新）加载到 shell 中。</li>
-</ol>
-<blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">marco()&#123;</span><br><span class="line">       export MARCO=$(pwd)</span><br><span class="line">&#125;</span><br><span class="line">polo()&#123;</span><br><span class="line">       cd &quot;$MARCO&quot;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
-<p>解释：</p>
-</blockquote>
-<ul>
-<li>export命令将新增MARCO内的内容到其之后所有创建的子进程中，在相同脚本中相当于定义全局变量，不同的脚本中直接引入即可。</li>
-<li>source 将脚本内嵌到shell中，这时脚本中的命令可以直接执行 </li>
-<li>注意”$”的好多用法</li>
-</ul>
-<ol start="3">
-<li><p>Say you have a command that fails rarely. In order to debug it you need to capture its output but it can be time consuming to get a failure run. Write a bash script that runs the following script until it fails and captures its standard output and error streams to files and prints everything at the end. Bonus points if you can also report how many runs it took for the script to fail.<br>假设您有一个很少失败的命令。为了调试它，您需要捕获其输出，但运行失败可能很耗时。编写一个 bash 脚本，该脚本运行以下脚本，直到它失败并将其标准输出和错误流捕获到文件并在最后打印所有内容。如果还可以报告脚本失败所花费的运行次数，则为奖励积分。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env bash</span><br><span class="line"></span><br><span class="line">n=$(( RANDOM % 100 ))</span><br><span class="line"></span><br><span class="line">if [[ n -eq 42 ]]; then</span><br><span class="line">   echo &quot;Something went wrong&quot;</span><br><span class="line">   &gt;&amp;2 echo &quot;The error was using magic numbers&quot;</span><br><span class="line">   exit 1</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>上网查一查shell中for或者while循环的语法即可，若将n改为对我文件进行执行，然后-eq参数改为0，不断循环然后加一个变量记录循环次数即可</p>
-</blockquote>
-</li>
-<li><p>echo “Everything went according to plan”<br>As we covered in the lecture find’s -exec can be very powerful for performing operations over the files we are searching for. However, what if we want to do something with all the files, like creating a zip file? As you have seen so far commands will take input from both arguments and STDIN. When piping commands, we are connecting STDOUT to STDIN, but some commands like tar take inputs from arguments. To bridge this disconnect there’s the xargs command which will execute a command using STDIN as arguments. For example ls | xargs rm will delete the files in the current directory.<br>正如我们在讲座中介绍的那样 find 的 -exec 对于对我们正在寻找的文件执行操作非常强大。但是，如果我们想对所有文件执行某些操作，例如创建zip文件，该怎么办？如您所见，命令将从参数和 STDIN 中获取输入。管道命令时，我们将 STDOUT 连接到 STDIN，但像 tar 这样的命令从参数中获取输入。为了弥合这种断开连接，有 xargs 命令，它将使用STDIN作为参数执行命令。例如 ls | xargs rm 将删除当前目录中的文件。<br>Your task is to write a command that recursively finds all HTML files in the folder and makes a zip with them. Note that your command should work even if the files have spaces (hint: check -d flag for xargs).<br>您的任务是编写一个命令，该命令以递归方式查找文件夹中的所有 HTML 文件，并用它们制作一个 zip。请注意，即使文件有空格，您的命令也应该有效（提示：检查 -d 标志的 xargs ）。<br>If you’re on macOS, note that the default BSD find is different from the one included in GNU coreutils. You can use -print0 on find and the -0 flag on xargs. As a macOS user, you should be aware that command-line utilities shipped with macOS may differ from the GNU counterparts; you can install the GNU versions if you like by using brew.<br>如果您使用的是 macOS，请注意默认的 BSD find 与 GNU coreutils 中包含的不同。您可以在 find 上使用 -print0 ，在 xargs 上使用 -0 标志。作为 macOS 用户，您应该知道 macOS 附带的命令行实用程序可能与 GNU 对应工具不同;如果您愿意，您可以使用 brew 安装 GNU 版本。</p>
-</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -type f -name &quot;*.html&quot; -print0 | xargs -0 tar -czf html_files.zip</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>解释：</p>
-<ol>
-<li>find命令递归的寻找指定目录下所有符合条件的文件：用’.’代表在当前目录下寻找， -type f 寻找普通的file文件 -name指定名称 -print0 将文件名以null字符分隔输出(\0)</li>
-<li>| xargs -0 从管道左侧接受以null分隔符的输入流</li>
-<li>tar -czf html_files.zip 此时xargs传递的输入符合tar的输入要求链接了tar命令和find<blockquote>
-<p>tar: 压缩、打包命令<br>-c: 创建一个新的压缩包<br>-z: 使用 gzip 压缩算法进行压缩<br>-f: 指定压缩包的文件名<br>html_files.zip: 压缩包的文件名，可以根据需要修改</p>
-</blockquote>
-</li>
-</ol>
-</blockquote>
-<ol start="5">
-<li>(Advanced) Write a command or script to recursively find the most recently modified file in a directory. More generally, can you list all files by recency?<br>（高级）编写命令或脚本以递归方式查找目录中最近修改的文件。更一般地说，您可以按新近度列出所有文件吗？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -type f -printf &#x27;%T+ %p\n&#x27; | sort -r | head -n 1 | cut -d&#x27; &#x27; -f2-</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>查找最近修改过的文件，解释:<br>-printf ‘%T+ %p\n’ 输出以时间在前，之后加上路径<br>sort -r :即reverse把时间按照倒序进行处理<br>head -n 1 :只取第一个<br>cut -d’ ‘ -f2-：从输出中删除修改时间，只保留文件路径</p>
-</blockquote>
-</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -type f -printf &#x27;%T+ %p\n&#x27; | sort -r | cut -d&#x27; &#x27; -f2-</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>实现新近度排列只需要不要head的那个命令即可</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/Lecture%203%20vim/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
-      <meta itemprop="name" content="XuandYu000">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="viewoverlook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/07/02/Lecture%203%20vim/" class="post-title-link" itemprop="url">Lecture 3 vim</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:07:09" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/csdiy/" itemprop="url" rel="index"><span itemprop="name">csdiy</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/csdiy/missing-semester/" itemprop="url" rel="index"><span itemprop="name">missing semester</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>583</span>
+              <span>1.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -985,26 +735,30 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Lecture-3-vim"><a href="#Lecture-3-vim" class="headerlink" title="Lecture 3 vim"></a>Lecture 3 vim</h1><ol>
-<li><p>完成 vimtutor。 备注： 它在一个 80x24（80 列，24 行） 终端窗口看起来最好。<br> 直接执行</p>
- <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vimtutor</span><br></pre></td></tr></table></figure></li>
-<li><p>下载我们的vimrc，然后把它保存到 ~&#x2F;.vimrc。 通读这个注释详细的文件 （用 Vim!）， 然后观察 Vim 在这个新的设置下看起来和使用起来有哪些细微的区别。<br>下载后他禁用了上下左右键使用hjkl代替，挺反人类的但是用习惯还可以</p>
-</li>
-<li><p>安装和配置一个插件： ctrlp.vim</p>
+          <h1 id="Higher-Order-Funcrtions"><a href="#Higher-Order-Funcrtions" class="headerlink" title="Higher Order Funcrtions"></a>Higher Order Funcrtions</h1><p>让我们做一个功能组合</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">combine_funcs</span>(<span class="params">op</span>):</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;&quot;&quot;combine funcs(OP)(f,g)(x)=OP(f(x),g(x))&quot;&quot;&quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>	<span class="keyword">def</span> <span class="title function_">combine</span>(<span class="params">f,g</span>):</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>		<span class="keyword">def</span> <span class="title function_">val</span>(<span class="params">x</span>):</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>			<span class="keyword">return</span> op(f(x),g(x))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>		<span class="keyword">return</span> val</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>	<span class="keyword">return</span> combined</span><br></pre></td></tr></table></figure>
+
+<p>功能实例</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">combine_func</span>(<span class="params">op</span>):</span><br><span class="line">	<span class="keyword">def</span> <span class="title function_">combined</span>(<span class="params">f,g</span>):</span><br><span class="line">		<span class="keyword">def</span> <span class="title function_">val</span>(<span class="params">x</span>):</span><br><span class="line">			<span class="keyword">return</span> op(f(x),g(x))</span><br><span class="line">		<span class="keyword">return</span> val</span><br><span class="line">	<span class="keyword">return</span> combined</span><br><span class="line"><span class="keyword">from</span> operator <span class="keyword">import</span> add</span><br><span class="line">add_func=combine_func(add)</span><br><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> sin,cos,pi</span><br><span class="line">h=add_func(sin,cos)</span><br><span class="line">h(pi/<span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+
+<p>为什么要返回val和combined，而不是val(x),combined(f,g)?<br>combined直至<code>h=add_func(sin,cos)</code>之前都没有赋值，这里的<code>return combined</code>是返回combined函数本身而不是调用后的结果，同样的在没对val赋值时返回的也只是函数val</p>
+<h4 id="challenge-Conditional-Function"><a href="#challenge-Conditional-Function" class="headerlink" title="challenge: Conditional Function"></a>challenge: Conditional Function</h4><p>是否可以写一个python函数<code>if_func</code>: <code>if_func(x/1,x&gt;0,0)</code><br>使得返回值和条件语句<code>1/x if x&gt;0 else 0</code> </p>
 <ul>
-<li>这里建议使用vim-plug，在.vimrc添加：Plug ‘插件名称’<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">call plug#begin(&#x27;~/.vim/plugged&#x27;)</span><br><span class="line"> Plug &#x27;vim-airline/vim-airline&#x27;</span><br><span class="line"> call plug#end()</span><br></pre></td></tr></table></figure>
-之后重新打开vim，执行<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:PlugInstall</span><br></pre></td></tr></table></figure>
-*删除插件<br>删除插件，只需要将写在 .vimrc 配置文件内的插件删除，重启 vim 并执行命令 :PlugClean</li>
+<li>答案是不行的，函数调用时会计算操作数也就是已经计算好了<code>1/x</code></li>
 </ul>
-<p>练习使用 Vim, 在你自己的机器上重做 演示。</p>
-</li>
-<li><p>下个月用 Vim 完成所有的文件编辑。每当不够高效的时候，或者你感觉 “一定有一个更好的方式”时， 尝试求助搜索引擎，很有可能有一个更好的方式。如果你遇到难题，可以来我们的答疑时间或者给我们发邮件。</p>
-</li>
-<li><p>在其他工具中设置 Vim 快捷键 （见上面的操作指南）。</p>
-</li>
-<li><p>进一步自定义你的 ~&#x2F;.vimrc 和安装更多插件。</p>
-</li>
-</ol>
+<p>但是我们可以这样写</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">define if_func(then_expr,condition,else_expr):</span><br><span class="line">	<span class="keyword">return</span> then_expr() <span class="keyword">if</span> condition <span class="keyword">else</span> else_expr()</span><br></pre></td></tr></table></figure>
+
+<p>之后这样调用:</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if_func(<span class="keyword">lambda</span>: <span class="number">1</span>/x,x&gt;<span class="number">0</span>,<span class="keyword">lambda</span>:<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">到目前为止，每当我们想要定义一个新函数时，都需要给它取一个名字。但是对于其他类型的表达式，我们不需要将中间值与名称相关联。也就是说，我们可以计算 `a * b + c * d` 而不必命名子表达式 `a*b` 或 `c*d` 或完整的表达式。在 Python 中，我们可以使用 lambda 表达式临时创建函数，这些表达式会计算为未命名的函数。一个 lambda 表达式的计算结果是一个函数，它仅有一个返回表达式作为主体。不允许使用赋值和控制语句。</span><br></pre></td></tr></table></figure>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">compose1</span>(<span class="params">f,g</span>):</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">return</span> <span class="keyword">lambda</span> x: f(g(x))</span><br></pre></td></tr></table></figure>
+<p>可以构造相应的句子理解:</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">lambda</span>           x       :           f(g(x))</span><br><span class="line">A function that  takes x <span class="keyword">and</span> returns f(g(x))</span><br></pre></td></tr></table></figure>
+
+
 
       
     </div>
@@ -1240,6 +994,252 @@
 <li>前往 ~&#x2F;.ssh&#x2F; 并查看是否已经存在 SSH 密钥对。如果不存在，请使用ssh-keygen -o -a 100 -t ed25519来创建一个。建议为密钥设置密码然后使用ssh-agent 这里；</li>
 <li>在.ssh&#x2F;config加入下面内容：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Host vm #ssh连接的别名</span><br><span class="line">   User username_goes_here #用户名</span><br><span class="line">   HostName ip_goes_here #ip地址</span><br><span class="line">   IdentityFile ~/.ssh/id_ed25519 #密钥文件</span><br><span class="line">   LocalForward 9999 localhost:8888  #本地端口转发</span><br></pre></td></tr></table></figure></li>
 </ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/Lecture%203%20vim/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
+      <meta itemprop="name" content="XuandYu000">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="viewoverlook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/07/02/Lecture%203%20vim/" class="post-title-link" itemprop="url">Lecture 3 vim</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:07:09" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/csdiy/" itemprop="url" rel="index"><span itemprop="name">csdiy</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/csdiy/missing-semester/" itemprop="url" rel="index"><span itemprop="name">missing semester</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>583</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Lecture-3-vim"><a href="#Lecture-3-vim" class="headerlink" title="Lecture 3 vim"></a>Lecture 3 vim</h1><ol>
+<li><p>完成 vimtutor。 备注： 它在一个 80x24（80 列，24 行） 终端窗口看起来最好。<br> 直接执行</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vimtutor</span><br></pre></td></tr></table></figure></li>
+<li><p>下载我们的vimrc，然后把它保存到 ~&#x2F;.vimrc。 通读这个注释详细的文件 （用 Vim!）， 然后观察 Vim 在这个新的设置下看起来和使用起来有哪些细微的区别。<br>下载后他禁用了上下左右键使用hjkl代替，挺反人类的但是用习惯还可以</p>
+</li>
+<li><p>安装和配置一个插件： ctrlp.vim</p>
+<ul>
+<li>这里建议使用vim-plug，在.vimrc添加：Plug ‘插件名称’<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">call plug#begin(&#x27;~/.vim/plugged&#x27;)</span><br><span class="line"> Plug &#x27;vim-airline/vim-airline&#x27;</span><br><span class="line"> call plug#end()</span><br></pre></td></tr></table></figure>
+之后重新打开vim，执行<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:PlugInstall</span><br></pre></td></tr></table></figure>
+*删除插件<br>删除插件，只需要将写在 .vimrc 配置文件内的插件删除，重启 vim 并执行命令 :PlugClean</li>
+</ul>
+<p>练习使用 Vim, 在你自己的机器上重做 演示。</p>
+</li>
+<li><p>下个月用 Vim 完成所有的文件编辑。每当不够高效的时候，或者你感觉 “一定有一个更好的方式”时， 尝试求助搜索引擎，很有可能有一个更好的方式。如果你遇到难题，可以来我们的答疑时间或者给我们发邮件。</p>
+</li>
+<li><p>在其他工具中设置 Vim 快捷键 （见上面的操作指南）。</p>
+</li>
+<li><p>进一步自定义你的 ~&#x2F;.vimrc 和安装更多插件。</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/Lecture%202%20Shell%20Tools%20and%20Scripting/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
+      <meta itemprop="name" content="XuandYu000">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="viewoverlook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/07/02/Lecture%202%20Shell%20Tools%20and%20Scripting/" class="post-title-link" itemprop="url">Lecture 2 Shell Tools and Scripting</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:10:56" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/csdiy/" itemprop="url" rel="index"><span itemprop="name">csdiy</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/csdiy/missing-semester/" itemprop="url" rel="index"><span itemprop="name">missing semester</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Lecture-2-Shell-Tools-and-Scripting"><a href="#Lecture-2-Shell-Tools-and-Scripting" class="headerlink" title="Lecture 2 Shell Tools and Scripting"></a>Lecture 2 Shell Tools and Scripting</h1><p>homework:</p>
+<p>1.Read man ls and write an ls command that lists files in the following manner<br>读取 man ls 并编写按以下方式列出文件的 ls 命令</p>
+<p>Includes all files, including hidden files<br>包括所有文件，包括隐藏文件<br>Sizes are listed in human readable format (e.g. 454M instead of 454279954)<br>尺寸以人类可读的格式列出（例如 454M 而不是 454279954）<br>Files are ordered by recency 文件按新近度排序<br>Output is colorized 输出已着色<br>A sample output would look like this<br>示例输出如下所示</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-rw-r--r--   1 user group 1.1M Jan 14 09:53 baz</span><br><span class="line">drwxr-xr-x   5 user group  160 Jan 14 09:53 .</span><br><span class="line">-rw-r--r--   1 user group  514 Jan 14 06:42 bar</span><br><span class="line">-rw-r--r--   1 user group 106M Jan 13 12:12 foo</span><br><span class="line">drwx------+ 47 user group 1.5K Jan 12 18:08 ..</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ol>
+<li>先man ls找具体命令要用 -l -h -t -c</li>
+<li>执行<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l -h -t -c</span><br></pre></td></tr></table></figure>
+效果：<img src="https://raw.githubusercontent.com/XuandYu000/picture/main/1.png"/></li>
+</ol>
+</blockquote>
+<ol start="2">
+<li>Write bash functions marco and polo that do the following. Whenever you execute marco the current working directory should be saved in some manner, then when you execute polo, no matter what directory you are in, polo should cd you back to the directory where you executed marco. For ease of debugging you can write the code in a file marco.sh and (re)load the definitions to your shell by executing source marco.sh.<br>编写执行以下操作的 bash 函数 marco 和 polo 。每当你执行 marco 时，当前工作目录应该以某种方式保存，那么当你执行 polo 时，无论你在哪个目录， polo 都应该 cd 你回到你执行 marco 的目录。为了便于调试，您可以将代码编写在文件 marco.sh 中，并通过执行 source marco.sh 将定义（重新）加载到 shell 中。</li>
+</ol>
+<blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">marco()&#123;</span><br><span class="line">       export MARCO=$(pwd)</span><br><span class="line">&#125;</span><br><span class="line">polo()&#123;</span><br><span class="line">       cd &quot;$MARCO&quot;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+<p>解释：</p>
+</blockquote>
+<ul>
+<li>export命令将新增MARCO内的内容到其之后所有创建的子进程中，在相同脚本中相当于定义全局变量，不同的脚本中直接引入即可。</li>
+<li>source 将脚本内嵌到shell中，这时脚本中的命令可以直接执行 </li>
+<li>注意”$”的好多用法</li>
+</ul>
+<ol start="3">
+<li><p>Say you have a command that fails rarely. In order to debug it you need to capture its output but it can be time consuming to get a failure run. Write a bash script that runs the following script until it fails and captures its standard output and error streams to files and prints everything at the end. Bonus points if you can also report how many runs it took for the script to fail.<br>假设您有一个很少失败的命令。为了调试它，您需要捕获其输出，但运行失败可能很耗时。编写一个 bash 脚本，该脚本运行以下脚本，直到它失败并将其标准输出和错误流捕获到文件并在最后打印所有内容。如果还可以报告脚本失败所花费的运行次数，则为奖励积分。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env bash</span><br><span class="line"></span><br><span class="line">n=$(( RANDOM % 100 ))</span><br><span class="line"></span><br><span class="line">if [[ n -eq 42 ]]; then</span><br><span class="line">   echo &quot;Something went wrong&quot;</span><br><span class="line">   &gt;&amp;2 echo &quot;The error was using magic numbers&quot;</span><br><span class="line">   exit 1</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>上网查一查shell中for或者while循环的语法即可，若将n改为对我文件进行执行，然后-eq参数改为0，不断循环然后加一个变量记录循环次数即可</p>
+</blockquote>
+</li>
+<li><p>echo “Everything went according to plan”<br>As we covered in the lecture find’s -exec can be very powerful for performing operations over the files we are searching for. However, what if we want to do something with all the files, like creating a zip file? As you have seen so far commands will take input from both arguments and STDIN. When piping commands, we are connecting STDOUT to STDIN, but some commands like tar take inputs from arguments. To bridge this disconnect there’s the xargs command which will execute a command using STDIN as arguments. For example ls | xargs rm will delete the files in the current directory.<br>正如我们在讲座中介绍的那样 find 的 -exec 对于对我们正在寻找的文件执行操作非常强大。但是，如果我们想对所有文件执行某些操作，例如创建zip文件，该怎么办？如您所见，命令将从参数和 STDIN 中获取输入。管道命令时，我们将 STDOUT 连接到 STDIN，但像 tar 这样的命令从参数中获取输入。为了弥合这种断开连接，有 xargs 命令，它将使用STDIN作为参数执行命令。例如 ls | xargs rm 将删除当前目录中的文件。<br>Your task is to write a command that recursively finds all HTML files in the folder and makes a zip with them. Note that your command should work even if the files have spaces (hint: check -d flag for xargs).<br>您的任务是编写一个命令，该命令以递归方式查找文件夹中的所有 HTML 文件，并用它们制作一个 zip。请注意，即使文件有空格，您的命令也应该有效（提示：检查 -d 标志的 xargs ）。<br>If you’re on macOS, note that the default BSD find is different from the one included in GNU coreutils. You can use -print0 on find and the -0 flag on xargs. As a macOS user, you should be aware that command-line utilities shipped with macOS may differ from the GNU counterparts; you can install the GNU versions if you like by using brew.<br>如果您使用的是 macOS，请注意默认的 BSD find 与 GNU coreutils 中包含的不同。您可以在 find 上使用 -print0 ，在 xargs 上使用 -0 标志。作为 macOS 用户，您应该知道 macOS 附带的命令行实用程序可能与 GNU 对应工具不同;如果您愿意，您可以使用 brew 安装 GNU 版本。</p>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -type f -name &quot;*.html&quot; -print0 | xargs -0 tar -czf html_files.zip</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>解释：</p>
+<ol>
+<li>find命令递归的寻找指定目录下所有符合条件的文件：用’.’代表在当前目录下寻找， -type f 寻找普通的file文件 -name指定名称 -print0 将文件名以null字符分隔输出(\0)</li>
+<li>| xargs -0 从管道左侧接受以null分隔符的输入流</li>
+<li>tar -czf html_files.zip 此时xargs传递的输入符合tar的输入要求链接了tar命令和find<blockquote>
+<p>tar: 压缩、打包命令<br>-c: 创建一个新的压缩包<br>-z: 使用 gzip 压缩算法进行压缩<br>-f: 指定压缩包的文件名<br>html_files.zip: 压缩包的文件名，可以根据需要修改</p>
+</blockquote>
+</li>
+</ol>
+</blockquote>
+<ol start="5">
+<li>(Advanced) Write a command or script to recursively find the most recently modified file in a directory. More generally, can you list all files by recency?<br>（高级）编写命令或脚本以递归方式查找目录中最近修改的文件。更一般地说，您可以按新近度列出所有文件吗？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -type f -printf &#x27;%T+ %p\n&#x27; | sort -r | head -n 1 | cut -d&#x27; &#x27; -f2-</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>查找最近修改过的文件，解释:<br>-printf ‘%T+ %p\n’ 输出以时间在前，之后加上路径<br>sort -r :即reverse把时间按照倒序进行处理<br>head -n 1 :只取第一个<br>cut -d’ ‘ -f2-：从输出中删除修改时间，只保留文件路径</p>
+</blockquote>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -type f -printf &#x27;%T+ %p\n&#x27; | sort -r | cut -d&#x27; &#x27; -f2-</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>实现新近度排列只需要不要head的那个命令即可</p>
+</blockquote>
 
       
     </div>
