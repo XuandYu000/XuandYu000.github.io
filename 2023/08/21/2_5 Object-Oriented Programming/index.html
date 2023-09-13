@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/sailboat.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/sailboat.png">
+  <link rel="mask-icon" href="/images/sailboat.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="2_5 Object-Oriented ProgrammingObject-oriented programming (OOP) is a method for organizing programs that brings together many of the ideas introduced in this chapter. Like the functions in data abstr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2_5 Object-Oriented Programming">
+<meta property="og:url" content="http://example.com/2023/08/21/2_5%20Object-Oriented%20Programming/index.html">
+<meta property="og:site_name" content="viewoverlook">
+<meta property="og:description" content="2_5 Object-Oriented ProgrammingObject-oriented programming (OOP) is a method for organizing programs that brings together many of the ideas introduced in this chapter. Like the functions in data abstr">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://www.composingprograms.com/img/multiple_inheritance.png">
+<meta property="article:published_time" content="2023-08-20T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-08-21T02:51:55.934Z">
+<meta property="article:author" content="XuandYu000">
+<meta property="article:tag" content="py">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.composingprograms.com/img/multiple_inheritance.png">
+
+<link rel="canonical" href="http://example.com/2023/08/21/2_5%20Object-Oriented%20Programming/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>2_5 Object-Oriented Programming | viewoverlook</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">viewoverlook</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/21/2_5%20Object-Oriented%20Programming/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
+      <meta itemprop="name" content="XuandYu000">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="viewoverlook">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          2_5 Object-Oriented Programming
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-08-21 00:00:00 / 修改时间：10:51:55" itemprop="dateCreated datePublished" datetime="2023-08-21T00:00:00+08:00">2023-08-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/csdiy/" itemprop="url" rel="index"><span itemprop="name">csdiy</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/csdiy/cs61A/" itemprop="url" rel="index"><span itemprop="name">cs61A</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="2-5-Object-Oriented-Programming"><a href="#2-5-Object-Oriented-Programming" class="headerlink" title="2_5 Object-Oriented Programming"></a>2_5 Object-Oriented Programming</h1><p>Object-oriented programming (OOP) is a method for organizing programs that brings together many of the ideas introduced in this chapter. Like the functions in data abstraction, classes create abstraction barriers between the use and implementation of data. Like dispatch dictionaries, objects respond to behavioral requests. Like mutable data structures, objects have local state that is not directly accessible from the global environment. The Python object system provides convenient syntax to promote the use of these techniques for organizing programs. Much of this syntax is shared among other object-oriented programming languages.</p>
+<p>The object system offers more than just convenience. It enables a new metaphor for designing programs in which several independent agents interact within the computer. Each object bundles together local state and behavior in a way that abstracts the complexity of both. Objects communicate with each other, and useful results are computed as a consequence of their interaction. Not only do objects pass messages, they also share behavior among other objects of the same type and inherit characteristics from related types.</p>
+<p>The paradigm of object-oriented programming has its own vocabulary that supports the object metaphor. We have seen that an object is a data value that has methods and attributes, accessible via dot notation. Every object also has a type, called its <em>class</em>. To create new types of data, we implement new classes.</p>
+<h3 id="2-5-1-Objects-and-Classes"><a href="#2-5-1-Objects-and-Classes" class="headerlink" title="2.5.1   Objects and Classes"></a>2.5.1   Objects and Classes</h3><p>A class serves as a template for all objects whose type is that class. Every object is an instance of some particular class. The objects we have used so far all have built-in classes, but new user-defined classes can be created as well. A class definition specifies the attributes and methods shared among objects of that class. We will introduce the class statement by revisiting the example of a bank account.</p>
+<p>When introducing local state, we saw that bank accounts are naturally modeled as mutable values that have a balance. A bank account object should have a withdraw method that updates the account balance and returns the requested amount, if it is available. To complete the abstraction: a bank account should be able to return its current balance, return the name of the account holder, and an amount for deposit.</p>
+<p>An Account class allows us to create multiple instances of bank accounts. The act of creating a new object instance is known as <em>instantiating</em> the class. The syntax in Python for instantiating a class is identical to the syntax of calling a function. In this case, we call Account with the argument ‘Kirk’, the account holder’s name.</p>
+<p>An <em>attribute</em> of an object is a name-value pair associated with the object, which is accessible via dot notation. The attributes specific to a particular object, as opposed to all objects of a class, are called <em>instance attributes</em>. Each Account has its own balance and account holder name, which are examples of instance attributes. In the broader programming community, instance attributes may also be called <em>fields</em>, <em>properties</em>, or <em>instance variables</em>.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a.holder</span><br><span class="line">&#x27;Kirk&#x27;</span><br><span class="line">&gt;&gt;&gt; a.balance</span><br><span class="line">0</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Functions that operate on the object or perform object-specific computations are called methods. The return values and side effects of a method can depend upon and change other attributes of the object. For example, deposit is a method of our Account object a. It takes one argument, the amount to deposit, changes the balance attribute of the object, and returns the resulting balance.</p>
+<p>We say that methods are <em>invoked</em> on a particular object. As a result of invoking the withdraw method, either the withdrawal is approved and the amount is deducted, or the request is declined and the method returns an error message.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a.withdraw(10)  # The withdraw method returns the balance after withdrawal</span><br><span class="line">5</span><br><span class="line">&gt;&gt;&gt; a.balance       # The balance attribute has changed</span><br><span class="line">5</span><br><span class="line">&gt;&gt;&gt; a.withdraw(10)</span><br><span class="line">&#x27;Insufficient funds&#x27;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>As illustrated above, the behavior of a method can depend upon the changing attributes of the object. Two calls to withdraw with the same argument return different results.</p>
+<h3 id="2-5-2-Defining-Classes"><a href="#2-5-2-Defining-Classes" class="headerlink" title="2.5.2   Defining Classes"></a>2.5.2   Defining Classes</h3><p>User-defined classes are created by class statements, which consist of a single clause. A class statement defines the class name, then includes a suite of statements to define the attributes of the class:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class &lt;name&gt;:</span><br><span class="line">    &lt;suite&gt;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>When a class statement is executed, a new class is created and bound to <name> in the first frame of the current environment. The suite is then executed. Any names bound within the <suite> of a class statement, through def or assignment statements, create or modify attributes of the class.</p>
+<p>Classes are typically organized around manipulating instance attributes, which are the name-value pairs associated with each instance of that class. The class specifies the instance attributes of its objects by defining a method for initializing new objects. For example, part of initializing an object of the Account class is to assign it a starting balance of 0.</p>
+<p>The <suite> of a class statement contains def statements that define new methods for objects of that class. The method that initializes objects has a special name in Python, <code>__init__</code> (two underscores on each side of the word “init”), and is called the <code>constructor</code> for the class.</p>
+<p>类语句的<suite>包含定义该类对象的新方法的def语句。初始化对象的方法在python中具有特殊名称，<code>__init__</code>（“ init”单词的每一侧有两个下划线），并且称为类的_constructor_。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; class Account:</span><br><span class="line">        def __init__(self, account_holder):</span><br><span class="line">            self.balance = 0</span><br><span class="line">            self.holder = account_holder</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>The <strong>init</strong> method for Account has two formal parameters. The first one, self, is bound to the newly created Account object. The second parameter, account_holder, is bound to the argument passed to the class when it is called to be instantiated.</p>
+<p><strong>init</strong> 帐户方法具有两个正式参数。第一个自我绑定到新创建的帐户对象。第二个参数counce_holder绑定到被称为实例化时传递给类的参数。</p>
+<p>The constructor binds the instance attribute name balance to 0. It also binds the attribute name holder to the value of the name account_holder. The formal parameter account_holder is a local name in the <strong>init</strong> method. On the other hand, the name holder that is bound via the final assignment statement persists, because it is stored as an attribute of self using dot notation.</p>
+<p>Having defined the Account class, we can instantiate it.</p>
+<p>This “call” to the Account class creates a new object that is an instance of Account, then calls the constructor function <strong>init</strong> with two arguments: the newly created object and the string ‘Kirk’. By convention, we use the parameter name self for the first argument of a constructor, because it is bound to the object being instantiated. This convention is adopted in virtually all Python code.</p>
+<p>Now, we can access the object’s balance and holder using dot notation.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a.balance</span><br><span class="line">0</span><br><span class="line">&gt;&gt;&gt; a.holder</span><br><span class="line">&#x27;Kirk&#x27;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Identity.</strong> Each new account instance has its own balance attribute, the value of which is independent of other objects of the same class.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; b = Account(&#x27;Spock&#x27;)</span><br><span class="line">&gt;&gt;&gt; b.balance = 200</span><br><span class="line">&gt;&gt;&gt; [acc.balance for acc in (a, b)]</span><br><span class="line">[0, 200]</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>To enforce this separation, every object that is an instance of a user-defined class has a unique identity. Object identity is compared using the is and is not operators.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a is a</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; a is not b</span><br><span class="line">True</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Despite being constructed from identical calls, the objects bound to a and b are not the same. As usual, binding an object to a new name using assignment does not create a new object.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; c = a</span><br><span class="line">&gt;&gt;&gt; c is a</span><br><span class="line">True</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>New objects that have user-defined classes are only created when a class (such as Account) is instantiated with call expression syntax.</p>
+<p><strong>Methods.</strong> Object methods are also defined by a def statement in the suite of a class statement. Below, deposit and withdraw are both defined as methods on objects of the Account class.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; class Account:</span><br><span class="line">        def __init__(self, account_holder):</span><br><span class="line">            self.balance = 0</span><br><span class="line">            self.holder = account_holder</span><br><span class="line">        def deposit(self, amount):</span><br><span class="line">            self.balance = self.balance + amount</span><br><span class="line">            return self.balance</span><br><span class="line">        def withdraw(self, amount):</span><br><span class="line">            if amount &gt; self.balance:</span><br><span class="line">                return &#x27;Insufficient funds&#x27;</span><br><span class="line">            self.balance = self.balance - amount</span><br><span class="line">            return self.balance</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>While method definitions do not differ from function definitions in how they are declared, method definitions do have a different effect when executed. The function value that is created by a def statement within a class statement is bound to the declared name, but bound locally within the class as an attribute. That value is invoked as a method using dot notation from an instance of the class.</p>
+<p>Each method definition again includes a special first parameter self, which is bound to the object on which the method is invoked. For example, let us say that deposit is invoked on a particular Account object and passed a single argument value: the amount deposited. The object itself is bound to self, while the argument is bound to amount. All invoked methods have access to the object via the self parameter, and so they can all access and manipulate the object’s state.</p>
+<p>To invoke these methods, we again use dot notation, as illustrated below.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; spock_account = Account(&#x27;Spock&#x27;)</span><br><span class="line">&gt;&gt;&gt; spock_account.deposit(100)</span><br><span class="line">100</span><br><span class="line">&gt;&gt;&gt; spock_account.withdraw(90)</span><br><span class="line">10</span><br><span class="line">&gt;&gt;&gt; spock_account.withdraw(90)</span><br><span class="line">&#x27;Insufficient funds&#x27;</span><br><span class="line">&gt;&gt;&gt; spock_account.holder</span><br><span class="line">&#x27;Spock&#x27;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>When a method is invoked via dot notation, the object itself (bound to spock_account, in this case) plays a dual role. First, it determines what the name withdraw means; withdraw is not a name in the environment, but instead a name that is local to the Account class. Second, it is bound to the first parameter self when the withdraw method is invoked.</p>
+<h3 id="2-5-3-Message-Passing-and-Dot-Expressions"><a href="#2-5-3-Message-Passing-and-Dot-Expressions" class="headerlink" title="2.5.3   Message Passing and Dot Expressions"></a>2.5.3   Message Passing and Dot Expressions</h3><p>Methods, which are defined in classes, and instance attributes, which are typically assigned in constructors, are the fundamental elements of object-oriented programming. These two concepts replicate much of the behavior of a dispatch dictionary in a message passing implementation of a data value. Objects take messages using dot notation, but instead of those messages being arbitrary string-valued keys, they are names local to a class. Objects also have named local state values (the instance attributes), but that state can be accessed and manipulated using dot notation, without having to employ nonlocal statements in the implementation.</p>
+<p>The central idea in message passing was that data values should have behavior by responding to messages that are relevant to the abstract type they represent. Dot notation is a syntactic feature of Python that formalizes the message passing metaphor. The advantage of using a language with a built-in object system is that message passing can interact seamlessly with other language features, such as assignment statements. We do not require different messages to “get” or “set” the value associated with a local attribute name; the language syntax allows us to use the message name directly.</p>
+<p><strong>Dot expressions.</strong> The code fragment spock_account.deposit is called a <em>dot expression</em>. A dot expression consists of an expression, a dot, and a name:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;expression&gt; . &lt;name&gt;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>The <expression> can be any valid Python expression, but the <name> must be a simple name (not an expression that evaluates to a name). A dot expression evaluates to the value of the attribute with the given <name>, for the object that is the value of the <expression>.</p>
+<p>The built-in function getattr also returns an attribute for an object by name. It is the function equivalent of dot notation. Using getattr, we can look up an attribute using a string, just as we did with a dispatch dictionary.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; getattr(spock_account, &#x27;balance&#x27;)</span><br><span class="line">10</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>We can also test whether an object has a named attribute with hasattr.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; hasattr(spock_account, &#x27;deposit&#x27;)</span><br><span class="line">True</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>The attributes of an object include all of its instance attributes, along with all of the attributes (including methods) defined in its class. Methods are attributes of the class that require special handling.</p>
+<p><strong>Methods and functions.</strong> When a method is invoked on an object, that object is implicitly passed as the first argument to the method. That is, the object that is the value of the <expression> to the left of the dot is passed automatically as the first argument to the method named on the right side of the dot expression. As a result, the object is bound to the parameter self.</p>
+<p>To achieve automatic self binding, Python distinguishes between <em>functions</em>, which we have been creating since the beginning of the text, and <em>bound methods</em>, which couple together a function and the object on which that method will be invoked. A bound method value is already associated with its first argument, the instance on which it was invoked, which will be named self when the method is called.</p>
+<p>We can see the difference in the interactive interpreter by calling type on the returned values of dot expressions. As an attribute of a class, a method is just a function, but as an attribute of an instance, it is a bound method:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; type(Account.deposit)</span><br><span class="line">&lt;class &#x27;function&#x27;&gt;</span><br><span class="line">&gt;&gt;&gt; type(spock_account.deposit)</span><br><span class="line">&lt;class &#x27;method&#x27;&gt;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>These two results differ only in the fact that the first is a standard two-argument function with parameters self and amount. The second is a one-argument method, where the name self will be bound to the object named spock_account automatically when the method is called, while the parameter amount will be bound to the argument passed to the method. Both of these values, whether function values or bound method values, are associated with the same deposit function body.</p>
+<p>We can call deposit in two ways: as a function and as a bound method. In the former case, we must supply an argument for the self parameter explicitly. In the latter case, the self parameter is bound automatically.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; Account.deposit(spock_account, 1001)  # The deposit function takes 2 arguments</span><br><span class="line">1011</span><br><span class="line">&gt;&gt;&gt; spock_account.deposit(1000)           # The deposit method takes 1 argument</span><br><span class="line">2011</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>The function getattr behaves exactly like dot notation: if its first argument is an object but the name is a method defined in the class, then getattr returns a bound method value. On the other hand, if the first argument is a class, then getattr returns the attribute value directly, which is a plain function.</p>
+<p><strong>Naming Conventions.</strong> Class names are conventionally written using the CapWords convention (also called CamelCase because the capital letters in the middle of a name look like humps). Method names follow the standard convention of naming functions using lowercased words separated by underscores.</p>
+<p>In some cases, there are instance variables and methods that are related to the maintenance and consistency of an object that we don’t want users of the object to see or use. They are not part of the abstraction defined by a class, but instead part of the implementation. Python’s convention dictates that if an attribute name starts with an underscore, it should only be accessed within methods of the class itself, rather than by users of the class.</p>
+<h3 id="2-5-4-Class-Attributes"><a href="#2-5-4-Class-Attributes" class="headerlink" title="2.5.4   Class Attributes"></a>2.5.4   Class Attributes</h3><p>Some attribute values are shared across all objects of a given class. Such attributes are associated with the class itself, rather than any individual instance of the class. For instance, let us say that a bank pays interest on the balance of accounts at a fixed interest rate. That interest rate may change, but it is a single value shared across all accounts.</p>
+<p>某些属性值在给定类的所有对象上共享。此类属性与类本身相关联，而不是类的任何单个实例。例如，让我们说，银行以固定的利率以账户余额支付利息。利率可能会改变，但它是所有帐户中共有的单个值。</p>
+<p>Class attributes are created by assignment statements in the suite of a class statement, outside of any method definition. In the broader developer community, class attributes may also be called class variables or static variables. The following class statement creates a class attribute for Account with the name interest.</p>
+<p>类属性是由类别语句套件中的分配语句（除任何方法定义之外）创建的。在更广泛的开发人员社区中，类属性也可以称为类变量或静态变量。以下类语句创建一个具有名称兴趣的帐户的类属性。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; class Account:</span><br><span class="line">        interest = 0.02            # A class attribute</span><br><span class="line">        def __init__(self, account_holder):</span><br><span class="line">            self.balance = 0</span><br><span class="line">            self.holder = account_holder</span><br><span class="line">        # Additional methods would be defined here</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>This attribute can still be accessed from any instance of the class.</p>
+<p>类属性仍可以被类中任何实例所访问</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; spock_account = Account(&#x27;Spock&#x27;)</span><br><span class="line">&gt;&gt;&gt; kirk_account = Account(&#x27;Kirk&#x27;)</span><br><span class="line">&gt;&gt;&gt; spock_account.interest</span><br><span class="line">0.02</span><br><span class="line">&gt;&gt;&gt; kirk_account.interest</span><br><span class="line">0.02</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>However, a single assignment statement to a class attribute changes the value of the attribute for all instances of the class.</p>
+<p>然而，对类属性的修改会反映到所有类实例上</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; Account.interest = 0.04</span><br><span class="line">&gt;&gt;&gt; spock_account.interest</span><br><span class="line">0.04</span><br><span class="line">&gt;&gt;&gt; kirk_account.interest</span><br><span class="line">0.04</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Attribute names.</strong> We have introduced enough complexity into our object system that we have to specify how names are resolved to particular attributes. After all, we could easily have a class attribute and an instance attribute with the same name.</p>
+<p>As we have seen, a dot expression consists of an expression, a dot, and a name:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;expression&gt; . &lt;name&gt;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>To evaluate a dot expression:</p>
+<ol>
+<li>Evaluate the <expression> to the left of the dot, which yields the <em>object</em> of the dot expression.</li>
+<li><name> is matched against the instance attributes of that object; if an attribute with that name exists, its value is returned.</li>
+<li>If <name> does not appear among instance attributes, then <name> is looked up in the class, which yields a class attribute value.</li>
+<li>That value is returned unless it is a function, in which case a bound method is returned instead.</li>
+</ol>
+<p>In this evaluation procedure, instance attributes are found before class attributes, just as local names have priority over global in an environment. Methods defined within the class are combined with the object of the dot expression to form a bound method during the fourth step of this evaluation procedure. The procedure for looking up a name in a class has additional nuances that will arise shortly, once we introduce class inheritance.</p>
+<p>在本类表达式中定义的方法与DOT表达式的对象结合在一起，以在此评估过程的第四步中形成界定方法。在程序中寻找命名还是有细微的差距的，我们会在讲类的继承时介绍它</p>
+<p><strong>Attribute assignment.</strong> All assignment statements that contain a dot expression on their left-hand side affect attributes for the object of that dot expression. If the object is an instance, then assignment sets an instance attribute. If the object is a class, then assignment sets a class attribute. As a consequence of this rule, assignment to an attribute of an object cannot affect the attributes of its class. The examples below illustrate this distinction.</p>
+<p>所有在其左侧包含点表达式的分配语句都会影响该点表达式对象的属性。如果对象是一个实例，则分配设置一个实例属性。如果对象是类，则分配设置类属性。由于该规则，分配对象的属性不能影响其类的属性。下面的示例说明了这种区别。</p>
+<p>If we assign to the named attribute interest of an account instance, we create a new instance attribute that has the same name as the existing class attribute.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; kirk_account.interest = 0.08</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>and that attribute value will be returned from a dot expression.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; kirk_account.interest</span><br><span class="line">0.08</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>However, the class attribute interest still retains its original value, which is returned for all other accounts.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; spock_account.interest</span><br><span class="line">0.04</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Changes to the class attribute interest will affect spock_account, but the instance attribute for kirk_account will be unaffected.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; Account.interest = 0.05  # changing the class attribute</span><br><span class="line">&gt;&gt;&gt; spock_account.interest     # changes instances without like-named instance attributes</span><br><span class="line">0.05</span><br><span class="line">&gt;&gt;&gt; kirk_account.interest     # but the existing instance attribute is unaffected</span><br><span class="line">0.08</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-5-5-Inheritance"><a href="#2-5-5-Inheritance" class="headerlink" title="2.5.5   Inheritance"></a>2.5.5   Inheritance</h3><p>When working in the object-oriented programming paradigm, we often find that different types are related. In particular, we find that similar classes differ in their amount of specialization. Two classes may have similar attributes, but one represents a special case of the other.</p>
+<p>For example, we may want to implement a checking account, which is different from a standard account. A checking account charges an extra $1 for each withdrawal and has a lower interest rate. Here, we demonstrate the desired behavior.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; ch = CheckingAccount(&#x27;Spock&#x27;)</span><br><span class="line">&gt;&gt;&gt; ch.interest     # Lower interest rate for checking accounts</span><br><span class="line">0.01</span><br><span class="line">&gt;&gt;&gt; ch.deposit(20)  # Deposits are the same</span><br><span class="line">20</span><br><span class="line">&gt;&gt;&gt; ch.withdraw(5)  # withdrawals decrease balance by an extra charge</span><br><span class="line">14</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>A CheckingAccount is a specialization of an Account. In OOP terminology, the generic account will serve as the base class of CheckingAccount, while CheckingAccount will be a subclass of Account. (The terms <em>parent class</em> and <em>superclass</em> are also used for the base class, while <em>child class</em> is also used for the subclass.)</p>
+<p>checkingAccount是帐户的专业化。在OOP术语中，通用帐户将用作CheckingAccount的基类，而CheckingAccount将是帐户子类。（术语_parent class_和_superclass_也用于基类，而_Child class_也用于子类。）</p>
+<p>A subclass <em>inherits</em> the attributes of its base class, but may <em>override</em> certain attributes, including certain methods. With inheritance, we only specify what is different between the subclass and the base class. Anything that we leave unspecified in the subclass is automatically assumed to behave just as it would for the base class.</p>
+<p>一个子类继承其基类的属性，但可能覆盖某些属性，包括某些方法。有了继承，我们仅指定子类和基类之间的不同之处。我们在子类中未指定的任何东西都自动假定像基类一样行为。</p>
+<p>Inheritance also has a role in our object metaphor, in addition to being a useful organizational feature. Inheritance is meant to represent <em>is-a</em> relationships between classes, which contrast with <em>has-a</em> relationships. A checking account <em>is-a</em> specific type of account, so having a CheckingAccount inherit from Account is an appropriate use of inheritance. On the other hand, a bank <em>has-a</em> list of bank accounts that it manages, so neither should inherit from the other. Instead, a list of account objects would be naturally expressed as an instance attribute of a bank object.</p>
+<p>继承在我们的对象隐喻中还具有作用，除了是有用的组织功能。继承旨在代表类之间的_is-a_关系，与_has-a_关系形成对比。支票帐户_is-a_特定的帐户类型，因此，从帐户中获得checkingAccount是对继承的适当使用。另一方面，银行_has-a_它管理的银行帐户列表，因此也不应从另一个帐户中继承。取而代之的是，帐户对象的列表将自然表示为银行对象的实例属性。</p>
+<h3 id="2-5-6-Using-Inheritance"><a href="#2-5-6-Using-Inheritance" class="headerlink" title="2.5.6   Using Inheritance"></a>2.5.6   Using Inheritance</h3><p>First, we give a full implementation of the Account class, which includes docstrings for the class and its methods.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; class Account:</span><br><span class="line">        &quot;&quot;&quot;A bank account that has a non-negative balance.&quot;&quot;&quot;</span><br><span class="line">        interest = 0.02</span><br><span class="line">        def __init__(self, account_holder):</span><br><span class="line">            self.balance = 0</span><br><span class="line">            self.holder = account_holder</span><br><span class="line">        def deposit(self, amount):</span><br><span class="line">            &quot;&quot;&quot;Increase the account balance by amount and return the new balance.&quot;&quot;&quot;</span><br><span class="line">            self.balance = self.balance + amount</span><br><span class="line">            return self.balance</span><br><span class="line">        def withdraw(self, amount):</span><br><span class="line">            &quot;&quot;&quot;Decrease the account balance by amount and return the new balance.&quot;&quot;&quot;</span><br><span class="line">            if amount &gt; self.balance:</span><br><span class="line">                return &#x27;Insufficient funds&#x27;</span><br><span class="line">            self.balance = self.balance - amount</span><br><span class="line">            return self.balance</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>A full implementation of CheckingAccount appears below. We specify inheritance by placing an expression that evaluates to the base class in parentheses after the class name.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; class CheckingAccount(Account):</span><br><span class="line">        &quot;&quot;&quot;A bank account that charges for withdrawals.&quot;&quot;&quot;</span><br><span class="line">        withdraw_charge = 1</span><br><span class="line">        interest = 0.01</span><br><span class="line">        def withdraw(self, amount):</span><br><span class="line">            return Account.withdraw(self, amount + self.withdraw_charge)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Here, we introduce a class attribute withdraw_charge that is specific to the CheckingAccount class. We assign a lower value to the interest attribute. We also define a new withdraw method to override the behavior defined in the Account class. With no further statements in the class suite, all other behavior is inherited from the base class Account.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; checking = CheckingAccount(&#x27;Sam&#x27;)</span><br><span class="line">&gt;&gt;&gt; checking.deposit(10)</span><br><span class="line">10</span><br><span class="line">&gt;&gt;&gt; checking.withdraw(5)</span><br><span class="line">4</span><br><span class="line">&gt;&gt;&gt; checking.interest</span><br><span class="line">0.01</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>The expression checking.deposit evaluates to a bound method for making deposits, which was defined in the Account class. When Python resolves a name in a dot expression that is not an attribute of the instance, it looks up the name in the class. In fact, the act of “looking up” a name in a class tries to find that name in every base class in the inheritance chain for the original object’s class. We can define this procedure recursively. To look up a name in a class.</p>
+<ol>
+<li>If it names an attribute in the class, return the attribute value.</li>
+<li>Otherwise, look up the name in the base class, if there is one.</li>
+</ol>
+<p>In the case of deposit, Python would have looked for the name first on the instance, and then in the CheckingAccount class. Finally, it would look in the Account class, where deposit is defined. According to our evaluation rule for dot expressions, since deposit is a function looked up in the class for the checking instance, the dot expression evaluates to a bound method value. That method is invoked with the argument 10, which calls the deposit method with self bound to the checking object and amount bound to 10.</p>
+<p>The class of an object stays constant throughout. Even though the deposit method was found in the Account class, deposit is called with self bound to an instance of CheckingAccount, not of Account.</p>
+<p><strong>Calling ancestors.</strong> Attributes that have been overridden are still accessible via class objects. For instance, we implemented the withdraw method of CheckingAccount by calling the withdraw method of Account with an argument that included the withdraw_charge.</p>
+<p>Notice that we called self.withdraw_charge rather than the equivalent CheckingAccount.withdraw_charge. The benefit of the former over the latter is that a class that inherits from CheckingAccount might override the withdrawal charge. If that is the case, we would like our implementation of withdraw to find that new value instead of the old one.</p>
+<p>请注意，我们称为self.withdraw_charge，而不是等效的checkingAccount.withdraw_charge。前者比后者的好处是，从检查元中继承的班级可能会覆盖撤回费用。如果是这种情况，我们希望我们的撤回实施以找到新值，而不是旧值。</p>
+<p><strong>Interfaces.</strong> It is extremely common in object-oriented programs that different types of objects will share the same attribute names. An <em>object interface</em> is a collection of attributes and conditions on those attributes. For example, all accounts must have deposit and withdraw methods that take numerical arguments, as well as a balance attribute. The classes Account and CheckingAccount both implement this interface. Inheritance specifically promotes name sharing in this way. In some programming languages such as Java, interface implementations must be explicitly declared. In others such as Python, Ruby, and Go, any object with the appropriate names implements an interface.</p>
+<p>The parts of your program that use objects (rather than implementing them) are most robust to future changes if they do not make assumptions about object types, but instead only about their attribute names. That is, they use the object abstraction, rather than assuming anything about its implementation.</p>
+<p>For example, let us say that we run a lottery, and we wish to deposit $5 into each of a list of accounts. The following implementation does not assume anything about the types of those accounts, and therefore works equally well with any type of object that has a deposit method:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def deposit_all(winners, amount=5):</span><br><span class="line">        for account in winners:</span><br><span class="line">            account.deposit(amount)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>The function deposit_all above assumes only that each account satisfies the account object abstraction, and so it will work with any other account classes that also implement this interface. Assuming a particular class of account would violate the abstraction barrier of the account object abstraction. For example, the following implementation will not necessarily work with new kinds of accounts:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def deposit_all(winners, amount=5):</span><br><span class="line">        for account in winners:</span><br><span class="line">            Account.deposit(account, amount)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>We will address this topic in more detail later in the chapter.</p>
+<h3 id="2-5-7-Multiple-Inheritance"><a href="#2-5-7-Multiple-Inheritance" class="headerlink" title="2.5.7   Multiple Inheritance"></a>2.5.7   Multiple Inheritance</h3><p>Python supports the concept of a subclass inheriting attributes from multiple base classes, a language feature called <em>multiple inheritance</em>.</p>
+<p>Suppose that we have a SavingsAccount that inherits from Account, but charges customers a small fee every time they make a deposit.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; class SavingsAccount(Account):</span><br><span class="line">        deposit_charge = 2</span><br><span class="line">        def deposit(self, amount):</span><br><span class="line">            return Account.deposit(self, amount - self.deposit_charge)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Then, a clever executive conceives of an AsSeenOnTVAccount account with the best features of both CheckingAccount and SavingsAccount: withdrawal fees, deposit fees, and a low interest rate. It’s both a checking and a savings account in one! “If we build it,” the executive reasons, “someone will sign up and pay all those fees. We’ll even give them a dollar.”</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; class AsSeenOnTVAccount(CheckingAccount, SavingsAccount):</span><br><span class="line">        def __init__(self, account_holder):</span><br><span class="line">            self.holder = account_holder</span><br><span class="line">            self.balance = 1           # A free dollar!</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>In fact, this implementation is complete. Both withdrawal and deposits will generate fees, using the function definitions in CheckingAccount and SavingsAccount respectively.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; such_a_deal = AsSeenOnTVAccount(&quot;John&quot;)</span><br><span class="line">&gt;&gt;&gt; such_a_deal.balance</span><br><span class="line">1</span><br><span class="line">&gt;&gt;&gt; such_a_deal.deposit(20)            # $2 fee from SavingsAccount.deposit</span><br><span class="line">19</span><br><span class="line">&gt;&gt;&gt; such_a_deal.withdraw(5)            # $1 fee from CheckingAccount.withdraw</span><br><span class="line">13</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Non-ambiguous references are resolved correctly as expected:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; such_a_deal.deposit_charge</span><br><span class="line">2</span><br><span class="line">&gt;&gt;&gt; such_a_deal.withdraw_charge</span><br><span class="line">1</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>But what about when the reference is ambiguous, such as the reference to the withdraw method that is defined in both Account and CheckingAccount? The figure below depicts an <em>inheritance graph</em> for the AsSeenOnTVAccount class. Each arrow points from a subclass to a base class.</p>
+<p><img src="http://www.composingprograms.com/img/multiple_inheritance.png"></p>
+<p>For a simple “diamond” shape like this, Python resolves names from left to right, then upwards. In this example, Python checks for an attribute name in the following classes, in order, until an attribute with that name is found:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">AsSeenOnTVAccount, CheckingAccount, SavingsAccount, Account, object</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>There is no correct solution to the inheritance ordering problem, as there are cases in which we might prefer to give precedence to certain inherited classes over others. However, any programming language that supports multiple inheritance must select some ordering in a consistent way, so that users of the language can predict the behavior of their programs.</p>
+<p><strong>Further reading.</strong> Python resolves this name using a recursive algorithm called the C3 Method Resolution Ordering. The method resolution order of any class can be queried using the mro method on all classes.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; [c.__name__ for c in AsSeenOnTVAccount.mro()]</span><br><span class="line">[&#x27;AsSeenOnTVAccount&#x27;, &#x27;CheckingAccount&#x27;, &#x27;SavingsAccount&#x27;, &#x27;Account&#x27;, &#x27;object&#x27;]</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>The precise algorithm for finding method resolution orderings is not a topic for this text, but is <a target="_blank" rel="noopener" href="http://python-history.blogspot.com/2010/06/method-resolution-order.html">described by Python’s primary author</a> with a reference to the original paper.</p>
+<h3 id="2-5-8-The-Role-of-Objects"><a href="#2-5-8-The-Role-of-Objects" class="headerlink" title="2.5.8   The Role of Objects"></a>2.5.8   The Role of Objects</h3><p>The Python object system is designed to make data abstraction and message passing both convenient and flexible. The specialized syntax of classes, methods, inheritance, and dot expressions all enable us to formalize the object metaphor in our programs, which improves our ability to organize large programs.</p>
+<p>In particular, we would like our object system to promote a <em>separation of concerns</em> among the different aspects of the program. Each object in a program encapsulates and manages some part of the program’s state, and each class statement defines the functions that implement some part of the program’s overall logic. Abstraction barriers enforce the boundaries between different aspects of a large program.</p>
+<p>Object-oriented programming is particularly well-suited to programs that model systems that have separate but interacting parts. For instance, different users interact in a social network, different characters interact in a game, and different shapes interact in a physical simulation. When representing such systems, the objects in a program often map naturally onto objects in the system being modeled, and classes represent their types and relationships.</p>
+<p>On the other hand, classes may not provide the best mechanism for implementing certain abstractions. Functional abstractions provide a more natural metaphor for representing relationships between inputs and outputs. One should not feel compelled to fit every bit of logic in a program within a class, especially when defining independent functions for manipulating data is more natural. Functions can also enforce a separation of concerns.</p>
+<p>Multi-paradigm languages such as Python allow programmers to match organizational paradigms to appropriate problems. Learning to identify when to introduce a new class, as opposed to a new function, in order to simplify or modularize a program, is an important design skill in software engineering that deserves careful attention.</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+            <!-- -->
+          <div class="post-tags">
+              <a href="/tags/py/" rel="tag"><i class="fa fa-tag"></i> py</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/08/21/2_7%20Object%20Abstraction/" rel="prev" title="2_7 Object Abstraction">
+      <i class="fa fa-chevron-left"></i> 2_7 Object Abstraction
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/09/14/hello-world/" rel="next" title="Hello World">
+      Hello World <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2-5-Object-Oriented-Programming"><span class="nav-number">1.</span> <span class="nav-text">2_5 Object-Oriented Programming</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-1-Objects-and-Classes"><span class="nav-number">1.0.1.</span> <span class="nav-text">2.5.1   Objects and Classes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-2-Defining-Classes"><span class="nav-number">1.0.2.</span> <span class="nav-text">2.5.2   Defining Classes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-3-Message-Passing-and-Dot-Expressions"><span class="nav-number">1.0.3.</span> <span class="nav-text">2.5.3   Message Passing and Dot Expressions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-4-Class-Attributes"><span class="nav-number">1.0.4.</span> <span class="nav-text">2.5.4   Class Attributes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-5-Inheritance"><span class="nav-number">1.0.5.</span> <span class="nav-text">2.5.5   Inheritance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-6-Using-Inheritance"><span class="nav-number">1.0.6.</span> <span class="nav-text">2.5.6   Using Inheritance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-7-Multiple-Inheritance"><span class="nav-number">1.0.7.</span> <span class="nav-text">2.5.7   Multiple Inheritance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-8-The-Role-of-Objects"><span class="nav-number">1.0.8.</span> <span class="nav-text">2.5.8   The Role of Objects</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="XuandYu000"
+      src="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
+  <p class="site-author-name" itemprop="name">XuandYu000</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/XuandYu000" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;XuandYu000" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XuandYu000</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+-->
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
