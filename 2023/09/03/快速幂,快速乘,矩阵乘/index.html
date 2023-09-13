@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/sailboat.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/sailboat.png">
+  <link rel="mask-icon" href="/images/sailboat.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="快速幂,快速乘,矩阵乘快速幂计算$a^n(n\geqslant0)$,一般会对答案取个模 例如计算$5^{11}$,考虑11二进制$(1011)_2$有$5^{11} &#x3D; 5^85^25^1$ 将n的二进制中为1的位置对应的a的$2^k$次幂相乘就能得到最终结果 可以用$O(\log{n})$的时间复杂度计算a所有被用到的$2^k$">
+<meta property="og:type" content="article">
+<meta property="og:title" content="快速幂,快速乘,矩阵乘 - 快速幂,快速乘,矩阵乘">
+<meta property="og:url" content="http://example.com/2023/09/03/%E5%BF%AB%E9%80%9F%E5%B9%82,%E5%BF%AB%E9%80%9F%E4%B9%98,%E7%9F%A9%E9%98%B5%E4%B9%98/index.html">
+<meta property="og:site_name" content="viewoverlook">
+<meta property="og:description" content="快速幂,快速乘,矩阵乘快速幂计算$a^n(n\geqslant0)$,一般会对答案取个模 例如计算$5^{11}$,考虑11二进制$(1011)_2$有$5^{11} &#x3D; 5^85^25^1$ 将n的二进制中为1的位置对应的a的$2^k$次幂相乘就能得到最终结果 可以用$O(\log{n})$的时间复杂度计算a所有被用到的$2^k$">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/202309031446356.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/202309031524117.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/202309031548541.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/202309031615055.png">
+<meta property="article:published_time" content="2023-09-02T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-09-03T13:57:34.033Z">
+<meta property="article:author" content="XuandYu000">
+<meta property="article:tag" content="快速幂">
+<meta property="article:tag" content="快速乘">
+<meta property="article:tag" content="矩阵乘">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/202309031446356.png">
+
+<link rel="canonical" href="http://example.com/2023/09/03/%E5%BF%AB%E9%80%9F%E5%B9%82,%E5%BF%AB%E9%80%9F%E4%B9%98,%E7%9F%A9%E9%98%B5%E4%B9%98/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>快速幂,快速乘,矩阵乘 - 快速幂,快速乘,矩阵乘 | viewoverlook</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">viewoverlook</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/03/%E5%BF%AB%E9%80%9F%E5%B9%82,%E5%BF%AB%E9%80%9F%E4%B9%98,%E7%9F%A9%E9%98%B5%E4%B9%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
+      <meta itemprop="name" content="XuandYu000">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="viewoverlook">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          快速幂,快速乘,矩阵乘 - 快速幂,快速乘,矩阵乘
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-09-03 00:00:00 / 修改时间：21:57:34" itemprop="dateCreated datePublished" datetime="2023-09-03T00:00:00+08:00">2023-09-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithms/" itemprop="url" rel="index"><span itemprop="name">algorithms</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="快速幂-快速乘-矩阵乘"><a href="#快速幂-快速乘-矩阵乘" class="headerlink" title="快速幂,快速乘,矩阵乘"></a>快速幂,快速乘,矩阵乘</h1><h2 id="快速幂"><a href="#快速幂" class="headerlink" title="快速幂"></a>快速幂</h2><p>计算$a^n(n\geqslant0)$,一般会对答案取个模</p>
+<p>例如计算$5^{11}$,考虑11二进制$(1011)_2$有$5^{11} &#x3D; 5^8<em>5^2</em>5^1$</p>
+<p>将n的二进制中为1的位置对应的a的$2^k$次幂相乘就能得到最终结果</p>
+<p>可以用$O(\log{n})$的时间复杂度计算a所有被用到的$2^k$</p>
+<span id="more"></span>
+
+<p>模板</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> P = <span class="number">1e9</span>+<span class="number">7</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">quickpow</span><span class="params">(<span class="type">long</span> <span class="type">long</span> a, <span class="type">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">long</span> <span class="type">long</span> ans = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(; n; n &gt;&gt;= <span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(n &amp; <span class="number">1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			ans *= a;</span><br><span class="line">			ans %= P;</span><br><span class="line">		&#125;</span><br><span class="line">		a *= a;</span><br><span class="line">		a %= P;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="快速乘-O-log-b"><a href="#快速乘-O-log-b" class="headerlink" title="快速乘$O(\log{b})$"></a>快速乘$O(\log{b})$</h2><p>$a*b\mod P$</p>
+<ul>
+<li>$0\leqslant{a,b}\leqslant{10^{9}},1\leqslant P \leqslant10^9$,开<code>long long</code>直接算</li>
+<li>$0\leqslant{a,b}\leqslant{10^{18}},1\leqslant P \leqslant10^9$,由于$(a<em>b)%P&#x3D;(a%P</em>b%P)%P$且取完模后并不会报<code>long long</code>,乘之前分别取模 </li>
+<li>$0\leqslant{a,b}\leqslant{10^{18}},1\leqslant P \leqslant10^{18}$,怎么办？</li>
+</ul>
+<p>考虑$7<em>11%P$,$(11)_{2}&#x3D;1011$,有$7</em>11 &#x3D; 7<em>8 + 7</em>2 + 7*1$ </p>
+<p>将b的二进制中为1的位置对应的$2^k*a$相加就能得到最终结果</p>
+<p>模板:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;array&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> x first</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> y second</span></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; PII;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"><span class="function">LL <span class="title">quickmul</span><span class="params">(LL a, LL b, LL P)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	LL ans = <span class="number">0</span>;</span><br><span class="line">	a %= P;</span><br><span class="line">	<span class="keyword">for</span>(; b; b &gt;&gt;= <span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(b &amp; <span class="number">1</span>) ans += a, ans %= P;</span><br><span class="line">		a += a;</span><br><span class="line">		a %= P;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;	</span><br><span class="line">	LL a,b,P; <span class="built_in">scanf</span>(<span class="string">&quot;%lld%lld%lld&quot;</span>,&amp;a,&amp;b,&amp;P);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%lld&quot;</span>,<span class="built_in">quickmul</span>(a,b,P));</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="矩阵乘法"><a href="#矩阵乘法" class="headerlink" title="矩阵乘法"></a>矩阵乘法</h2><p>使用大写字母<em>A,B</em>表示矩阵,$A_{i,j}$表示矩阵A中第i行第j列的元素</p>
+<p>$$<br>\begin{array}{l}<br>假设A是一个n行m列矩阵,B为m行k列矩阵,C是一个行k列矩阵 \<br>C &#x3D; A * B \<br>C_{i,j} &#x3D; \sum^{m}<em>{k&#x3D;1}A</em>{i,j}B_{i,j}<br>\end{array}<br>$$</p>
+<p>矩阵乘法满足结合律但不满足交换律<br>$$<br>\begin{array}{l}<br>(A * B) * C &#x3D; A * (B * C) \<br>A * B \neq B * A<br>\end{array}<br>$$</p>
+<p>暴力求复杂度$O(nmk)$</p>
+<p>根据结合律性质,可以使用快速幂快速求出一个矩阵A的n次幂,因为在很多问题中,我们在处理递推公式或动态规划的转移方程时第i项的值可以由之前k项的值推得:<br>$$<br>\begin{array}{l}<br>f[i] &#x3D; \sum^{k}<em>{j &#x3D; 1} a</em>{j}*f[i-j] \<br>构造矩阵 \<br>A &#x3D; \left( \begin{array}{cc}<br>0 &amp; 0 &amp; \dots &amp; 0 &amp; a_{k} \<br>1 &amp; 0 &amp; \dots &amp; 0 &amp; a_{k-1} \<br>0 &amp; 1 &amp; \dots &amp; 0 &amp; a_{k-2} \<br>\dots \<br>0 &amp; 0 &amp; \dots &amp; 1 &amp; a_1<br>\end{array} \right) \<br>(f[i-k] \dots f[i-2] f[i-1]) * A &#x3D; (f[i-k+1] \dots f[i-1] f[i]) \<br>(f[1] \dots f[k-1] f[k]) * A^{n-k} &#x3D; (f[n-k+1] \dots f[n-1] f[n])<br>\end{array}<br>$$<br>时间复杂度$O(k^{3}\log{n})$</p>
+<p>模板:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> n;</span><br><span class="line">LL a[N+<span class="number">1</span>][N+<span class="number">1</span>],f[N+<span class="number">1</span>];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">aa</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	LL w[N+<span class="number">1</span>][N+<span class="number">1</span>];</span><br><span class="line">	<span class="built_in">memset</span>(w,<span class="number">0</span>,<span class="built_in">sizeof</span>(w));</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">			<span class="keyword">for</span>(<span class="type">int</span> k = <span class="number">1</span>; k &lt;= n; k++)</span><br><span class="line">				w[i][j] = a[i][k] * a[k][j],</span><br><span class="line">				w[i][j] %= P;</span><br><span class="line">	<span class="built_in">memcpy</span>(a,w,<span class="built_in">sizeof</span>(a));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">fa</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	LL w[N+<span class="number">1</span>];</span><br><span class="line">	<span class="built_in">memset</span>(w, <span class="number">0</span>, <span class="built_in">sizeof</span>(w));</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">			w[i] += f[j] * a[j][i],</span><br><span class="line">			w[i] %= P;</span><br><span class="line">	<span class="built_in">memcpy</span>(f,w,<span class="built_in">sizeof</span>(f));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">matrixpow</span><span class="params">(<span class="type">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(; k; k &gt;&gt;= <span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(k &amp; <span class="number">1</span>) <span class="built_in">fa</span>();</span><br><span class="line">		<span class="built_in">aa</span>();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以进一步将一定为0的位置省略计算优化</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">200</span>, P = <span class="number">1e9</span>+<span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line">LL a[N+<span class="number">1</span>][N+<span class="number">1</span>],f[N+<span class="number">1</span>];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">aa</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	LL w[N+<span class="number">1</span>][N+<span class="number">1</span>];</span><br><span class="line">	<span class="built_in">memset</span>(w,<span class="number">0</span>,<span class="built_in">sizeof</span>(w));</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> k = <span class="number">1</span>; k &lt;= n; k++)</span><br><span class="line">			<span class="keyword">if</span>(a[i][k])</span><br><span class="line">				<span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">					<span class="keyword">if</span>(a[k][j])</span><br><span class="line">						w[i][j] += a[i][k] * a[k][j],</span><br><span class="line">						w[i][j] %= P;</span><br><span class="line">	<span class="built_in">memcpy</span>(a,w,<span class="built_in">sizeof</span>(a));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">fa</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	LL w[N+<span class="number">1</span>];</span><br><span class="line">	<span class="built_in">memset</span>(w, <span class="number">0</span>, <span class="built_in">sizeof</span>(w));</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">			w[i] += f[j] * a[j][i],</span><br><span class="line">			w[i] %= P;</span><br><span class="line">	<span class="built_in">memcpy</span>(f,w,<span class="built_in">sizeof</span>(f));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">matrixpow</span><span class="params">(<span class="type">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(; k; k &gt;&gt;= <span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(k &amp; <span class="number">1</span>) <span class="built_in">fa</span>();</span><br><span class="line">		<span class="built_in">aa</span>();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><h1 id="推出来的公式-begin-array-l-left-begin-array-cc-f-i-2-f-i-1-end-array-right-left-begin-array-cc-0-1-1-1-end-array-right"><a href="#推出来的公式-begin-array-l-left-begin-array-cc-f-i-2-f-i-1-end-array-right-left-begin-array-cc-0-1-1-1-end-array-right" class="headerlink" title="推出来的公式$$\begin{array}{l}\left(\begin{array}{cc}f_{i-2} &amp; f_{i-1}\end{array} \right)\left(\begin{array}{cc}0 &amp; 1 \1 &amp; 1\end{array} \right)"></a><img src="https://raw.githubusercontent.com/XuandYu000/picture/main/202309031446356.png" alt="image.png"><br>推出来的公式<br>$$<br>\begin{array}{l}<br>\left(\begin{array}{cc}<br>f_{i-2} &amp; f_{i-1}<br>\end{array} \right)<br>\left(\begin{array}{cc}<br>0 &amp; 1 \<br>1 &amp; 1<br>\end{array} \right)</h1><p>\left(\begin{array}{cc}<br>f_{i-1} &amp; f_{i}<br>\end{array} \right)<br>\end{array}<br>$$</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;array&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> x first</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> y second</span></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; PII;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">2</span>, P = <span class="number">1e9</span>+<span class="number">7</span>;</span><br><span class="line"><span class="type">int</span> n = <span class="number">2</span>;</span><br><span class="line"><span class="type">int</span> k;</span><br><span class="line">LL f[N+<span class="number">1</span>],a[N+<span class="number">1</span>][N+<span class="number">1</span>];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">aa</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	LL w[N+<span class="number">1</span>][N+<span class="number">1</span>];</span><br><span class="line">	<span class="built_in">memset</span>(w, <span class="number">0</span>, <span class="built_in">sizeof</span>(w));</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> k = <span class="number">1</span>; k &lt;= n; k++)</span><br><span class="line">			<span class="keyword">if</span>(a[i][k])</span><br><span class="line">				<span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">					<span class="keyword">if</span>(a[k][j])</span><br><span class="line">						w[i][j] += a[i][k] * a[k][j],</span><br><span class="line">						w[i][j] %= P;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">memcpy</span>(a, w, <span class="built_in">sizeof</span>(a)); </span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">fa</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	LL w[N+<span class="number">1</span>];</span><br><span class="line">	<span class="built_in">memset</span>(w,<span class="number">0</span>,<span class="built_in">sizeof</span>(w));</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">			w[i] += f[j] * a[j][i],</span><br><span class="line">			w[i] %= P;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">memcpy</span>(f, w, <span class="built_in">sizeof</span>(f));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">output</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			cout&lt;&lt;a[i][j]&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		cout&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">matrixpow</span><span class="params">(LL k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(; k; k&gt;&gt;=<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(k &amp; <span class="number">1</span>) <span class="built_in">fa</span>();</span><br><span class="line">		<span class="built_in">aa</span>();</span><br><span class="line">		<span class="comment">// output();</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;	</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;k);</span><br><span class="line">	f[<span class="number">1</span>] = <span class="number">0</span>, f[<span class="number">2</span>] = <span class="number">1</span>;</span><br><span class="line">	a[<span class="number">1</span>][<span class="number">1</span>] = <span class="number">0</span>, a[<span class="number">1</span>][<span class="number">2</span>] = <span class="number">1</span>;</span><br><span class="line">	a[<span class="number">2</span>][<span class="number">1</span>] = <span class="number">1</span>, a[<span class="number">2</span>][<span class="number">2</span>] = <span class="number">1</span>;</span><br><span class="line">	<span class="built_in">matrixpow</span>(k<span class="number">-1</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%lld&quot;</span>,f[<span class="number">2</span>]);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://raw.githubusercontent.com/XuandYu000/picture/main/202309031524117.png" alt="image.png"></p>
+<p>套路: 求前多少项的和就在矩阵中多加一行一列即可</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;array&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> x first</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> y second</span></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; PII;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">3</span>, P = <span class="number">1e9</span>+<span class="number">7</span>;</span><br><span class="line"><span class="type">int</span> k;</span><br><span class="line">LL f[N+<span class="number">1</span>],a[N+<span class="number">1</span>][N+<span class="number">1</span>];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">aa</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	LL w[N + <span class="number">1</span>][N + <span class="number">1</span>];</span><br><span class="line">	<span class="built_in">memset</span>(w, <span class="number">0</span>, <span class="built_in">sizeof</span>(w));</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= N; i++)</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> k = <span class="number">1</span>; k &lt;= N; k++)</span><br><span class="line">			<span class="keyword">if</span>(a[i][k])</span><br><span class="line">				<span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt;= N; j++)</span><br><span class="line">					<span class="keyword">if</span>(a[k][j])</span><br><span class="line">						w[i][j] += a[i][k] * a[k][j];</span><br><span class="line">	<span class="built_in">memcpy</span>(a, w, <span class="built_in">sizeof</span>(a));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">fa</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	LL w[N + <span class="number">1</span>];</span><br><span class="line">	<span class="built_in">memset</span>(w, <span class="number">0</span>, <span class="built_in">sizeof</span>(w));</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= N; i++)</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt;= N; j++)</span><br><span class="line">			w[i] += f[j] * a[j][i],</span><br><span class="line">			w[i] %= P;</span><br><span class="line">	<span class="built_in">memcpy</span>(f, w, <span class="built_in">sizeof</span>(f));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">martixpow</span><span class="params">(LL k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(; k; k &gt;&gt;= <span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(k &amp; <span class="number">1</span>) <span class="built_in">fa</span>();</span><br><span class="line">		<span class="built_in">aa</span>();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;	</span><br><span class="line">	cin&gt;&gt;k;</span><br><span class="line">	f[<span class="number">1</span>] = <span class="number">0</span>, f[<span class="number">2</span>] = <span class="number">1</span>, f[<span class="number">3</span>] = <span class="number">0</span>;</span><br><span class="line">	a[<span class="number">1</span>][<span class="number">1</span>] = <span class="number">0</span>, a[<span class="number">1</span>][<span class="number">2</span>] = <span class="number">1</span>, a[<span class="number">1</span>][<span class="number">3</span>] = <span class="number">0</span>;</span><br><span class="line">	a[<span class="number">2</span>][<span class="number">1</span>] = <span class="number">1</span>, a[<span class="number">2</span>][<span class="number">2</span>] = <span class="number">1</span>, a[<span class="number">2</span>][<span class="number">3</span>] = <span class="number">1</span>;</span><br><span class="line">	a[<span class="number">3</span>][<span class="number">1</span>] = <span class="number">0</span>, a[<span class="number">3</span>][<span class="number">2</span>] = <span class="number">0</span>, a[<span class="number">3</span>][<span class="number">3</span>] = <span class="number">1</span>;</span><br><span class="line">	<span class="built_in">martixpow</span>(k);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%lld&quot;</span>,f[<span class="number">3</span>]);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/XuandYu000/picture/main/202309031548541.png" alt="image.png"></p>
+<p>使用dp的话k的复杂度太高,使用矩阵的话可以将k的复杂度省掉,此时f的定义则是经过i条边后可以到达的点</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;array&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> x first</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> y second</span></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; PII;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">200</span>, P = <span class="number">1e9</span> + <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> n,m,u,v,k;</span><br><span class="line">LL f[N + <span class="number">1</span>],a[N + <span class="number">1</span>][N + <span class="number">1</span>];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">aa</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	LL w[N + <span class="number">1</span>][N + <span class="number">1</span>];</span><br><span class="line">	<span class="built_in">memset</span>(w, <span class="number">0</span>, <span class="built_in">sizeof</span>(w));</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= N; i++)</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> k = <span class="number">1</span>; k &lt;= N; k++)</span><br><span class="line">			<span class="keyword">if</span>(a[i][k])</span><br><span class="line">				<span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt;= N; j++)</span><br><span class="line">					<span class="keyword">if</span>(a[k][j])</span><br><span class="line">						w[i][j] += a[i][k] * a[k][j],</span><br><span class="line">						w[i][j] %= P;</span><br><span class="line">	<span class="built_in">memcpy</span>(a, w, <span class="built_in">sizeof</span>(a));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">fa</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	LL w[N + <span class="number">1</span>];</span><br><span class="line">	<span class="built_in">memset</span>(w, <span class="number">0</span>, <span class="built_in">sizeof</span>(w));</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= N ;i++)</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt;= N; j++)</span><br><span class="line">			w[i] += f[j] * a[j][i],</span><br><span class="line">			w[i] %= P;</span><br><span class="line">	<span class="built_in">memcpy</span>(f, w, <span class="built_in">sizeof</span>(f));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">martixpow</span><span class="params">(<span class="type">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(; k; k &gt;&gt;= <span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(k &amp; <span class="number">1</span>) <span class="built_in">fa</span>();</span><br><span class="line">		<span class="built_in">aa</span>();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;	</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;n,&amp;m);</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; m; i++) </span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> x, y; <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;x, &amp;y);</span><br><span class="line">		a[x][y]++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>, &amp;u, &amp;v, &amp;k);</span><br><span class="line">	f[u] = <span class="number">1</span>;</span><br><span class="line">	<span class="built_in">martixpow</span>(k);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%lld&quot;</span>, f[v]);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://raw.githubusercontent.com/XuandYu000/picture/main/202309031615055.png" alt="image.png"></p>
+<p>$$<br>\begin{array}{l}<br>f[i] &#x3D; \sum^{k}<em>{j &#x3D; 1} a</em>{j}*f[i-j] \<br>构造矩阵 \<br>A &#x3D; \left( \begin{array}{cc}<br>0 &amp; 0 &amp; \dots &amp; 0 &amp; a_{k} \<br>1 &amp; 0 &amp; \dots &amp; 0 &amp; a_{k-1} \<br>0 &amp; 1 &amp; \dots &amp; 0 &amp; a_{k-2} \<br>\dots \<br>0 &amp; 0 &amp; \dots &amp; 1 &amp; a_1<br>\end{array} \right) \<br>(f[i-k] \dots f[i-2] f[i-1]) * A &#x3D; (f[i-k+1] \dots f[i-1] f[i]) \<br>(f[1] \dots f[k-1] f[k]) * A^{n-k} &#x3D; (f[n-k+1] \dots f[n-1] f[n])<br>\end{array}<br>$$</p>
+<p>使用dp求状态$f[n] &#x3D; f[n-1] + f[n-m]$,但是效率不高,此时采用矩阵乘除最后一列外,其他如上述构造的矩阵,最后一个位置,n-1位和n-m位有贡献为1,此时只需要右上和右下为1即可</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: D. Magic Gems</span></span><br><span class="line"><span class="comment">// Contest: Codeforces - Educational Codeforces Round 60 (Rated for Div. 2)</span></span><br><span class="line"><span class="comment">// URL: https://codeforces.com/problemset/problem/1117/D</span></span><br><span class="line"><span class="comment">// Memory Limit: 256 MB</span></span><br><span class="line"><span class="comment">// Time Limit: 3000 ms</span></span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="comment">// Powered by CP Editor (https://cpeditor.org)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;array&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> x first</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> y second</span></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; PII;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">100</span>, P = <span class="number">1e9</span>+<span class="number">7</span>;</span><br><span class="line">LL n, a[N + <span class="number">1</span>][N + <span class="number">1</span>], f[N + <span class="number">1</span>];</span><br><span class="line"><span class="type">int</span> m;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">aa</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	LL w[N + <span class="number">1</span>][N + <span class="number">1</span>];</span><br><span class="line">	<span class="built_in">memset</span>(w, <span class="number">0</span>, <span class="built_in">sizeof</span>(w));</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= m; i++)</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> k = <span class="number">1</span>; k &lt;= m; k++)</span><br><span class="line">			<span class="keyword">if</span>(a[i][k])</span><br><span class="line">				<span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; j++)</span><br><span class="line">					<span class="keyword">if</span>(a[k][j])</span><br><span class="line">						w[i][j] += a[i][k] * a[k][j],</span><br><span class="line">						w[i][j] %= P;</span><br><span class="line">	<span class="built_in">memcpy</span>(a, w, <span class="built_in">sizeof</span>(a));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">fa</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	LL w[N + <span class="number">1</span>];</span><br><span class="line">	<span class="built_in">memset</span>(w, <span class="number">0</span>, <span class="built_in">sizeof</span>(w));</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= m; i++)</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; j++)</span><br><span class="line">			w[i] += f[j] * a[j][i],</span><br><span class="line">			w[i] %= P;</span><br><span class="line">	<span class="built_in">memcpy</span>(f, w, <span class="built_in">sizeof</span>(f));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">martixpow</span><span class="params">(LL k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(; k; k &gt;&gt;= <span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(k &amp; <span class="number">1</span>) <span class="built_in">fa</span>();</span><br><span class="line">		<span class="built_in">aa</span>();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;	 </span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%lld%d&quot;</span>,&amp;n,&amp;m);</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">2</span>; i &lt;= m; i++) a[i][i<span class="number">-1</span>] = <span class="number">1</span>;</span><br><span class="line">	a[<span class="number">1</span>][m] = <span class="number">1</span>;</span><br><span class="line">	a[m][m] = <span class="number">1</span>;</span><br><span class="line">	f[m] = <span class="number">1</span>;</span><br><span class="line">	<span class="built_in">martixpow</span>(n);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, f[m]);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+            <!-- -->
+          <div class="post-tags">
+              <a href="/tags/%E5%BF%AB%E9%80%9F%E5%B9%82/" rel="tag"><i class="fa fa-tag"></i> 快速幂</a>
+              <a href="/tags/%E5%BF%AB%E9%80%9F%E4%B9%98/" rel="tag"><i class="fa fa-tag"></i> 快速乘</a>
+              <a href="/tags/%E7%9F%A9%E9%98%B5%E4%B9%98/" rel="tag"><i class="fa fa-tag"></i> 矩阵乘</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/09/02/%E5%8D%9A%E5%BC%88%E8%AE%BA/" rel="prev" title="简单博弈论 - 简单博弈论">
+      <i class="fa fa-chevron-left"></i> 简单博弈论 - 简单博弈论
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/09/06/%E9%AB%98%E6%96%AF%E6%B6%88%E5%85%83/" rel="next" title="高斯消元 - 高斯消元">
+      高斯消元 - 高斯消元 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E5%B9%82-%E5%BF%AB%E9%80%9F%E4%B9%98-%E7%9F%A9%E9%98%B5%E4%B9%98"><span class="nav-number">1.</span> <span class="nav-text">快速幂,快速乘,矩阵乘</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E5%B9%82"><span class="nav-number">1.1.</span> <span class="nav-text">快速幂</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E4%B9%98-O-log-b"><span class="nav-number">1.2.</span> <span class="nav-text">快速乘$O(\log{b})$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95"><span class="nav-number">1.3.</span> <span class="nav-text">矩阵乘法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98"><span class="nav-number">1.3.1.</span> <span class="nav-text">例题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8E%A8%E5%87%BA%E6%9D%A5%E7%9A%84%E5%85%AC%E5%BC%8F-begin-array-l-left-begin-array-cc-f-i-2-f-i-1-end-array-right-left-begin-array-cc-0-1-1-1-end-array-right"><span class="nav-number">2.</span> <span class="nav-text">推出来的公式$$\begin{array}{l}\left(\begin{array}{cc}f_{i-2} &amp; f_{i-1}\end{array} \right)\left(\begin{array}{cc}0 &amp; 1 \1 &amp; 1\end{array} \right)</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="XuandYu000"
+      src="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
+  <p class="site-author-name" itemprop="name">XuandYu000</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">46</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/XuandYu000" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;XuandYu000" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XuandYu000</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+-->
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
