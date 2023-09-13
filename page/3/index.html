@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta property="og:type" content="website">
@@ -183,7 +183,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/21/Streams/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/21/Scheme/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
@@ -197,7 +197,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/08/21/Streams/" class="post-title-link" itemprop="url">Streams</a>
+            <a href="/2023/08/21/Scheme/" class="post-title-link" itemprop="url">Scheme</a>
         </h2>
 
         <div class="post-meta">
@@ -208,7 +208,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-08-21 00:00:00 / 修改时间：10:54:53" itemprop="dateCreated datePublished" datetime="2023-08-21T00:00:00+08:00">2023-08-21</time>
+              <time title="创建时间：2023-08-21 00:00:00 / 修改时间：10:54:28" itemprop="dateCreated datePublished" datetime="2023-08-21T00:00:00+08:00">2023-08-21</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -230,14 +230,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>3.6k</span>
+              <span>6.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
+              <span>6 分钟</span>
             </span>
 
         </div>
@@ -249,33 +249,111 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Streams"><a href="#Streams" class="headerlink" title="Streams"></a>Streams</h1><h3 id="Sequence-Operations"><a href="#Sequence-Operations" class="headerlink" title="Sequence Operations"></a>Sequence Operations</h3><p>Map, filter, and reduce express sequence manipulation using compact expressions</p>
-<p>Example: Sum all primes in an interval from a(inclusive) to b(exclusive)</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">sum_primes</span>(<span class="params">a, b</span>):</span><br><span class="line">	total = <span class="number">0</span></span><br><span class="line">	x = a</span><br><span class="line">	<span class="keyword">while</span> x &lt; b:</span><br><span class="line">		<span class="keyword">if</span> is_prime(x):</span><br><span class="line">			total += x</span><br><span class="line">		x+=<span class="number">1</span></span><br><span class="line">	<span class="keyword">return</span> total</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">sum_primes</span>(<span class="params">a, b</span>):</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">sum</span>(<span class="built_in">filter</span>(is_prime, <span class="built_in">range</span>(a,b)))</span><br></pre></td></tr></table></figure>
-
-<img src="https://raw.githubusercontent.com/XuandYu000/picture/main/20230813172937.png"/>
-
-<p>Streams allow scheme to process sequences while using an efficient amount of space just like a Python iterator.<br>But unlike iterators which are mutable values, Steams are immutable.<br><img src="https://raw.githubusercontent.com/XuandYu000/picture/main/20230813174023.png"/></p>
-<p>stream can be infinite.<br>I can define a new procedure that takes a stream and returns another stream just by inspecting and manipulating some elements from the front of the input stream and then using con stream to build something new.<br><img src="https://raw.githubusercontent.com/XuandYu000/picture/main/20230813174923.png"/></p>
-<p>A stream is an example of a lazy sequence. Specifically, it is a lazily evaluated Scheme list. In other words, the stream’s elements (except for the first element) are only evaluated when the values are needed. In addition, streams are <em>memoized</em>: the elements that have already been computed are saved!<br>流是惰性序列的一个示例。具体来说，它是一个延迟计算的Scheme列表。换句话说，流的元素（第一个元素除外）仅在需要值时才计算。此外，流会被记忆：已经计算过的元素会被保存！</p>
-<p>Because a stream is simply a lazy list, the rest of a stream is also a stream (just like the rest of a list is also a list). In addition, <code>nil</code> can also serve as an empty stream. To check if a stream is empty, we can use the built-in procedure <code>null?</code>.<br>因为流只是一个惰性列表，所以流的其余部分也是一个流（就像列表的其余部分也是一个列表一样）。另外 <code>nil</code> 也可以作为空流。要检查流是否为空，我们可以使用内置过程 <code>null?</code> 。</p>
-<p>The procedures involved for working with streams are as follows:<br>使用流所涉及的过程如下：</p>
+          <h1 id="Scheme"><a href="#Scheme" class="headerlink" title="Scheme"></a>Scheme</h1><h3 id="scheme-fundamentals"><a href="#scheme-fundamentals" class="headerlink" title="scheme fundamentals"></a>scheme fundamentals</h3><p>scheme programs consist of expressions, which can be:</p>
 <ul>
-<li><code>(cons-stream first rest)</code>: A special form that constructs a stream by evaluating the first operand <code>first</code> and storing its value as the first element in the stream, and storing the second operand <code>rest</code>, unevaluated, to be evaluated later.<br>  <code>(cons-stream first rest)</code> ：一种特殊形式，通过计算第一个操作数 <code>first</code> 并将其值存储为流中的第一个元素，并存储第二个操作数 <code>rest</code> （未计算，以便稍后计算）来构造流。</li>
-<li><code>(car s)</code>: A procedure that works on streams the same way it does on lists. It returns the first element of the stream, which had already been computed on construction of the stream.<br>  <code>(car s)</code> ：处理流的过程与处理列表的方式相同。它返回流的第一个元素，该元素已经在流的构造中计算出来。</li>
-<li><code>(cdr-stream s)</code>: A procedure that returns the rest of the stream by evaluating the <code>rest</code> expression that was stored on construction of the stream. It then stores the value of this expression so that on subsequent calls to <code>cdr-stream</code> on this stream, <code>rest</code> no longer has to be evaluated.<br>  <code>(cdr-stream s)</code> ：通过评估在构建流时存储的 <code>rest</code> 表达式来返回流的其余部分的过程。然后，它存储该表达式的值，以便后续调用该流上的 <code>cdr-stream</code> 时，不再需要计算 <code>rest</code> 。</li>
+<li>primitive expression: 2, 3.3, true, +, quotient ……</li>
+<li>combination: (qutient 10 2), (not true)……<br>Numbers are self-evaluating; symbols are bound to values<br>Call expressions include an operands and 0 or more operands(操作数) in parentheses(括号)<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;(quotient 10 2)</span><br><span class="line">5</span><br><span class="line">&gt;(quotient (+ 8 7) 5)</span><br><span class="line">3</span><br></pre></td></tr></table></figure></li>
 </ul>
-<p>Now we are ready to look at a simple example. This stream is an infinite stream where each element is 1.<br>现在我们准备看一个简单的例子。该流是一个无限流，其中每个元素都是 1。</p>
-<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">scm&gt; (<span class="name"><span class="built_in">define</span></span> ones (<span class="name">cons-stream</span> <span class="number">1</span> ones))</span><br><span class="line">ones</span><br><span class="line">scm&gt; (<span class="name"><span class="built_in">car</span></span> ones)</span><br><span class="line"><span class="number">1</span></span><br><span class="line">scm&gt; (<span class="name">cdr-stream</span> ones)</span><br><span class="line">(<span class="name">1</span> . #[<span class="name">promise</span> (<span class="name">forced</span>)])</span><br></pre></td></tr></table></figure>
+<p>A combination that is not a call expression is a special form:</p>
+<ul>
+<li>If expression: <code>if &lt;predicate&gt; &lt;consequent&gt; &lt;alternative&gt;</code></li>
+<li>And and or: (and &lt;$e_1$&gt; $\dots$ &lt;$e_n$&gt;), (or &lt;$e_1$&gt; $\dots$ &lt;$e_n$&gt;)</li>
+<li>Binding symbols: <code>define &lt;symbol&gt; &lt;expression&gt;</code> </li>
+<li>New procedures: <code>define (&lt;symbol&gt; &lt;formal parameters&gt;) &lt;body&gt;</code></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(define (sqrt x)</span><br><span class="line">	(define (update guess)</span><br><span class="line">		(if (= (square guess) x)</span><br><span class="line">			guess</span><br><span class="line">			(update (average guess (/ x guess)))))</span><br><span class="line">(update 1)</span><br></pre></td></tr></table></figure>
 
-<p>The reason we are able to recursively reference this object without causing an error is because the second operand to <code>cons-stream</code> is not evaluated. Instead, it is stored until <code>cdr-stream</code> is called, at which point the expression will be evaluated and the resulting value will be stored.<br>我们能够递归引用该对象而不导致错误的原因是因为 <code>cons-stream</code> 的第二个操作数没有被求值。相反，它会被存储直到调用 <code>cdr-stream</code> ，此时将计算表达式并存储结果值。</p>
-<p>Next, here’s one way to build a stream of the natural numbers starting at <code>n</code>.<br>接下来，这是构建从 <code>n</code> 开始的自然数流的一种方法。</p>
-<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">scm&gt; (<span class="name"><span class="built_in">define</span></span> (<span class="name">naturals</span> (<span class="name">n</span>)) </span><br><span class="line">	   (<span class="name">cons-stream</span> n (<span class="name">naturals</span> (<span class="name"><span class="built_in">+</span></span> n <span class="number">1</span>)))) </span><br><span class="line">naturals </span><br><span class="line">scm&gt; (<span class="name"><span class="built_in">define</span></span> nat (<span class="name">naturals</span> <span class="number">0</span>)) </span><br><span class="line">nat </span><br><span class="line">scm&gt; (<span class="name"><span class="built_in">car</span></span> nat) </span><br><span class="line"><span class="number">0</span> </span><br><span class="line">scm&gt; (<span class="name"><span class="built_in">car</span></span> (<span class="name">cdr-stream</span> nat)) </span><br><span class="line"><span class="number">1</span> </span><br><span class="line">scm&gt; (<span class="name"><span class="built_in">car</span></span> (<span class="name">cdr-stream</span> (<span class="name">cdr-stream</span> nat))) </span><br><span class="line"><span class="number">2</span></span><br></pre></td></tr></table></figure>
+<h3 id="Lambda-expressions"><a href="#Lambda-expressions" class="headerlink" title="Lambda expressions"></a>Lambda expressions</h3><p>与python类似:<br><code>&lt;lambda (&lt;formal-parameters) &lt;body&gt;</code></p>
+<h3 id="Lists"><a href="#Lists" class="headerlink" title="Lists"></a>Lists</h3><ul>
+<li>cons: Two-argument procedure that creates a linked list</li>
+<li>car: procedure that returns the first element of a list</li>
+<li>cdr: Procedures that returns the rest of a list</li>
+<li>nil: The empty list<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Scheme lists are written in parentheses with elements separated by space</span><br><span class="line">(cons 1 (cons 2 nil))</span><br><span class="line"></span><br><span class="line">(1 2)</span><br></pre></td></tr></table></figure>
+正常的显示应该向链表结构:<img src="https://raw.githubusercontent.com/XuandYu000/picture/main/20230805141030.png"/></li>
+</ul>
+<h3 id="Symbolic-Programming"><a href="#Symbolic-Programming" class="headerlink" title="Symbolic Programming"></a>Symbolic Programming</h3><img src="https://raw.githubusercontent.com/XuandYu000/picture/main/20230805142209.png"/>
+引用: 使用`'`在需要引用的对象前面
+解引用:
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; (define b 2)</span><br><span class="line">b</span><br><span class="line">&gt; &#x27;(a b c)</span><br><span class="line">(a b c)</span><br></pre></td></tr></table></figure>
+以上我们希望只是引用而不直接调用b绑定的值
+但是如果需要将b=2放入时 可以使用\`表示 同时使用`,`表明解引用的对象
+但是解引用作用和引用相同除非我们告诉其准确的目标
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; `(a b c)</span><br><span class="line">(a b c)</span><br><span class="line">&gt; `(a ,b c)</span><br><span class="line">(a 2 c)</span><br></pre></td></tr></table></figure>
 
-<p>Here, the expression that is stored is a recursive call to <code>naturals</code>. When we evaluate this call, we get another stream whose first element is one greater than the previous number in the sequence. The second element of this stream is uncomputed until <code>cdr-stream</code> is called on it, which will activate yet another call to <code>naturals</code>. Hence, we effectively get an infinite stream of integers, where each integer is computed one at a time. This is almost like infinite recursion, but one which can be viewed one step at a time, so it does not crash.<br>这里，存储的表达式是对 <code>naturals</code> 的递归调用。当我们评估这个调用时，我们得到另一个流，其第一个元素比序列中的前一个数字大一个。该流的第二个元素在调用 <code>cdr-stream</code> 之前不会被计算，这将激活对 <code>naturals</code> 的另一个调用。因此，我们有效地获得了无限的整数流，其中每个整数一次计算一个。这几乎就像无限递归，但可以一次查看一步，因此不会崩溃。</p>
+<h4 id="example-中缀表达式转换为前缀表达式"><a href="#example-中缀表达式转换为前缀表达式" class="headerlink" title="example: 中缀表达式转换为前缀表达式"></a>example: 中缀表达式转换为前缀表达式</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(define (infix e)</span><br><span class="line">	(if (not (list? e)) e</span><br><span class="line">		`(,(cadr e) ,(infix(car e)) ,(infix(caddr e)))</span><br><span class="line">	)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 
+<h4 id="Dynamic-Scope"><a href="#Dynamic-Scope" class="headerlink" title="Dynamic Scope"></a>Dynamic Scope</h4><p>Scheme和python查找命名时通过lexical scope(static scope)</p>
+<ul>
+<li>lexical scope: 父帧是程序被定义时的环境</li>
+<li>Dynamic scope: 父帧是程序被调用的环境</li>
+</ul>
+<p>example:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(define f (lambda (x) (+ x y)))</span><br><span class="line">(define g (lambda (x y) (f (+ x x)))</span><br></pre></td></tr></table></figure>
+<p>lexical scope:f帧的父帧是全局帧(在这里会报错因为y没定义)<br>Dynamic scope: f帧的父帧是g帧</p>
+<h4 id="Tail-recursion"><a href="#Tail-recursion" class="headerlink" title="Tail recursion"></a>Tail recursion</h4><p>key observations:</p>
+<ul>
+<li>people in the middle of the line don’t wait for an answer<ul>
+<li>Tail recursive calls</li>
+</ul>
+</li>
+<li>information is passed down, as the questions are being asked.<ul>
+<li>intermediate variable</li>
+</ul>
+</li>
+<li>Last person announces answer(there’s no going back and forth)<ul>
+<li>base case returns this intermediate variable</li>
+</ul>
+</li>
+</ul>
+<h5 id="Tail-contexts"><a href="#Tail-contexts" class="headerlink" title="Tail contexts"></a>Tail contexts</h5><img src="https://raw.githubusercontent.com/XuandYu000/picture/main/20230812160914.png"/>
+
+<p>尾递归在传递时并不传递答案的形成过程，而是不断传递子问题(一般通过中间变量传递，没有中间变量可选通常定义一个辅助函数加一个中间变量)<br>例如:</p>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name"><span class="built_in">define</span></span> (<span class="name">replicate</span> x n)</span><br><span class="line">  (<span class="name"><span class="built_in">define</span></span> (<span class="name">replicate-help</span> x n lst-sofar)</span><br><span class="line">    (<span class="name"><span class="built_in">if</span></span> (<span class="name"><span class="built_in">=</span></span> n <span class="number">0</span>)</span><br><span class="line">        lst-sofar</span><br><span class="line">        (<span class="name">replicate-help</span> x (<span class="name"><span class="built_in">-</span></span> n <span class="number">1</span>) (<span class="name"><span class="built_in">cons</span></span> x lst-sofar))))</span><br><span class="line">    (<span class="name">replicate-help</span> x n nil))</span><br></pre></td></tr></table></figure>
+<h4 id="Macros-宏"><a href="#Macros-宏" class="headerlink" title="Macros(宏)"></a>Macros(宏)</h4><p>宏是Scheme的一个功能,允许你在语言中定义新的特殊的形式。类似于<code>cond</code>,<code>car</code>……</p>
+<p>Macro是源代码在计算前对代码的转化<br>Macro存在于许多语言中，但是在像Lisp语言中最易实现</p>
+<p>So far we’ve been able to define our own procedures in Scheme using the <code>define</code> special form. When we call these procedures, we have to follow the rules for evaluating call expressions, which involve evaluating all the operands.</p>
+<p>目前为止我们已经可以通过<code>define</code>自定义特殊形式代码段。当我们调用代码段时，我们会根据代码段内的规则来计算操作数。</p>
+<p>We know that special form expressions do not follow the evaluation rules of call expressions. Instead, each special form has its own rules of evaluation, which may include not evaluating all the operands. Wouldn’t it be cool if we could define our own special forms where we decide which operands are evaluated? Consider the following example where we attempt to write a function that evaluates a given expression twice:</p>
+<p>我们知道特殊形式表达并不遵循表达式的求值规则。相反，每种特殊形式都有自己的求值规则，其中可能包括不求值所有操作数。如果我们可以定义自己的特殊形式来决定计算那些操作数，那不是很酷？考虑以下实例，我们尝试编写一个对给定表达式求值两次的函数。</p>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">scm&gt; (<span class="name"><span class="built_in">define</span></span> (<span class="name">twice</span> f) (<span class="name"><span class="built_in">begin</span></span> f f))</span><br><span class="line">twice</span><br><span class="line">scm&gt; (<span class="name">twice</span> (<span class="name">print</span> <span class="symbol">&#x27;woof</span>&#x27;))</span><br><span class="line">woof</span><br></pre></td></tr></table></figure>
+<p>由于<code>twice</code>是常规过程，对<code>twice</code>的调用过程回遵循于常规调用表达式相同的求值规则；首先评估运算符之后计算操作数。这意味着当计算操作数<code>(print &#39;woof)</code>时打印了<code>woof</code>。在<code>twice</code>主体内，<code>f</code>绑定的是print返回值None，因此<code>(begin f f)</code>不进行任何操作</p>
+<p>The problem here is clear: we need to prevent the given expression from evaluating until we’re inside the body of the procedure. This is where the <code>define-macro</code> special form, which has identical syntax to the regular <code>define</code> form, comes in:  </p>
+<p>这里的问题很明显：我们需要阻止给定的表达式求值，直到我们进入过程主体。这就是 <code>define-macro</code> 特殊形式的用武之地，它与常规 <code>define</code> 形式具有相同的语法：</p>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scm&gt; (<span class="name">define-macro</span> (<span class="name">twice</span> f) (<span class="name"><span class="built_in">list</span></span> <span class="symbol">&#x27;begin</span> f f))</span><br><span class="line">twice</span><br></pre></td></tr></table></figure>
+
+<p><code>define-macro</code> allows us to define what’s known as a <code>macro</code>, which is simply a way for us to combine unevaluated input expressions together into another expression. When we call macros, the operands are not evaluated, but rather are treated as Scheme data. This means that any operands that are call expressions or special form expression are treated like lists.  </p>
+<p><code>define-macro</code> 允许我们定义所谓的 <code>macro</code> ，这只是我们将未计算的输入表达式组合到另一个表达式中的一种方法。当我们调用宏时，操作数不会被计算，而是被视为方案数据。这意味着作为调用表达式或特殊形式表达式的任何操作数都将被视为列表。</p>
+<p>If we call <code>(twice (print &#39;woof))</code>, <code>f</code> will actually be bound to the list <code>(print &#39;woof)</code> instead of the value <code>undefined</code>. Inside the body of <code>define-macro</code>, we can insert these expressions into a larger Scheme expression. In our case, we would want a <code>begin</code> expression that looks like the following:  </p>
+<p>如果我们调用 <code>(twice (print &#39;woof))</code> ， <code>f</code> 实际上将绑定到列表 <code>(print &#39;woof)</code> 而不是值 <code>undefined</code> 。在 <code>define-macro</code> 的主体中，我们可以将这些表达式插入到更大的Scheme表达式中。在我们的例子中，我们需要一个如下所示的 <code>begin</code> 表达式：</p>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name"><span class="built_in">begin</span></span> (<span class="name">print</span> <span class="symbol">&#x27;woof</span>) (<span class="name">print</span> <span class="symbol">&#x27;woof</span>))</span><br></pre></td></tr></table></figure>
+
+<p>To recap, macros are called similarly to regular procedures, but the rules for evaluating them are different. We evaluated lambda procedures in the following way:<br>回顾一下，宏的调用方式与常规过程类似，但评估它们的规则不同。我们通过以下方式评估 lambda 过程：</p>
+<ul>
+<li>Evaluate operator</li>
+<li>Evaluate operands</li>
+<li>Apply operator to operands, evaluating the body of the procedure<br>  将运算符应用于操作数，评估过程的主体</li>
+</ul>
+<p>However, the rules for evaluating calls to macro procedures are:<br>然而，评估对宏过程的调用的规则是：</p>
+<ul>
+<li>Evaluate operator</li>
+<li>Apply operator to unevaluated operands<br>  将运算符应用于未计算的操作数</li>
+<li>Evaluate the expression returned by the macro in the frame it was called in.<br>  评估宏在调用它的框架中返回的表达式。</li>
+</ul>
+<h4 id="Quasiquotes"><a href="#Quasiquotes" class="headerlink" title="Quasiquotes"></a>Quasiquotes</h4><p>Recall that the <code>quote</code> special form prevents the Scheme interpreter from executing a following expression. We saw that this helps us create complex lists more easily than repeatedly calling <code>cons</code> or trying to get the structure right with <code>list</code>. It seems like this form would come in handy if we are trying to construct complex Scheme expressions with many nested lists.</p>
+<p>回想一下， <code>quote</code> 特殊形式阻止Scheme 解释器执行以下表达式。我们发现这可以帮助我们更轻松地创建复杂的列表，而不是重复调用 <code>cons</code> 或尝试使用 <code>list</code> 获得正确的结构。如果我们试图用许多嵌套列表构造复杂的Scheme表达式，这种形式似乎会派上用场。</p>
+<p>Consider that we rewrite the <code>twice</code> macro as follows:<br>考虑一下我们重写 <code>twice</code> 宏如下：</p>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">define-macro</span> (<span class="name">twice</span> f)</span><br><span class="line">  &#x27;(begin f f))</span><br></pre></td></tr></table></figure>
+
+<p>This seems like it would have the same effect, but since the <code>quote</code> form prevents any evaluation, the resulting expression we create would actually be <code>(begin f f)</code>, which is not what we want.<br>这似乎具有相同的效果，但由于 <code>quote</code> 形式阻止任何计算，我们创建的结果表达式实际上是 <code>(begin f f)</code> ，这不是我们想要的。</p>
+<p>The <strong>quasiquote</strong> allows us to construct literal lists in a similar way as quote, but also lets us specify if any sub-expression within the list should be evaluated.  </p>
+<p>quasiquote 允许我们以与 quote 类似的方式构造文字列表，而且还允许我们指定是否应计算列表中的任何子表达式。</p>
+<p>At first glance, the quasiquote (which can be invoked with the backtick <code>`</code> or the <code>quasiquote</code> special form) behaves exactly the same as <code>&#39;</code> or <code>quote</code>. However, using quasiquotes gives you the ability to **unquote** (which can be invoked with the comma <code>,</code> or the <code>unquote</code> special form). This removes an expression from the quoted context, evaluates it, and places it back in.  </p>
+<p>乍一看，准引号（可以使用反引号 <code>`</code> 或 <code>quasiquote</code> 特殊形式调用）的行为与 <code>&#39;</code> 或 <code>quote</code> 完全相同。但是，使用准引号使您能够取消引号（可以使用逗号 <code>,</code> 或 <code>unquote</code> 特殊形式调用）。这会从引用的上下文中删除表达式，对其求值，然后将其放回原处。</p>
+<p>By combining quasiquotes and unquoting, we can often save ourselves a lot of trouble when building macro expressions.  </p>
+<p>通过结合准引号和取消引号，我们在构建宏表达式时通常可以省去很多麻烦。</p>
+<p>Here is how we could use quasiquoting to rewrite our previous example:  </p>
+<p>以下是我们如何使用准引用来重写我们之前的示例：</p>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">define-macro</span> (<span class="name">twice</span> f)</span><br><span class="line">  `(begin ,f ,f))</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -667,117 +745,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/Intro/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
-      <meta itemprop="name" content="XuandYu000">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="viewoverlook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/07/02/Intro/" class="post-title-link" itemprop="url">Intro</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-07-02 00:00:00" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-09-04 20:50:21" itemprop="dateModified" datetime="2023-09-04T20:50:21+08:00">2023-09-04</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/csdiy/" itemprop="url" rel="index"><span itemprop="name">csdiy</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/csdiy/cs61A/" itemprop="url" rel="index"><span itemprop="name">cs61A</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>191</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h1><img src="https://raw.githubusercontent.com/XuandYu000/picture/main/20230627122952.png"/>
-
-<h3 id="这门课关于什么？"><a href="#这门课关于什么？" class="headerlink" title="这门课关于什么？"></a>这门课关于什么？</h3><ul>
-<li><p>一门关于掌握complexity(复杂性的课程)</p>
-<ul>
-<li>抽象</li>
-<li>编程</li>
-<li>但并完全包括01</li>
-</ul>
-</li>
-<li><p>python入门</p>
-<ul>
-<li>深入理解语言基础</li>
-<li>程序执行</li>
-<li>计算机对编程语言怎么执行</li>
-</ul>
-</li>
-</ul>
-<h3 id="Types-of-expressions"><a href="#Types-of-expressions" class="headerlink" title="Types of expressions"></a>Types of expressions</h3><p>表达式描绘计算过程并且执行得出计算结果<br>事实证明在诸多表达式中函数可以表示出其他代数表达式，这是计算机所需要的 </p>
-<p>推荐教材:<br><a target="_blank" rel="noopener" href="http://www.composingprograms.com/">http://www.composingprograms.com/</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/Lecture%202%20Shell%20Tools%20and%20Scripting/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -919,6 +886,117 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/Intro/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
+      <meta itemprop="name" content="XuandYu000">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="viewoverlook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/07/02/Intro/" class="post-title-link" itemprop="url">Intro</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-07-02 00:00:00" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-04 20:50:21" itemprop="dateModified" datetime="2023-09-04T20:50:21+08:00">2023-09-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/csdiy/" itemprop="url" rel="index"><span itemprop="name">csdiy</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/csdiy/cs61A/" itemprop="url" rel="index"><span itemprop="name">cs61A</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>191</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h1><img src="https://raw.githubusercontent.com/XuandYu000/picture/main/20230627122952.png"/>
+
+<h3 id="这门课关于什么？"><a href="#这门课关于什么？" class="headerlink" title="这门课关于什么？"></a>这门课关于什么？</h3><ul>
+<li><p>一门关于掌握complexity(复杂性的课程)</p>
+<ul>
+<li>抽象</li>
+<li>编程</li>
+<li>但并完全包括01</li>
+</ul>
+</li>
+<li><p>python入门</p>
+<ul>
+<li>深入理解语言基础</li>
+<li>程序执行</li>
+<li>计算机对编程语言怎么执行</li>
+</ul>
+</li>
+</ul>
+<h3 id="Types-of-expressions"><a href="#Types-of-expressions" class="headerlink" title="Types of expressions"></a>Types of expressions</h3><p>表达式描绘计算过程并且执行得出计算结果<br>事实证明在诸多表达式中函数可以表示出其他代数表达式，这是计算机所需要的 </p>
+<p>推荐教材:<br><a target="_blank" rel="noopener" href="http://www.composingprograms.com/">http://www.composingprograms.com/</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/Lecture%203%20vim/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1005,112 +1083,6 @@
 <li><p>进一步自定义你的 ~&#x2F;.vimrc 和安装更多插件。</p>
 </li>
 </ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/Lecture%204%20%E6%95%B0%E6%8D%AE%E6%95%B4%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
-      <meta itemprop="name" content="XuandYu000">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="viewoverlook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/07/02/Lecture%204%20%E6%95%B0%E6%8D%AE%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">Lecture 4 数据整理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:06:51" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/csdiy/" itemprop="url" rel="index"><span itemprop="name">csdiy</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/csdiy/missing-semester/" itemprop="url" rel="index"><span itemprop="name">missing semester</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.9k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Lecture-4-数据整理"><a href="#Lecture-4-数据整理" class="headerlink" title="Lecture 4 数据整理"></a>Lecture 4 数据整理</h1><h3 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h3><ol>
-<li>学习一下这篇简短的 <a target="_blank" rel="noopener" href="https://regexone.com/">交互式正则表达式教程</a>.</li>
-<li>统计words文件 (&#x2F;usr&#x2F;share&#x2F;dict&#x2F;words) 中包含至少三个a 且不以’s 结尾的单词个数。这些单词中，出现频率前三的末尾两个字母是什么？ sed的 y命令，或者 tr 程序也许可以帮你解决大小写的问题。共存在多少种词尾两字母组合？还有一个很 有挑战性的问题：哪个组合从未出现过？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat /usr/share/dict/words | tr &quot;[:upper:]&quot; &quot;[:lower:]&quot; | grep -E &quot;^([^a]*a)&#123;3&#125;.*$&quot; | grep -v &quot;&#x27;s$&quot; | wc -l </span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; cat /usr/share/dict/words 打开这个文件</span><br><span class="line">&gt; tr &quot;[:upper:]&quot; &quot;[:lower:]&quot; tr命令将所有大写都转化为小写</span><br><span class="line">&gt; grep -E &quot;^([^a]*a)&#123;3&#125;.*$&quot; -E 使用正则表达式，([^a]*a)&#123;3&#125; 匹配零个或多个非&quot;a&quot;字符，后跟一个&quot;a&quot;字符匹配3次，之后匹配任意字符</span><br><span class="line">&gt; grep -v &quot;&#x27;s$&quot; &quot;&#x27;s$&quot; 匹配以&#x27;s结尾的字符，grep -v 不显示匹配字符</span><br><span class="line">&gt; wc -l 这个命令计算输出的行数，输出结果为符合要求的单词数。</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /usr/share/dict/words | tr &quot;[:upper:]&quot; &quot;[:lower:]&quot; | grep -E &quot;^([^a]*a)&#123;3&#125;.*$&quot; | grep -v &quot;&#x27;s$&quot; | sed -E &quot;s/.*([a-z]&#123;2&#125;)$/\1/&quot; | sort | uniq -c | sort | tail -n3</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -E &quot;s/.*([a-z]&#123;2&#125;)$/\1/&quot; &quot;s/&quot;进入替换模式 .*匹配任意字符 ([a-z]&#123;2&#125;)$ 结尾处捕获两字符 &quot;\1&quot;使用捕获的字符替换</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">for i in &#123;a..z&#125;;do</span><br><span class="line"> for j in &#123;a..z&#125;;do</span><br><span class="line">    echo  &quot;$i$j&quot;</span><br><span class="line"> done</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./all.sh &gt; all.txt</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /usr/share/dict/words | tr &quot;[:upper:]&quot; &quot;[:lower:]&quot; | grep -E &quot;^([^a]*a)&#123;3&#125;.*$&quot; | grep -v &quot;&#x27;s$&quot; | sed -E &quot;s/.*([a-z]&#123;2&#125;)$/\1/&quot; | sort | uniq &gt; occurance.txt</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diff --unchanged-group-format=&#x27;&#x27; &lt;(cat occurance.txt) &lt;(cat all.txt) | wc -l</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">diff --unchanged-group-format=&#x27;&#x27; </span><br><span class="line">将两个文件中相同的部分设置为空字符串，剩下的就是不相同的部分，之后输出行数即可</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>进行原地替换听上去很有诱惑力，例如： sed s&#x2F;REGEX&#x2F;SUBSTITUTION&#x2F; input.txt &gt; input.txt。但是这并不是一个明智的做法，为什么呢？还是说只有 sed是这样的? 查看 man sed 来完成这个问题</li>
-</ol>
-<ul>
-<li>sed s&#x2F;REGEX&#x2F;SUBSTITUTION&#x2F; input.txt &gt; input.txt 表达式中后一个 input.txt会首先被清空，而且是发生在前的。所以前面一个input.txt在还没有被 sed 处理时已经为空了。在使用正则处理文件前最好是首先备份文件。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i.bak s/REGEX/SUBSTITION/ input.txt</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这段命令如果数据没有备份会自动创建.bak备份文件，直接对文件进行修改</span><br></pre></td></tr></table></figure></li>
-</ul>
 
       
     </div>
@@ -1259,7 +1231,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/bzoj3032%20%E4%B8%83%E5%A4%95%E7%A5%AD/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/Lecture%204%20%E6%95%B0%E6%8D%AE%E6%95%B4%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
@@ -1273,7 +1245,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/07/02/bzoj3032%20%E4%B8%83%E5%A4%95%E7%A5%AD/" class="post-title-link" itemprop="url">bzoj3032 七夕祭</a>
+            <a href="/2023/07/02/Lecture%204%20%E6%95%B0%E6%8D%AE%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">Lecture 4 数据整理</a>
         </h2>
 
         <div class="post-meta">
@@ -1284,7 +1256,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:28:01" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
+              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:06:51" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1292,7 +1264,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithms/" itemprop="url" rel="index"><span itemprop="name">algorithms</span></a>
+                  <a href="/categories/csdiy/" itemprop="url" rel="index"><span itemprop="name">csdiy</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/csdiy/missing-semester/" itemprop="url" rel="index"><span itemprop="name">missing semester</span></a>
                 </span>
             </span>
 
@@ -1302,7 +1278,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2k</span>
+              <span>1.9k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1321,23 +1297,118 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="bzoj3032-七夕祭"><a href="#bzoj3032-七夕祭" class="headerlink" title="bzoj3032 七夕祭"></a>bzoj3032 七夕祭</h1><p><a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/107/">题目链接</a><br>解析:</p>
-<ol>
-<li>如果交换左右两边的位置每一行感兴趣的摊位数量不变<br>  同理交换上下两边的位置每一列感兴趣的摊位数量不变<br>  所以该问题可以分解为两个一维的问题：<ul>
-<li>用最少的步数使每一行的摊位数目相等</li>
-<li>用最少的步数使每一列的摊位数目相等</li>
-<li>前提是总的行数上的感兴趣的数目或总的列数上感兴趣的摊位数目可以被均分</li>
+          <h1 id="Lecture-4-数据整理"><a href="#Lecture-4-数据整理" class="headerlink" title="Lecture 4 数据整理"></a>Lecture 4 数据整理</h1><h3 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h3><ol>
+<li>学习一下这篇简短的 <a target="_blank" rel="noopener" href="https://regexone.com/">交互式正则表达式教程</a>.</li>
+<li>统计words文件 (&#x2F;usr&#x2F;share&#x2F;dict&#x2F;words) 中包含至少三个a 且不以’s 结尾的单词个数。这些单词中，出现频率前三的末尾两个字母是什么？ sed的 y命令，或者 tr 程序也许可以帮你解决大小写的问题。共存在多少种词尾两字母组合？还有一个很 有挑战性的问题：哪个组合从未出现过？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat /usr/share/dict/words | tr &quot;[:upper:]&quot; &quot;[:lower:]&quot; | grep -E &quot;^([^a]*a)&#123;3&#125;.*$&quot; | grep -v &quot;&#x27;s$&quot; | wc -l </span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; cat /usr/share/dict/words 打开这个文件</span><br><span class="line">&gt; tr &quot;[:upper:]&quot; &quot;[:lower:]&quot; tr命令将所有大写都转化为小写</span><br><span class="line">&gt; grep -E &quot;^([^a]*a)&#123;3&#125;.*$&quot; -E 使用正则表达式，([^a]*a)&#123;3&#125; 匹配零个或多个非&quot;a&quot;字符，后跟一个&quot;a&quot;字符匹配3次，之后匹配任意字符</span><br><span class="line">&gt; grep -v &quot;&#x27;s$&quot; &quot;&#x27;s$&quot; 匹配以&#x27;s结尾的字符，grep -v 不显示匹配字符</span><br><span class="line">&gt; wc -l 这个命令计算输出的行数，输出结果为符合要求的单词数。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /usr/share/dict/words | tr &quot;[:upper:]&quot; &quot;[:lower:]&quot; | grep -E &quot;^([^a]*a)&#123;3&#125;.*$&quot; | grep -v &quot;&#x27;s$&quot; | sed -E &quot;s/.*([a-z]&#123;2&#125;)$/\1/&quot; | sort | uniq -c | sort | tail -n3</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -E &quot;s/.*([a-z]&#123;2&#125;)$/\1/&quot; &quot;s/&quot;进入替换模式 .*匹配任意字符 ([a-z]&#123;2&#125;)$ 结尾处捕获两字符 &quot;\1&quot;使用捕获的字符替换</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">for i in &#123;a..z&#125;;do</span><br><span class="line"> for j in &#123;a..z&#125;;do</span><br><span class="line">    echo  &quot;$i$j&quot;</span><br><span class="line"> done</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./all.sh &gt; all.txt</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /usr/share/dict/words | tr &quot;[:upper:]&quot; &quot;[:lower:]&quot; | grep -E &quot;^([^a]*a)&#123;3&#125;.*$&quot; | grep -v &quot;&#x27;s$&quot; | sed -E &quot;s/.*([a-z]&#123;2&#125;)$/\1/&quot; | sort | uniq &gt; occurance.txt</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diff --unchanged-group-format=&#x27;&#x27; &lt;(cat occurance.txt) &lt;(cat all.txt) | wc -l</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">diff --unchanged-group-format=&#x27;&#x27; </span><br><span class="line">将两个文件中相同的部分设置为空字符串，剩下的就是不相同的部分，之后输出行数即可</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>进行原地替换听上去很有诱惑力，例如： sed s&#x2F;REGEX&#x2F;SUBSTITUTION&#x2F; input.txt &gt; input.txt。但是这并不是一个明智的做法，为什么呢？还是说只有 sed是这样的? 查看 man sed 来完成这个问题</li>
+</ol>
+<ul>
+<li>sed s&#x2F;REGEX&#x2F;SUBSTITUTION&#x2F; input.txt &gt; input.txt 表达式中后一个 input.txt会首先被清空，而且是发生在前的。所以前面一个input.txt在还没有被 sed 处理时已经为空了。在使用正则处理文件前最好是首先备份文件。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i.bak s/REGEX/SUBSTITION/ input.txt</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这段命令如果数据没有备份会自动创建.bak备份文件，直接对文件进行修改</span><br></pre></td></tr></table></figure></li>
 </ul>
-</li>
-<li>接下来解决两个相似的一维问题即可<br>这和均分纸牌问题相似：M个人拍成一行，每个人手中有C[1]~C[M]张纸牌，每个人都想要拿到相同数量的纸牌，可以让某个人将自己手中的一张牌交给身边的一个人,问最少需要多少次交换。这里假设均分纸牌问题有解：<br>考虑第一个人：<ol>
-<li>若C[1] &gt; avg, 则他需要将C[1] - avg张牌交给第二个人</li>
-<li>若C[1] &lt; avg, 则他需要从第二个人那里拿avg - C[1]张牌<br>接下来以此考虑2~M个人。所需最小步数即为   $\sum_{i&#x3D;1}^M abs(i<em>avg-G[i])$ ，其中G[i]&#x3D;$\sum_{i&#x3D;1}^MC[i]$<br>其含义是每个“前缀“持有者最初共有G[i]张牌，最终会共有i</em>avg张牌，设A[i]&#x3D;C[i]-avg,即从一开始就减掉avg最终每个人只有0张牌<br>3.但是这个问题可以将头尾互换相当于“环形均分纸牌”，该问题一定有最优解，并且所求的答案可以看作是将环从某一点k断开，其持有的纸牌数，前缀和分别是<br>A[k+1]  S[k+1]-S[k]<br>A[k+2]  S[k+2]-S[k]<br>……      ……</li>
-</ol>
-<p>A[M]  S[M]-S[k]<br>A[1]  S[1]+S[M]-S[k]<br>……     ……<br>A[k]  S[k]+S[M]-S[k]<br>经推导S[M]一定为0所需最小步数为$\sum_{i&#x3D;k+1}^M abs(S[k]-S[i])$ S[i]&#x3D;$\sum_{j&#x3D;1}^iA[j]$ 步数最小时上述公式又转为货舱选址问题，选择中位数即可</p>
-</li>
-</ol>
-<p>代码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">// Problem: 七夕祭</span><br><span class="line">// Contest: AcWing</span><br><span class="line">// URL: https://www.acwing.com/problem/content/107/</span><br><span class="line">// Memory Limit: 64 MB</span><br><span class="line">// Time Limit: 1000 ms</span><br><span class="line">// </span><br><span class="line">// Powered by CP Editor (https://cpeditor.org)</span><br><span class="line"></span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;queue&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#include&lt;cmath&gt;</span><br><span class="line">#include&lt;stack&gt;</span><br><span class="line">#include&lt;vector&gt;</span><br><span class="line">#include&lt;map&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">#define x first</span><br><span class="line">#define y second</span><br><span class="line">typedef pair&lt;int,int&gt; PII;</span><br><span class="line">typedef long long LL;</span><br><span class="line">const int N=1e5+10;</span><br><span class="line">int n,m,t;</span><br><span class="line">LL lx[N],ly[N],f[N];</span><br><span class="line">LL handle(LL arr[],int n)&#123;</span><br><span class="line">	for(int i=1;i&lt;=n;i++) f[i]=f[i-1]+arr[i]-arr[0]/n;</span><br><span class="line">	sort(f+1,f+1+n);</span><br><span class="line">	int loc=(n+1)&gt;&gt;1;</span><br><span class="line">	LL res=0;</span><br><span class="line">	for(int i=1;i&lt;=n;i++)&#123;</span><br><span class="line">		res+=abs(f[i]-f[loc]);</span><br><span class="line">	&#125;</span><br><span class="line">	return res;</span><br><span class="line">&#125;</span><br><span class="line">int main()&#123;</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;m&gt;&gt;t;</span><br><span class="line">	while(t--)&#123;</span><br><span class="line">		int x,y;</span><br><span class="line">		cin&gt;&gt;x&gt;&gt;y;</span><br><span class="line">		lx[x]++,ly[y]++;</span><br><span class="line">	&#125;</span><br><span class="line">	for(int i=1;i&lt;=n;i++) lx[0]+=lx[i];</span><br><span class="line">	for(int i=1;i&lt;=m;i++) ly[0]+=ly[i];</span><br><span class="line">	if(lx[0]%n==0&amp;&amp;ly[0]%m==0) printf(&quot;both %lld\n&quot;,handle(lx,n)+handle(ly,m));</span><br><span class="line">	else if(lx[0]%n==0) printf(&quot;row %lld\n&quot;,handle(lx,n));</span><br><span class="line">	else if(ly[0]%m==0) printf(&quot;column %lld\n&quot;,handle(ly,m));</span><br><span class="line">	else printf(&quot;impossible\n&quot;);</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/cf1823/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
+      <meta itemprop="name" content="XuandYu000">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="viewoverlook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/07/02/cf1823/" class="post-title-link" itemprop="url">cf1823</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:27:20" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithms/" itemprop="url" rel="index"><span itemprop="name">algorithms</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="cf1823"><a href="#cf1823" class="headerlink" title="cf1823"></a>cf1823</h1><h4 id="A-A-characteristic"><a href="#A-A-characteristic" class="headerlink" title="A. A-characteristic"></a>A. A-characteristic</h4><p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1823/problem/A">题目链接</a><br>由于出现数字只可能是1或-1，那么假设数列全为-1，依次枚举1出现的个数，可以得出结论不是所有数字都有答案的，由于会有重复数字出现，只需要枚举1的个数x&lt;&#x3D;n&#x2F;2即可。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">// Problem: A. A-characteristic</span><br><span class="line">// Contest: Codeforces - Codeforces Round 868 (Div. 2)</span><br><span class="line">// URL: https://codeforces.com/contest/1823/problem/A</span><br><span class="line">// Memory Limit: 256 MB</span><br><span class="line">// Time Limit: 1000 ms</span><br><span class="line">// </span><br><span class="line">// Powered by CP Editor (https://cpeditor.org)</span><br><span class="line"></span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;queue&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#include&lt;cmath&gt;</span><br><span class="line">#include&lt;stack&gt;</span><br><span class="line">#include&lt;vector&gt;</span><br><span class="line">#include&lt;map&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">#define x first</span><br><span class="line">#define y second</span><br><span class="line">typedef pair&lt;int,int&gt; PII;</span><br><span class="line">typedef long long LL;</span><br><span class="line">const int N=110;</span><br><span class="line">int t,n,k;</span><br><span class="line">int res[N];</span><br><span class="line">bool cal(int l,int r)&#123;</span><br><span class="line">	if(l*(l-1)/2+r*(r-1)/2==k)&#123;</span><br><span class="line">		for(int i=1;i&lt;=l;i++) res[i]=1;</span><br><span class="line">		for(int i=l+1;i&lt;=n;i++) res[i]=-1;</span><br><span class="line">		return true;</span><br><span class="line">	&#125;</span><br><span class="line">	return false;</span><br><span class="line">&#125;</span><br><span class="line">bool check(int x)&#123;</span><br><span class="line">	int mid=x&gt;&gt;1;</span><br><span class="line">	for(int i=x;i&gt;=mid;i--)&#123;</span><br><span class="line">		if(cal(i,x-i))&#123;</span><br><span class="line">			return true;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return false;</span><br><span class="line">&#125;</span><br><span class="line">int main()&#123;</span><br><span class="line">	cin&gt;&gt;t;</span><br><span class="line">	while(t--)&#123;</span><br><span class="line">		cin&gt;&gt;n&gt;&gt;k;</span><br><span class="line">		if(check(n))&#123;</span><br><span class="line">			puts(&quot;YES&quot;);</span><br><span class="line">			for(int i=1;i&lt;=n;i++)&#123;</span><br><span class="line">				cout&lt;&lt;res[i]&lt;&lt;&quot; &quot;;</span><br><span class="line">			&#125;</span><br><span class="line">			puts(&quot;&quot;);</span><br><span class="line">		&#125;else&#123;</span><br><span class="line">			puts(&quot;NO&quot;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="B-Sort-with-Step"><a href="#B-Sort-with-Step" class="headerlink" title="B. Sort with Step"></a>B. Sort with Step</h4><p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1823/problem/B">题目链接</a><br>只能交换相隔k个位置的数字，假如k为1，那么可以看作冒泡排序必然有解<br>k&gt;1时，将数组按照下标i分组，i%k&#x3D;&#x3D;0的为一组，i%k&#x3D;&#x3D;1的为一组，…，i%k&#x3D;&#x3D;k-1的为一组，要想可以按照递增序列上升，同时由于数字x&lt;n,且只会出现一次。所以如果不先更换一组数据就有解的话，同一组内的数字对k取模的结果必然一致。不一致的话当不一致的数字为2时，可以交换一次得到解，否则无解。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line">// Problem: B. Sort with Step</span><br><span class="line">// Contest: Codeforces - Codeforces Round 868 (Div. 2)</span><br><span class="line">// URL: https://codeforces.com/contest/1823/problem/B</span><br><span class="line">// Memory Limit: 256 MB</span><br><span class="line">// Time Limit: 1000 ms</span><br><span class="line">// </span><br><span class="line">// Powered by CP Editor (https://cpeditor.org)</span><br><span class="line"></span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;queue&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#include&lt;cmath&gt;</span><br><span class="line">#include&lt;stack&gt;</span><br><span class="line">#include&lt;vector&gt;</span><br><span class="line">#include&lt;map&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">#define x first</span><br><span class="line">#define y second</span><br><span class="line">typedef pair&lt;int,int&gt; PII;</span><br><span class="line">typedef long long LL;</span><br><span class="line">const int N=2e5+10;</span><br><span class="line">int t,n,k;</span><br><span class="line">int p[N],tmp[N];</span><br><span class="line">vector&lt;int&gt; q[N];</span><br><span class="line">LL getnum(int l,int r)&#123;</span><br><span class="line">	if(l&gt;=r) return 0;</span><br><span class="line">	int mid=(l+r)&gt;&gt;1;</span><br><span class="line">	LL ans=getnum(l,mid)+getnum(mid+1,r);</span><br><span class="line">	int i=l,j=mid+1,cnt=0;</span><br><span class="line">	while(i&lt;=mid&amp;&amp;j&lt;=r)&#123;</span><br><span class="line">		if(p[i]&lt;=p[j]) tmp[cnt++]=p[i++];</span><br><span class="line">		else&#123;</span><br><span class="line">			ans+=mid-i+1;</span><br><span class="line">			tmp[cnt++]=p[j++];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	while(i&lt;=mid) tmp[cnt++]=p[i++];</span><br><span class="line">	while(j&lt;=r) tmp[cnt++]=p[j++];</span><br><span class="line">	for(i=l,j=0;i&lt;=r;i++,j++)&#123;</span><br><span class="line">		p[i]=tmp[j];</span><br><span class="line">	&#125;</span><br><span class="line">	return ans;</span><br><span class="line">&#125;</span><br><span class="line">int main()&#123;</span><br><span class="line">	scanf(&quot;%d&quot;,&amp;t);</span><br><span class="line">	while(t--)&#123;</span><br><span class="line">		scanf(&quot;%d%d&quot;,&amp;n,&amp;k);</span><br><span class="line">		for(int i=0;i&lt;k;i++)&#123;</span><br><span class="line">			q[i].clear();</span><br><span class="line">		&#125;</span><br><span class="line">		for(int i=1;i&lt;=n;i++)&#123;</span><br><span class="line">			scanf(&quot;%d&quot;,&amp;p[i]);</span><br><span class="line">			q[i%k].push_back(p[i]);</span><br><span class="line">		&#125;</span><br><span class="line">		if(k==1)&#123;</span><br><span class="line">			puts(&quot;0&quot;);</span><br><span class="line">			continue;</span><br><span class="line">		&#125;</span><br><span class="line">		int res=0;</span><br><span class="line">		for(int i=0;i&lt;k;i++)&#123;</span><br><span class="line">			// sort(q[i].begin(),q[i].end());</span><br><span class="line">			// for(int j=0;j&lt;q[i].size();j++)&#123;</span><br><span class="line">				// p[i+j*k]=q[i][j];</span><br><span class="line">				// cout&lt;&lt;q[i][j]&lt;&lt;&quot; &quot;;</span><br><span class="line">			// &#125;</span><br><span class="line">			// cout&lt;&lt;endl;</span><br><span class="line">			for(int j=0;j&lt;q[i].size();j++)&#123;</span><br><span class="line">				if(q[i][j]%k!=i) res++; </span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		// LL res=getnum(1,n);</span><br><span class="line">		// cout&lt;&lt;res&lt;&lt;endl;</span><br><span class="line">		// for(int i=1;i&lt;=n;i++)&#123;</span><br><span class="line">			// cout&lt;&lt;p[i]&lt;&lt;&quot; &quot;;</span><br><span class="line">		// &#125;</span><br><span class="line">		// cout&lt;&lt;endl;</span><br><span class="line">		if(res==0) puts(&quot;0&quot;);</span><br><span class="line">		else if(res==2) puts(&quot;1&quot;);</span><br><span class="line">		else puts(&quot;-1&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="C-Strongly-Composite"><a href="#C-Strongly-Composite" class="headerlink" title="C. Strongly Composite"></a>C. Strongly Composite</h4><p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1823/problem/C">题目链接</a><br>比赛的时候没做出来但是思路对的，先贴代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">// Problem: C. Strongly Composite</span><br><span class="line">// Contest: Codeforces - Codeforces Round 868 (Div. 2)</span><br><span class="line">// URL: https://codeforces.com/contest/1823/problem/C</span><br><span class="line">// Memory Limit: 256 MB</span><br><span class="line">// Time Limit: 2000 ms</span><br><span class="line">// </span><br><span class="line">// Powered by CP Editor (https://cpeditor.org)</span><br><span class="line"></span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;queue&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#include&lt;cmath&gt;</span><br><span class="line">#include&lt;stack&gt;</span><br><span class="line">#include&lt;vector&gt;</span><br><span class="line">#include&lt;map&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">#define x first</span><br><span class="line">#define y second</span><br><span class="line">typedef pair&lt;int,int&gt; PII;</span><br><span class="line">typedef long long LL;</span><br><span class="line">const int N=1010,M=1e5+10;</span><br><span class="line">int T;</span><br><span class="line">int n,k;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">	/*</span><br><span class="line">	res</span><br><span class="line">	暂时想出来的思路是计算出所有乘数中每个质数的数量，</span><br><span class="line">	然后同一个素数下每两个组合，直至每个素数均剩下0或1个,res+=每个素数的数量/2</span><br><span class="line">	然后计算剩余个数为1的素数的个数count如果可以整除3那么res+=count/3,否则就看乘积是不是强合数，是的话res=1,不是res=0</span><br><span class="line">	*/</span><br><span class="line">	scanf(&quot;%d&quot;,&amp;T);</span><br><span class="line">	while(T--)&#123;</span><br><span class="line">		scanf(&quot;%d&quot;,&amp;n);</span><br><span class="line">		map&lt;int,int&gt; q;</span><br><span class="line">		for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">			int x;</span><br><span class="line">			scanf(&quot;%d&quot;,&amp;x);</span><br><span class="line">			for(int j=2;j&lt;=x/j;j++)&#123;</span><br><span class="line">				while(x%j==0)&#123;</span><br><span class="line">					x/=j;</span><br><span class="line">					q[j]++;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			if(x!=1) q[x]++;</span><br><span class="line">		&#125;</span><br><span class="line">		int res=0,rem=0;</span><br><span class="line">		for(PII p:q)&#123;</span><br><span class="line">			int num=p.x;</span><br><span class="line">			int cnt=p.y;</span><br><span class="line">			res+=cnt/2;</span><br><span class="line">			rem+=cnt%2;</span><br><span class="line">		&#125;</span><br><span class="line">		res+=rem/3;</span><br><span class="line">		printf(&quot;%d\n&quot;,res);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>思路证明：对于一个强合数x，对其进行因式分解x&#x3D;$d^{p_1}<em>{1}$$d^{p_2}</em>{2}……$$d^{p_{m-1}}<em>{m-1}$$d^{p_m}</em>{m}$,那么x的因子数量为D&#x3D;$\prod_{i&#x3D;1}^m{(d_i+1)} $<br>数字的质因子个数为m,合因数的个数为D-m-1.x是强合数m&lt;&#x3D;D-m-1即2<em>m+1&lt;&#x3D;D,由于$d_i$+1&gt;&#x3D;2,那么D&gt;&#x3D;$2^m$<br>对于强合数的一个弱条件，2</em>m+1&lt;&#x3D;$2^m$,当m为1或2时不成立其余成立，那么由于D&gt;&#x3D;$2^m$,所以当m为1或2时，x为强合数<br>即如果是一个强合数，质因子个数大于等于3<br>接下来找出所有数列中的质因子得到($p^i$,$c^i$),前为质因子，后为所有数中质因子个数。<br>最优策略是对于同一质因子求$\sum_i{ci&#x2F;2}$,剩下个数r&#x3D;$\sum_i(ci%2)$<br>res+&#x3D;$\sum_i{ci&#x2F;2}$+r&#x2F;3即可</p>
+
       
     </div>
 
