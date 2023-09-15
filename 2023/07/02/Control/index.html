@@ -23,12 +23,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Control Print and None 区分python中两种类型的函数 - 纯函数(pure functions): 函数中有一些输入(参数)并返回一些输出(调用返回结果) 1abs(-2) 可将内置函数abs描述为接受输入并产生输出的小型机器  abs在调用时除了返回值外不会造成其他任何影响，而且使用相同参数调用时总会返回相同的值  非纯函数(Non-pure funct">
+  <meta name="description" content="ControlPrint and None区分python中两种类型的函数  纯函数(pure functions): 函数中有一些输入(参数)并返回一些输出(调用返回结果) 1abs(-2) 可将内置函数abs描述为接受输入并产生输出的小型机器abs在调用时除了返回值外不会造成其他任何影响，而且使用相同参数调用时总会返回相同的值  非纯函数(Non-pure functions): 除了返回值外">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Control">
 <meta property="og:url" content="http://example.com/2023/07/02/Control/index.html">
 <meta property="og:site_name" content="viewoverlook">
-<meta property="og:description" content="Control Print and None 区分python中两种类型的函数 - 纯函数(pure functions): 函数中有一些输入(参数)并返回一些输出(调用返回结果) 1abs(-2) 可将内置函数abs描述为接受输入并产生输出的小型机器  abs在调用时除了返回值外不会造成其他任何影响，而且使用相同参数调用时总会返回相同的值  非纯函数(Non-pure funct">
+<meta property="og:description" content="ControlPrint and None区分python中两种类型的函数  纯函数(pure functions): 函数中有一些输入(参数)并返回一些输出(调用返回结果) 1abs(-2) 可将内置函数abs描述为接受输入并产生输出的小型机器abs在调用时除了返回值外不会造成其他任何影响，而且使用相同参数调用时总会返回相同的值  非纯函数(Non-pure functions): 除了返回值外">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/20230628122028.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/20230628124703.png">
@@ -83,7 +83,7 @@
   </style>
 </noscript>
 
-</head>
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
@@ -252,112 +252,67 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="control">Control</h1>
-<h3 id="print-and-none">Print and None</h3>
-<p>区分python中两种类型的函数 - 纯函数(pure functions):
-函数中有一些输入(参数)并返回一些输出(调用返回结果) <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">abs</span>(-<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
-可将内置函数<code>abs</code>描述为接受输入并产生输出的小型机器
-<img src="https://raw.githubusercontent.com/XuandYu000/picture/main/20230628122028.png"/>
-<code>abs</code>在调用时除了返回值外不会造成其他任何影响，而且使用相同参数调用时总会返回相同的值</p>
+        <h1 id="Control"><a href="#Control" class="headerlink" title="Control"></a>Control</h1><h3 id="Print-and-None"><a href="#Print-and-None" class="headerlink" title="Print and None"></a>Print and None</h3><p>区分python中两种类型的函数</p>
 <ul>
-<li>非纯函数(Non-pure functions):
-除了返回值外，调用一个非纯函数还会产生其他改变解释器和计算机状态的副作用(side
-effect)。一个常见的副作用就是使用<code>print</code>函数产生(非返回值的)额外输出
+<li><p>纯函数(pure functions): 函数中有一些输入(参数)并返回一些输出(调用返回结果)</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">abs</span>(-<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<p>可将内置函数<code>abs</code>描述为接受输入并产生输出的小型机器<br><img src="https://raw.githubusercontent.com/XuandYu000/picture/main/20230628122028.png"/><br><code>abs</code>在调用时除了返回值外不会造成其他任何影响，而且使用相同参数调用时总会返回相同的值</p>
+</li>
+<li><p>非纯函数(Non-pure functions): 除了返回值外，调用一个非纯函数还会产生其他改变解释器和计算机状态的副作用(side effect)。一个常见的副作用就是使用<code>print</code>函数产生(非返回值的)额外输出</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/XuandYu000/picture/main/20230628124703.png"/>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">虽然print和abs在上述例子中相似，但是工作方式不同，print返回值始终为None，不代表任何内容的特殊python值。交互式python解释器不会自动打印。</span><br></pre></td></tr></table></figure></li>
+<p><img src="https://raw.githubusercontent.com/XuandYu000/picture/main/20230628124703.png"/></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">虽然print和abs在上述例子中相似，但是工作方式不同，print返回值始终为None，不代表任何内容的特殊python值。交互式python解释器不会自动打印。</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
-<p>以下这个例子显示<code>print</code>的嵌套表达式展示非纯函数的特征
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">print</span>(<span class="number">1</span>),<span class="built_in">print</span>(<span class="number">2</span>))</span><br></pre></td></tr></table></figure></p>
+<p>以下这个例子显示<code>print</code>的嵌套表达式展示非纯函数的特征<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">print</span>(<span class="number">1</span>),<span class="built_in">print</span>(<span class="number">2</span>))</span><br></pre></td></tr></table></figure></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">小心使用print！他返回的None意味着其不应该用于赋值语句</span><br></pre></td></tr></table></figure>
-<p>纯函数不能有副作用，或是随着时间推移的改变的限制，但是对其施加这些限制会产生巨大的好处。首先，纯函数可以更可靠地组成复合调用表达式。在上面的示例中可以看到在操作数表达式中使用非纯函数 <code>print</code> 并不能返回有用的结果，但另一方面，我们已经看到 <code>max, pow, sqrt</code> 等函数可以在嵌套表达式中有效使用。</p>
+<p>纯函数不能有副作用，或是随着时间推移的改变的限制，但是对其施加这些限制会产生巨大的好处。首先，纯函数可以更可靠地组成复合调用表达式。在上面的示例中可以看到在操作数表达式中使用非纯函数 <code>print</code> 并不能返回有用的结果，但另一方面，我们已经看到 <code>max, pow, sqrt</code> 等函数可以在嵌套表达式中有效使用。</p>
 <p>第二，纯函数往往更易于测试。相同的参数列表会返回相同的值，我们可以将其与预期的返回值进行比较。本章后面将更详细地讨论测试。</p>
 <p>第三，第四章将说明纯函数对于编写可以同时计算多个调用表达式的并发程序来说是必不可少的。</p>
 <p>此外，第二章会研究一系列非纯函数并描述它们的用途。</p>
-<p>所以我们将在本章的剩余部分重点介绍纯函数的创建和使用，<code>print</code> 函数仅用于查看计算的中间结果。</p>
-<h3 id="miscellaneous-python-features">Miscellaneous Python
-Features</h3>
-<h4 id="文档">文档</h4>
-<p>函数定义通常包括描述函数的文档，称为 “文档字符串
-docstring”，它必须在函数体中缩进。文档字符串通常使用三个引号，第一行描述函数的任务，随后的几行可以描述参数并解释函数的意图：
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">pressure</span>(<span class="params">v, t, n</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;计算理想气体的压力，单位为帕斯卡</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        使用理想气体定律：http://en.wikipedia.org/wiki/Ideal_gas_law</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        v -- 气体体积，单位为立方米</span></span><br><span class="line"><span class="string">        t -- 绝对温度，单位为开尔文</span></span><br><span class="line"><span class="string">        n -- 气体粒子</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        k = <span class="number">1.38e-23</span>  <span class="comment"># 玻尔兹曼常数</span></span><br><span class="line">        <span class="keyword">return</span> n * k * t / v</span><br></pre></td></tr></table></figure>
-当你使用函数名称作为参数调用 <code>help</code> 时，你会看到它的文档字符串（键入
-q 以退出 Python help）。 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">help</span>(pressure)</span><br></pre></td></tr></table></figure> 注释：Python
-中的注释可以附加到 <code>#</code> 号后的行尾。例如，上面代码中的注释 <code>玻尔兹曼常数</code> 描述了 <code>k</code> 变量的含义。这些注释不会出现在
-Python
-的 <code>help</code> 中，而且会被解释器忽略，它们只为人类而存在。</p>
-<h4 id="参数默认值">参数默认值</h4>
-<p>定义通用函数的结果是引入了额外的参数。具有许多参数的函数可能调用起来很麻烦并且难以阅读。</p>
-<p>在 Python
-中，我们可以为函数的参数提供默认值。当调用该函数时，具有默认值的参数是可选的。如果未提供，则将默认值绑定到形参上。例如，如果程序通常用于计算
-“一摩尔” 粒子的压力，则可以提供此值作为默认值：</p>
+<p>所以我们将在本章的剩余部分重点介绍纯函数的创建和使用，<code>print</code> 函数仅用于查看计算的中间结果。</p>
+<h3 id="Miscellaneous-Python-Features"><a href="#Miscellaneous-Python-Features" class="headerlink" title="Miscellaneous Python Features"></a>Miscellaneous Python Features</h3><h4 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h4><p>函数定义通常包括描述函数的文档，称为 “文档字符串 docstring”，它必须在函数体中缩进。文档字符串通常使用三个引号，第一行描述函数的任务，随后的几行可以描述参数并解释函数的意图：<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">pressure</span>(<span class="params">v, t, n</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;计算理想气体的压力，单位为帕斯卡</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        使用理想气体定律：http://en.wikipedia.org/wiki/Ideal_gas_law</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        v -- 气体体积，单位为立方米</span></span><br><span class="line"><span class="string">        t -- 绝对温度，单位为开尔文</span></span><br><span class="line"><span class="string">        n -- 气体粒子</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        k = <span class="number">1.38e-23</span>  <span class="comment"># 玻尔兹曼常数</span></span><br><span class="line">        <span class="keyword">return</span> n * k * t / v</span><br></pre></td></tr></table></figure><br>当你使用函数名称作为参数调用 <code>help</code> 时，你会看到它的文档字符串（键入 q 以退出 Python help）。<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">help</span>(pressure)</span><br></pre></td></tr></table></figure><br>注释：Python 中的注释可以附加到 <code>#</code> 号后的行尾。例如，上面代码中的注释 <code>玻尔兹曼常数</code> 描述了 <code>k</code> 变量的含义。这些注释不会出现在 Python 的 <code>help</code> 中，而且会被解释器忽略，它们只为人类而存在。</p>
+<h4 id="参数默认值"><a href="#参数默认值" class="headerlink" title="参数默认值"></a>参数默认值</h4><p>定义通用函数的结果是引入了额外的参数。具有许多参数的函数可能调用起来很麻烦并且难以阅读。</p>
+<p>在 Python 中，我们可以为函数的参数提供默认值。当调用该函数时，具有默认值的参数是可选的。如果未提供，则将默认值绑定到形参上。例如，如果程序通常用于计算 “一摩尔” 粒子的压力，则可以提供此值作为默认值：</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">pressure</span>(<span class="params">v, t, n=<span class="number">6.022e23</span></span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;计算理想气体的压力，单位为帕斯卡</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        使用理想气体定律：http://en.wikipedia.org/wiki/Ideal_gas_law</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        v -- 气体体积，单位为立方米</span></span><br><span class="line"><span class="string">        t -- 绝对温度，单位为开尔文</span></span><br><span class="line"><span class="string">        n -- 气体粒子，默认为一摩尔</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        k = <span class="number">1.38e-23</span>  <span class="comment"># 玻尔兹曼常数</span></span><br><span class="line">        <span class="keyword">return</span> n * k * t / v</span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">=在这里有两种含义，def中不表示赋值，而是指示函数调用时的默认值。</span><br><span class="line">函数体中k的赋值语句将名称k与玻尔兹曼常数的近似值进行了绑定。</span><br></pre></td></tr></table></figure>
-<h4 id="designing-functions">Designing Functions</h4>
-<p>函数是所有程序（无论大小）的基本组成部分，并且是我们使用编程语言来表达计算过程的主要媒介。之前我们已经讨论过了函数的形式及其调用方式，而本节我们将讨论
-“什么是一个好函数”。从根本上说，好函数共有的品质就是：它们都强化了“函数就是抽象”
-的理念。</p>
+<h4 id="Designing-Functions"><a href="#Designing-Functions" class="headerlink" title="Designing Functions"></a>Designing Functions</h4><p>函数是所有程序（无论大小）的基本组成部分，并且是我们使用编程语言来表达计算过程的主要媒介。之前我们已经讨论过了函数的形式及其调用方式，而本节我们将讨论 “什么是一个好函数”。从根本上说，好函数共有的品质就是：它们都强化了“函数就是抽象” 的理念。</p>
 <ul>
 <li>每个函数应该只负责一个任务，且该任务要用一个简短的名称来识别，并在一行文本中进行描述。按顺序执行多个任务的函数应该分为多个函数。</li>
-<li>不要重复自己（Don't repeat
-yourself）是软件工程的核心原则。这个所谓的 DRY
-原则指出，多个代码片段不应该描述重复的逻辑。相反，逻辑应该只实现一次，为其指定一个名称后多次使用。如果你发现自己正在复制粘贴一段代码，那么你可能已经找到了进行函数抽象的机会。</li>
-<li>定义通用的函数。比如作为 <code>pow</code> 函数的一个特例的平方函数就不在
-Python 库中，因为 <code>pow</code> 函数可以将数字计算为任意次方。</li>
+<li>不要重复自己（Don’t repeat yourself）是软件工程的核心原则。这个所谓的 DRY 原则指出，多个代码片段不应该描述重复的逻辑。相反，逻辑应该只实现一次，为其指定一个名称后多次使用。如果你发现自己正在复制粘贴一段代码，那么你可能已经找到了进行函数抽象的机会。</li>
+<li>定义通用的函数。比如作为 <code>pow</code> 函数的一个特例的平方函数就不在 Python 库中，因为 <code>pow</code> 函数可以将数字计算为任意次方。</li>
 </ul>
-<p>这些准则提高了代码的可读性，减少了错误的数量，并且通常最大限度地减少了编写的代码总量。将复杂的任务分解为简洁的功能是一项需要经验才能掌握的技能。幸运的是，Python
-提供了多种特性来支持你的工作。</p>
+<p>这些准则提高了代码的可读性，减少了错误的数量，并且通常最大限度地减少了编写的代码总量。将复杂的任务分解为简洁的功能是一项需要经验才能掌握的技能。幸运的是，Python 提供了多种特性来支持你的工作。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">注意hw01中有一道题涉及函数与if语句的区别，我觉得那个非常好，最后实现方法是利用if语句只判断一下二选一，但是函数需要评估所有的参数。例如以下：cond()是False，在if_statement中先判断False，然后执行if_else中的一个，但是在if_function中我们把True条件改变就可以轻而易举的做到cond()的选择效果不起作用</span><br></pre></td></tr></table></figure>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">if_function</span>(<span class="params">condition, true_result, false_result</span>):</span><br><span class="line"></span><br><span class="line">    <span class="string">&quot;&quot;&quot;Return true_result if condition is a true value, and</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    false_result otherwise.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; if_function(True, 2, 3)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    2</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; if_function(False, 2, 3)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    3</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; if_function(3==2, &#x27;equal&#x27;, &#x27;not equal&#x27;)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &#x27;not equal&#x27;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; if_function(3&gt;2, &#x27;bigger&#x27;, &#x27;smaller&#x27;)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &#x27;bigger&#x27;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> condition:</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> true_result</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> false_result</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">with_if_statement</span>():</span><br><span class="line"></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; result = with_if_statement()</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    61A</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; print(result)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    None</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> cond():</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> true_func()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> false_func()</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">with_if_function</span>():</span><br><span class="line"></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; result = with_if_function()</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Welcome to</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    61A</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; print(result)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    None</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> if_function(cond(), true_func(), false_func())</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">cond</span>():</span><br><span class="line"></span><br><span class="line">    <span class="string">&quot;*** YOUR CODE HERE ***&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">global</span> x</span><br><span class="line"></span><br><span class="line">    x=<span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> x==<span class="number">1</span>:</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">true_func</span>():</span><br><span class="line"></span><br><span class="line">    <span class="string">&quot;*** YOUR CODE HERE ***&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">global</span> x</span><br><span class="line"></span><br><span class="line">    x=<span class="number">2</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> x==<span class="number">2</span>:</span><br><span class="line"></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Welcome to&quot;</span>)</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">false_func</span>():</span><br><span class="line"></span><br><span class="line">    <span class="string">&quot;*** YOUR CODE HERE ***&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">global</span> x</span><br><span class="line"></span><br><span class="line">    x=<span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> x==<span class="number">1</span>:</span><br><span class="line"></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;61A&quot;</span>)</span><br></pre></td></tr></table></figure>
-<h3 id="discussion-1-cs-61a-spring-2021">Discussion 1 | CS 61A Spring
-2021</h3>
-<h2 id="conditional-statements">Conditional statements</h2>
-<p><strong>Conditional statements</strong> let programs execute
-different lines of code depending on certain conditions. Let’s review
-the <code>if-elif-else</code> syntax.</p>
+<h3 id="Discussion-1-CS-61A-Spring-2021"><a href="#Discussion-1-CS-61A-Spring-2021" class="headerlink" title="Discussion 1 | CS 61A Spring 2021"></a>Discussion 1 | CS 61A Spring 2021</h3><h2 id="Conditional-statements"><a href="#Conditional-statements" class="headerlink" title="Conditional statements"></a>Conditional statements</h2><p><strong>Conditional statements</strong> let programs execute different lines of code depending on certain conditions. Let’s review the <code>if-elif-else</code> syntax.</p>
 <p>Recall the following points:</p>
 <ul>
-<li><p>The <code>else</code> and <code>elif</code> clauses are optional,
-and you can have any number of <code>elif</code> clauses.</p></li>
-<li><p>A <strong>conditional expression</strong> is an expression that
-evaluates to either a truthy value (<code>True</code>, a non-zero
-integer, etc.) or a falsy value
-(<code>False</code>, <code>0</code>, <code>None</code>, <code>""</code>, <code>[]</code>,
-etc.).</p></li>
-<li><p>Only the <strong>suite</strong> that is indented under the
-first <code>if</code>/<code>elif</code> whose conditional expression
-evaluates to a true value will be executed.</p></li>
-<li><p>If none of the conditional expressions evaluate to a true value,
-then the <code>else</code> suite is executed. There can only be
-one <code>else</code> clause in a conditional statement!</p>
-<p>if <conditional expression>: <suite of statements>; elif
-<conditional expression>: <suite of statements>; else:
-<suite of statements>;</p></li>
+<li>The <code>else</code> and <code>elif</code> clauses are optional, and you can have any number of <code>elif</code> clauses.</li>
+<li>A <strong>conditional expression</strong> is an expression that evaluates to either a truthy value (<code>True</code>, a non-zero integer, etc.) or a falsy value (<code>False</code>, <code>0</code>, <code>None</code>, <code>&quot;&quot;</code>, <code>[]</code>, etc.).</li>
+<li>Only the <strong>suite</strong> that is indented under the first <code>if</code>/<code>elif</code> whose conditional expression evaluates to a true value will be executed.</li>
+<li><p>If none of the conditional expressions evaluate to a true value, then the <code>else</code> suite is executed. There can only be one <code>else</code> clause in a conditional statement!</p>
+<p>  if <conditional expression>:</p>
+<pre><code>  &lt;suite of statements&gt;;
+</code></pre><p>  elif <conditional expression>:</p>
+<pre><code>  &lt;suite of statements&gt;;
+</code></pre><p>  else:</p>
+<pre><code>  &lt;suite of statements&gt;;
+</code></pre></li>
 </ul>
-<h2 id="boolean-operators">Boolean Operators</h2>
-<p>Python also includes the <strong>boolean
-operators</strong> <code>and</code>, <code>or</code>,
-and <code>not</code>. These operators are used to combine and manipulate
-boolean values.</p>
+<h2 id="Boolean-Operators"><a href="#Boolean-Operators" class="headerlink" title="Boolean Operators"></a>Boolean Operators</h2><p>Python also includes the <strong>boolean operators</strong> <code>and</code>, <code>or</code>, and <code>not</code>. These operators are used to combine and manipulate boolean values.</p>
 <ul>
-<li><p><code>not</code> returns the opposite truth value of the
-following expression (so not will always return
-either <code>True</code> or <code>False</code>).</p></li>
-<li><p><code>and</code> evaluates expressions in order and stops
-evaluating (short-circuits) once it reaches the first false value, and
-then returns it. If all values evaluate to a true value, the last value
-is returned.</p></li>
-<li><p><code>or</code> short-circuits at the first true value and
-returns it. If all values evaluate to a false value, the last value is
-returned.</p>
+<li><code>not</code> returns the opposite truth value of the following expression (so not will always return either <code>True</code> or <code>False</code>).</li>
+<li><code>and</code> evaluates expressions in order and stops evaluating (short-circuits) once it reaches the first false value, and then returns it. If all values evaluate to a true value, the last value is returned.</li>
+<li><p><code>or</code> short-circuits at the first true value and returns it. If all values evaluate to a false value, the last value is returned.</p>
 <blockquote>
 <blockquote>
 <blockquote>
-<p>not None True not True False -1 and 0 and 1 0 False or 9999 or 1/0
-9999</p>
+<p>not None<br>  True<br>not True<br>  False<br>-1 and 0 and 1<br>  0<br>False or 9999 or 1/0<br>  9999</p>
 </blockquote>
 </blockquote>
-</blockquote></li>
+</blockquote>
+</li>
 </ul>
 
     </div>
@@ -378,8 +333,8 @@ returned.</p>
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2023/07/02/Intro/" rel="prev" title="Intro">
-      <i class="fa fa-chevron-left"></i> Intro
+    <a href="/2023/07/02/Higher%20Order%20Funcrtions/" rel="prev" title="Higher Order Funcrtions">
+      <i class="fa fa-chevron-left"></i> Higher Order Funcrtions
     </a></div>
       <div class="post-nav-item">
     <a href="/2023/07/06/cf1845/" rel="next" title="cf1845">
@@ -443,9 +398,7 @@ returned.</p>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#control"><span class="nav-number">1.</span> <span class="nav-text">Control</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#print-and-none"><span class="nav-number">1.0.1.</span> <span class="nav-text">Print and None</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#miscellaneous-python-features"><span class="nav-number">1.0.2.</span> <span class="nav-text">Miscellaneous Python
-Features</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E6%A1%A3"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">文档</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E9%BB%98%E8%AE%A4%E5%80%BC"><span class="nav-number">1.0.2.2.</span> <span class="nav-text">参数默认值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#designing-functions"><span class="nav-number">1.0.2.3.</span> <span class="nav-text">Designing Functions</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#discussion-1-cs-61a-spring-2021"><span class="nav-number">1.0.3.</span> <span class="nav-text">Discussion 1 | CS 61A Spring
-2021</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#conditional-statements"><span class="nav-number">1.1.</span> <span class="nav-text">Conditional statements</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#boolean-operators"><span class="nav-number">1.2.</span> <span class="nav-text">Boolean Operators</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Control"><span class="nav-number">1.</span> <span class="nav-text">Control</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Print-and-None"><span class="nav-number">1.0.1.</span> <span class="nav-text">Print and None</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Miscellaneous-Python-Features"><span class="nav-number">1.0.2.</span> <span class="nav-text">Miscellaneous Python Features</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E6%A1%A3"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">文档</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E9%BB%98%E8%AE%A4%E5%80%BC"><span class="nav-number">1.0.2.2.</span> <span class="nav-text">参数默认值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Designing-Functions"><span class="nav-number">1.0.2.3.</span> <span class="nav-text">Designing Functions</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Discussion-1-CS-61A-Spring-2021"><span class="nav-number">1.0.3.</span> <span class="nav-text">Discussion 1 | CS 61A Spring 2021</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conditional-statements"><span class="nav-number">1.1.</span> <span class="nav-text">Conditional statements</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Boolean-Operators"><span class="nav-number">1.2.</span> <span class="nav-text">Boolean Operators</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -529,6 +482,7 @@ Features</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a cla
 
   
   <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
 
@@ -541,6 +495,65 @@ Features</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a cla
 
 
 <script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
 
 
   <script defer src="/lib/three/three.min.js"></script>
@@ -567,11 +580,33 @@ Features</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a cla
 
 
 
+    <div id="pjax">
   
 
   
 
   
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
 
+<script>
+var options = {
+  bottom: '64px',
+  right: 'unset',
+  left: '32px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+    </div>
 </body>
 </html>
