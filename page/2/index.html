@@ -185,122 +185,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/06/cf1845/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
-      <meta itemprop="name" content="XuandYu000">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="viewoverlook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/07/06/cf1845/" class="post-title-link" itemprop="url">cf1845</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-07-06 00:00:00" itemprop="dateCreated datePublished" datetime="2023-07-06T00:00:00+08:00">2023-07-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-08-23 18:56:25" itemprop="dateModified" datetime="2023-08-23T18:56:25+08:00">2023-08-23</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithms/" itemprop="url" rel="index"><span itemprop="name">algorithms</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="cf1845">cf1845</h1>
-<h4 id="a.-forbidden-integer">A. Forbidden Integer</h4>
-<p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1845/problem/A">题目链接</a>
-题目大意：
-给定数字n,k,x,求是否能在1~k中在不选x的条件下取若干个数字使其之和为n 思路
-如果有<code>x!=1</code>则必然可以，若<code>x=1</code>,可以将其分为偶数和奇数，偶数有若干个2组成，奇数可以减若干个2使其到达k以内，看k是否该奇数即可包含即可</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: A. Forbidden Integer</span></span><br><span class="line"><span class="comment">// Contest: Codeforces - Educational Codeforces Round 151 (Rated for Div. 2)</span></span><br><span class="line"><span class="comment">// URL: https://codeforces.com/contest/1845/problem/A</span></span><br><span class="line"><span class="comment">// Memory Limit: 256 MB</span></span><br><span class="line"><span class="comment">// Time Limit: 2000 ms</span></span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="comment">// Powered by CP Editor (https://cpeditor.org)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> x first</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> y second</span></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; PII;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">	<span class="type">int</span> T; cin&gt;&gt;T;</span><br><span class="line">	<span class="keyword">while</span>(T--)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> n,k,x; cin&gt;&gt;n&gt;&gt;k&gt;&gt;x;</span><br><span class="line">		<span class="keyword">if</span>(x!=<span class="number">1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">// puts(&quot;YES&quot;);</span></span><br><span class="line">			cout&lt;&lt;<span class="string">&quot;YES&quot;</span>&lt;&lt;endl;</span><br><span class="line">			cout&lt;&lt;n&lt;&lt;endl;</span><br><span class="line">			<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">			&#123;</span><br><span class="line">				cout&lt;&lt;<span class="number">1</span>&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			cout&lt;&lt;endl;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="type">bool</span> fla=<span class="literal">false</span>;</span><br><span class="line">			vector&lt;<span class="type">int</span>&gt; q;</span><br><span class="line">			<span class="keyword">while</span>(n&gt;<span class="number">0</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span>(<span class="number">2</span>&lt;=n&amp;&amp;n&lt;=k)</span><br><span class="line">				&#123;</span><br><span class="line">					q.<span class="built_in">push_back</span>(n);</span><br><span class="line">					fla=<span class="literal">true</span>;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				n-=<span class="number">2</span>;</span><br><span class="line">				q.<span class="built_in">push_back</span>(<span class="number">2</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(!fla) cout&lt;&lt;<span class="string">&quot;NO&quot;</span>&lt;&lt;endl;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				<span class="comment">// puts(&quot;YES&quot;);</span></span><br><span class="line">				cout&lt;&lt;<span class="string">&quot;YES&quot;</span>&lt;&lt;endl;</span><br><span class="line">				cout&lt;&lt;q.<span class="built_in">size</span>()&lt;&lt;endl;</span><br><span class="line">				<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>,len=q.<span class="built_in">size</span>();i&lt;len;i++)</span><br><span class="line">				&#123;</span><br><span class="line">					cout&lt;&lt;q[i]&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				cout&lt;&lt;endl;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h4 id="b.-come-together">B. Come Together</h4>
-<p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1845/problem/B">题目链接</a>
-题目大意：
-两个人均从A出发在目的地分别为B，C，只能走相邻的格子，求到达目的地之前两个人最多可以一起走多少步，两个人都按最小步数走
-思路
-最小步数就是A，B和A,C之间的曼哈顿距离，可以分别以A，B为顶点和以A，C为顶点画两个矩形，两个矩形相交而成的矩形与A的最远曼哈顿距离即为答案。还要考虑一点，就是以上情况只讨论了C,B的x，y坐标值中都至少有一个不小于A中x，y的坐标值。当有两个点的x或y至少有一个完全小于A的x或y时上述不成立(可以画个图看看)，此时则要对称一下使B,C符合之前的约束条件
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: B. Come Together</span></span><br><span class="line"><span class="comment">// Contest: Codeforces - Educational Codeforces Round 151 (Rated for Div. 2)</span></span><br><span class="line"><span class="comment">// URL: https://codeforces.com/contest/1845/problem/B</span></span><br><span class="line"><span class="comment">// Memory Limit: 256 MB</span></span><br><span class="line"><span class="comment">// Time Limit: 2000 ms</span></span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="comment">// Powered by CP Editor (https://cpeditor.org)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> x first</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> y second</span></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; PII;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">	<span class="type">int</span> T; cin&gt;&gt;T;</span><br><span class="line">	<span class="keyword">while</span>(T--)</span><br><span class="line">	&#123;</span><br><span class="line">		PII p[<span class="number">3</span>];</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">3</span>;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			cin&gt;&gt;p[i].x&gt;&gt;p[i].y;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(p[<span class="number">0</span>].x&gt;=p[<span class="number">1</span>].x&amp;&amp;p[<span class="number">0</span>].x&gt;=p[<span class="number">2</span>].x)&#123;</span><br><span class="line">			p[<span class="number">1</span>].x=p[<span class="number">0</span>].x+<span class="built_in">abs</span>(p[<span class="number">0</span>].x-p[<span class="number">1</span>].x);</span><br><span class="line">			p[<span class="number">2</span>].x=p[<span class="number">0</span>].x+<span class="built_in">abs</span>(p[<span class="number">0</span>].x-p[<span class="number">2</span>].x);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(p[<span class="number">0</span>].y&gt;=p[<span class="number">1</span>].y&amp;&amp;p[<span class="number">0</span>].y&gt;=p[<span class="number">2</span>].y)&#123;</span><br><span class="line">			p[<span class="number">1</span>].y=p[<span class="number">0</span>].y+<span class="built_in">abs</span>(p[<span class="number">0</span>].y-p[<span class="number">1</span>].y);</span><br><span class="line">			p[<span class="number">2</span>].y=p[<span class="number">0</span>].y+<span class="built_in">abs</span>(p[<span class="number">0</span>].y-p[<span class="number">2</span>].y);</span><br><span class="line">		&#125;</span><br><span class="line"><span class="comment">// 		</span></span><br><span class="line">		<span class="comment">// for(int i=0;i&lt;3;i++)</span></span><br><span class="line">		<span class="comment">// &#123;</span></span><br><span class="line">			<span class="comment">// cout&lt;&lt;i&lt;&lt;&quot;:&quot;&lt;&lt;endl;</span></span><br><span class="line">			<span class="comment">// cout&lt;&lt;p[i].x&lt;&lt;&quot; &quot;&lt;&lt;p[i].y&lt;&lt;endl;</span></span><br><span class="line">		<span class="comment">// &#125;</span></span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(p[<span class="number">2</span>].y&lt;=p[<span class="number">1</span>].x&amp;&amp;p[<span class="number">2</span>].y&lt;=p[<span class="number">1</span>].y) <span class="built_in">swap</span>(p[<span class="number">1</span>],p[<span class="number">2</span>]);</span><br><span class="line">		<span class="keyword">if</span>((p[<span class="number">2</span>].x&gt;=p[<span class="number">1</span>].x&amp;&amp;p[<span class="number">1</span>].x&gt;=p[<span class="number">0</span>].x)&amp;&amp;(p[<span class="number">2</span>].y&gt;=p[<span class="number">1</span>].y&amp;&amp;p[<span class="number">1</span>].y&gt;=p[<span class="number">0</span>].y))</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="type">int</span> pb=<span class="built_in">abs</span>(p[<span class="number">1</span>].x-p[<span class="number">0</span>].x)+<span class="built_in">abs</span>(p[<span class="number">1</span>].y-p[<span class="number">0</span>].y);</span><br><span class="line">			cout&lt;&lt;pb+<span class="number">1</span>&lt;&lt;endl;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="type">int</span> mx=<span class="built_in">max</span>(<span class="built_in">min</span>(p[<span class="number">1</span>].x,p[<span class="number">2</span>].x),p[<span class="number">0</span>].x);</span><br><span class="line">			<span class="type">int</span> my=<span class="built_in">max</span>(<span class="built_in">min</span>(p[<span class="number">1</span>].y,p[<span class="number">2</span>].y),p[<span class="number">0</span>].y);</span><br><span class="line">			cout&lt;&lt;<span class="built_in">abs</span>(mx-p[<span class="number">0</span>].x)+<span class="built_in">abs</span>(my-p[<span class="number">0</span>].y)+<span class="number">1</span>&lt;&lt;endl;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-<h4 id="c.-strong-password">C. Strong Password</h4>
-<p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1845/problem/C">题目链接</a>
-题目大意： 给定两个序列l,r,长度均为m,此时要选出长度为m的序列suq，<span
-class="math inline">\(l[i]&lt;=suq[i]&lt;=r[i]\)</span>是suq不是给定字符串s的子序列(自序列在s中可以不连续)，问是否存在这样的子序列
-思路 贪心的方法是选每一位时尽量选第一次出现时最靠右的位置，理由如下图
-<img
-src="https://raw.githubusercontent.com/XuandYu000/picture/main/20230706163002.png"
-alt="image.png" />
-当第一位选3~5时选最靠右的可以过滤掉一些情况，此时剩余可能组成的情况变小，获得符合条件的序列的可能增大。当每一位都选最靠右端的情况时是符合条件的序列的可能性最大。
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在这里用到一个模板用于找在一个中序列中所有数字在第i位右边第一次出现的位置，当在边界时说明在第i位右边没有该字符</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: C. Strong Password</span></span><br><span class="line"><span class="comment">// Contest: Codeforces - Educational Codeforces Round 151 (Rated for Div. 2)</span></span><br><span class="line"><span class="comment">// URL: https://codeforces.com/contest/1845/problem/C</span></span><br><span class="line"><span class="comment">// Memory Limit: 256 MB</span></span><br><span class="line"><span class="comment">// Time Limit: 2000 ms</span></span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="comment">// Powered by CP Editor (https://cpeditor.org)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;array&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> x first</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> y second</span></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; PII;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">	<span class="type">int</span> T; cin&gt;&gt;T;</span><br><span class="line">	<span class="keyword">while</span>(T--)</span><br><span class="line">	&#123;</span><br><span class="line">		string s; cin&gt;&gt;s;</span><br><span class="line">		<span class="type">int</span> m; cin&gt;&gt;m;</span><br><span class="line">		string l,r; cin&gt;&gt;l&gt;&gt;r;</span><br><span class="line">		<span class="type">int</span> n=s.<span class="built_in">size</span>();</span><br><span class="line">		vector&lt;array&lt;<span class="type">int</span>,10&gt;&gt; <span class="built_in">q</span>(n+<span class="number">1</span>);</span><br><span class="line">		<span class="comment">// 记录第i位右边最近的0~9的位置，n为边界当取n时说明第i位右边没有在这个数</span></span><br><span class="line">		q[n].<span class="built_in">fill</span>(n);</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i=n<span class="number">-1</span>;i&gt;=<span class="number">0</span>;i--)</span><br><span class="line">		&#123;</span><br><span class="line">			q[i]=q[i+<span class="number">1</span>];</span><br><span class="line">			q[i][s[i]-<span class="string">&#x27;0&#x27;</span>]=i;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="type">int</span> cur=<span class="number">-1</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;m <span class="keyword">and</span> cur&lt;n;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="type">int</span> nxt=<span class="number">0</span>;</span><br><span class="line">			<span class="keyword">for</span>(<span class="type">int</span> j=l[i]-<span class="string">&#x27;0&#x27;</span>;j&lt;=r[i]-<span class="string">&#x27;0&#x27;</span>;j++)</span><br><span class="line">			&#123;</span><br><span class="line">				nxt=<span class="built_in">max</span>(nxt,q[cur+<span class="number">1</span>][j]);</span><br><span class="line">			&#125;</span><br><span class="line">			cur=nxt;</span><br><span class="line">		&#125;</span><br><span class="line">		cout&lt;&lt;(cur==n?<span class="string">&quot;YES\n&quot;</span>:<span class="string">&quot;NO\n&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h4 id="d.-rating-system">D. Rating System</h4>
-<p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1845/problem/D">题目链接</a>
-题目大意： 给定数组a，从s=0开始，遍历数组a，并累加<span
-class="math inline">\(a_i\)</span>到s。一旦<span
-class="math inline">\(s&gt;=k\)</span>,那么后续<span
-class="math inline">\(s=\max(s+a_i,k)\)</span>。问k取多少可以让最终的s最大
-思路
-<img src="https://raw.githubusercontent.com/XuandYu000/picture/main/20230706164130.png"/>
-当取图中的k时之后下降的一段被移除，其余上升的段不变，下降段如果小于移除的下降段则减小的也不变，试想一下一旦取下降最大的一段移除那么就是把之后图像往上平移一个最大距离。那么答案就是最大。
-此时问题就被转化为寻找最小子段和问题，而最小子段和可以由前缀和-最大子段和得出
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: D. Rating System</span></span><br><span class="line"><span class="comment">// Contest: Codeforces - Educational Codeforces Round 151 (Rated for Div. 2)</span></span><br><span class="line"><span class="comment">// URL: https://codeforces.com/contest/1845/problem/D</span></span><br><span class="line"><span class="comment">// Memory Limit: 256 MB</span></span><br><span class="line"><span class="comment">// Time Limit: 2000 ms</span></span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="comment">// Powered by CP Editor (https://cpeditor.org)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> x first</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> y second</span></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; PII;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">	<span class="type">int</span> T; cin&gt;&gt;T;</span><br><span class="line">	<span class="keyword">while</span>(T--)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> n; cin&gt;&gt;n;</span><br><span class="line">		<span class="function">vector&lt;LL&gt; <span class="title">a</span><span class="params">(n)</span></span>;</span><br><span class="line">		<span class="keyword">for</span>(LL&amp; x:a) cin&gt;&gt;x;</span><br><span class="line">		LL cmax=<span class="number">0</span>;</span><br><span class="line">		LL cbest=<span class="number">0</span>;</span><br><span class="line">		LL bestk=<span class="number">0</span>;</span><br><span class="line">		LL csum=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			csum+=a[i];</span><br><span class="line">			cmax=<span class="built_in">max</span>(cmax,csum);</span><br><span class="line">			LL val=cmax-csum;</span><br><span class="line">			<span class="keyword">if</span>(val&gt;cbest)</span><br><span class="line">			&#123;</span><br><span class="line">				cbest=val;</span><br><span class="line">				bestk=cmax;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		cout&lt;&lt;bestk&lt;&lt;endl; </span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-<h4 id="e.-boxes-and-balls">E. Boxes and Balls</h4>
-<p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1845/problem/E">题目链接</a>
-题目大意：
-给定一个只含0，1的序列，给定k次操作每次操作只能交换一对相邻的0和1，问最后可以得到多少不同的数组,答案对1e9+7取模
-思路
-对于可以取多少不同，交换序列元素为一步之类的经常从dp考虑。但是我的dp不好只能理解个大概在这里先把代码贴上慢慢考虑慢慢学吧
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: E. Boxes and Balls</span></span><br><span class="line"><span class="comment">// Contest: Codeforces - Educational Codeforces Round 151 (Rated for Div. 2)</span></span><br><span class="line"><span class="comment">// URL: https://codeforces.com/contest/1845/problem/E</span></span><br><span class="line"><span class="comment">// Memory Limit: 256 MB</span></span><br><span class="line"><span class="comment">// Time Limit: 5000 ms</span></span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="comment">// Powered by CP Editor (https://cpeditor.org)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;array&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> x first</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> y second</span></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; PII;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">1505</span>,mod=<span class="number">1e9</span>+<span class="number">7</span>;</span><br><span class="line"><span class="type">int</span> n,k,m;</span><br><span class="line"><span class="type">int</span> a[N],b[N];</span><br><span class="line"><span class="type">int</span> f[N][N];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Add</span><span class="params">(<span class="type">int</span> &amp;a,<span class="type">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	a+=b;</span><br><span class="line">	a-=a&gt;=mod?mod:<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;k;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		cin&gt;&gt;a[i];</span><br><span class="line">		m+=a[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(m&gt;n&gt;&gt;<span class="number">1</span>) <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++) a[i]^=<span class="number">1</span>;</span><br><span class="line">	m=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(a[i]==<span class="number">1</span>) b[++m]=i;</span><br><span class="line">	&#125;</span><br><span class="line">	f[<span class="number">0</span>][<span class="number">0</span>]=<span class="number">1</span>;<span class="type">int</span> cur=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++,cur^=<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j=<span class="built_in">min</span>(m,i)<span class="number">-1</span>;j&gt;=<span class="number">0</span>;j--)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="type">int</span> d=<span class="built_in">abs</span>(b[j+<span class="number">1</span>]-i);</span><br><span class="line">			<span class="keyword">for</span>(<span class="type">int</span> x=<span class="number">0</span>;x&lt;=k-d;x++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">Add</span>(f[j+<span class="number">1</span>][x+d],f[j][x]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="type">int</span> ans=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=k;i&gt;=<span class="number">0</span>;i-=<span class="number">2</span>) <span class="built_in">Add</span>(ans,f[m][i]);</span><br><span class="line">	cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/Control/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -485,7 +369,7 @@ returned.</p>
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/Lecture%203%20vim/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/Higher%20Order%20Funcrtions/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
@@ -499,7 +383,7 @@ returned.</p>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/07/02/Lecture%203%20vim/" class="post-title-link" itemprop="url">Lecture 3 vim</a>
+            <a href="/2023/07/02/Higher%20Order%20Funcrtions/" class="post-title-link" itemprop="url">Higher Order Funcrtions</a>
         </h2>
 
         <div class="post-meta">
@@ -510,7 +394,7 @@ returned.</p>
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:07:09" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
+              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:12:33" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -522,7 +406,7 @@ returned.</p>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/csdiy/missing-semester/" itemprop="url" rel="index"><span itemprop="name">missing semester</span></a>
+                  <a href="/categories/csdiy/cs61A/" itemprop="url" rel="index"><span itemprop="name">cs61A</span></a>
                 </span>
             </span>
 
@@ -537,27 +421,23 @@ returned.</p>
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="lecture-3-vim">Lecture 3 vim</h1>
-<ol type="1">
-<li><p>完成 vimtutor。 备注： 它在一个 80x24（80 列，24 行）
-终端窗口看起来最好。 直接执行 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vimtutor</span><br></pre></td></tr></table></figure></p></li>
-<li><p>下载我们的vimrc，然后把它保存到 ~/.vimrc。 通读这个注释详细的文件
-（用 Vim!）， 然后观察 Vim
-在这个新的设置下看起来和使用起来有哪些细微的区别。
-下载后他禁用了上下左右键使用hjkl代替，挺反人类的但是用习惯还可以</p></li>
-<li><p>安装和配置一个插件： ctrlp.vim</p>
-<ul>
-<li>这里建议使用vim-plug，在.vimrc添加：Plug ‘插件名称’ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">call plug#begin(&#x27;~/.vim/plugged&#x27;)</span><br><span class="line"> Plug &#x27;vim-airline/vim-airline&#x27;</span><br><span class="line"> call plug#end()</span><br></pre></td></tr></table></figure>
-之后重新打开vim，执行 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:PlugInstall</span><br></pre></td></tr></table></figure> *删除插件 删除插件，只需要将写在
-.vimrc 配置文件内的插件删除，重启 vim 并执行命令 :PlugClean</li>
-</ul>
-<p>练习使用 Vim, 在你自己的机器上重做 演示。</p></li>
-<li><p>下个月用 Vim 完成所有的文件编辑。每当不够高效的时候，或者你感觉
-“一定有一个更好的方式”时，
-尝试求助搜索引擎，很有可能有一个更好的方式。如果你遇到难题，可以来我们的答疑时间或者给我们发邮件。</p></li>
-<li><p>在其他工具中设置 Vim 快捷键 （见上面的操作指南）。</p></li>
-<li><p>进一步自定义你的 ~/.vimrc 和安装更多插件。</p></li>
-</ol>
+          <h1 id="higher-order-funcrtions">Higher Order Funcrtions</h1>
+<p>让我们做一个功能组合 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">combine_funcs</span>(<span class="params">op</span>):</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;&quot;&quot;combine funcs(OP)(f,g)(x)=OP(f(x),g(x))&quot;&quot;&quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>	<span class="keyword">def</span> <span class="title function_">combine</span>(<span class="params">f,g</span>):</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>		<span class="keyword">def</span> <span class="title function_">val</span>(<span class="params">x</span>):</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>			<span class="keyword">return</span> op(f(x),g(x))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>		<span class="keyword">return</span> val</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>	<span class="keyword">return</span> combined</span><br></pre></td></tr></table></figure></p>
+<p>功能实例</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">combine_func</span>(<span class="params">op</span>):</span><br><span class="line">	<span class="keyword">def</span> <span class="title function_">combined</span>(<span class="params">f,g</span>):</span><br><span class="line">		<span class="keyword">def</span> <span class="title function_">val</span>(<span class="params">x</span>):</span><br><span class="line">			<span class="keyword">return</span> op(f(x),g(x))</span><br><span class="line">		<span class="keyword">return</span> val</span><br><span class="line">	<span class="keyword">return</span> combined</span><br><span class="line"><span class="keyword">from</span> operator <span class="keyword">import</span> add</span><br><span class="line">add_func=combine_func(add)</span><br><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> sin,cos,pi</span><br><span class="line">h=add_func(sin,cos)</span><br><span class="line">h(pi/<span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+<p>为什么要返回val和combined，而不是val(x),combined(f,g)?
+combined直至<code>h=add_func(sin,cos)</code>之前都没有赋值，这里的<code>return combined</code>是返回combined函数本身而不是调用后的结果，同样的在没对val赋值时返回的也只是函数val</p>
+<h4 id="challenge-conditional-function">challenge: Conditional
+Function</h4>
+<p>是否可以写一个python函数<code>if_func</code>:
+<code>if_func(x/1,x&gt;0,0)</code>
+使得返回值和条件语句<code>1/x if x&gt;0 else 0</code> -
+答案是不行的，函数调用时会计算操作数也就是已经计算好了<code>1/x</code></p>
+<p>但是我们可以这样写 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">define if_func(then_expr,condition,else_expr):</span><br><span class="line">	<span class="keyword">return</span> then_expr() <span class="keyword">if</span> condition <span class="keyword">else</span> else_expr()</span><br></pre></td></tr></table></figure></p>
+<p>之后这样调用: <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if_func(<span class="keyword">lambda</span>: <span class="number">1</span>/x,x&gt;<span class="number">0</span>,<span class="keyword">lambda</span>:<span class="number">0</span>)</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">到目前为止，每当我们想要定义一个新函数时，都需要给它取一个名字。但是对于其他类型的表达式，我们不需要将中间值与名称相关联。也就是说，我们可以计算 `a * b + c * d` 而不必命名子表达式 `a*b` 或 `c*d` 或完整的表达式。在 Python 中，我们可以使用 lambda 表达式临时创建函数，这些表达式会计算为未命名的函数。一个 lambda 表达式的计算结果是一个函数，它仅有一个返回表达式作为主体。不允许使用赋值和控制语句。</span><br></pre></td></tr></table></figure>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">compose1</span>(<span class="params">f,g</span>):</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">return</span> <span class="keyword">lambda</span> x: f(g(x))</span><br></pre></td></tr></table></figure>
+<p>可以构造相应的句子理解: <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">lambda</span>           x       :           f(g(x))</span><br><span class="line">A function that  takes x <span class="keyword">and</span> returns f(g(x))</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -829,6 +709,98 @@ files by recency?
 <blockquote>
 <p>实现新近度排列只需要不要head的那个命令即可</p>
 </blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/Lecture%203%20vim/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
+      <meta itemprop="name" content="XuandYu000">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="viewoverlook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/07/02/Lecture%203%20vim/" class="post-title-link" itemprop="url">Lecture 3 vim</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:07:09" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/csdiy/" itemprop="url" rel="index"><span itemprop="name">csdiy</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/csdiy/missing-semester/" itemprop="url" rel="index"><span itemprop="name">missing semester</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="lecture-3-vim">Lecture 3 vim</h1>
+<ol type="1">
+<li><p>完成 vimtutor。 备注： 它在一个 80x24（80 列，24 行）
+终端窗口看起来最好。 直接执行 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vimtutor</span><br></pre></td></tr></table></figure></p></li>
+<li><p>下载我们的vimrc，然后把它保存到 ~/.vimrc。 通读这个注释详细的文件
+（用 Vim!）， 然后观察 Vim
+在这个新的设置下看起来和使用起来有哪些细微的区别。
+下载后他禁用了上下左右键使用hjkl代替，挺反人类的但是用习惯还可以</p></li>
+<li><p>安装和配置一个插件： ctrlp.vim</p>
+<ul>
+<li>这里建议使用vim-plug，在.vimrc添加：Plug ‘插件名称’ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">call plug#begin(&#x27;~/.vim/plugged&#x27;)</span><br><span class="line"> Plug &#x27;vim-airline/vim-airline&#x27;</span><br><span class="line"> call plug#end()</span><br></pre></td></tr></table></figure>
+之后重新打开vim，执行 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:PlugInstall</span><br></pre></td></tr></table></figure> *删除插件 删除插件，只需要将写在
+.vimrc 配置文件内的插件删除，重启 vim 并执行命令 :PlugClean</li>
+</ul>
+<p>练习使用 Vim, 在你自己的机器上重做 演示。</p></li>
+<li><p>下个月用 Vim 完成所有的文件编辑。每当不够高效的时候，或者你感觉
+“一定有一个更好的方式”时，
+尝试求助搜索引擎，很有可能有一个更好的方式。如果你遇到难题，可以来我们的答疑时间或者给我们发邮件。</p></li>
+<li><p>在其他工具中设置 Vim 快捷键 （见上面的操作指南）。</p></li>
+<li><p>进一步自定义你的 ~/.vimrc 和安装更多插件。</p></li>
+</ol>
 
       
     </div>
@@ -1174,106 +1146,6 @@ class="math inline">\(\sum_{j=1}^iA[j]\)</span>
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/cf1823/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
-      <meta itemprop="name" content="XuandYu000">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="viewoverlook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/07/02/cf1823/" class="post-title-link" itemprop="url">cf1823</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:27:20" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithms/" itemprop="url" rel="index"><span itemprop="name">algorithms</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="cf1823">cf1823</h1>
-<h4 id="a.-a-characteristic">A. A-characteristic</h4>
-<p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1823/problem/A">题目链接</a>
-由于出现数字只可能是1或-1，那么假设数列全为-1，依次枚举1出现的个数，可以得出结论不是所有数字都有答案的，由于会有重复数字出现，只需要枚举1的个数x&lt;=n/2即可。
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">// Problem: A. A-characteristic</span><br><span class="line">// Contest: Codeforces - Codeforces Round 868 (Div. 2)</span><br><span class="line">// URL: https://codeforces.com/contest/1823/problem/A</span><br><span class="line">// Memory Limit: 256 MB</span><br><span class="line">// Time Limit: 1000 ms</span><br><span class="line">// </span><br><span class="line">// Powered by CP Editor (https://cpeditor.org)</span><br><span class="line"></span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;queue&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#include&lt;cmath&gt;</span><br><span class="line">#include&lt;stack&gt;</span><br><span class="line">#include&lt;vector&gt;</span><br><span class="line">#include&lt;map&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">#define x first</span><br><span class="line">#define y second</span><br><span class="line">typedef pair&lt;int,int&gt; PII;</span><br><span class="line">typedef long long LL;</span><br><span class="line">const int N=110;</span><br><span class="line">int t,n,k;</span><br><span class="line">int res[N];</span><br><span class="line">bool cal(int l,int r)&#123;</span><br><span class="line">	if(l*(l-1)/2+r*(r-1)/2==k)&#123;</span><br><span class="line">		for(int i=1;i&lt;=l;i++) res[i]=1;</span><br><span class="line">		for(int i=l+1;i&lt;=n;i++) res[i]=-1;</span><br><span class="line">		return true;</span><br><span class="line">	&#125;</span><br><span class="line">	return false;</span><br><span class="line">&#125;</span><br><span class="line">bool check(int x)&#123;</span><br><span class="line">	int mid=x&gt;&gt;1;</span><br><span class="line">	for(int i=x;i&gt;=mid;i--)&#123;</span><br><span class="line">		if(cal(i,x-i))&#123;</span><br><span class="line">			return true;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return false;</span><br><span class="line">&#125;</span><br><span class="line">int main()&#123;</span><br><span class="line">	cin&gt;&gt;t;</span><br><span class="line">	while(t--)&#123;</span><br><span class="line">		cin&gt;&gt;n&gt;&gt;k;</span><br><span class="line">		if(check(n))&#123;</span><br><span class="line">			puts(&quot;YES&quot;);</span><br><span class="line">			for(int i=1;i&lt;=n;i++)&#123;</span><br><span class="line">				cout&lt;&lt;res[i]&lt;&lt;&quot; &quot;;</span><br><span class="line">			&#125;</span><br><span class="line">			puts(&quot;&quot;);</span><br><span class="line">		&#125;else&#123;</span><br><span class="line">			puts(&quot;NO&quot;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h4 id="b.-sort-with-step">B. Sort with Step</h4>
-<p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1823/problem/B">题目链接</a>
-只能交换相隔k个位置的数字，假如k为1，那么可以看作冒泡排序必然有解
-k&gt;1时，将数组按照下标i分组，i%k==0的为一组，i%k==1的为一组，...，i%k==k-1的为一组，要想可以按照递增序列上升，同时由于数字x&lt;n,且只会出现一次。所以如果不先更换一组数据就有解的话，同一组内的数字对k取模的结果必然一致。不一致的话当不一致的数字为2时，可以交换一次得到解，否则无解。
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line">// Problem: B. Sort with Step</span><br><span class="line">// Contest: Codeforces - Codeforces Round 868 (Div. 2)</span><br><span class="line">// URL: https://codeforces.com/contest/1823/problem/B</span><br><span class="line">// Memory Limit: 256 MB</span><br><span class="line">// Time Limit: 1000 ms</span><br><span class="line">// </span><br><span class="line">// Powered by CP Editor (https://cpeditor.org)</span><br><span class="line"></span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;queue&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#include&lt;cmath&gt;</span><br><span class="line">#include&lt;stack&gt;</span><br><span class="line">#include&lt;vector&gt;</span><br><span class="line">#include&lt;map&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">#define x first</span><br><span class="line">#define y second</span><br><span class="line">typedef pair&lt;int,int&gt; PII;</span><br><span class="line">typedef long long LL;</span><br><span class="line">const int N=2e5+10;</span><br><span class="line">int t,n,k;</span><br><span class="line">int p[N],tmp[N];</span><br><span class="line">vector&lt;int&gt; q[N];</span><br><span class="line">LL getnum(int l,int r)&#123;</span><br><span class="line">	if(l&gt;=r) return 0;</span><br><span class="line">	int mid=(l+r)&gt;&gt;1;</span><br><span class="line">	LL ans=getnum(l,mid)+getnum(mid+1,r);</span><br><span class="line">	int i=l,j=mid+1,cnt=0;</span><br><span class="line">	while(i&lt;=mid&amp;&amp;j&lt;=r)&#123;</span><br><span class="line">		if(p[i]&lt;=p[j]) tmp[cnt++]=p[i++];</span><br><span class="line">		else&#123;</span><br><span class="line">			ans+=mid-i+1;</span><br><span class="line">			tmp[cnt++]=p[j++];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	while(i&lt;=mid) tmp[cnt++]=p[i++];</span><br><span class="line">	while(j&lt;=r) tmp[cnt++]=p[j++];</span><br><span class="line">	for(i=l,j=0;i&lt;=r;i++,j++)&#123;</span><br><span class="line">		p[i]=tmp[j];</span><br><span class="line">	&#125;</span><br><span class="line">	return ans;</span><br><span class="line">&#125;</span><br><span class="line">int main()&#123;</span><br><span class="line">	scanf(&quot;%d&quot;,&amp;t);</span><br><span class="line">	while(t--)&#123;</span><br><span class="line">		scanf(&quot;%d%d&quot;,&amp;n,&amp;k);</span><br><span class="line">		for(int i=0;i&lt;k;i++)&#123;</span><br><span class="line">			q[i].clear();</span><br><span class="line">		&#125;</span><br><span class="line">		for(int i=1;i&lt;=n;i++)&#123;</span><br><span class="line">			scanf(&quot;%d&quot;,&amp;p[i]);</span><br><span class="line">			q[i%k].push_back(p[i]);</span><br><span class="line">		&#125;</span><br><span class="line">		if(k==1)&#123;</span><br><span class="line">			puts(&quot;0&quot;);</span><br><span class="line">			continue;</span><br><span class="line">		&#125;</span><br><span class="line">		int res=0;</span><br><span class="line">		for(int i=0;i&lt;k;i++)&#123;</span><br><span class="line">			// sort(q[i].begin(),q[i].end());</span><br><span class="line">			// for(int j=0;j&lt;q[i].size();j++)&#123;</span><br><span class="line">				// p[i+j*k]=q[i][j];</span><br><span class="line">				// cout&lt;&lt;q[i][j]&lt;&lt;&quot; &quot;;</span><br><span class="line">			// &#125;</span><br><span class="line">			// cout&lt;&lt;endl;</span><br><span class="line">			for(int j=0;j&lt;q[i].size();j++)&#123;</span><br><span class="line">				if(q[i][j]%k!=i) res++; </span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		// LL res=getnum(1,n);</span><br><span class="line">		// cout&lt;&lt;res&lt;&lt;endl;</span><br><span class="line">		// for(int i=1;i&lt;=n;i++)&#123;</span><br><span class="line">			// cout&lt;&lt;p[i]&lt;&lt;&quot; &quot;;</span><br><span class="line">		// &#125;</span><br><span class="line">		// cout&lt;&lt;endl;</span><br><span class="line">		if(res==0) puts(&quot;0&quot;);</span><br><span class="line">		else if(res==2) puts(&quot;1&quot;);</span><br><span class="line">		else puts(&quot;-1&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h4 id="c.-strongly-composite">C. Strongly Composite</h4>
-<p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1823/problem/C">题目链接</a>
-比赛的时候没做出来但是思路对的，先贴代码 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">// Problem: C. Strongly Composite</span><br><span class="line">// Contest: Codeforces - Codeforces Round 868 (Div. 2)</span><br><span class="line">// URL: https://codeforces.com/contest/1823/problem/C</span><br><span class="line">// Memory Limit: 256 MB</span><br><span class="line">// Time Limit: 2000 ms</span><br><span class="line">// </span><br><span class="line">// Powered by CP Editor (https://cpeditor.org)</span><br><span class="line"></span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;queue&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#include&lt;cmath&gt;</span><br><span class="line">#include&lt;stack&gt;</span><br><span class="line">#include&lt;vector&gt;</span><br><span class="line">#include&lt;map&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">#define x first</span><br><span class="line">#define y second</span><br><span class="line">typedef pair&lt;int,int&gt; PII;</span><br><span class="line">typedef long long LL;</span><br><span class="line">const int N=1010,M=1e5+10;</span><br><span class="line">int T;</span><br><span class="line">int n,k;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">	/*</span><br><span class="line">	res</span><br><span class="line">	暂时想出来的思路是计算出所有乘数中每个质数的数量，</span><br><span class="line">	然后同一个素数下每两个组合，直至每个素数均剩下0或1个,res+=每个素数的数量/2</span><br><span class="line">	然后计算剩余个数为1的素数的个数count如果可以整除3那么res+=count/3,否则就看乘积是不是强合数，是的话res=1,不是res=0</span><br><span class="line">	*/</span><br><span class="line">	scanf(&quot;%d&quot;,&amp;T);</span><br><span class="line">	while(T--)&#123;</span><br><span class="line">		scanf(&quot;%d&quot;,&amp;n);</span><br><span class="line">		map&lt;int,int&gt; q;</span><br><span class="line">		for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">			int x;</span><br><span class="line">			scanf(&quot;%d&quot;,&amp;x);</span><br><span class="line">			for(int j=2;j&lt;=x/j;j++)&#123;</span><br><span class="line">				while(x%j==0)&#123;</span><br><span class="line">					x/=j;</span><br><span class="line">					q[j]++;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			if(x!=1) q[x]++;</span><br><span class="line">		&#125;</span><br><span class="line">		int res=0,rem=0;</span><br><span class="line">		for(PII p:q)&#123;</span><br><span class="line">			int num=p.x;</span><br><span class="line">			int cnt=p.y;</span><br><span class="line">			res+=cnt/2;</span><br><span class="line">			rem+=cnt%2;</span><br><span class="line">		&#125;</span><br><span class="line">		res+=rem/3;</span><br><span class="line">		printf(&quot;%d\n&quot;,res);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-思路证明：对于一个强合数x，对其进行因式分解x=<span
-class="math inline">\(d^{p_1}_{1}\)</span><span
-class="math inline">\(d^{p_2}_{2}……\)</span><span
-class="math inline">\(d^{p_{m-1}}_{m-1}\)</span><span
-class="math inline">\(d^{p_m}_{m}\)</span>,那么x的因子数量为D=$_{i=1}^m{(d_i+1)}
-$
-数字的质因子个数为m,合因数的个数为D-m-1.x是强合数m&lt;=D-m-1即2<em>m+1&lt;=D,由于<span
-class="math inline">\(d_i\)</span>+1&gt;=2,那么D&gt;=<span
-class="math inline">\(2^m\)</span>
-对于强合数的一个弱条件，2</em>m+1&lt;=<span
-class="math inline">\(2^m\)</span>,当m为1或2时不成立其余成立，那么由于D&gt;=<span
-class="math inline">\(2^m\)</span>,所以当m为1或2时，x为强合数
-即如果是一个强合数，质因子个数大于等于3
-接下来找出所有数列中的质因子得到(<span
-class="math inline">\(p^i\)</span>,<span
-class="math inline">\(c^i\)</span>),前为质因子，后为所有数中质因子个数。
-最优策略是对于同一质因子求<span
-class="math inline">\(\sum_i{ci/2}\)</span>,剩下个数r=<span
-class="math inline">\(\sum_i(ci\%2)\)</span><br />
-res+=<span class="math inline">\(\sum_i{ci/2}\)</span>+r/3即可</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/cf1832/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1411,6 +1283,106 @@ class="math inline">\(e_5=d_5-d_4=a_1+a_2+a_3+a_4\)</span></p>
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/cf1823/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
+      <meta itemprop="name" content="XuandYu000">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="viewoverlook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/07/02/cf1823/" class="post-title-link" itemprop="url">cf1823</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:27:20" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithms/" itemprop="url" rel="index"><span itemprop="name">algorithms</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="cf1823">cf1823</h1>
+<h4 id="a.-a-characteristic">A. A-characteristic</h4>
+<p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1823/problem/A">题目链接</a>
+由于出现数字只可能是1或-1，那么假设数列全为-1，依次枚举1出现的个数，可以得出结论不是所有数字都有答案的，由于会有重复数字出现，只需要枚举1的个数x&lt;=n/2即可。
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">// Problem: A. A-characteristic</span><br><span class="line">// Contest: Codeforces - Codeforces Round 868 (Div. 2)</span><br><span class="line">// URL: https://codeforces.com/contest/1823/problem/A</span><br><span class="line">// Memory Limit: 256 MB</span><br><span class="line">// Time Limit: 1000 ms</span><br><span class="line">// </span><br><span class="line">// Powered by CP Editor (https://cpeditor.org)</span><br><span class="line"></span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;queue&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#include&lt;cmath&gt;</span><br><span class="line">#include&lt;stack&gt;</span><br><span class="line">#include&lt;vector&gt;</span><br><span class="line">#include&lt;map&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">#define x first</span><br><span class="line">#define y second</span><br><span class="line">typedef pair&lt;int,int&gt; PII;</span><br><span class="line">typedef long long LL;</span><br><span class="line">const int N=110;</span><br><span class="line">int t,n,k;</span><br><span class="line">int res[N];</span><br><span class="line">bool cal(int l,int r)&#123;</span><br><span class="line">	if(l*(l-1)/2+r*(r-1)/2==k)&#123;</span><br><span class="line">		for(int i=1;i&lt;=l;i++) res[i]=1;</span><br><span class="line">		for(int i=l+1;i&lt;=n;i++) res[i]=-1;</span><br><span class="line">		return true;</span><br><span class="line">	&#125;</span><br><span class="line">	return false;</span><br><span class="line">&#125;</span><br><span class="line">bool check(int x)&#123;</span><br><span class="line">	int mid=x&gt;&gt;1;</span><br><span class="line">	for(int i=x;i&gt;=mid;i--)&#123;</span><br><span class="line">		if(cal(i,x-i))&#123;</span><br><span class="line">			return true;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return false;</span><br><span class="line">&#125;</span><br><span class="line">int main()&#123;</span><br><span class="line">	cin&gt;&gt;t;</span><br><span class="line">	while(t--)&#123;</span><br><span class="line">		cin&gt;&gt;n&gt;&gt;k;</span><br><span class="line">		if(check(n))&#123;</span><br><span class="line">			puts(&quot;YES&quot;);</span><br><span class="line">			for(int i=1;i&lt;=n;i++)&#123;</span><br><span class="line">				cout&lt;&lt;res[i]&lt;&lt;&quot; &quot;;</span><br><span class="line">			&#125;</span><br><span class="line">			puts(&quot;&quot;);</span><br><span class="line">		&#125;else&#123;</span><br><span class="line">			puts(&quot;NO&quot;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="b.-sort-with-step">B. Sort with Step</h4>
+<p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1823/problem/B">题目链接</a>
+只能交换相隔k个位置的数字，假如k为1，那么可以看作冒泡排序必然有解
+k&gt;1时，将数组按照下标i分组，i%k==0的为一组，i%k==1的为一组，...，i%k==k-1的为一组，要想可以按照递增序列上升，同时由于数字x&lt;n,且只会出现一次。所以如果不先更换一组数据就有解的话，同一组内的数字对k取模的结果必然一致。不一致的话当不一致的数字为2时，可以交换一次得到解，否则无解。
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line">// Problem: B. Sort with Step</span><br><span class="line">// Contest: Codeforces - Codeforces Round 868 (Div. 2)</span><br><span class="line">// URL: https://codeforces.com/contest/1823/problem/B</span><br><span class="line">// Memory Limit: 256 MB</span><br><span class="line">// Time Limit: 1000 ms</span><br><span class="line">// </span><br><span class="line">// Powered by CP Editor (https://cpeditor.org)</span><br><span class="line"></span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;queue&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#include&lt;cmath&gt;</span><br><span class="line">#include&lt;stack&gt;</span><br><span class="line">#include&lt;vector&gt;</span><br><span class="line">#include&lt;map&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">#define x first</span><br><span class="line">#define y second</span><br><span class="line">typedef pair&lt;int,int&gt; PII;</span><br><span class="line">typedef long long LL;</span><br><span class="line">const int N=2e5+10;</span><br><span class="line">int t,n,k;</span><br><span class="line">int p[N],tmp[N];</span><br><span class="line">vector&lt;int&gt; q[N];</span><br><span class="line">LL getnum(int l,int r)&#123;</span><br><span class="line">	if(l&gt;=r) return 0;</span><br><span class="line">	int mid=(l+r)&gt;&gt;1;</span><br><span class="line">	LL ans=getnum(l,mid)+getnum(mid+1,r);</span><br><span class="line">	int i=l,j=mid+1,cnt=0;</span><br><span class="line">	while(i&lt;=mid&amp;&amp;j&lt;=r)&#123;</span><br><span class="line">		if(p[i]&lt;=p[j]) tmp[cnt++]=p[i++];</span><br><span class="line">		else&#123;</span><br><span class="line">			ans+=mid-i+1;</span><br><span class="line">			tmp[cnt++]=p[j++];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	while(i&lt;=mid) tmp[cnt++]=p[i++];</span><br><span class="line">	while(j&lt;=r) tmp[cnt++]=p[j++];</span><br><span class="line">	for(i=l,j=0;i&lt;=r;i++,j++)&#123;</span><br><span class="line">		p[i]=tmp[j];</span><br><span class="line">	&#125;</span><br><span class="line">	return ans;</span><br><span class="line">&#125;</span><br><span class="line">int main()&#123;</span><br><span class="line">	scanf(&quot;%d&quot;,&amp;t);</span><br><span class="line">	while(t--)&#123;</span><br><span class="line">		scanf(&quot;%d%d&quot;,&amp;n,&amp;k);</span><br><span class="line">		for(int i=0;i&lt;k;i++)&#123;</span><br><span class="line">			q[i].clear();</span><br><span class="line">		&#125;</span><br><span class="line">		for(int i=1;i&lt;=n;i++)&#123;</span><br><span class="line">			scanf(&quot;%d&quot;,&amp;p[i]);</span><br><span class="line">			q[i%k].push_back(p[i]);</span><br><span class="line">		&#125;</span><br><span class="line">		if(k==1)&#123;</span><br><span class="line">			puts(&quot;0&quot;);</span><br><span class="line">			continue;</span><br><span class="line">		&#125;</span><br><span class="line">		int res=0;</span><br><span class="line">		for(int i=0;i&lt;k;i++)&#123;</span><br><span class="line">			// sort(q[i].begin(),q[i].end());</span><br><span class="line">			// for(int j=0;j&lt;q[i].size();j++)&#123;</span><br><span class="line">				// p[i+j*k]=q[i][j];</span><br><span class="line">				// cout&lt;&lt;q[i][j]&lt;&lt;&quot; &quot;;</span><br><span class="line">			// &#125;</span><br><span class="line">			// cout&lt;&lt;endl;</span><br><span class="line">			for(int j=0;j&lt;q[i].size();j++)&#123;</span><br><span class="line">				if(q[i][j]%k!=i) res++; </span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		// LL res=getnum(1,n);</span><br><span class="line">		// cout&lt;&lt;res&lt;&lt;endl;</span><br><span class="line">		// for(int i=1;i&lt;=n;i++)&#123;</span><br><span class="line">			// cout&lt;&lt;p[i]&lt;&lt;&quot; &quot;;</span><br><span class="line">		// &#125;</span><br><span class="line">		// cout&lt;&lt;endl;</span><br><span class="line">		if(res==0) puts(&quot;0&quot;);</span><br><span class="line">		else if(res==2) puts(&quot;1&quot;);</span><br><span class="line">		else puts(&quot;-1&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="c.-strongly-composite">C. Strongly Composite</h4>
+<p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1823/problem/C">题目链接</a>
+比赛的时候没做出来但是思路对的，先贴代码 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">// Problem: C. Strongly Composite</span><br><span class="line">// Contest: Codeforces - Codeforces Round 868 (Div. 2)</span><br><span class="line">// URL: https://codeforces.com/contest/1823/problem/C</span><br><span class="line">// Memory Limit: 256 MB</span><br><span class="line">// Time Limit: 2000 ms</span><br><span class="line">// </span><br><span class="line">// Powered by CP Editor (https://cpeditor.org)</span><br><span class="line"></span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;queue&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#include&lt;cmath&gt;</span><br><span class="line">#include&lt;stack&gt;</span><br><span class="line">#include&lt;vector&gt;</span><br><span class="line">#include&lt;map&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">#define x first</span><br><span class="line">#define y second</span><br><span class="line">typedef pair&lt;int,int&gt; PII;</span><br><span class="line">typedef long long LL;</span><br><span class="line">const int N=1010,M=1e5+10;</span><br><span class="line">int T;</span><br><span class="line">int n,k;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">	/*</span><br><span class="line">	res</span><br><span class="line">	暂时想出来的思路是计算出所有乘数中每个质数的数量，</span><br><span class="line">	然后同一个素数下每两个组合，直至每个素数均剩下0或1个,res+=每个素数的数量/2</span><br><span class="line">	然后计算剩余个数为1的素数的个数count如果可以整除3那么res+=count/3,否则就看乘积是不是强合数，是的话res=1,不是res=0</span><br><span class="line">	*/</span><br><span class="line">	scanf(&quot;%d&quot;,&amp;T);</span><br><span class="line">	while(T--)&#123;</span><br><span class="line">		scanf(&quot;%d&quot;,&amp;n);</span><br><span class="line">		map&lt;int,int&gt; q;</span><br><span class="line">		for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">			int x;</span><br><span class="line">			scanf(&quot;%d&quot;,&amp;x);</span><br><span class="line">			for(int j=2;j&lt;=x/j;j++)&#123;</span><br><span class="line">				while(x%j==0)&#123;</span><br><span class="line">					x/=j;</span><br><span class="line">					q[j]++;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			if(x!=1) q[x]++;</span><br><span class="line">		&#125;</span><br><span class="line">		int res=0,rem=0;</span><br><span class="line">		for(PII p:q)&#123;</span><br><span class="line">			int num=p.x;</span><br><span class="line">			int cnt=p.y;</span><br><span class="line">			res+=cnt/2;</span><br><span class="line">			rem+=cnt%2;</span><br><span class="line">		&#125;</span><br><span class="line">		res+=rem/3;</span><br><span class="line">		printf(&quot;%d\n&quot;,res);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+思路证明：对于一个强合数x，对其进行因式分解x=<span
+class="math inline">\(d^{p_1}_{1}\)</span><span
+class="math inline">\(d^{p_2}_{2}……\)</span><span
+class="math inline">\(d^{p_{m-1}}_{m-1}\)</span><span
+class="math inline">\(d^{p_m}_{m}\)</span>,那么x的因子数量为D=$_{i=1}^m{(d_i+1)}
+$
+数字的质因子个数为m,合因数的个数为D-m-1.x是强合数m&lt;=D-m-1即2<em>m+1&lt;=D,由于<span
+class="math inline">\(d_i\)</span>+1&gt;=2,那么D&gt;=<span
+class="math inline">\(2^m\)</span>
+对于强合数的一个弱条件，2</em>m+1&lt;=<span
+class="math inline">\(2^m\)</span>,当m为1或2时不成立其余成立，那么由于D&gt;=<span
+class="math inline">\(2^m\)</span>,所以当m为1或2时，x为强合数
+即如果是一个强合数，质因子个数大于等于3
+接下来找出所有数列中的质因子得到(<span
+class="math inline">\(p^i\)</span>,<span
+class="math inline">\(c^i\)</span>),前为质因子，后为所有数中质因子个数。
+最优策略是对于同一质因子求<span
+class="math inline">\(\sum_i{ci/2}\)</span>,剩下个数r=<span
+class="math inline">\(\sum_i(ci\%2)\)</span><br />
+res+=<span class="math inline">\(\sum_i{ci/2}\)</span>+r/3即可</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
@@ -1482,7 +1454,7 @@ class="math inline">\(e_5=d_5-d_4=a_1+a_2+a_3+a_4\)</span></p>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
