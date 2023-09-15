@@ -22,44 +22,18 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="lecture5 Queues are one form of abstract data structure.  Queues have specific properties. Namely, they are FIFO or “first in first out.” You can imagine yourself in a line for a ride at an amusement">
+  <meta name="description" content="lecture5  Queues are one form of abstract data structure. Queues have specific properties. Namely, they are FIFO or “first in first out.” You can imagine yourself in a line for a ride at an amuse">
 <meta property="og:type" content="article">
 <meta property="og:title" content="lecture5">
 <meta property="og:url" content="http://example.com/2023/07/02/lecture5/index.html">
 <meta property="og:site_name" content="viewoverlook">
-<meta property="og:description" content="lecture5 Queues are one form of abstract data structure.  Queues have specific properties. Namely, they are FIFO or “first in first out.” You can imagine yourself in a line for a ride at an amusement">
+<meta property="og:description" content="lecture5  Queues are one form of abstract data structure. Queues have specific properties. Namely, they are FIFO or “first in first out.” You can imagine yourself in a line for a ride at an amuse">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide019.png">
-<meta property="og:image" content="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide022.png">
-<meta property="og:image" content="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide025.png">
-<meta property="og:image" content="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide026.png">
-<meta property="og:image" content="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide036.png">
-<meta property="og:image" content="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide037.png">
-<meta property="og:image" content="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide041.png">
-<meta property="og:image" content="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide042.png">
-<meta property="og:image" content="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide043.png">
-<meta property="og:image" content="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide055.png">
-<meta property="og:image" content="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide059.png">
-<meta property="og:image" content="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide064.png">
-<meta property="og:image" content="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide066.png">
-<meta property="og:image" content="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide068.png">
-<meta property="og:image" content="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide073.png">
-<meta property="og:image" content="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide075.png">
-<meta property="og:image" content="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide077.png">
-<meta property="og:image" content="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide084.png">
-<meta property="og:image" content="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide086.png">
-<meta property="og:image" content="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide086.png">
-<meta property="og:image" content="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide119.png">
-<meta property="og:image" content="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide120.png">
-<meta property="og:image" content="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide157.png">
-<meta property="og:image" content="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide169.png">
-<meta property="og:image" content="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide184.png">
 <meta property="article:published_time" content="2023-07-01T16:00:00.000Z">
 <meta property="article:modified_time" content="2023-07-02T08:15:10.279Z">
 <meta property="article:author" content="XuandYu000">
 <meta property="article:tag" content="programming">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide019.png">
 
 <link rel="canonical" href="http://example.com/2023/07/02/lecture5/">
 
@@ -257,21 +231,7 @@
                 </span>
             </span>
 
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>17k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>16 分钟</span>
-            </span>
+          
 
         </div>
       </header>
@@ -282,193 +242,305 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="lecture5"><a href="#lecture5" class="headerlink" title="lecture5"></a>lecture5</h1><ul>
-<li><p><em>Queues</em> are one form of abstract data structure.</p>
-</li>
-<li><p>Queues have specific properties. Namely, they are <em>FIFO</em> or “first in first out.” You can imagine yourself in a line for a ride at an amusement park. The first person in the line gets to go on the ride first. The last person gets to go on the ride last.</p>
-</li>
-<li><p>Queues have specific actions associated with them. For example, an item can be <em>enqueued</em>; that is, the item can join the line or queue. Further, an item can be <em>dequeued</em> or leave the queue once it reaches the front of the line.</p>
-</li>
-<li><p>Queues contrast a <em>stack</em>. Fundamentally, the properties of a stack are different than a queue. Specifically, it is <em>LIFO</em> or “last in first out.” Just like stacking trays in a cafeteria, a tray that is placed in a stack last is the first that may be picked up.</p>
-</li>
-<li><p>Stacks have specific actions associated with them. For example, <em>push</em> places something on top of a stack. <em>Pop</em> is removing something from the top of the stack.</p>
-</li>
+        <h1 id="lecture5">lecture5</h1>
+<ul>
+<li><p><em>Queues</em> are one form of abstract data structure.</p></li>
+<li><p>Queues have specific properties. Namely, they are <em>FIFO</em>
+or “first in first out.” You can imagine yourself in a line for a ride
+at an amusement park. The first person in the line gets to go on the
+ride first. The last person gets to go on the ride last.</p></li>
+<li><p>Queues have specific actions associated with them. For example,
+an item can be <em>enqueued</em>; that is, the item can join the line or
+queue. Further, an item can be <em>dequeued</em> or leave the queue once
+it reaches the front of the line.</p></li>
+<li><p>Queues contrast a <em>stack</em>. Fundamentally, the properties
+of a stack are different than a queue. Specifically, it is <em>LIFO</em>
+or “last in first out.” Just like stacking trays in a cafeteria, a tray
+that is placed in a stack last is the first that may be picked
+up.</p></li>
+<li><p>Stacks have specific actions associated with them. For example,
+<em>push</em> places something on top of a stack. <em>Pop</em> is
+removing something from the top of the stack.</p></li>
 <li><p>In code, you might imagine a stack as follows:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const int CAPACITY = 50;</span><br><span class="line"></span><br><span class="line">typedef struct</span><br><span class="line">&#123;</span><br><span class="line">    person people[CAPACITY];</span><br><span class="line">    int size;</span><br><span class="line">&#125;</span><br><span class="line">stack;</span><br></pre></td></tr></table></figure>
-
-<p>Notice that an array called people is of type <code>person</code>. The <code>CAPACITY</code> is how high the stack could be. The integer <code>size</code> is how full the stack actually is, regardless of how much it <em>could</em> hold.</p>
-</li>
-<li><p>You might imagine that the above code has a limitation. Since the capacity of the array is always predetermined in this code. Therefore, the stack may always be oversized. You might imagine only using one place in the stack out of 5000.</p>
-</li>
-<li><p>It would be nice for our stack to be dynamic – able to grow as items are added to it.</p>
-</li>
-<li><p>Rewinding to Week 2, we introduced you to your first data structure.</p>
-</li>
-<li><p>An array is a block of contiguous memory.</p>
-</li>
+<p>Notice that an array called people is of type <code>person</code>.
+The <code>CAPACITY</code> is how high the stack could be. The integer
+<code>size</code> is how full the stack actually is, regardless of how
+much it <em>could</em> hold.</p></li>
+<li><p>You might imagine that the above code has a limitation. Since the
+capacity of the array is always predetermined in this code. Therefore,
+the stack may always be oversized. You might imagine only using one
+place in the stack out of 5000.</p></li>
+<li><p>It would be nice for our stack to be dynamic – able to grow as
+items are added to it.</p></li>
+<li><p>Rewinding to Week 2, we introduced you to your first data
+structure.</p></li>
+<li><p>An array is a block of contiguous memory.</p></li>
 <li><p>You might imagine an array as follows:</p>
-<p><img src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide019.png"></p>
-</li>
-<li><p>In memory, there are other values being stored by other programs, functions, and variables. Many of these may be unused garbage values that were utilized at one point but are available now for use.</p>
-<p><img src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide022.png"></p>
-</li>
-<li><p>Imagine you wanted to store a fourth value <code>4</code> in our array? What would be needed is to allocate a new area of memory and move the old array to a new one.</p>
-<p><img src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide025.png"></p>
-</li>
+<p><img
+src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide019.png" /></p></li>
+<li><p>In memory, there are other values being stored by other programs,
+functions, and variables. Many of these may be unused garbage values
+that were utilized at one point but are available now for use.</p>
+<p><img
+src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide022.png" /></p></li>
+<li><p>Imagine you wanted to store a fourth value <code>4</code> in our
+array? What would be needed is to allocate a new area of memory and move
+the old array to a new one.</p>
+<p><img
+src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide025.png" /></p></li>
 <li><p>Old garbage values would be overwritten with our new data.</p>
-<p><img src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide026.png"></p>
-</li>
-<li><p>One of the drawbacks of this approach is that it’s bad design: Every time we add a number, we have to copy the array item by item.</p>
-</li>
-<li><p>Wouldn’t it be nice if we were able to put the <code>4</code> somewhere else in memory? By definition, this would no longer be an array because <code>4</code> would no longer be in contiguous memory.</p>
-</li>
-<li><p>In your terminal, type <code>code list.c</code> and write code as follows:</p>
+<p><img
+src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide026.png" /></p></li>
+<li><p>One of the drawbacks of this approach is that it’s bad design:
+Every time we add a number, we have to copy the array item by
+item.</p></li>
+<li><p>Wouldn’t it be nice if we were able to put the <code>4</code>
+somewhere else in memory? By definition, this would no longer be an
+array because <code>4</code> would no longer be in contiguous
+memory.</p></li>
+<li><p>In your terminal, type <code>code list.c</code> and write code as
+follows:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">// Implements a list of numbers with an array of fixed size</span><br><span class="line"></span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">int main(void) &#123;</span><br><span class="line">    // List of size 3</span><br><span class="line">    int list[3];</span><br><span class="line"></span><br><span class="line">    // Initialize list with numbers</span><br><span class="line">    list[0] = 1;</span><br><span class="line">    list[1] = 2;</span><br><span class="line">    list[2] = 3;</span><br><span class="line"></span><br><span class="line">    // Print list</span><br><span class="line">    for (int i = 0; i &lt; 3; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        printf(&quot;%i\n&quot;, list[i]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Notice that the above is very much like what we learned earlier in this course. We have memory being preallocated for three items.</p>
-</li>
-<li><p>Building upon our knowledge obtained more recently, we can leverage our understanding of pointers to create a better design in this code. Modify your code as follows:</p>
+<p>Notice that the above is very much like what we learned earlier in
+this course. We have memory being preallocated for three items.</p></li>
+<li><p>Building upon our knowledge obtained more recently, we can
+leverage our understanding of pointers to create a better design in this
+code. Modify your code as follows:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">// Implements a list of numbers with an array of dynamic size</span><br><span class="line"></span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line"></span><br><span class="line">int main(void) &#123;</span><br><span class="line">    // List of size 3</span><br><span class="line">    int *list = malloc(3 * sizeof(int));</span><br><span class="line">    if (list == NULL)</span><br><span class="line">    &#123;</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // Initialize list of size 3 with numbers</span><br><span class="line">    list[0] = 1;</span><br><span class="line">    list[1] = 2;</span><br><span class="line">    list[2] = 3;</span><br><span class="line"></span><br><span class="line">    // List of size 4</span><br><span class="line">    int *tmp = malloc(4 * sizeof(int));</span><br><span class="line">    if (tmp == NULL)</span><br><span class="line">    &#123;</span><br><span class="line">        free(list);</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // Copy list of size 3 into list of size 4</span><br><span class="line">    for (int i = 0; i &lt; 3; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        tmp[i] = list[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // Add number to list of size 4</span><br><span class="line">    tmp[3] = 4;</span><br><span class="line"></span><br><span class="line">    // Free list of size 3</span><br><span class="line">    free(list);</span><br><span class="line"></span><br><span class="line">    // Remember list of size 4</span><br><span class="line">    list = tmp;</span><br><span class="line"></span><br><span class="line">    // Print list</span><br><span class="line">    for (int i = 0; i &lt; 4; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        printf(&quot;%i\n&quot;, list[i]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // Free list</span><br><span class="line">    free(list);</span><br><span class="line">    return 0;</span><br></pre></td></tr></table></figure>
-
-<p>Notice that a list of size three integers is created. Then, three memory addresses can be assigned the values <code>1</code>, <code>2</code>, and <code>3</code>. Then, a list of size four is created. Next, the list is copied from the first to the second. The value for the <code>4</code> is added to the <code>tmp</code> list. Since the block of memory that <code>list</code> points to is no longer used, it is freed using the command <code>free(list)</code>. Finally, the compiler is told to point <code>list</code> pointer now to the block of memory that <code>tmp</code> points to. The contents of <code>list</code> are printed and then freed.</p>
-</li>
-<li><p>It’s useful to think about <code>list</code> and <code>tmp</code> as both signs that point at a chunk of memory. As in the example above, <code>list</code> at one point <em>pointed</em> to an array of size 3. By the end, <code>list</code> was told to point to a chunk of memory of size 4. Technically, by the end of the above code, <code>tmp</code> and <code>list</code> both pointed to the same block of memory.</p>
-</li>
-<li><p>C comes with a very useful function called <code>realloc</code> that will reallocate the memory for you. <code>realloc</code> takes two arguments. First, it asks you to specify the array you are attempting to copy. Second, it asks you to specify the size to which you would like the final array to be. Modify your code as follows:</p>
+<p>Notice that a list of size three integers is created. Then, three
+memory addresses can be assigned the values <code>1</code>,
+<code>2</code>, and <code>3</code>. Then, a list of size four is
+created. Next, the list is copied from the first to the second. The
+value for the <code>4</code> is added to the <code>tmp</code> list.
+Since the block of memory that <code>list</code> points to is no longer
+used, it is freed using the command <code>free(list)</code>. Finally,
+the compiler is told to point <code>list</code> pointer now to the block
+of memory that <code>tmp</code> points to. The contents of
+<code>list</code> are printed and then freed.</p></li>
+<li><p>It’s useful to think about <code>list</code> and <code>tmp</code>
+as both signs that point at a chunk of memory. As in the example above,
+<code>list</code> at one point <em>pointed</em> to an array of size 3.
+By the end, <code>list</code> was told to point to a chunk of memory of
+size 4. Technically, by the end of the above code, <code>tmp</code> and
+<code>list</code> both pointed to the same block of memory.</p></li>
+<li><p>C comes with a very useful function called <code>realloc</code>
+that will reallocate the memory for you. <code>realloc</code> takes two
+arguments. First, it asks you to specify the array you are attempting to
+copy. Second, it asks you to specify the size to which you would like
+the final array to be. Modify your code as follows:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">// Implements a list of numbers with an array of dynamic size using realloc</span><br><span class="line"></span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line"></span><br><span class="line">int main(void) &#123;</span><br><span class="line">    // List of size 3</span><br><span class="line">    int *list = malloc(3 * sizeof(int));</span><br><span class="line">    if (list == NULL)</span><br><span class="line">    &#123;</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // Initialize list of size 3 with numbers</span><br><span class="line">    list[0] = 1;</span><br><span class="line">    list[1] = 2;</span><br><span class="line">    list[2] = 3;</span><br><span class="line"></span><br><span class="line">    // Resize list to be of size 4</span><br><span class="line">    int *tmp = realloc(list, 4 * sizeof(int));</span><br><span class="line">    if (tmp == NULL)</span><br><span class="line">    &#123;</span><br><span class="line">        free(list);</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">    list = tmp;</span><br><span class="line"></span><br><span class="line">    // Add number to list</span><br><span class="line">    list[3] = 4;</span><br><span class="line"></span><br><span class="line">    // Print list</span><br><span class="line">    for (int i = 0; i &lt; 4; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        printf(&quot;%i\n&quot;, list[i]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // Free list</span><br><span class="line">    free(list);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Notice that <code>int *tmp = realloc(list, 4 * sizeof(int))</code> creates a list of size four integers. Then, it copies the values of <code>list</code> to this new array. Finally, a pointer called <code>tmp</code> points to the location of memory of this new array. The copying is handled by <code>realloc</code>. Once that copy is made, the memory at the location of <code>list</code> is freed. Then, the pointer called <code>list</code> is pointed at the location of <code>tmp</code>, where the new array is located.</p>
-</li>
-<li><p>You can imagine how using <code>realloc</code> for a queue or stack could be useful. As the amount of data grows, <code>realloc</code> could be used to grow or shrink the stack or queue.</p>
-</li>
-<li><p>In recent weeks, you have learned about three useful primitives. A <code>struct</code> is a data type that you can define yourself. A <code>.</code> in <em>dot notation</em> allows you to access variables inside that structure. The <code>*</code> operator is used to declare a pointer or dereference a variable.</p>
-</li>
-<li><p>Today, you are introduced to the <code>-&gt;</code> operator. It is an arrow. This operator goes to an address and looks inside of a structure.</p>
-</li>
-<li><p>A <em>Linked list</em> is one of the most powerful data structures within C. A linked list allows you to include values that are located at varying areas of memory. Further, they allow you to dynamically grow and shrink the list as you desire.</p>
-</li>
-<li><p>You might imagine three values stored at three different areas of memory as follows:</p>
-<p><img src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide036.png"></p>
-</li>
-<li><p>How could one stitch together these values in a list?</p>
-</li>
+<p>Notice that <code>int *tmp = realloc(list, 4 * sizeof(int))</code>
+creates a list of size four integers. Then, it copies the values of
+<code>list</code> to this new array. Finally, a pointer called
+<code>tmp</code> points to the location of memory of this new array. The
+copying is handled by <code>realloc</code>. Once that copy is made, the
+memory at the location of <code>list</code> is freed. Then, the pointer
+called <code>list</code> is pointed at the location of <code>tmp</code>,
+where the new array is located.</p></li>
+<li><p>You can imagine how using <code>realloc</code> for a queue or
+stack could be useful. As the amount of data grows, <code>realloc</code>
+could be used to grow or shrink the stack or queue.</p></li>
+<li><p>In recent weeks, you have learned about three useful primitives.
+A <code>struct</code> is a data type that you can define yourself. A
+<code>.</code> in <em>dot notation</em> allows you to access variables
+inside that structure. The <code>*</code> operator is used to declare a
+pointer or dereference a variable.</p></li>
+<li><p>Today, you are introduced to the <code>-&gt;</code> operator. It
+is an arrow. This operator goes to an address and looks inside of a
+structure.</p></li>
+<li><p>A <em>Linked list</em> is one of the most powerful data
+structures within C. A linked list allows you to include values that are
+located at varying areas of memory. Further, they allow you to
+dynamically grow and shrink the list as you desire.</p></li>
+<li><p>You might imagine three values stored at three different areas of
+memory as follows:</p>
+<p><img
+src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide036.png" /></p></li>
+<li><p>How could one stitch together these values in a list?</p></li>
 <li><p>We could imagine this data pictured above as follows:</p>
-<p><img src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide037.png"></p>
-</li>
-<li><p>We could utilize more memory to keep track of where the next item is.</p>
-<p><img src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide041.png"></p>
-<p>Notice that NULL is utilized to indicate that nothing else is <em>next</em> in the list.</p>
-</li>
-<li><p>By convention, we would keep one more element in memory, a pointer, that keeps track of the first item in the list.</p>
-<p><img src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide042.png"></p>
-</li>
-<li><p>Abstracting away the memory addresses, the list would appear as follows:</p>
-<p><img src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide043.png"></p>
-</li>
-<li><p>These boxes are called <em>nodes</em>. A <em>node</em> contains both an <em>item</em> and a pointer called <em>next</em>. In code, you can imagine a node as follows:</p>
+<p><img
+src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide037.png" /></p></li>
+<li><p>We could utilize more memory to keep track of where the next item
+is.</p>
+<p><img
+src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide041.png" /></p>
+<p>Notice that NULL is utilized to indicate that nothing else is
+<em>next</em> in the list.</p></li>
+<li><p>By convention, we would keep one more element in memory, a
+pointer, that keeps track of the first item in the list.</p>
+<p><img
+src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide042.png" /></p></li>
+<li><p>Abstracting away the memory addresses, the list would appear as
+follows:</p>
+<p><img
+src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide043.png" /></p></li>
+<li><p>These boxes are called <em>nodes</em>. A <em>node</em> contains
+both an <em>item</em> and a pointer called <em>next</em>. In code, you
+can imagine a node as follows:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">typedef struct node</span><br><span class="line">&#123;</span><br><span class="line">    int number;</span><br><span class="line">    struct node *next;</span><br><span class="line">&#125;</span><br><span class="line">node;</span><br></pre></td></tr></table></figure>
-
-<p>Notice that the item contained within this node is an integer called <code>number</code>. Second, a pointer to a node called <code>next</code> is included, which will point to another node somewhere in memory.</p>
-</li>
-<li><p>Linked lists are not stored in a contiguous block of memory. They can grow as large as you wish, provided that enough system resources exist. The downside, however, is that more memory is required to keep track of the list instead of an array. This is because for each element, you must store not just the value of the element, but also a pointer to the next node. Further, linked lists cannot be indexed into like is possible in an array because we need to pass through the first elements to find the location of the th element. Because of this, the list pictured above must be linearly searched. Binary search, therefore, is not possible in a list constructed as above.</p>
-</li>
-<li><p>Conceptually, we can imagine the process of creating a linked list. First, <code>node *list</code> is declared, but it is of a garbage value.</p>
-<p><img src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide055.png"></p>
-</li>
+<p>Notice that the item contained within this node is an integer called
+<code>number</code>. Second, a pointer to a node called
+<code>next</code> is included, which will point to another node
+somewhere in memory.</p></li>
+<li><p>Linked lists are not stored in a contiguous block of memory. They
+can grow as large as you wish, provided that enough system resources
+exist. The downside, however, is that more memory is required to keep
+track of the list instead of an array. This is because for each element,
+you must store not just the value of the element, but also a pointer to
+the next node. Further, linked lists cannot be indexed into like is
+possible in an array because we need to pass through the first elements
+to find the location of the th element. Because of this, the list
+pictured above must be linearly searched. Binary search, therefore, is
+not possible in a list constructed as above.</p></li>
+<li><p>Conceptually, we can imagine the process of creating a linked
+list. First, <code>node *list</code> is declared, but it is of a garbage
+value.</p>
+<p><img
+src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide055.png" /></p></li>
 <li><p>Next, a node called <code>n</code> is allocated in memory.</p>
-<p><img src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide059.png"></p>
-</li>
-<li><p>Next, the <code>number</code> of node is assigned the value <code>1</code>.</p>
-<p><img src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide064.png"></p>
-</li>
-<li><p>Next, the node’s <code>next</code> field is assigned <code>NULL</code>.</p>
-<p><img src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide066.png"></p>
-</li>
-<li><p>Next, <code>list</code> is pointed at the memory location to where <code>n</code> points. <code>n</code> and <code>list</code> now point to the same place.</p>
-<p><img src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide068.png"></p>
-</li>
-<li><p>A new node is then created. Both the <code>number</code> and <code>next</code> field are both filled with garbage values.</p>
-<p><img src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide073.png"></p>
-</li>
-<li><p>The <code>number</code> value of <code>n</code>’s node (the new node) is updated to <code>2</code>.</p>
-<p><img src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide075.png"></p>
-</li>
+<p><img
+src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide059.png" /></p></li>
+<li><p>Next, the <code>number</code> of node is assigned the value
+<code>1</code>.</p>
+<p><img
+src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide064.png" /></p></li>
+<li><p>Next, the node’s <code>next</code> field is assigned
+<code>NULL</code>.</p>
+<p><img
+src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide066.png" /></p></li>
+<li><p>Next, <code>list</code> is pointed at the memory location to
+where <code>n</code> points. <code>n</code> and <code>list</code> now
+point to the same place.</p>
+<p><img
+src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide068.png" /></p></li>
+<li><p>A new node is then created. Both the <code>number</code> and
+<code>next</code> field are both filled with garbage values.</p>
+<p><img
+src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide073.png" /></p></li>
+<li><p>The <code>number</code> value of <code>n</code>’s node (the new
+node) is updated to <code>2</code>.</p>
+<p><img
+src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide075.png" /></p></li>
 <li><p>Also, the <code>next</code> field is updated as well.</p>
-<p><img src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide077.png"></p>
-</li>
-<li><p>Most important, we do not want to lose our connection to any of these nodes lest they be lost forever. Accordingly, <code>n</code>’s <code>next</code> field is pointed to the same memory location as <code>list</code>.</p>
-<p><img src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide084.png"></p>
-</li>
-<li><p>Finally, <code>list</code> is updated to point at <code>n</code>. We now have a linked list of two items.</p>
-<p><img src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide086.png"></p>
-</li>
+<p><img
+src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide077.png" /></p></li>
+<li><p>Most important, we do not want to lose our connection to any of
+these nodes lest they be lost forever. Accordingly, <code>n</code>’s
+<code>next</code> field is pointed to the same memory location as
+<code>list</code>.</p>
+<p><img
+src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide084.png" /></p></li>
+<li><p>Finally, <code>list</code> is updated to point at <code>n</code>.
+We now have a linked list of two items.</p>
+<p><img
+src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide086.png" /></p></li>
 <li><p>To implement this in code, modify your code as follows:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">// Prepends numbers to a linked list, using while loop to print</span><br><span class="line"></span><br><span class="line">#include &lt;cs50.h&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line"></span><br><span class="line">typedef struct node</span><br><span class="line">&#123;</span><br><span class="line">    int number;</span><br><span class="line">    struct node *next;</span><br><span class="line">&#125;</span><br><span class="line">node;</span><br><span class="line"></span><br><span class="line">int main(int argc, char *argv[]) &#123;</span><br><span class="line">    // Memory for numbers</span><br><span class="line">    node *list = NULL;</span><br><span class="line"></span><br><span class="line">    // For each command-line argument</span><br><span class="line">    for (int i = 1; i &lt; argc; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        // Convert argument to int</span><br><span class="line">        int number = atoi(argv[i]);</span><br><span class="line"></span><br><span class="line">        // Allocate node for number</span><br><span class="line">        node *n = malloc(sizeof(node));</span><br><span class="line">        if (n == NULL)</span><br><span class="line">        &#123;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;</span><br><span class="line">        n-&gt;number = number;</span><br><span class="line">        n-&gt;next = NULL;</span><br><span class="line"></span><br><span class="line">        // Prepend node to list</span><br><span class="line">        n-&gt;next = list;</span><br><span class="line">        list = n;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // Print numbers</span><br><span class="line">    node *ptr = list;</span><br><span class="line">    while (ptr != NULL)</span><br><span class="line">    &#123;</span><br><span class="line">        printf(&quot;%i\n&quot;, ptr-&gt;number);</span><br><span class="line">        ptr = ptr-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // Free memory</span><br><span class="line">    ptr = list;</span><br><span class="line">    while (ptr != NULL)</span><br><span class="line">    &#123;</span><br><span class="line">        node *next = ptr-&gt;next;</span><br><span class="line">        free(ptr);</span><br><span class="line">        ptr = next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Notice that what the user inputs at the command line is put into the <code>number</code> field of a node called <code>n</code>, and then that node is added to the <code>list</code>. For example, <code>./list 1 2</code> will put the number <code>1</code> into the <code>number</code> field of a node called <code>n</code>, then put a pointer to <code>list</code> into the <code>next</code> field of the node, and then update <code>list</code> to point to <code>n</code>. That same process is repeated for <code>2</code>. Next, <code>node *ptr = list</code> creates a temporary variable that points at the same spot that <code>list</code> points to. The <code>while</code> prints what at the node <code>ptr</code> points to, and then updates <code>ptr</code> to point to the <code>next</code> node in the list. Finally, all the memory is freed.</p>
-</li>
-<li><p>Considering the amount of time required to search this list, it is in the order of , as in the worst case the entire list must always be searched to find an item. The time complexity for adding a new element to the list will depend on where that element is added. This is illustrated in the examples below.</p>
-</li>
-<li><p>You, as the programmer, have the choice of how to implement your list. The following code, for example, implements a linked list that prepends numbers to the front of the list:</p>
+<p>Notice that what the user inputs at the command line is put into the
+<code>number</code> field of a node called <code>n</code>, and then that
+node is added to the <code>list</code>. For example,
+<code>./list 1 2</code> will put the number <code>1</code> into the
+<code>number</code> field of a node called <code>n</code>, then put a
+pointer to <code>list</code> into the <code>next</code> field of the
+node, and then update <code>list</code> to point to <code>n</code>. That
+same process is repeated for <code>2</code>. Next,
+<code>node *ptr = list</code> creates a temporary variable that points
+at the same spot that <code>list</code> points to. The
+<code>while</code> prints what at the node <code>ptr</code> points to,
+and then updates <code>ptr</code> to point to the <code>next</code> node
+in the list. Finally, all the memory is freed.</p></li>
+<li><p>Considering the amount of time required to search this list, it
+is in the order of , as in the worst case the entire list must always be
+searched to find an item. The time complexity for adding a new element
+to the list will depend on where that element is added. This is
+illustrated in the examples below.</p></li>
+<li><p>You, as the programmer, have the choice of how to implement your
+list. The following code, for example, implements a linked list that
+prepends numbers to the front of the list:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">// Prepends numbers to a linked list, using for loop to print</span><br><span class="line"></span><br><span class="line">#include &lt;cs50.h&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line"></span><br><span class="line">typedef struct node</span><br><span class="line">&#123;</span><br><span class="line">    int number;</span><br><span class="line">    struct node *next;</span><br><span class="line">&#125;</span><br><span class="line">node;</span><br><span class="line"></span><br><span class="line">int main(int argc, char *argv[]) &#123;</span><br><span class="line">    // Memory for numbers</span><br><span class="line">    node *list = NULL;</span><br><span class="line"></span><br><span class="line">    // For each command-line argument</span><br><span class="line">    for (int i = 1; i &lt; argc; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        // Convert argument to int</span><br><span class="line">        int number = atoi(argv[i]);</span><br><span class="line"></span><br><span class="line">        // Allocate node for number</span><br><span class="line">        node *n = malloc(sizeof(node));</span><br><span class="line">        if (n == NULL)</span><br><span class="line">        &#123;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;</span><br><span class="line">        n-&gt;number = number;</span><br><span class="line">        n-&gt;next = NULL;</span><br><span class="line"></span><br><span class="line">        // Prepend node to list</span><br><span class="line">        n-&gt;next = list;</span><br><span class="line">        list = n;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // Print numbers</span><br><span class="line">    for (node *ptr = list; ptr != NULL; ptr = ptr-&gt;next)</span><br><span class="line">    &#123;</span><br><span class="line">        printf(&quot;%i\n&quot;, ptr-&gt;number);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // Free memory</span><br><span class="line">    node *ptr = list;</span><br><span class="line">    while (ptr != NULL)</span><br><span class="line">    &#123;</span><br><span class="line">        node *next = ptr-&gt;next;</span><br><span class="line">        free(ptr);</span><br><span class="line">        ptr = next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Notice how numbers are placed at the start of the list. This insertion will run in the order of , as the number of steps it takes to do this does not depend on the size of the list.</p>
-</li>
-<li><p>Further, you could place numbers at the end of the list as illustrated in this code:</p>
+<p>Notice how numbers are placed at the start of the list. This
+insertion will run in the order of , as the number of steps it takes to
+do this does not depend on the size of the list.</p></li>
+<li><p>Further, you could place numbers at the end of the list as
+illustrated in this code:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line">// Implements a list of numbers using a linked list</span><br><span class="line"></span><br><span class="line">#include &lt;cs50.h&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line"></span><br><span class="line">typedef struct node</span><br><span class="line">&#123;</span><br><span class="line">    int number;</span><br><span class="line">    struct node *next;</span><br><span class="line">&#125;</span><br><span class="line">node;</span><br><span class="line"></span><br><span class="line">int main(int argc, char *argv[]) &#123;</span><br><span class="line">    // Memory for numbers</span><br><span class="line">    node *list = NULL;</span><br><span class="line"></span><br><span class="line">    // For each command-line argument</span><br><span class="line">    for (int i = 1; i &lt; argc; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        // Convert argument to int</span><br><span class="line">        int number = atoi(argv[i]);</span><br><span class="line"></span><br><span class="line">        // Allocate node for number</span><br><span class="line">        node *n = malloc(sizeof(node));</span><br><span class="line">        if (n == NULL)</span><br><span class="line">        &#123;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;</span><br><span class="line">        n-&gt;number = number;</span><br><span class="line">        n-&gt;next = NULL;</span><br><span class="line"></span><br><span class="line">        // If list is empty</span><br><span class="line">        if (list == NULL)</span><br><span class="line">        &#123;</span><br><span class="line">            // This node is the whole list</span><br><span class="line">            list = n;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // If list has numbers already</span><br><span class="line">        else</span><br><span class="line">        &#123;</span><br><span class="line">            // Iterate over nodes in list</span><br><span class="line">            for (node *ptr = list; ptr != NULL; ptr = ptr-&gt;next)</span><br><span class="line">            &#123;</span><br><span class="line">                // If at end of list</span><br><span class="line">                if (ptr-&gt;next == NULL)</span><br><span class="line">                &#123;</span><br><span class="line">                    // Append node</span><br><span class="line">                    ptr-&gt;next = n;</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // Print numbers</span><br><span class="line">    for (node *ptr = list; ptr != NULL; ptr = ptr-&gt;next)</span><br><span class="line">    &#123;</span><br><span class="line">        printf(&quot;%i\n&quot;, ptr-&gt;number);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // Free memory</span><br><span class="line">    node *ptr = list;</span><br><span class="line">    while (ptr != NULL)</span><br><span class="line">    &#123;</span><br><span class="line">        node *next = ptr-&gt;next;</span><br><span class="line">        free(ptr);</span><br><span class="line">        ptr = next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Notice how this code <em>walks down</em> this list to find the end. When appending an element, (adding to the end of the list) our code will run in , as we have to go through our entire list before we can add the final element.</p>
-</li>
+<p>Notice how this code <em>walks down</em> this list to find the end.
+When appending an element, (adding to the end of the list) our code will
+run in , as we have to go through our entire list before we can add the
+final element.</p></li>
 <li><p>Further, you could sort your list as items are added:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line">// Implements a sorted list of numbers using a linked list</span><br><span class="line"></span><br><span class="line">#include &lt;cs50.h&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line"></span><br><span class="line">typedef struct node</span><br><span class="line">&#123;</span><br><span class="line">    int number;</span><br><span class="line">    struct node *next;</span><br><span class="line">&#125;</span><br><span class="line">node;</span><br><span class="line"></span><br><span class="line">int main(int argc, char *argv[]) &#123;</span><br><span class="line">    // Memory for numbers</span><br><span class="line">    node *list = NULL;</span><br><span class="line"></span><br><span class="line">    // For each command-line argument</span><br><span class="line">    for (int i = 1; i &lt; argc; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        // Convert argument to int</span><br><span class="line">        int number = atoi(argv[i]);</span><br><span class="line"></span><br><span class="line">        // Allocate node for number</span><br><span class="line">        node *n = malloc(sizeof(node));</span><br><span class="line">        if (n == NULL)</span><br><span class="line">        &#123;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;</span><br><span class="line">        n-&gt;number = number;</span><br><span class="line">        n-&gt;next = NULL;</span><br><span class="line"></span><br><span class="line">        // If list is empty</span><br><span class="line">        if (list == NULL)</span><br><span class="line">        &#123;</span><br><span class="line">            list = n;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // If number belongs at beginning of list</span><br><span class="line">        else if (n-&gt;number &lt; list-&gt;number)</span><br><span class="line">        &#123;</span><br><span class="line">            n-&gt;next = list;</span><br><span class="line">            list = n;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // If number belongs later in list</span><br><span class="line">        else</span><br><span class="line">        &#123;</span><br><span class="line">            // Iterate over nodes in list</span><br><span class="line">            for (node *ptr = list; ptr != NULL; ptr = ptr-&gt;next)</span><br><span class="line">            &#123;</span><br><span class="line">                // If at end of list</span><br><span class="line">                if (ptr-&gt;next == NULL)</span><br><span class="line">                &#123;</span><br><span class="line">                    // Append node</span><br><span class="line">                    ptr-&gt;next = n;</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                // If in middle of list</span><br><span class="line">                if (n-&gt;number &lt; ptr-&gt;next-&gt;number)</span><br><span class="line">                &#123;</span><br><span class="line">                    n-&gt;next = ptr-&gt;next;</span><br><span class="line">                    ptr-&gt;next = n;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // Print numbers</span><br><span class="line">    for (node *ptr = list; ptr != NULL; ptr = ptr-&gt;next)</span><br><span class="line">    &#123;</span><br><span class="line">        printf(&quot;%i\n&quot;, ptr-&gt;number);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // Free memory</span><br><span class="line">    node *ptr = list;</span><br><span class="line">    while (ptr != NULL)</span><br><span class="line">    &#123;</span><br><span class="line">        node *next = ptr-&gt;next;</span><br><span class="line">        free(ptr);</span><br><span class="line">        ptr = next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Notice how this list is sorted as it is built. To insert an element in this specific order, our code will still run in for each insertion, as in the worst case we will have to look through all current elements.</p>
-</li>
-<li><p><em>Binary search trees</em> are another data structure that can be used to store data more efficiently such that it can be searched and retrieved.</p>
-</li>
+<p>Notice how this list is sorted as it is built. To insert an element
+in this specific order, our code will still run in for each insertion,
+as in the worst case we will have to look through all current
+elements.</p></li>
+<li><p><em>Binary search trees</em> are another data structure that can
+be used to store data more efficiently such that it can be searched and
+retrieved.</p></li>
 <li><p>You can imagine a sorted sequence of numbers.</p>
-<p><img src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide086.png"></p>
-</li>
-<li><p>Imagine then that the center value becomes the top of a tree. Those that are less than this value are placed to the left. Those values that are more than this value are to the right.</p>
-<p><img src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide119.png"></p>
-</li>
-<li><p>Pointers can then be used to point to the correct location of each area of memory such that each of these nodes can be connected.</p>
-<p><img src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide120.png"></p>
-</li>
+<p><img
+src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide086.png" /></p></li>
+<li><p>Imagine then that the center value becomes the top of a tree.
+Those that are less than this value are placed to the left. Those values
+that are more than this value are to the right.</p>
+<p><img
+src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide119.png" /></p></li>
+<li><p>Pointers can then be used to point to the correct location of
+each area of memory such that each of these nodes can be connected.</p>
+<p><img
+src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide120.png" /></p></li>
 <li><p>In code, this can be implemented as follows.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line">// Implements a list of numbers as a binary search tree</span><br><span class="line"></span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line"></span><br><span class="line">// Represents a node</span><br><span class="line">typedef struct node</span><br><span class="line">&#123;</span><br><span class="line">    int number;</span><br><span class="line">    struct node *left;</span><br><span class="line">    struct node *right;</span><br><span class="line">&#125;</span><br><span class="line">node;</span><br><span class="line"></span><br><span class="line">void free_tree(node *root);</span><br><span class="line">void print_tree(node *root);</span><br><span class="line"></span><br><span class="line">int main(void) &#123;</span><br><span class="line">    // Tree of size 0</span><br><span class="line">    node *tree = NULL;</span><br><span class="line"></span><br><span class="line">    // Add number to list</span><br><span class="line">    node *n = malloc(sizeof(node));</span><br><span class="line">    if (n == NULL)</span><br><span class="line">    &#123;</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">    n-&gt;number = 2;</span><br><span class="line">    n-&gt;left = NULL;</span><br><span class="line">    n-&gt;right = NULL;</span><br><span class="line">    tree = n;</span><br><span class="line"></span><br><span class="line">    // Add number to list</span><br><span class="line">    n = malloc(sizeof(node));</span><br><span class="line">    if (n == NULL)</span><br><span class="line">    &#123;</span><br><span class="line">        free_tree(tree);</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">    n-&gt;number = 1;</span><br><span class="line">    n-&gt;left = NULL;</span><br><span class="line">    n-&gt;right = NULL;</span><br><span class="line">    tree-&gt;left = n;</span><br><span class="line"></span><br><span class="line">    // Add number to list</span><br><span class="line">    n = malloc(sizeof(node));</span><br><span class="line">    if (n == NULL)</span><br><span class="line">    &#123;</span><br><span class="line">        free_tree(tree);</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">    n-&gt;number = 3;</span><br><span class="line">    n-&gt;left = NULL;</span><br><span class="line">    n-&gt;right = NULL;</span><br><span class="line">    tree-&gt;right = n;</span><br><span class="line"></span><br><span class="line">    // Print tree</span><br><span class="line">    print_tree(tree);</span><br><span class="line"></span><br><span class="line">    // Free tree</span><br><span class="line">    free_tree(tree);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void free_tree(node *root) &#123;</span><br><span class="line">    if (root == NULL)</span><br><span class="line">    &#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    free_tree(root-&gt;left);</span><br><span class="line">    free_tree(root-&gt;right);</span><br><span class="line">    free(root);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void print_tree(node *root) &#123;</span><br><span class="line">    if (root == NULL)</span><br><span class="line">    &#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    print_tree(root-&gt;left);</span><br><span class="line">    printf(&quot;%i\n&quot;, root-&gt;number);</span><br><span class="line">    print_tree(root-&gt;right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line">// Implements a list of numbers as a binary search tree</span><br><span class="line"></span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line"></span><br><span class="line">// Represents a node</span><br><span class="line">typedef struct node</span><br><span class="line">&#123;</span><br><span class="line">    int number;</span><br><span class="line">    struct node *left;</span><br><span class="line">    struct node *right;</span><br><span class="line">&#125;</span><br><span class="line">node;</span><br><span class="line"></span><br><span class="line">void free_tree(node *root);</span><br><span class="line">void print_tree(node *root);</span><br><span class="line"></span><br><span class="line">int main(void) &#123;</span><br><span class="line">    // Tree of size 0</span><br><span class="line">    node *tree = NULL;</span><br><span class="line"></span><br><span class="line">    // Add number to list</span><br><span class="line">    node *n = malloc(sizeof(node));</span><br><span class="line">    if (n == NULL)</span><br><span class="line">    &#123;</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">    n-&gt;number = 2;</span><br><span class="line">    n-&gt;left = NULL;</span><br><span class="line">    n-&gt;right = NULL;</span><br><span class="line">    tree = n;</span><br><span class="line"></span><br><span class="line">    // Add number to list</span><br><span class="line">    n = malloc(sizeof(node));</span><br><span class="line">    if (n == NULL)</span><br><span class="line">    &#123;</span><br><span class="line">        free_tree(tree);</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">    n-&gt;number = 1;</span><br><span class="line">    n-&gt;left = NULL;</span><br><span class="line">    n-&gt;right = NULL;</span><br><span class="line">    tree-&gt;left = n;</span><br><span class="line"></span><br><span class="line">    // Add number to list</span><br><span class="line">    n = malloc(sizeof(node));</span><br><span class="line">    if (n == NULL)</span><br><span class="line">    &#123;</span><br><span class="line">        free_tree(tree);</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">    n-&gt;number = 3;</span><br><span class="line">    n-&gt;left = NULL;</span><br><span class="line">    n-&gt;right = NULL;</span><br><span class="line">    tree-&gt;right = n;</span><br><span class="line"></span><br><span class="line">    // Print tree</span><br><span class="line">    print_tree(tree);</span><br><span class="line"></span><br><span class="line">    // Free tree</span><br><span class="line">    free_tree(tree);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void free_tree(node *root) &#123;</span><br><span class="line">    if (root == NULL)</span><br><span class="line">    &#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    free_tree(root-&gt;left);</span><br><span class="line">    free_tree(root-&gt;right);</span><br><span class="line">    free(root);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void print_tree(node *root) &#123;</span><br><span class="line">    if (root == NULL)</span><br><span class="line">    &#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    print_tree(root-&gt;left);</span><br><span class="line">    printf(&quot;%i\n&quot;, root-&gt;number);</span><br><span class="line">    print_tree(root-&gt;right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 <li><p>Searching this tree could be implemented as follows:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">bool search(node *tree, int number)</span><br><span class="line">&#123;</span><br><span class="line">    if (tree == NULL)</span><br><span class="line">    &#123;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">    else if (number &lt; tree-&gt;number)</span><br><span class="line">    &#123;</span><br><span class="line">        return search(tree-&gt;left, number);</span><br><span class="line">    &#125;</span><br><span class="line">    else if (number &gt; tree-&gt;number)</span><br><span class="line">    &#123;</span><br><span class="line">        return search(tree-&gt;right, number);</span><br><span class="line">    &#125;</span><br><span class="line">    else if (number == tree-&gt;number)</span><br><span class="line">    &#123;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Notice this search function begins by going to the location of <code>tree</code>. Then, it uses recursion to search for <code>number</code>.</p>
-</li>
-<li><p>A tree like the above offers dynamism that an array does not offer. It can grow and shrink as we wish.</p>
-</li>
-<li><p><em>Hashing</em> is the idea of taking a value and being able to output a value that becomes a shortcut to it later.</p>
-</li>
-<li><p>For example, hashing <em>apple</em> may hash as a value of <code>1</code>, and <em>berry</em> may be hashed as <code>2</code>. Therefore, finding <em>apple</em> is as easy as asking the <em>hash</em> algorithm where <em>apple</em> is stored. While not ideal in terms of design, ultimately, putting all _a_’s in one bucket and _b_’s in another, this concept of <em>bucketizing</em> hashed values illustrates how you can use this concept: a hashed value can be used to shortcut finding such a value.</p>
-</li>
-<li><p>A <em>hash function</em> is an algorithm that reduces a larger value to something small and predictable. Generally, this function takes in an item you wish to add to your hash table, and returns an integer representing the array index in which the item should be placed.</p>
-</li>
-<li><p>A <em>hash table</em> is a fantastic combination of both arrays and linked lists. When implemented in code, a hash table is an <em>array</em> of <em>pointers</em> to _node_s.</p>
-</li>
+<p>Notice this search function begins by going to the location of
+<code>tree</code>. Then, it uses recursion to search for
+<code>number</code>.</p></li>
+<li><p>A tree like the above offers dynamism that an array does not
+offer. It can grow and shrink as we wish.</p></li>
+<li><p><em>Hashing</em> is the idea of taking a value and being able to
+output a value that becomes a shortcut to it later.</p></li>
+<li><p>For example, hashing <em>apple</em> may hash as a value of
+<code>1</code>, and <em>berry</em> may be hashed as <code>2</code>.
+Therefore, finding <em>apple</em> is as easy as asking the <em>hash</em>
+algorithm where <em>apple</em> is stored. While not ideal in terms of
+design, ultimately, putting all <em>a</em>’s in one bucket and
+<em>b</em>’s in another, this concept of <em>bucketizing</em> hashed
+values illustrates how you can use this concept: a hashed value can be
+used to shortcut finding such a value.</p></li>
+<li><p>A <em>hash function</em> is an algorithm that reduces a larger
+value to something small and predictable. Generally, this function takes
+in an item you wish to add to your hash table, and returns an integer
+representing the array index in which the item should be
+placed.</p></li>
+<li><p>A <em>hash table</em> is a fantastic combination of both arrays
+and linked lists. When implemented in code, a hash table is an
+<em>array</em> of <em>pointers</em> to _node_s.</p></li>
 <li><p>A hash table could be imagined as follows:</p>
-<p><img src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide157.png"></p>
-<p>Notice that this is an array that is assigned each value of the alphabet.</p>
-</li>
-<li><p>Then, at each location of the array, a linked list is used to track each value being stored there:</p>
-<p><img src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide169.png"></p>
-</li>
-<li><p><em>Collisions</em> are when you add values to the hash table, and something already exists at the hashed location. In the above, collisions are simply appended to the end of the list.</p>
-</li>
-<li><p>Collisions can be reduced by better programming your hash table and hash algorithm. You can imagine an improvement upon the above as follows:</p>
-<p><img src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide184.png"></p>
-</li>
-<li><p>You, as the programmer, have to make a decision about the advantages of using more memory to have a large hash table and potentially reducing search time or using less memory and potentially increasing search time.</p>
-</li>
+<p><img
+src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide157.png" /></p>
+<p>Notice that this is an array that is assigned each value of the
+alphabet.</p></li>
+<li><p>Then, at each location of the array, a linked list is used to
+track each value being stored there:</p>
+<p><img
+src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide169.png" /></p></li>
+<li><p><em>Collisions</em> are when you add values to the hash table,
+and something already exists at the hashed location. In the above,
+collisions are simply appended to the end of the list.</p></li>
+<li><p>Collisions can be reduced by better programming your hash table
+and hash algorithm. You can imagine an improvement upon the above as
+follows:</p>
+<p><img
+src="https://cs50.harvard.edu/x/2023/notes/5/cs50Week5Slide184.png" /></p></li>
+<li><p>You, as the programmer, have to make a decision about the
+advantages of using more memory to have a large hash table and
+potentially reducing search time or using less memory and potentially
+increasing search time.</p></li>
 </ul>
-<p>In this lesson, you learned about using pointers to build new data structures. Specifically, we delved into…</p>
+<p>In this lesson, you learned about using pointers to build new data
+structures. Specifically, we delved into…</p>
 
     </div>
 
@@ -492,8 +564,8 @@
       <i class="fa fa-chevron-left"></i> lecture4
     </a></div>
       <div class="post-nav-item">
-    <a href="/2023/07/02/lecture2/" rel="next" title="lecture2">
-      lecture2 <i class="fa fa-chevron-right"></i>
+    <a href="/2023/07/02/lecture3/" rel="next" title="lecture3">
+      lecture3 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -615,16 +687,6 @@
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">XuandYu000</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-chart-area"></i>
-    </span>
-    <span title="站点总字数">336k</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-coffee"></i>
-    </span>
-    <span title="站点阅读时长">5:05</span>
 </div>
 
 <!--

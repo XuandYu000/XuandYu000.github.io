@@ -22,12 +22,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="lecture9 Welcome! Static to Dynamic Flask Layout POST Frosh IMs Flask and SQL Session Store API JSON Summing Up  Welcome! In previous weeks, you have learned numerous programming languages, techniques">
+  <meta name="description" content="lecture9  Welcome! Static to Dynamic Flask Layout POST Frosh IMs Flask and SQL Session Store API JSON Summing Up  Welcome!  In previous weeks, you have learned numerous programming la">
 <meta property="og:type" content="article">
 <meta property="og:title" content="lecture9">
 <meta property="og:url" content="http://example.com/2023/07/02/lecture9/index.html">
 <meta property="og:site_name" content="viewoverlook">
-<meta property="og:description" content="lecture9 Welcome! Static to Dynamic Flask Layout POST Frosh IMs Flask and SQL Session Store API JSON Summing Up  Welcome! In previous weeks, you have learned numerous programming languages, techniques">
+<meta property="og:description" content="lecture9  Welcome! Static to Dynamic Flask Layout POST Frosh IMs Flask and SQL Session Store API JSON Summing Up  Welcome!  In previous weeks, you have learned numerous programming la">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-07-01T16:00:00.000Z">
 <meta property="article:modified_time" content="2023-07-02T08:15:38.516Z">
@@ -231,21 +231,7 @@
                 </span>
             </span>
 
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>25k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>23 分钟</span>
-            </span>
+          
 
         </div>
       </header>
@@ -256,7 +242,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="lecture9"><a href="#lecture9" class="headerlink" title="lecture9"></a>lecture9</h1><ul>
+        <h1 id="lecture9">lecture9</h1>
+<ul>
 <li><a href="#welcome">Welcome!</a></li>
 <li><a href="#static-to-dynamic">Static to Dynamic</a></li>
 <li><a href="#flask">Flask</a></li>
@@ -270,242 +257,334 @@
 <li><a href="#json">JSON</a></li>
 <li><a href="#summing-up">Summing Up</a></li>
 </ul>
-<h2 id="Welcome"><a href="#Welcome" class="headerlink" title="Welcome!"></a><a href="#welcome">Welcome!</a></h2><ul>
-<li>In previous weeks, you have learned numerous programming languages, techniques, and strategies.</li>
-<li>Indeed, this class has been far less of a <em>C class</em> or <em>Python class</em> and far more of a <em>programming class</em>, such that you can go on to follow future trends.</li>
-<li>In these past several weeks, you have learned <em>how to learn</em> about programming.</li>
-<li>Today, we will be moving from HTML and CSS into combining HTML, CSS, SQL, Python, and JavaScript so you can create your own web applications.</li>
+<h2 id="welcome"><a href="#welcome">Welcome!</a></h2>
+<ul>
+<li>In previous weeks, you have learned numerous programming languages,
+techniques, and strategies.</li>
+<li>Indeed, this class has been far less of a <em>C class</em> or
+<em>Python class</em> and far more of a <em>programming class</em>, such
+that you can go on to follow future trends.</li>
+<li>In these past several weeks, you have learned <em>how to learn</em>
+about programming.</li>
+<li>Today, we will be moving from HTML and CSS into combining HTML, CSS,
+SQL, Python, and JavaScript so you can create your own web
+applications.</li>
 </ul>
-<h2 id="Static-to-Dynamic"><a href="#Static-to-Dynamic" class="headerlink" title="Static to Dynamic"></a><a href="#static-to-dynamic">Static to Dynamic</a></h2><ul>
-<li>Up until this point, all HTML you saw was pre-written and static.</li>
-<li>In the past, when you visited a page, the browser downloaded an HTML page, and you were able to view it.</li>
-<li>Dynamic pages refer to the ability of Python and similar languages to create HTML files on-the-fly. Accordingly, you can have web pages that are generated by options selected by your user.</li>
-<li>You have used <code>http-server</code> in the past to serve your web pages. Today, we are going to utilize a new server that can parse out a web address and perform actions based on the URL provided.</li>
+<h2 id="static-to-dynamic"><a href="#static-to-dynamic">Static to
+Dynamic</a></h2>
+<ul>
+<li>Up until this point, all HTML you saw was pre-written and
+static.</li>
+<li>In the past, when you visited a page, the browser downloaded an HTML
+page, and you were able to view it.</li>
+<li>Dynamic pages refer to the ability of Python and similar languages
+to create HTML files on-the-fly. Accordingly, you can have web pages
+that are generated by options selected by your user.</li>
+<li>You have used <code>http-server</code> in the past to serve your web
+pages. Today, we are going to utilize a new server that can parse out a
+web address and perform actions based on the URL provided.</li>
 </ul>
-<h2 id="Flask"><a href="#Flask" class="headerlink" title="Flask"></a><a href="#flask">Flask</a></h2><ul>
-<li><p><em>Flask</em> is a third-party library that allows you to host web applications using the Flask framework within Python.<br><em>Flask</em> 是一个第三方库，允许你使用Python中的Flask框架托管web应用程序</p>
-</li>
-<li><p>You can run flask by executing <code>flask run</code>.</p>
-</li>
-<li><p>To do so, you will need a file called <code>app.py</code> and a folder called <code>templates</code>.</p>
-</li>
-<li><p>To get started, create a folder called <code>templates</code> and create a file called <code>index.html</code> with the following code:</p>
+<h2 id="flask"><a href="#flask">Flask</a></h2>
+<ul>
+<li><p><em>Flask</em> is a third-party library that allows you to host
+web applications using the Flask framework within Python. <em>Flask</em>
+是一个第三方库，允许你使用Python中的Flask框架托管web应用程序</p></li>
+<li><p>You can run flask by executing <code>flask run</code>.</p></li>
+<li><p>To do so, you will need a file called <code>app.py</code> and a
+folder called <code>templates</code>.</p></li>
+<li><p>To get started, create a folder called <code>templates</code> and
+create a file called <code>index.html</code> with the following
+code:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line"></span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=1, width=device-width&quot;&gt;</span><br><span class="line">        &lt;title&gt;hello&lt;/title&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        hello, &#123;&#123; name &#125;&#125;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>Notice the double <code>&#123;&#123; name &#125;&#125;</code> that is a placeholder for something that will be later provided by our Flask server.<br>这里的<code>&#123;&#123;name&#125;&#125;</code>是占位符，在Flask server中会给出</p>
-</li>
-<li><p>Then, in the same folder that the <code>templates</code> folder appears, create a file called <code>app.py</code> and add the following code:</p>
+<p>Notice the double <code>&#123;&#123; name &#125;&#125;</code> that is a
+placeholder for something that will be later provided by our Flask
+server. 这里的<code>&#123;&#123;name&#125;&#125;</code>是占位符，在Flask
+server中会给出</p></li>
+<li><p>Then, in the same folder that the <code>templates</code> folder
+appears, create a file called <code>app.py</code> and add the following
+code:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># Greets user</span><br><span class="line"></span><br><span class="line">from flask import Flask, render_template, request</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@app.route(&quot;/&quot;)</span><br><span class="line">def index():</span><br><span class="line">    return render_template(&quot;index.html&quot;, name=request.args.get(&quot;name&quot;, &quot;world&quot;))</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>Notice that this code defines <code>app</code> as the Flask application. Then, it defines the <code>/</code> route of <code>app</code> as returning the contents of <code>index.html</code> with the argument of <code>name</code>. By default, the <code>request.args.get</code> function will look for the <code>name</code> being provided by the user. If no name is provided, it will default to <code>world</code>.<br>这段代码将<code>app</code>定义为Flask应用程序。之后这暂且当作约定，在<code>index</code>函数中调用render_template函数使用<code>index.html</code>模板.将<code>name</code>赋为用户<code>request.args.get</code>提供的字符串，如果没有则以<code>world</code>代替之</p>
-</li>
-<li><p>Finally, add a final file in the same folder as <code>app.py</code> called <code>requirements.txt</code> that has only a single line of code:</p>
-<p>Notice only <code>Flask</code> appears in this file.</p>
-</li>
-<li><p>You can run this file by typing <code>flask run</code> in the terminal window. If Flask does not run, ensure that your syntax is correct in each of the files above. Further, if Flask will not run, make sure your files are organized as follows:</p>
+<p>Notice that this code defines <code>app</code> as the Flask
+application. Then, it defines the <code>/</code> route of
+<code>app</code> as returning the contents of <code>index.html</code>
+with the argument of <code>name</code>. By default, the
+<code>request.args.get</code> function will look for the
+<code>name</code> being provided by the user. If no name is provided, it
+will default to <code>world</code>.
+这段代码将<code>app</code>定义为Flask应用程序。之后这暂且当作约定，在<code>index</code>函数中调用render_template函数使用<code>index.html</code>模板.将<code>name</code>赋为用户<code>request.args.get</code>提供的字符串，如果没有则以<code>world</code>代替之</p></li>
+<li><p>Finally, add a final file in the same folder as
+<code>app.py</code> called <code>requirements.txt</code> that has only a
+single line of code:</p>
+<p>Notice only <code>Flask</code> appears in this file.</p></li>
+<li><p>You can run this file by typing <code>flask run</code> in the
+terminal window. If Flask does not run, ensure that your syntax is
+correct in each of the files above. Further, if Flask will not run, make
+sure your files are organized as follows:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/templates</span><br><span class="line">    index.html</span><br><span class="line">app.py</span><br><span class="line">requirements.txt</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>Once you get it running, you will be prompted to click a link. Once you navigate to that webpage, try adding <code>?name=[Your Name]</code> to the base URL in your browser’s URL bar.</p>
-</li>
-<li><p>Improving upon our program, we know that most users will not type arguments into the address bar. Instead, programmers rely upon users to fill out forms on web pages. Accordingly, we can modify index.html as follows:<br>继续改善代码，我们知道大多数的用户并不会直接在地址框内输入参数。与此相反程序员依赖用户填写表格并将其提交到网页中。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line"></span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=1, width=device-width&quot;&gt;</span><br><span class="line">        &lt;title&gt;hello&lt;/title&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;form action=&quot;/greet&quot; method=&quot;get&quot;&gt;</span><br><span class="line">            &lt;input autocomplete=&quot;off&quot; autofocus name=&quot;name&quot; placeholder=&quot;Name&quot; type=&quot;text&quot;&gt;</span><br><span class="line">            &lt;button type=&quot;submit&quot;&gt;Greet&lt;/button&gt;</span><br><span class="line">        &lt;/form&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>Notice that a form is now created that takes the user’s name and then passes it off to a route called <code>/greet</code>.</p>
-</li>
+<p>Once you get it running, you will be prompted to click a link. Once
+you navigate to that webpage, try adding <code>?name=[Your Name]</code>
+to the base URL in your browser’s URL bar.</p></li>
+<li><p>Improving upon our program, we know that most users will not type
+arguments into the address bar. Instead, programmers rely upon users to
+fill out forms on web pages. Accordingly, we can modify index.html as
+follows:
+继续改善代码，我们知道大多数的用户并不会直接在地址框内输入参数。与此相反程序员依赖用户填写表格并将其提交到网页中。
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line"></span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=1, width=device-width&quot;&gt;</span><br><span class="line">        &lt;title&gt;hello&lt;/title&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;form action=&quot;/greet&quot; method=&quot;get&quot;&gt;</span><br><span class="line">            &lt;input autocomplete=&quot;off&quot; autofocus name=&quot;name&quot; placeholder=&quot;Name&quot; type=&quot;text&quot;&gt;</span><br><span class="line">            &lt;button type=&quot;submit&quot;&gt;Greet&lt;/button&gt;</span><br><span class="line">        &lt;/form&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<p>Notice that a form is now created that takes the user’s name and then
+passes it off to a route called <code>/greet</code>.</p></li>
 <li><p>Further, we can change <code>app.py</code> as follows:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># Adds a form, second route</span><br><span class="line"></span><br><span class="line">from flask import Flask, render_template, request</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@app.route(&quot;/&quot;)</span><br><span class="line">def index():</span><br><span class="line">    return render_template(&quot;index.html&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@app.route(&quot;/greet&quot;)</span><br><span class="line">def greet():</span><br><span class="line">    return render_template(&quot;greet.html&quot;, name=request.args.get(&quot;name&quot;, &quot;world&quot;))</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>Notice that the default path will display a form for the user to input their name. The <code>/greet</code> route will pass the <code>name</code> to that web page.<br>在默认路径下只会对用户显示一张表单来输入自己的名字。<code>/greet</code>会将名字传到网页端，这就是一个基本的前后端交互的程序。</p>
-</li>
-<li><p>To finalize this implementation, you will need another template for <code>greet.html</code> as follows:</p>
+<p>Notice that the default path will display a form for the user to
+input their name. The <code>/greet</code> route will pass the
+<code>name</code> to that web page.
+在默认路径下只会对用户显示一张表单来输入自己的名字。<code>/greet</code>会将名字传到网页端，这就是一个基本的前后端交互的程序。</p></li>
+<li><p>To finalize this implementation, you will need another template
+for <code>greet.html</code> as follows:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line"></span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=1, width=device-width&quot;&gt;</span><br><span class="line">        &lt;title&gt;hello&lt;/title&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        hello, &#123;&#123; name &#125;&#125;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>Notice that this route will now render the greeting to the user, followed by their name.</p>
-</li>
+<p>Notice that this route will now render the greeting to the user,
+followed by their name.</p></li>
 </ul>
-<h2 id="Layout"><a href="#Layout" class="headerlink" title="Layout"></a><a href="#layout">Layout</a></h2><p>在上述的两个页面中<code>index.html</code>和<code>greet.html</code>仅有些许不同，主体相似，如果我们有很多其他的类似界面需求时所能做的就是单纯的复制相同的界面。这很繁琐呀。</p>
-<ul>
-<li>Both of our web pages, <code>index.html</code> and <code>greet.html</code>, have much of the same data. Wouldn’t it be nice to allow the body to be unique, but copy the same layout from page to page?</li>
-<li>First, create a new template called <code>layout.html</code> and write code as follows:<br>首先创建一个<code>layout.html</code>文件<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line"></span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=1, width=device-width&quot;&gt;</span><br><span class="line">        &lt;title&gt;hello&lt;/title&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &#123;% block body %&#125;&#123;% endblock %&#125;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-Notice that the <code>&#123;% block body %&#125;&#123;% endblock %&#125;</code> allows for the insertion of other code from other HTML files.</li>
-</ul>
-<p>   <code>&#123;% block body %&#125;` `&#123;% endblock %&#125;</code> 允许其他html文件的交互性代码。   </p>
+<h2 id="layout"><a href="#layout">Layout</a></h2>
+<p>在上述的两个页面中<code>index.html</code>和<code>greet.html</code>仅有些许不同，主体相似，如果我们有很多其他的类似界面需求时所能做的就是单纯的复制相同的界面。这很繁琐呀。
+* Both of our web pages, <code>index.html</code> and
+<code>greet.html</code>, have much of the same data. Wouldn’t it be nice
+to allow the body to be unique, but copy the same layout from page to
+page? * First, create a new template called <code>layout.html</code> and
+write code as follows: 首先创建一个<code>layout.html</code>文件
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line"></span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=1, width=device-width&quot;&gt;</span><br><span class="line">        &lt;title&gt;hello&lt;/title&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &#123;% block body %&#125;&#123;% endblock %&#125;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<pre><code>Notice that the `&#123;% block body %&#125;&#123;% endblock %&#125;` allows for the insertion of other code from other HTML files.</code></pre>
+<p><code>&#123;% block body %&#125;` `&#123;% endblock %&#125;</code> 允许其他html文件的交互性代码。</p>
 <ul>
 <li><p>Then, modify your <code>index.html</code> as follows:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;layout.html&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block body %&#125;</span><br><span class="line"></span><br><span class="line">    &lt;form action=&quot;/greet&quot; method=&quot;get&quot;&gt;</span><br><span class="line">        &lt;input autocomplete=&quot;off&quot; autofocus name=&quot;name&quot; placeholder=&quot;Name&quot; type=&quot;text&quot;&gt;</span><br><span class="line">        &lt;button type=&quot;submit&quot;&gt;Greet&lt;/button&gt;</span><br><span class="line">    &lt;/form&gt;</span><br><span class="line"></span><br><span class="line">&#123;% endblock %&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>Notice that the line <code>&#123;% extends "layout.html" %&#125;</code> tells the server where to get the layout of this page. Then, the <code>&#123;% block body %&#125;&#123;% endblock %&#125;</code> tells what code to be inserted into <code>layout.html</code>.<br><code>&#123;% extends "layout.html" %&#125;</code>告诉服务器 从哪里获得模板文件，之后的两个代码块之间插入对应的代码</p>
-</li>
+<p>Notice that the line <code>&#123;% extends "layout.html" %&#125;</code> tells the
+server where to get the layout of this page. Then, the
+<code>&#123;% block body %&#125;&#123;% endblock %&#125;</code> tells what code to be inserted into
+<code>layout.html</code>. <code>&#123;% extends "layout.html" %&#125;</code>告诉服务器
+从哪里获得模板文件，之后的两个代码块之间插入对应的代码</p></li>
 <li><p>Finally, change <code>greet.html</code> as follows:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;layout.html&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block body %&#125;</span><br><span class="line">    hello, &#123;&#123; name &#125;&#125;</span><br><span class="line">&#123;% endblock %&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>Notice how this code is shorter and more compact.</p>
-</li>
+<p>Notice how this code is shorter and more compact.</p></li>
 </ul>
-<h2 id="POST"><a href="#POST" class="headerlink" title="POST"></a><a href="#post">POST</a></h2><ul>
-<li><p>You can imagine scenarios where it is not safe to utilize <code>get</code>, as usernames and passwords would show up in the URL.<br>使用<code>get</code>很显然不是最优方案因为会将用户名字和密码都显示到URL上</p>
-</li>
-<li><p>We can utilize the method <code>post</code> to help with this problem by modifying <code>app.py</code> as follows:</p>
+<h2 id="post"><a href="#post">POST</a></h2>
+<ul>
+<li><p>You can imagine scenarios where it is not safe to utilize
+<code>get</code>, as usernames and passwords would show up in the URL.
+使用<code>get</code>很显然不是最优方案因为会将用户名字和密码都显示到URL上</p></li>
+<li><p>We can utilize the method <code>post</code> to help with this
+problem by modifying <code>app.py</code> as follows:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># Switches to POST</span><br><span class="line"></span><br><span class="line">from flask import Flask, render_template, request</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@app.route(&quot;/&quot;)</span><br><span class="line">def index():</span><br><span class="line">    return render_template(&quot;index.html&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@app.route(&quot;/greet&quot;, methods=[&quot;POST&quot;]) #这里是使用的参数 </span><br><span class="line">def greet():</span><br><span class="line">    return render_template(&quot;greet.html&quot;, name=request.form.get(&quot;name&quot;, &quot;world&quot;))</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>Notice that <code>POST</code> is added to the <code>/greet</code> route, and that we use <code>request.form.get</code> rather than <code>request.args.get</code>.</p>
-</li>
-<li><p>This tells the server to look <em>deeper</em> in the virtual envelope and not reveal the items in <code>post</code> in the URL.</p>
-</li>
-<li><p>Still, this code can be advanced further by utilizing a single route for both <code>get</code> and <code>post</code>. To do this, modify <code>app.py</code> as follows:</p>
+<p>Notice that <code>POST</code> is added to the <code>/greet</code>
+route, and that we use <code>request.form.get</code> rather than
+<code>request.args.get</code>.</p></li>
+<li><p>This tells the server to look <em>deeper</em> in the virtual
+envelope and not reveal the items in <code>post</code> in the
+URL.</p></li>
+<li><p>Still, this code can be advanced further by utilizing a single
+route for both <code>get</code> and <code>post</code>. To do this,
+modify <code>app.py</code> as follows:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># Uses a single route</span><br><span class="line"></span><br><span class="line">from flask import Flask, render_template, request</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@app.route(&quot;/&quot;, methods=[&quot;GET&quot;, &quot;POST&quot;])</span><br><span class="line">def index():</span><br><span class="line">    if request.method == &quot;POST&quot;:</span><br><span class="line">        return render_template(&quot;greet.html&quot;, name=request.form.get(&quot;name&quot;, &quot;world&quot;))</span><br><span class="line">    return render_template(&quot;index.html&quot;)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>Notice that both <code>get</code> and <code>post</code> are done in a single routing. However, <code>request.method</code> is utilized to properly route based upon the type of routing requested by the user.</p>
-</li>
+<p>Notice that both <code>get</code> and <code>post</code> are done in a
+single routing. However, <code>request.method</code> is utilized to
+properly route based upon the type of routing requested by the
+user.</p></li>
 </ul>
-<h2 id="Frosh-IMs"><a href="#Frosh-IMs" class="headerlink" title="Frosh IMs"></a><a href="#frosh-ims">Frosh IMs</a></h2><ul>
-<li><p>Frosh IMs or <em>froshims</em> is a web application that allows students to register for intermural sports.</p>
-</li>
-<li><p>Create a folder by typing <code>mkdir froshims</code> in the terminal window. Then, type <code>cd froshims</code> to browse to this folder. Within, create a directory called templates by typing <code>mkdir templates</code>. Finally, type <code>code app.py</code> and write code as follows:</p>
+<h2 id="frosh-ims"><a href="#frosh-ims">Frosh IMs</a></h2>
+<ul>
+<li><p>Frosh IMs or <em>froshims</em> is a web application that allows
+students to register for intermural sports.</p></li>
+<li><p>Create a folder by typing <code>mkdir froshims</code> in the
+terminal window. Then, type <code>cd froshims</code> to browse to this
+folder. Within, create a directory called templates by typing
+<code>mkdir templates</code>. Finally, type <code>code app.py</code> and
+write code as follows:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"># Implements a registration form using a select menu</span><br><span class="line"></span><br><span class="line">from flask import Flask, render_template, request</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line">SPORTS = [</span><br><span class="line">    &quot;Basketball&quot;,</span><br><span class="line">    &quot;Soccer&quot;,</span><br><span class="line">    &quot;Ultimate Frisbee&quot;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@app.route(&quot;/&quot;)</span><br><span class="line">def index():</span><br><span class="line">    return render_template(&quot;index.html&quot;, sports=SPORTS)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@app.route(&quot;/register&quot;, methods=[&quot;POST&quot;])</span><br><span class="line">def register():</span><br><span class="line"></span><br><span class="line">    # Validate submission</span><br><span class="line">    if not request.form.get(&quot;name&quot;) or request.form.get(&quot;sport&quot;) not in SPORTS:</span><br><span class="line">        return render_template(&quot;failure.html&quot;)</span><br><span class="line"></span><br><span class="line">    # Confirm registration</span><br><span class="line">    return render_template(&quot;success.html&quot;)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>Notice that a <code>failure</code> option is provided, such that a failure message will be displayed to the user if the <code>name</code> or <code>sport</code> field is not properly filled out.</p>
-</li>
-<li><p>Next, create a file in the <code>templates</code> folder called <code>index.html</code> by typing <code>code templates/index.html</code> and write code as follows:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;layout.html&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block body %&#125;</span><br><span class="line">    &lt;h1&gt;Register&lt;/h1&gt;</span><br><span class="line">    &lt;form action=&quot;/register&quot; method=&quot;post&quot;&gt;</span><br><span class="line">        &lt;input autocomplete=&quot;off&quot; autofocus name=&quot;name&quot; placeholder=&quot;Name&quot; type=&quot;text&quot;&gt;</span><br><span class="line">        &lt;select name=&quot;sport&quot;&gt;</span><br><span class="line">            &lt;option disabled selected&gt;Sport&lt;/option&gt;</span><br><span class="line">            &#123;% for sport in sports %&#125;</span><br><span class="line">                &lt;option value=&quot;&#123;&#123; sport &#125;&#125;&quot;&gt;&#123;&#123; sport &#125;&#125;&lt;/option&gt;</span><br><span class="line">            &#123;% endfor %&#125;</span><br><span class="line">        &lt;/select&gt;</span><br><span class="line">        &lt;button type=&quot;submit&quot;&gt;Register&lt;/button&gt;</span><br><span class="line">    &lt;/form&gt;</span><br><span class="line">&#123;% endblock %&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Next, create a file called <code>layout.html</code> by typing <code>code templates/layout.html</code> and write code as follows:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line"></span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=1, width=device-width&quot;&gt;</span><br><span class="line">        &lt;title&gt;froshims&lt;/title&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &#123;% block body %&#125;&#123;% endblock %&#125;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Fourth, create a file in templates called <code>success.html</code> as follows:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;layout.html&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block body %&#125;</span><br><span class="line">    You are registered!</span><br><span class="line">&#123;% endblock %&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Finally, create a file in templates called <code>failure.html</code> as follows:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;layout.html&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block body %&#125;</span><br><span class="line">    You are not registered!</span><br><span class="line">&#123;% endblock %&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>You can imagine how we might want to accept the registration of many different registrants. We can improve <code>app.py</code> as follows:</p>
+<p>Notice that a <code>failure</code> option is provided, such that a
+failure message will be displayed to the user if the <code>name</code>
+or <code>sport</code> field is not properly filled out.</p></li>
+<li><p>Next, create a file in the <code>templates</code> folder called
+<code>index.html</code> by typing <code>code templates/index.html</code>
+and write code as follows:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;layout.html&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block body %&#125;</span><br><span class="line">    &lt;h1&gt;Register&lt;/h1&gt;</span><br><span class="line">    &lt;form action=&quot;/register&quot; method=&quot;post&quot;&gt;</span><br><span class="line">        &lt;input autocomplete=&quot;off&quot; autofocus name=&quot;name&quot; placeholder=&quot;Name&quot; type=&quot;text&quot;&gt;</span><br><span class="line">        &lt;select name=&quot;sport&quot;&gt;</span><br><span class="line">            &lt;option disabled selected&gt;Sport&lt;/option&gt;</span><br><span class="line">            &#123;% for sport in sports %&#125;</span><br><span class="line">                &lt;option value=&quot;&#123;&#123; sport &#125;&#125;&quot;&gt;&#123;&#123; sport &#125;&#125;&lt;/option&gt;</span><br><span class="line">            &#123;% endfor %&#125;</span><br><span class="line">        &lt;/select&gt;</span><br><span class="line">        &lt;button type=&quot;submit&quot;&gt;Register&lt;/button&gt;</span><br><span class="line">    &lt;/form&gt;</span><br><span class="line">&#123;% endblock %&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p>Next, create a file called <code>layout.html</code> by typing
+<code>code templates/layout.html</code> and write code as follows:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line"></span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=1, width=device-width&quot;&gt;</span><br><span class="line">        &lt;title&gt;froshims&lt;/title&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &#123;% block body %&#125;&#123;% endblock %&#125;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p>Fourth, create a file in templates called
+<code>success.html</code> as follows:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;layout.html&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block body %&#125;</span><br><span class="line">    You are registered!</span><br><span class="line">&#123;% endblock %&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p>Finally, create a file in templates called
+<code>failure.html</code> as follows:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;layout.html&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block body %&#125;</span><br><span class="line">    You are not registered!</span><br><span class="line">&#123;% endblock %&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p>You can imagine how we might want to accept the registration of
+many different registrants. We can improve <code>app.py</code> as
+follows:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"># Implements a registration form, storing registrants in a dictionary, with error messages</span><br><span class="line"></span><br><span class="line">from flask import Flask, redirect, render_template, request</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line">REGISTRANTS = &#123;&#125;</span><br><span class="line"></span><br><span class="line">SPORTS = [</span><br><span class="line">    &quot;Basketball&quot;,</span><br><span class="line">    &quot;Soccer&quot;,</span><br><span class="line">    &quot;Ultimate Frisbee&quot;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@app.route(&quot;/&quot;)</span><br><span class="line">def index():</span><br><span class="line">    return render_template(&quot;index.html&quot;, sports=SPORTS)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@app.route(&quot;/register&quot;, methods=[&quot;POST&quot;])</span><br><span class="line">def register():</span><br><span class="line"></span><br><span class="line">    # Validate name</span><br><span class="line">    name = request.form.get(&quot;name&quot;)</span><br><span class="line">    if not name:</span><br><span class="line">        return render_template(&quot;error.html&quot;, message=&quot;Missing name&quot;)</span><br><span class="line"></span><br><span class="line">    # Validate sport</span><br><span class="line">    sport = request.form.get(&quot;sport&quot;)</span><br><span class="line">    if not sport:</span><br><span class="line">        return render_template(&quot;error.html&quot;, message=&quot;Missing sport&quot;)</span><br><span class="line">    if sport not in SPORTS:</span><br><span class="line">        return render_template(&quot;error.html&quot;, message=&quot;Invalid sport&quot;)</span><br><span class="line"></span><br><span class="line">    # Remember registrant</span><br><span class="line">    REGISTRANTS[name] = sport</span><br><span class="line"></span><br><span class="line">    # Confirm registration</span><br><span class="line">    return redirect(&quot;/registrants&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@app.route(&quot;/registrants&quot;)</span><br><span class="line">def registrants():</span><br><span class="line">    return render_template(&quot;registrants.html&quot;, registrants=REGISTRANTS)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>Notice that a dictionary called <code>REGISTRANTS</code> is used to log the <code>sport</code> selected by <code>REGISTRANTS[name]</code>. Also, notice that <code>registrants=REGISTRANTS</code> passes the dictionary on to this template.</p>
-</li>
-<li><p>Further, create a new template called <code>registrants.html</code> as follows:</p>
+<p>Notice that a dictionary called <code>REGISTRANTS</code> is used to
+log the <code>sport</code> selected by <code>REGISTRANTS[name]</code>.
+Also, notice that <code>registrants=REGISTRANTS</code> passes the
+dictionary on to this template.</p></li>
+<li><p>Further, create a new template called
+<code>registrants.html</code> as follows:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;layout.html&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block body %&#125;</span><br><span class="line">    &lt;h1&gt;Registrants&lt;/h1&gt;</span><br><span class="line">    &lt;table&gt;</span><br><span class="line">        &lt;thead&gt;</span><br><span class="line">            &lt;tr&gt;</span><br><span class="line">                &lt;th&gt;Name&lt;/th&gt;</span><br><span class="line">                &lt;th&gt;Sport&lt;/th&gt;</span><br><span class="line">            &lt;/tr&gt;</span><br><span class="line">        &lt;/thead&gt;</span><br><span class="line">        &lt;tbody&gt;</span><br><span class="line">            &#123;% for name in registrants %&#125;</span><br><span class="line">                &lt;tr&gt;</span><br><span class="line">                    &lt;td&gt;&#123;&#123; name &#125;&#125;&lt;/td&gt;</span><br><span class="line">                    &lt;td&gt;&#123;&#123; registrants[name] &#125;&#125;&lt;/td&gt;</span><br><span class="line">                &lt;/tr&gt;</span><br><span class="line">            &#123;% endfor %&#125;</span><br><span class="line">        &lt;/tbody&gt;</span><br><span class="line">    &lt;/table&gt;</span><br><span class="line">&#123;% endblock %&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>Notice that <code>&#123;% for name in registrants %&#125;...&#123;% endfor %&#125;</code> will iterate through each of the registrants. Very powerful to be able to iterate on a dynamic web page!</p>
-</li>
-<li><p>Executing <code>flask run</code> and entering numerous names and sports, you can browse to <code>/registrants</code> to view what data has been logged.</p>
-</li>
-<li><p>You now have a web application! However, there are some security flaws! Because everything is client-side, an adversary could change the HTML and <em>hack</em> a website. Further, this data will not persist if the server is shut down. Could there be some way we could have our data persist even when the server restarts?</p>
-</li>
+<p>Notice that <code>&#123;% for name in registrants %&#125;...&#123;% endfor %&#125;</code> will iterate through
+each of the registrants. Very powerful to be able to iterate on a
+dynamic web page!</p></li>
+<li><p>Executing <code>flask run</code> and entering numerous names and
+sports, you can browse to <code>/registrants</code> to view what data
+has been logged.</p></li>
+<li><p>You now have a web application! However, there are some security
+flaws! Because everything is client-side, an adversary could change the
+HTML and <em>hack</em> a website. Further, this data will not persist if
+the server is shut down. Could there be some way we could have our data
+persist even when the server restarts?</p></li>
 </ul>
-<h2 id="Flask-and-SQL"><a href="#Flask-and-SQL" class="headerlink" title="Flask and SQL"></a><a href="#flask-and-sql">Flask and SQL</a></h2><ul>
-<li><p>Just as we have seen how Python can interface with a SQL database, we can combine the power of Flask, Python, and SQL to create a web application where data will persist!</p>
-</li>
-<li><p>To implement this, you will need to take a number of steps.</p>
-</li>
-<li><p>First, modify <code>requirements.txt</code> as follows:</p>
-</li>
+<h2 id="flask-and-sql"><a href="#flask-and-sql">Flask and SQL</a></h2>
+<ul>
+<li><p>Just as we have seen how Python can interface with a SQL
+database, we can combine the power of Flask, Python, and SQL to create a
+web application where data will persist!</p></li>
+<li><p>To implement this, you will need to take a number of
+steps.</p></li>
+<li><p>First, modify <code>requirements.txt</code> as follows:</p></li>
 <li><p>Modify <code>index.html</code> as follows:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;layout.html&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block body %&#125;</span><br><span class="line">    &lt;h1&gt;Register&lt;/h1&gt;</span><br><span class="line">    &lt;form action=&quot;/register&quot; method=&quot;post&quot;&gt;</span><br><span class="line">        &lt;input autocomplete=&quot;off&quot; autofocus name=&quot;name&quot; placeholder=&quot;Name&quot; type=&quot;text&quot;&gt;</span><br><span class="line">        &#123;% for sport in sports %&#125;</span><br><span class="line">            &lt;input name=&quot;sport&quot; type=&quot;radio&quot; value=&quot;&#123;&#123; sport &#125;&#125;&quot;&gt; &#123;&#123; sport &#125;&#125;</span><br><span class="line">        &#123;% endfor %&#125;</span><br><span class="line">        &lt;button type=&quot;submit&quot;&gt;Register&lt;/button&gt;</span><br><span class="line">    &lt;/form&gt;</span><br><span class="line">&#123;% endblock %&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;layout.html&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block body %&#125;</span><br><span class="line">    &lt;h1&gt;Register&lt;/h1&gt;</span><br><span class="line">    &lt;form action=&quot;/register&quot; method=&quot;post&quot;&gt;</span><br><span class="line">        &lt;input autocomplete=&quot;off&quot; autofocus name=&quot;name&quot; placeholder=&quot;Name&quot; type=&quot;text&quot;&gt;</span><br><span class="line">        &#123;% for sport in sports %&#125;</span><br><span class="line">            &lt;input name=&quot;sport&quot; type=&quot;radio&quot; value=&quot;&#123;&#123; sport &#125;&#125;&quot;&gt; &#123;&#123; sport &#125;&#125;</span><br><span class="line">        &#123;% endfor %&#125;</span><br><span class="line">        &lt;button type=&quot;submit&quot;&gt;Register&lt;/button&gt;</span><br><span class="line">    &lt;/form&gt;</span><br><span class="line">&#123;% endblock %&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
 <li><p>Modify <code>layout.html</code> as follows:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line"></span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=1, width=device-width&quot;&gt;</span><br><span class="line">        &lt;title&gt;froshims&lt;/title&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &#123;% block body %&#125;&#123;% endblock %&#125;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line"></span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=1, width=device-width&quot;&gt;</span><br><span class="line">        &lt;title&gt;froshims&lt;/title&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &#123;% block body %&#125;&#123;% endblock %&#125;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
 <li><p>Ensure <code>failure.html</code> appears as follows:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;layout.html&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block body %&#125;</span><br><span class="line">    You are not registered!</span><br><span class="line">&#123;% endblock %&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;layout.html&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block body %&#125;</span><br><span class="line">    You are not registered!</span><br><span class="line">&#123;% endblock %&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
 <li><p>Modify <code>registrants.html</code> to appear as follows:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;layout.html&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block body %&#125;</span><br><span class="line">    &lt;h1&gt;Registrants&lt;/h1&gt;</span><br><span class="line">    &lt;table&gt;</span><br><span class="line">        &lt;thead&gt;</span><br><span class="line">            &lt;tr&gt;</span><br><span class="line">                &lt;th&gt;Name&lt;/th&gt;</span><br><span class="line">                &lt;th&gt;Sport&lt;/th&gt;</span><br><span class="line">                &lt;th&gt;&lt;/th&gt;</span><br><span class="line">            &lt;/tr&gt;</span><br><span class="line">        &lt;/thead&gt;</span><br><span class="line">        &lt;tbody&gt;</span><br><span class="line">            &#123;% for registrant in registrants %&#125;</span><br><span class="line">                &lt;tr&gt;</span><br><span class="line">                    &lt;td&gt;&#123;&#123; registrant.name &#125;&#125;&lt;/td&gt;</span><br><span class="line">                    &lt;td&gt;&#123;&#123; registrant.sport &#125;&#125;&lt;/td&gt;</span><br><span class="line">                    &lt;td&gt;</span><br><span class="line">                        &lt;form action=&quot;/deregister&quot; method=&quot;post&quot;&gt;</span><br><span class="line">                            &lt;input name=&quot;id&quot; type=&quot;hidden&quot; value=&quot;&#123;&#123; registrant.id &#125;&#125;&quot;&gt;</span><br><span class="line">                            &lt;button type=&quot;submit&quot;&gt;Deregister&lt;/button&gt;</span><br><span class="line">                        &lt;/form&gt;</span><br><span class="line">                    &lt;/td&gt;</span><br><span class="line">                &lt;/tr&gt;</span><br><span class="line">            &#123;% endfor %&#125;</span><br><span class="line">        &lt;/tbody&gt;</span><br><span class="line">    &lt;/table&gt;</span><br><span class="line">&#123;% endblock %&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>Notice that a hidden value <code>registrant.id</code> is included such that it’s possible to use this <code>id</code> later in <code>app.py</code></p>
-</li>
+<p>Notice that a hidden value <code>registrant.id</code> is included
+such that it’s possible to use this <code>id</code> later in
+<code>app.py</code></p></li>
 <li><p>Finally, modify <code>app.py</code> as follows:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"># Implements a registration form, storing registrants in a SQLite database, with support for deregistration</span><br><span class="line"></span><br><span class="line">from cs50 import SQL</span><br><span class="line">from flask import Flask, redirect, render_template, request</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line">db = SQL(&quot;sqlite:///froshims.db&quot;)</span><br><span class="line"></span><br><span class="line">SPORTS = [</span><br><span class="line">    &quot;Basketball&quot;,</span><br><span class="line">    &quot;Soccer&quot;,</span><br><span class="line">    &quot;Ultimate Frisbee&quot;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@app.route(&quot;/&quot;)</span><br><span class="line">def index():</span><br><span class="line">    return render_template(&quot;index.html&quot;, sports=SPORTS)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@app.route(&quot;/deregister&quot;, methods=[&quot;POST&quot;])</span><br><span class="line">def deregister():</span><br><span class="line"></span><br><span class="line">    # Forget registrant</span><br><span class="line">    id = request.form.get(&quot;id&quot;)</span><br><span class="line">    if id:</span><br><span class="line">        db.execute(&quot;DELETE FROM registrants WHERE id = ?&quot;, id)</span><br><span class="line">    return redirect(&quot;/registrants&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@app.route(&quot;/register&quot;, methods=[&quot;POST&quot;])</span><br><span class="line">def register():</span><br><span class="line"></span><br><span class="line">    # Validate submission</span><br><span class="line">    name = request.form.get(&quot;name&quot;)</span><br><span class="line">    sport = request.form.get(&quot;sport&quot;)</span><br><span class="line">    if not name or sport not in SPORTS:</span><br><span class="line">        return render_template(&quot;failure.html&quot;)</span><br><span class="line"></span><br><span class="line">    # Remember registrant</span><br><span class="line">    db.execute(&quot;INSERT INTO registrants (name, sport) VALUES(?, ?)&quot;, name, sport)</span><br><span class="line"></span><br><span class="line">    # Confirm registration</span><br><span class="line">    return redirect(&quot;/registrants&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@app.route(&quot;/registrants&quot;)</span><br><span class="line">def registrants():</span><br><span class="line">    registrants = db.execute(&quot;SELECT * FROM registrants&quot;)</span><br><span class="line">    return render_template(&quot;registrants.html&quot;, registrants=registrants)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>Notice that the <code>cs50</code> library is utilized. A route is included for <code>register</code> for the <code>post</code> method. This route will take the name and sport taken from the registration form and execute a SQL query to add the <code>name</code> and the <code>sport</code> to the <code>registrants</code> table. The <code>deregister</code> routes to a SQL query that will grab the user’s <code>id</code> and utilize that information to deregister this individual.</p>
-</li>
-<li><p>You can read more in the <a target="_blank" rel="noopener" href="https://flask.palletsprojects.com/">Flask documentation</a>.</p>
-</li>
+<p>Notice that the <code>cs50</code> library is utilized. A route is
+included for <code>register</code> for the <code>post</code> method.
+This route will take the name and sport taken from the registration form
+and execute a SQL query to add the <code>name</code> and the
+<code>sport</code> to the <code>registrants</code> table. The
+<code>deregister</code> routes to a SQL query that will grab the user’s
+<code>id</code> and utilize that information to deregister this
+individual.</p></li>
+<li><p>You can read more in the <a
+target="_blank" rel="noopener" href="https://flask.palletsprojects.com/">Flask
+documentation</a>.</p></li>
 </ul>
-<h2 id="Session"><a href="#Session" class="headerlink" title="Session"></a><a href="#session">Session</a></h2><ul>
-<li><p>While the above code is useful from an administrative standpoint, where a back-office administrator could add and remove individuals from the database, one can imagine how this code is not safe to implement on a public server.</p>
-</li>
-<li><p>For one, bad actors could make decisions on behalf of other users by hitting the deregister button – effectively deleting their recorded answer from the server.</p>
-</li>
-<li><p>Web services like Google use login credentials to ensure users only have access to the right data.</p>
-</li>
-<li><p>We can actually implement this itself using <em>cookies</em>. Cookies are small files that are stored on your computer, such that your computer can communicate with the server and effectively say, “I’m an authorized user that has already logged in.”</p>
-</li>
-<li><p>In the simplest form, we can implement this by creating a folder called <code>login</code> and then adding the following files.</p>
-</li>
-<li><p>First, create a file called <code>requirements.txt</code> that reads as follows:</p>
-<p>Notice that in addition to <code>Flask</code>, we also include <code>Flask-Session</code>, which is required to support login sessions.</p>
-</li>
-<li><p>Second, in a <code>templates</code> folder, create a file called <code>layout.html</code> that appears as follows:</p>
+<h2 id="session"><a href="#session">Session</a></h2>
+<ul>
+<li><p>While the above code is useful from an administrative standpoint,
+where a back-office administrator could add and remove individuals from
+the database, one can imagine how this code is not safe to implement on
+a public server.</p></li>
+<li><p>For one, bad actors could make decisions on behalf of other users
+by hitting the deregister button – effectively deleting their recorded
+answer from the server.</p></li>
+<li><p>Web services like Google use login credentials to ensure users
+only have access to the right data.</p></li>
+<li><p>We can actually implement this itself using <em>cookies</em>.
+Cookies are small files that are stored on your computer, such that your
+computer can communicate with the server and effectively say, “I’m an
+authorized user that has already logged in.”</p></li>
+<li><p>In the simplest form, we can implement this by creating a folder
+called <code>login</code> and then adding the following files.</p></li>
+<li><p>First, create a file called <code>requirements.txt</code> that
+reads as follows:</p>
+<p>Notice that in addition to <code>Flask</code>, we also include
+<code>Flask-Session</code>, which is required to support login
+sessions.</p></li>
+<li><p>Second, in a <code>templates</code> folder, create a file called
+<code>layout.html</code> that appears as follows:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line"></span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=1, width=device-width&quot;&gt;</span><br><span class="line">        &lt;title&gt;store&lt;/title&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &#123;% block body %&#125;&#123;% endblock %&#125;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>Notice this provides a very simple layout with a title and a body.</p>
-</li>
-<li><p>Third, create a file in the <code>templates</code> folder called <code>index.html</code> that appears as follows:</p>
+<p>Notice this provides a very simple layout with a title and a
+body.</p></li>
+<li><p>Third, create a file in the <code>templates</code> folder called
+<code>index.html</code> that appears as follows:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;layout.html&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block body %&#125;</span><br><span class="line"></span><br><span class="line">    &#123;% if session[&quot;name&quot;] %&#125;</span><br><span class="line">        You are logged in as &#123;&#123; session[&quot;name&quot;] &#125;&#125;. &lt;a href=&quot;/logout&quot;&gt;Log out&lt;/a&gt;.</span><br><span class="line">    &#123;% else %&#125;</span><br><span class="line">        You are not logged in. &lt;a href=&quot;/login&quot;&gt;Log in&lt;/a&gt;.</span><br><span class="line">    &#123;% endif %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% endblock %&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>Notice that this file looks to see if <code>session[&quot;name&quot;]</code> exists. If it does, it will display a welcome message. If not, it will recommend you browse to a page to log in.</p>
-</li>
-<li><p>Fourth, create a file called <code>login.html</code> and add the following code:</p>
+<p>Notice that this file looks to see if <code>session["name"]</code>
+exists. If it does, it will display a welcome message. If not, it will
+recommend you browse to a page to log in.</p></li>
+<li><p>Fourth, create a file called <code>login.html</code> and add the
+following code:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &quot;layout.html&quot; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block body %&#125;</span><br><span class="line"></span><br><span class="line">    &lt;form action=&quot;/login&quot; method=&quot;post&quot;&gt;</span><br><span class="line">        &lt;input autocomplete=&quot;off&quot; autofocus name=&quot;name&quot; placeholder=&quot;Name&quot; type=&quot;text&quot;&gt;</span><br><span class="line">        &lt;button type=&quot;submit&quot;&gt;Log In&lt;/button&gt;</span><br><span class="line">    &lt;/form&gt;</span><br><span class="line"></span><br><span class="line">&#123;% endblock %&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>Notice this is the layout of a basic login page.</p>
-</li>
-<li><p>Finally, create a file in the <code>login</code> folder called <code>app.py</code> and write code as follows:</p>
+<p>Notice this is the layout of a basic login page.</p></li>
+<li><p>Finally, create a file in the <code>login</code> folder called
+<code>app.py</code> and write code as follows:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">from flask import Flask, redirect, render_template, request, session</span><br><span class="line">from flask_session import Session</span><br><span class="line"></span><br><span class="line"># Configure app</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"># Configure session</span><br><span class="line">app.config[&quot;SESSION_PERMANENT&quot;] = False</span><br><span class="line">app.config[&quot;SESSION_TYPE&quot;] = &quot;filesystem&quot;</span><br><span class="line">Session(app)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@app.route(&quot;/&quot;)</span><br><span class="line">def index():</span><br><span class="line">    if not session.get(&quot;name&quot;):</span><br><span class="line">        return redirect(&quot;/login&quot;)</span><br><span class="line">    return render_template(&quot;index.html&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@app.route(&quot;/login&quot;, methods=[&quot;GET&quot;, &quot;POST&quot;])</span><br><span class="line">def login():</span><br><span class="line">    if request.method == &quot;POST&quot;:</span><br><span class="line">        session[&quot;name&quot;] = request.form.get(&quot;name&quot;)</span><br><span class="line">        return redirect(&quot;/&quot;):</span><br><span class="line">    return render_template(&quot;login.html&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@app.route(&quot;/logout&quot;)</span><br><span class="line">def logout():</span><br><span class="line">    session[&quot;name&quot;] = None</span><br><span class="line">    return redirect(&quot;/&quot;)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>Notice the modified <em>imports</em> at the top of the file, including <code>session</code>, which will allow for you to support sessions. Most important, notice how <code>session[&quot;name&quot;]</code> is used in the <code>login</code> and <code>logout</code> routes. The <code>login</code> route will assign the login name provided and assign it to <code>session[&quot;name&quot;]</code>. However, in the <code>logout</code> route, the logging out is implemented by simply setting <code>session[&quot;name&quot;]</code> to <code>None</code>.</p>
-</li>
-<li><p>You can read more about sessions in the <a target="_blank" rel="noopener" href="https://flask.palletsprojects.com/en/2.2.x/api/?highlight=session#flask.session">Flask documentation</a>.</p>
-</li>
+<p>Notice the modified <em>imports</em> at the top of the file,
+including <code>session</code>, which will allow for you to support
+sessions. Most important, notice how <code>session["name"]</code> is
+used in the <code>login</code> and <code>logout</code> routes. The
+<code>login</code> route will assign the login name provided and assign
+it to <code>session["name"]</code>. However, in the <code>logout</code>
+route, the logging out is implemented by simply setting
+<code>session["name"]</code> to <code>None</code>.</p></li>
+<li><p>You can read more about sessions in the <a
+target="_blank" rel="noopener" href="https://flask.palletsprojects.com/en/2.2.x/api/?highlight=session#flask.session">Flask
+documentation</a>.</p></li>
 </ul>
-<h2 id="Store"><a href="#Store" class="headerlink" title="Store"></a><a href="#store">Store</a></h2><ul>
-<li><p>Moving on to a final example of utilizing Flask’s ability to enable a session.</p>
-</li>
-<li><p>We examined the following code for <code>store</code> in <code>app.py</code>. The following code was shown:</p>
+<h2 id="store"><a href="#store">Store</a></h2>
+<ul>
+<li><p>Moving on to a final example of utilizing Flask’s ability to
+enable a session.</p></li>
+<li><p>We examined the following code for <code>store</code> in
+<code>app.py</code>. The following code was shown:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">from cs50 import SQL</span><br><span class="line">from flask import Flask, redirect, render_template, request, session</span><br><span class="line">from flask_session import Session</span><br><span class="line"></span><br><span class="line"># Configure app</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"># Connect to database</span><br><span class="line">db = SQL(&quot;sqlite:///store.db&quot;)</span><br><span class="line"></span><br><span class="line"># Configure session</span><br><span class="line">app.config[&quot;SESSION_PERMANENT&quot;] = False</span><br><span class="line">app.config[&quot;SESSION_TYPE&quot;] = &quot;filesystem&quot;</span><br><span class="line">Session(app)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@app.route(&quot;/&quot;)</span><br><span class="line">def index():</span><br><span class="line">    books = db.execute(&quot;SELECT * FROM books&quot;)</span><br><span class="line">    return render_template(&quot;books.html&quot;, books=books)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@app.route(&quot;/cart&quot;, methods=[&quot;GET&quot;, &quot;POST&quot;])</span><br><span class="line">def cart():</span><br><span class="line"></span><br><span class="line">    # Ensure cart exists</span><br><span class="line">    if &quot;cart&quot; not in session:</span><br><span class="line">        session[&quot;cart&quot;] = []</span><br><span class="line"></span><br><span class="line">    # POST</span><br><span class="line">    if request.method == &quot;POST&quot;:</span><br><span class="line">        id = request.form.get(&quot;id&quot;)</span><br><span class="line">        if id:</span><br><span class="line">            session[&quot;cart&quot;].append(id)</span><br><span class="line">        return redirect(&quot;/cart&quot;)</span><br><span class="line"></span><br><span class="line">    # GET</span><br><span class="line">    books = db.execute(&quot;SELECT * FROM books WHERE id IN (?)&quot;, session[&quot;cart&quot;])</span><br><span class="line">    return render_template(&quot;cart.html&quot;, books=books)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>Notice that <code>cart</code> is implemented using a list. Items can be added to this list using the <code>Add to Cart</code> buttons in <code>books.html</code>. When clicking such a button, the <code>post</code> method is invoked, where the <code>id</code> of the item is appended to the <code>cart</code>. When viewing the cart, invoking the <code>get</code> method, SQL is executed to display a list of the books in the cart.</p>
-</li>
+<p>Notice that <code>cart</code> is implemented using a list. Items can
+be added to this list using the <code>Add to Cart</code> buttons in
+<code>books.html</code>. When clicking such a button, the
+<code>post</code> method is invoked, where the <code>id</code> of the
+item is appended to the <code>cart</code>. When viewing the cart,
+invoking the <code>get</code> method, SQL is executed to display a list
+of the books in the cart.</p></li>
 </ul>
-<h2 id="API"><a href="#API" class="headerlink" title="API"></a><a href="#api">API</a></h2><ul>
-<li><p>An <em>application program interface</em> or <em>API</em> is a series of specifications that allow you to interface with another service. For example, we could utilize IMDB’s API to interface with their database. We might even integrate APIs for handling specific types of data downloadable from a server.</p>
-</li>
-<li><p>We looked at an example called <code>shows</code>.</p>
-</li>
+<h2 id="api"><a href="#api">API</a></h2>
+<ul>
+<li><p>An <em>application program interface</em> or <em>API</em> is a
+series of specifications that allow you to interface with another
+service. For example, we could utilize IMDB’s API to interface with
+their database. We might even integrate APIs for handling specific types
+of data downloadable from a server.</p></li>
+<li><p>We looked at an example called <code>shows</code>.</p></li>
 <li><p>Looking at <code>app.py</code>, we saw the following:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"># Searches for shows using Ajax</span><br><span class="line"></span><br><span class="line">from cs50 import SQL</span><br><span class="line">from flask import Flask, render_template, request</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line">db = SQL(&quot;sqlite:///shows.db&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@app.route(&quot;/&quot;)</span><br><span class="line">def index():</span><br><span class="line">    return render_template(&quot;index.html&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@app.route(&quot;/search&quot;)</span><br><span class="line">def search():</span><br><span class="line">    q = request.args.get(&quot;q&quot;)</span><br><span class="line">    if q:</span><br><span class="line">        shows = db.execute(&quot;SELECT * FROM shows WHERE title LIKE ? LIMIT 50&quot;, &quot;%&quot; + q + &quot;%&quot;)</span><br><span class="line">    else:</span><br><span class="line">        shows = []</span><br><span class="line">    return render_template(&quot;search.html&quot;, shows=shows)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>Notice that the <code>search</code> route executes a SQL query.</p>
-</li>
-<li><p>Looking at <code>search.html</code>, you’ll notice that it is very simple:</p>
+<p>Notice that the <code>search</code> route executes a SQL
+query.</p></li>
+<li><p>Looking at <code>search.html</code>, you’ll notice that it is
+very simple:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;% for show in shows %&#125;</span><br><span class="line">    &lt;li&gt;&#123;&#123; show[&quot;title&quot;] &#125;&#125;&lt;/li&gt;</span><br><span class="line">&#123;% endfor %&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>Notice that it provides a bulleted list.</p>
-</li>
-<li><p>Finally, looking at <code>index.html</code>, notice that <em>AJAX</em> code is utilized to power the search:</p>
+<p>Notice that it provides a bulleted list.</p></li>
+<li><p>Finally, looking at <code>index.html</code>, notice that
+<em>AJAX</em> code is utilized to power the search:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line"></span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=1, width=device-width&quot;&gt;</span><br><span class="line">        &lt;title&gt;shows&lt;/title&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line"></span><br><span class="line">        &lt;input autocomplete=&quot;off&quot; autofocus placeholder=&quot;Query&quot; type=&quot;search&quot;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;ul&gt;&lt;/ul&gt;</span><br><span class="line"></span><br><span class="line">        &lt;script&gt;</span><br><span class="line"></span><br><span class="line">            let input = document.querySelector(&#x27;input&#x27;);</span><br><span class="line">            input.addEventListener(&#x27;input&#x27;, async function() &#123;</span><br><span class="line">                let response = await fetch(&#x27;/search?q=&#x27; + input.value);</span><br><span class="line">                let shows = await response.text();</span><br><span class="line">                document.querySelector(&#x27;ul&#x27;).innerHTML = shows;</span><br><span class="line">            &#125;);</span><br><span class="line"></span><br><span class="line">        &lt;/script&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>Notice an event listener is utilized to dynamically query the server to provide a list that matches the title provided. This will locate the <code>ul</code> tag in the HTML and modify the web page accordingly to include the list of the matches.</p>
-</li>
-<li><p>You can read more in the <a target="_blank" rel="noopener" href="https://api.jquery.com/category/ajax/">AJAX documentation</a>.</p>
-</li>
+<p>Notice an event listener is utilized to dynamically query the server
+to provide a list that matches the title provided. This will locate the
+<code>ul</code> tag in the HTML and modify the web page accordingly to
+include the list of the matches.</p></li>
+<li><p>You can read more in the <a
+target="_blank" rel="noopener" href="https://api.jquery.com/category/ajax/">AJAX
+documentation</a>.</p></li>
 </ul>
-<h2 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a><a href="#json">JSON</a></h2><ul>
-<li><p><em>JavaScript Object Notation</em> or <em>JSON</em> is text file of dictionaries with keys and values. This is a raw, computer-friendly way to get lots of data.</p>
-</li>
-<li><p>JSON is a very useful way of getting back data from the server.</p>
-</li>
-<li><p>You can see this in action in the <code>index.html</code> we examined together:</p>
+<h2 id="json"><a href="#json">JSON</a></h2>
+<ul>
+<li><p><em>JavaScript Object Notation</em> or <em>JSON</em> is text file
+of dictionaries with keys and values. This is a raw, computer-friendly
+way to get lots of data.</p></li>
+<li><p>JSON is a very useful way of getting back data from the
+server.</p></li>
+<li><p>You can see this in action in the <code>index.html</code> we
+examined together:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line"></span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=1, width=device-width&quot;&gt;</span><br><span class="line">        &lt;title&gt;shows&lt;/title&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line"></span><br><span class="line">        &lt;input autocomplete=&quot;off&quot; autofocus placeholder=&quot;Query&quot; type=&quot;text&quot;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;ul&gt;&lt;/ul&gt;</span><br><span class="line"></span><br><span class="line">        &lt;script&gt;</span><br><span class="line"></span><br><span class="line">            let input = document.querySelector(&#x27;input&#x27;);</span><br><span class="line">            input.addEventListener(&#x27;input&#x27;, async function() &#123;</span><br><span class="line">                let response = await fetch(&#x27;/search?q=&#x27; + input.value);</span><br><span class="line">                let shows = await response.json();</span><br><span class="line">                let html = &#x27;&#x27;;</span><br><span class="line">                for (let id in shows) &#123;</span><br><span class="line">                    let title = shows[id].title.replace(&#x27;&lt;&#x27;, &#x27;&lt;&#x27;).replace(&#x27;&amp;&#x27;, &#x27;&amp;&#x27;);</span><br><span class="line">                    html += &#x27;&lt;li&gt;&#x27; + title + &#x27;&lt;/li&gt;&#x27;;</span><br><span class="line">                &#125;</span><br><span class="line">                document.querySelector(&#x27;ul&#x27;).innerHTML = html;</span><br><span class="line">            &#125;);</span><br><span class="line"></span><br><span class="line">        &lt;/script&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>While the above may be somewhat cryptic, it provides a starting point for you to research JSON on your own to see how it can be implemented in your own web applications.</p>
-</li>
-<li><p>You can read more in the <a target="_blank" rel="noopener" href="https://www.json.org/json-en.html">JSON documentation</a>.</p>
-</li>
+<p>While the above may be somewhat cryptic, it provides a starting point
+for you to research JSON on your own to see how it can be implemented in
+your own web applications.</p></li>
+<li><p>You can read more in the <a
+target="_blank" rel="noopener" href="https://www.json.org/json-en.html">JSON
+documentation</a>.</p></li>
 </ul>
-<h2 id="Summing-Up"><a href="#Summing-Up" class="headerlink" title="Summing Up"></a><a href="#summing-up">Summing Up</a></h2><p>In this lesson, you learned how to utilize Python, SQL, and Flask to create web applications. Specifically, we discussed…</p>
+<h2 id="summing-up"><a href="#summing-up">Summing Up</a></h2>
+<p>In this lesson, you learned how to utilize Python, SQL, and Flask to
+create web applications. Specifically, we discussed…</p>
 <ul>
 <li>GET</li>
 <li>POST</li>
@@ -538,8 +617,8 @@ Notice that the <code>&#123;% block body %&#125;&#123;% endblock %&#125;</code> 
       <i class="fa fa-chevron-left"></i> 区间染色问题
     </a></div>
       <div class="post-nav-item">
-    <a href="/2023/07/02/lecture8/" rel="next" title="lecture8">
-      lecture8 <i class="fa fa-chevron-right"></i>
+    <a href="/2023/07/02/lecture6/" rel="next" title="lecture6">
+      lecture6 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -599,7 +678,8 @@ Notice that the <code>&#123;% block body %&#125;&#123;% endblock %&#125;</code> 
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#lecture9"><span class="nav-number">1.</span> <span class="nav-text">lecture9</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Welcome"><span class="nav-number">1.1.</span> <span class="nav-text">Welcome!</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Static-to-Dynamic"><span class="nav-number">1.2.</span> <span class="nav-text">Static to Dynamic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Flask"><span class="nav-number">1.3.</span> <span class="nav-text">Flask</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Layout"><span class="nav-number">1.4.</span> <span class="nav-text">Layout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#POST"><span class="nav-number">1.5.</span> <span class="nav-text">POST</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Frosh-IMs"><span class="nav-number">1.6.</span> <span class="nav-text">Frosh IMs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Flask-and-SQL"><span class="nav-number">1.7.</span> <span class="nav-text">Flask and SQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Session"><span class="nav-number">1.8.</span> <span class="nav-text">Session</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Store"><span class="nav-number">1.9.</span> <span class="nav-text">Store</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#API"><span class="nav-number">1.10.</span> <span class="nav-text">API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSON"><span class="nav-number">1.11.</span> <span class="nav-text">JSON</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summing-Up"><span class="nav-number">1.12.</span> <span class="nav-text">Summing Up</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#lecture9"><span class="nav-number">1.</span> <span class="nav-text">lecture9</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#welcome"><span class="nav-number">1.1.</span> <span class="nav-text">Welcome!</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#static-to-dynamic"><span class="nav-number">1.2.</span> <span class="nav-text">Static to
+Dynamic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flask"><span class="nav-number">1.3.</span> <span class="nav-text">Flask</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#layout"><span class="nav-number">1.4.</span> <span class="nav-text">Layout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#post"><span class="nav-number">1.5.</span> <span class="nav-text">POST</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#frosh-ims"><span class="nav-number">1.6.</span> <span class="nav-text">Frosh IMs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flask-and-sql"><span class="nav-number">1.7.</span> <span class="nav-text">Flask and SQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#session"><span class="nav-number">1.8.</span> <span class="nav-text">Session</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#store"><span class="nav-number">1.9.</span> <span class="nav-text">Store</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#api"><span class="nav-number">1.10.</span> <span class="nav-text">API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#json"><span class="nav-number">1.11.</span> <span class="nav-text">JSON</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#summing-up"><span class="nav-number">1.12.</span> <span class="nav-text">Summing Up</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -661,16 +741,6 @@ Notice that the <code>&#123;% block body %&#125;&#123;% endblock %&#125;</code> 
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">XuandYu000</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-chart-area"></i>
-    </span>
-    <span title="站点总字数">336k</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-coffee"></i>
-    </span>
-    <span title="站点阅读时长">5:05</span>
 </div>
 
 <!--

@@ -226,21 +226,7 @@
                 </span>
             </span>
 
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>3.6k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
+          
 
         </div>
       </header>
@@ -251,32 +237,81 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Streams"><a href="#Streams" class="headerlink" title="Streams"></a>Streams</h1><h3 id="Sequence-Operations"><a href="#Sequence-Operations" class="headerlink" title="Sequence Operations"></a>Sequence Operations</h3><p>Map, filter, and reduce express sequence manipulation using compact expressions</p>
-<p>Example: Sum all primes in an interval from a(inclusive) to b(exclusive)</p>
+          <h1 id="streams">Streams</h1>
+<h3 id="sequence-operations">Sequence Operations</h3>
+<p>Map, filter, and reduce express sequence manipulation using compact
+expressions</p>
+<p>Example: Sum all primes in an interval from a(inclusive) to
+b(exclusive)</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">sum_primes</span>(<span class="params">a, b</span>):</span><br><span class="line">	total = <span class="number">0</span></span><br><span class="line">	x = a</span><br><span class="line">	<span class="keyword">while</span> x &lt; b:</span><br><span class="line">		<span class="keyword">if</span> is_prime(x):</span><br><span class="line">			total += x</span><br><span class="line">		x+=<span class="number">1</span></span><br><span class="line">	<span class="keyword">return</span> total</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">sum_primes</span>(<span class="params">a, b</span>):</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">sum</span>(<span class="built_in">filter</span>(is_prime, <span class="built_in">range</span>(a,b)))</span><br></pre></td></tr></table></figure>
-
-<img src="https://raw.githubusercontent.com/XuandYu000/picture/main/20230813172937.png"/>
-
-<p>Streams allow scheme to process sequences while using an efficient amount of space just like a Python iterator.<br>But unlike iterators which are mutable values, Steams are immutable.<br><img src="https://raw.githubusercontent.com/XuandYu000/picture/main/20230813174023.png"/></p>
-<p>stream can be infinite.<br>I can define a new procedure that takes a stream and returns another stream just by inspecting and manipulating some elements from the front of the input stream and then using con stream to build something new.<br><img src="https://raw.githubusercontent.com/XuandYu000/picture/main/20230813174923.png"/></p>
-<p>A stream is an example of a lazy sequence. Specifically, it is a lazily evaluated Scheme list. In other words, the stream’s elements (except for the first element) are only evaluated when the values are needed. In addition, streams are <em>memoized</em>: the elements that have already been computed are saved!<br>流是惰性序列的一个示例。具体来说，它是一个延迟计算的Scheme列表。换句话说，流的元素（第一个元素除外）仅在需要值时才计算。此外，流会被记忆：已经计算过的元素会被保存！</p>
-<p>Because a stream is simply a lazy list, the rest of a stream is also a stream (just like the rest of a list is also a list). In addition, <code>nil</code> can also serve as an empty stream. To check if a stream is empty, we can use the built-in procedure <code>null?</code>.<br>因为流只是一个惰性列表，所以流的其余部分也是一个流（就像列表的其余部分也是一个列表一样）。另外 <code>nil</code> 也可以作为空流。要检查流是否为空，我们可以使用内置过程 <code>null?</code> 。</p>
-<p>The procedures involved for working with streams are as follows:<br>使用流所涉及的过程如下：</p>
+<p><img src="https://raw.githubusercontent.com/XuandYu000/picture/main/20230813172937.png"/></p>
+<p>Streams allow scheme to process sequences while using an efficient
+amount of space just like a Python iterator. But unlike iterators which
+are mutable values, Steams are immutable.
+<img src="https://raw.githubusercontent.com/XuandYu000/picture/main/20230813174023.png"/></p>
+<p>stream can be infinite. I can define a new procedure that takes a
+stream and returns another stream just by inspecting and manipulating
+some elements from the front of the input stream and then using con
+stream to build something new.
+<img src="https://raw.githubusercontent.com/XuandYu000/picture/main/20230813174923.png"/></p>
+<p>A stream is an example of a lazy sequence. Specifically, it is a
+lazily evaluated Scheme list. In other words, the stream's elements
+(except for the first element) are only evaluated when the values are
+needed. In addition, streams are <em>memoized</em>: the elements that
+have already been computed are saved!<br />
+流是惰性序列的一个示例。具体来说，它是一个延迟计算的Scheme列表。换句话说，流的元素（第一个元素除外）仅在需要值时才计算。此外，流会被记忆：已经计算过的元素会被保存！</p>
+<p>Because a stream is simply a lazy list, the rest of a stream is also
+a stream (just like the rest of a list is also a list). In
+addition, <code>nil</code> can also serve as an empty stream. To check
+if a stream is empty, we can use the built-in
+procedure <code>null?</code>.<br />
+因为流只是一个惰性列表，所以流的其余部分也是一个流（就像列表的其余部分也是一个列表一样）。另外 <code>nil</code> 也可以作为空流。要检查流是否为空，我们可以使用内置过程 <code>null?</code> 。</p>
+<p>The procedures involved for working with streams are as
+follows:<br />
+使用流所涉及的过程如下：</p>
 <ul>
-<li><code>(cons-stream first rest)</code>: A special form that constructs a stream by evaluating the first operand <code>first</code> and storing its value as the first element in the stream, and storing the second operand <code>rest</code>, unevaluated, to be evaluated later.<br>  <code>(cons-stream first rest)</code> ：一种特殊形式，通过计算第一个操作数 <code>first</code> 并将其值存储为流中的第一个元素，并存储第二个操作数 <code>rest</code> （未计算，以便稍后计算）来构造流。</li>
-<li><code>(car s)</code>: A procedure that works on streams the same way it does on lists. It returns the first element of the stream, which had already been computed on construction of the stream.<br>  <code>(car s)</code> ：处理流的过程与处理列表的方式相同。它返回流的第一个元素，该元素已经在流的构造中计算出来。</li>
-<li><code>(cdr-stream s)</code>: A procedure that returns the rest of the stream by evaluating the <code>rest</code> expression that was stored on construction of the stream. It then stores the value of this expression so that on subsequent calls to <code>cdr-stream</code> on this stream, <code>rest</code> no longer has to be evaluated.<br>  <code>(cdr-stream s)</code> ：通过评估在构建流时存储的 <code>rest</code> 表达式来返回流的其余部分的过程。然后，它存储该表达式的值，以便后续调用该流上的 <code>cdr-stream</code> 时，不再需要计算 <code>rest</code> 。</li>
+<li><code>(cons-stream first rest)</code>: A special form that
+constructs a stream by evaluating the first
+operand <code>first</code> and storing its value as the first element in
+the stream, and storing the second operand <code>rest</code>,
+unevaluated, to be evaluated later.<br />
+<code>(cons-stream first rest)</code> ：一种特殊形式，通过计算第一个操作数 <code>first</code> 并将其值存储为流中的第一个元素，并存储第二个操作数 <code>rest</code> （未计算，以便稍后计算）来构造流。</li>
+<li><code>(car s)</code>: A procedure that works on streams the same way
+it does on lists. It returns the first element of the stream, which had
+already been computed on construction of the stream.<br />
+<code>(car s)</code> ：处理流的过程与处理列表的方式相同。它返回流的第一个元素，该元素已经在流的构造中计算出来。</li>
+<li><code>(cdr-stream s)</code>: A procedure that returns the rest of
+the stream by evaluating the <code>rest</code> expression that was
+stored on construction of the stream. It then stores the value of this
+expression so that on subsequent calls to <code>cdr-stream</code> on
+this stream, <code>rest</code> no longer has to be evaluated.<br />
+<code>(cdr-stream s)</code> ：通过评估在构建流时存储的 <code>rest</code> 表达式来返回流的其余部分的过程。然后，它存储该表达式的值，以便后续调用该流上的 <code>cdr-stream</code> 时，不再需要计算 <code>rest</code> 。</li>
 </ul>
-<p>Now we are ready to look at a simple example. This stream is an infinite stream where each element is 1.<br>现在我们准备看一个简单的例子。该流是一个无限流，其中每个元素都是 1。</p>
-<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">scm&gt; (<span class="name"><span class="built_in">define</span></span> ones (<span class="name">cons-stream</span> <span class="number">1</span> ones))</span><br><span class="line">ones</span><br><span class="line">scm&gt; (<span class="name"><span class="built_in">car</span></span> ones)</span><br><span class="line"><span class="number">1</span></span><br><span class="line">scm&gt; (<span class="name">cdr-stream</span> ones)</span><br><span class="line">(<span class="name">1</span> . #[<span class="name">promise</span> (<span class="name">forced</span>)])</span><br></pre></td></tr></table></figure>
-
-<p>The reason we are able to recursively reference this object without causing an error is because the second operand to <code>cons-stream</code> is not evaluated. Instead, it is stored until <code>cdr-stream</code> is called, at which point the expression will be evaluated and the resulting value will be stored.<br>我们能够递归引用该对象而不导致错误的原因是因为 <code>cons-stream</code> 的第二个操作数没有被求值。相反，它会被存储直到调用 <code>cdr-stream</code> ，此时将计算表达式并存储结果值。</p>
-<p>Next, here’s one way to build a stream of the natural numbers starting at <code>n</code>.<br>接下来，这是构建从 <code>n</code> 开始的自然数流的一种方法。</p>
-<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">scm&gt; (<span class="name"><span class="built_in">define</span></span> (<span class="name">naturals</span> (<span class="name">n</span>)) </span><br><span class="line">	   (<span class="name">cons-stream</span> n (<span class="name">naturals</span> (<span class="name"><span class="built_in">+</span></span> n <span class="number">1</span>)))) </span><br><span class="line">naturals </span><br><span class="line">scm&gt; (<span class="name"><span class="built_in">define</span></span> nat (<span class="name">naturals</span> <span class="number">0</span>)) </span><br><span class="line">nat </span><br><span class="line">scm&gt; (<span class="name"><span class="built_in">car</span></span> nat) </span><br><span class="line"><span class="number">0</span> </span><br><span class="line">scm&gt; (<span class="name"><span class="built_in">car</span></span> (<span class="name">cdr-stream</span> nat)) </span><br><span class="line"><span class="number">1</span> </span><br><span class="line">scm&gt; (<span class="name"><span class="built_in">car</span></span> (<span class="name">cdr-stream</span> (<span class="name">cdr-stream</span> nat))) </span><br><span class="line"><span class="number">2</span></span><br></pre></td></tr></table></figure>
-
-<p>Here, the expression that is stored is a recursive call to <code>naturals</code>. When we evaluate this call, we get another stream whose first element is one greater than the previous number in the sequence. The second element of this stream is uncomputed until <code>cdr-stream</code> is called on it, which will activate yet another call to <code>naturals</code>. Hence, we effectively get an infinite stream of integers, where each integer is computed one at a time. This is almost like infinite recursion, but one which can be viewed one step at a time, so it does not crash.<br>这里，存储的表达式是对 <code>naturals</code> 的递归调用。当我们评估这个调用时，我们得到另一个流，其第一个元素比序列中的前一个数字大一个。该流的第二个元素在调用 <code>cdr-stream</code> 之前不会被计算，这将激活对 <code>naturals</code> 的另一个调用。因此，我们有效地获得了无限的整数流，其中每个整数一次计算一个。这几乎就像无限递归，但可以一次查看一步，因此不会崩溃。</p>
+<p>Now we are ready to look at a simple example. This stream is an
+infinite stream where each element is 1.<br />
+现在我们准备看一个简单的例子。该流是一个无限流，其中每个元素都是 1。
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">scm&gt; (<span class="name"><span class="built_in">define</span></span> ones (<span class="name">cons-stream</span> <span class="number">1</span> ones))</span><br><span class="line">ones</span><br><span class="line">scm&gt; (<span class="name"><span class="built_in">car</span></span> ones)</span><br><span class="line"><span class="number">1</span></span><br><span class="line">scm&gt; (<span class="name">cdr-stream</span> ones)</span><br><span class="line">(<span class="name">1</span> . #[<span class="name">promise</span> (<span class="name">forced</span>)])</span><br></pre></td></tr></table></figure></p>
+<p>The reason we are able to recursively reference this object without
+causing an error is because the second operand
+to <code>cons-stream</code> is not evaluated. Instead, it is stored
+until <code>cdr-stream</code> is called, at which point the expression
+will be evaluated and the resulting value will be stored.<br />
+我们能够递归引用该对象而不导致错误的原因是因为 <code>cons-stream</code> 的第二个操作数没有被求值。相反，它会被存储直到调用 <code>cdr-stream</code> ，此时将计算表达式并存储结果值。</p>
+<p>Next, here's one way to build a stream of the natural numbers
+starting at <code>n</code>.<br />
+接下来，这是构建从 <code>n</code> 开始的自然数流的一种方法。
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">scm&gt; (<span class="name"><span class="built_in">define</span></span> (<span class="name">naturals</span> (<span class="name">n</span>)) </span><br><span class="line">	   (<span class="name">cons-stream</span> n (<span class="name">naturals</span> (<span class="name"><span class="built_in">+</span></span> n <span class="number">1</span>)))) </span><br><span class="line">naturals </span><br><span class="line">scm&gt; (<span class="name"><span class="built_in">define</span></span> nat (<span class="name">naturals</span> <span class="number">0</span>)) </span><br><span class="line">nat </span><br><span class="line">scm&gt; (<span class="name"><span class="built_in">car</span></span> nat) </span><br><span class="line"><span class="number">0</span> </span><br><span class="line">scm&gt; (<span class="name"><span class="built_in">car</span></span> (<span class="name">cdr-stream</span> nat)) </span><br><span class="line"><span class="number">1</span> </span><br><span class="line">scm&gt; (<span class="name"><span class="built_in">car</span></span> (<span class="name">cdr-stream</span> (<span class="name">cdr-stream</span> nat))) </span><br><span class="line"><span class="number">2</span></span><br></pre></td></tr></table></figure></p>
+<p>Here, the expression that is stored is a recursive call
+to <code>naturals</code>. When we evaluate this call, we get another
+stream whose first element is one greater than the previous number in
+the sequence. The second element of this stream is uncomputed
+until <code>cdr-stream</code> is called on it, which will activate yet
+another call to <code>naturals</code>. Hence, we effectively get an
+infinite stream of integers, where each integer is computed one at a
+time. This is almost like infinite recursion, but one which can be
+viewed one step at a time, so it does not crash.<br />
+这里，存储的表达式是对 <code>naturals</code> 的递归调用。当我们评估这个调用时，我们得到另一个流，其第一个元素比序列中的前一个数字大一个。该流的第二个元素在调用 <code>cdr-stream</code> 之前不会被计算，这将激活对 <code>naturals</code> 的另一个调用。因此，我们有效地获得了无限的整数流，其中每个整数一次计算一个。这几乎就像无限递归，但可以一次查看一步，因此不会崩溃。</p>
 
       
     </div>
@@ -339,21 +374,7 @@
                 </span>
             </span>
 
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>7.7k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>7 分钟</span>
-            </span>
+          
 
         </div>
       </header>
@@ -364,7 +385,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="cf1845"><a href="#cf1845" class="headerlink" title="cf1845"></a>cf1845</h1><h4 id="A-Forbidden-Integer"><a href="#A-Forbidden-Integer" class="headerlink" title="A. Forbidden Integer"></a>A. Forbidden Integer</h4><p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1845/problem/A">题目链接</a><br>题目大意：<br>给定数字n,k,x,求是否能在1~k中在不选x的条件下取若干个数字使其之和为n<br>思路<br>如果有<code>x!=1</code>则必然可以，若<code>x=1</code>,可以将其分为偶数和奇数，偶数有若干个2组成，奇数可以减若干个2使其到达k以内，看k是否该奇数即可包含即可</p>
+          <h1 id="cf1845">cf1845</h1>
+<h4 id="a.-forbidden-integer">A. Forbidden Integer</h4>
+<p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1845/problem/A">题目链接</a>
+题目大意：
+给定数字n,k,x,求是否能在1~k中在不选x的条件下取若干个数字使其之和为n 思路
+如果有<code>x!=1</code>则必然可以，若<code>x=1</code>,可以将其分为偶数和奇数，偶数有若干个2组成，奇数可以减若干个2使其到达k以内，看k是否该奇数即可包含即可</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/07/06/cf1845/#more" rel="contents">
@@ -438,21 +464,7 @@
                 </span>
             </span>
 
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>5k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>5 分钟</span>
-            </span>
+          
 
         </div>
       </header>
@@ -463,83 +475,112 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Control"><a href="#Control" class="headerlink" title="Control"></a>Control</h1><h3 id="Print-and-None"><a href="#Print-and-None" class="headerlink" title="Print and None"></a>Print and None</h3><p>区分python中两种类型的函数</p>
-<ul>
-<li><p>纯函数(pure functions): 函数中有一些输入(参数)并返回一些输出(调用返回结果)</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">abs</span>(-<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
-<p>可将内置函数<code>abs</code>描述为接受输入并产生输出的小型机器</p>
+          <h1 id="control">Control</h1>
+<h3 id="print-and-none">Print and None</h3>
+<p>区分python中两种类型的函数 - 纯函数(pure functions):
+函数中有一些输入(参数)并返回一些输出(调用返回结果) <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">abs</span>(-<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+可将内置函数<code>abs</code>描述为接受输入并产生输出的小型机器
 <img src="https://raw.githubusercontent.com/XuandYu000/picture/main/20230628122028.png"/>
-`abs`在调用时除了返回值外不会造成其他任何影响，而且使用相同参数调用时总会返回相同的值
-</li>
-<li><p>非纯函数(Non-pure functions): 除了返回值外，调用一个非纯函数还会产生其他改变解释器和计算机状态的副作用(side effect)。一个常见的副作用就是使用<code>print</code>函数产生(非返回值的)额外输出</p>
+<code>abs</code>在调用时除了返回值外不会造成其他任何影响，而且使用相同参数调用时总会返回相同的值</p>
+<ul>
+<li>非纯函数(Non-pure functions):
+除了返回值外，调用一个非纯函数还会产生其他改变解释器和计算机状态的副作用(side
+effect)。一个常见的副作用就是使用<code>print</code>函数产生(非返回值的)额外输出
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
 <img src="https://raw.githubusercontent.com/XuandYu000/picture/main/20230628124703.png"/>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">虽然print和abs在上述例子中相似，但是工作方式不同，print返回值始终为None，不代表任何内容的特殊python值。交互式python解释器不会自动打印。</span><br></pre></td></tr></table></figure></li>
 </ul>
-<p>以下这个例子显示<code>print</code>的嵌套表达式展示非纯函数的特征</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">print</span>(<span class="number">1</span>),<span class="built_in">print</span>(<span class="number">2</span>))</span><br></pre></td></tr></table></figure>
-
+<p>以下这个例子显示<code>print</code>的嵌套表达式展示非纯函数的特征
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">print</span>(<span class="number">1</span>),<span class="built_in">print</span>(<span class="number">2</span>))</span><br></pre></td></tr></table></figure></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">小心使用print！他返回的None意味着其不应该用于赋值语句</span><br></pre></td></tr></table></figure>
-
-
 <p>纯函数不能有副作用，或是随着时间推移的改变的限制，但是对其施加这些限制会产生巨大的好处。首先，纯函数可以更可靠地组成复合调用表达式。在上面的示例中可以看到在操作数表达式中使用非纯函数 <code>print</code> 并不能返回有用的结果，但另一方面，我们已经看到 <code>max, pow, sqrt</code> 等函数可以在嵌套表达式中有效使用。</p>
 <p>第二，纯函数往往更易于测试。相同的参数列表会返回相同的值，我们可以将其与预期的返回值进行比较。本章后面将更详细地讨论测试。</p>
 <p>第三，第四章将说明纯函数对于编写可以同时计算多个调用表达式的并发程序来说是必不可少的。</p>
 <p>此外，第二章会研究一系列非纯函数并描述它们的用途。</p>
 <p>所以我们将在本章的剩余部分重点介绍纯函数的创建和使用，<code>print</code> 函数仅用于查看计算的中间结果。</p>
-<h3 id="Miscellaneous-Python-Features"><a href="#Miscellaneous-Python-Features" class="headerlink" title="Miscellaneous Python Features"></a>Miscellaneous Python Features</h3><h4 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h4><p>函数定义通常包括描述函数的文档，称为 “文档字符串 docstring”，它必须在函数体中缩进。文档字符串通常使用三个引号，第一行描述函数的任务，随后的几行可以描述参数并解释函数的意图：</p>
+<h3 id="miscellaneous-python-features">Miscellaneous Python
+Features</h3>
+<h4 id="文档">文档</h4>
+<p>函数定义通常包括描述函数的文档，称为 “文档字符串
+docstring”，它必须在函数体中缩进。文档字符串通常使用三个引号，第一行描述函数的任务，随后的几行可以描述参数并解释函数的意图：
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">pressure</span>(<span class="params">v, t, n</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;计算理想气体的压力，单位为帕斯卡</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        使用理想气体定律：http://en.wikipedia.org/wiki/Ideal_gas_law</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        v -- 气体体积，单位为立方米</span></span><br><span class="line"><span class="string">        t -- 绝对温度，单位为开尔文</span></span><br><span class="line"><span class="string">        n -- 气体粒子</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        k = <span class="number">1.38e-23</span>  <span class="comment"># 玻尔兹曼常数</span></span><br><span class="line">        <span class="keyword">return</span> n * k * t / v</span><br></pre></td></tr></table></figure>
-<p>当你使用函数名称作为参数调用 <code>help</code> 时，你会看到它的文档字符串（键入 q 以退出 Python help）。</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">help</span>(pressure)</span><br></pre></td></tr></table></figure>
-<p>注释：Python 中的注释可以附加到 <code>#</code> 号后的行尾。例如，上面代码中的注释 <code>玻尔兹曼常数</code> 描述了 <code>k</code> 变量的含义。这些注释不会出现在 Python 的 <code>help</code> 中，而且会被解释器忽略，它们只为人类而存在。</p>
-<h4 id="参数默认值"><a href="#参数默认值" class="headerlink" title="参数默认值"></a>参数默认值</h4><p>定义通用函数的结果是引入了额外的参数。具有许多参数的函数可能调用起来很麻烦并且难以阅读。</p>
-<p>在 Python 中，我们可以为函数的参数提供默认值。当调用该函数时，具有默认值的参数是可选的。如果未提供，则将默认值绑定到形参上。例如，如果程序通常用于计算 “一摩尔” 粒子的压力，则可以提供此值作为默认值：</p>
+当你使用函数名称作为参数调用 <code>help</code> 时，你会看到它的文档字符串（键入
+q 以退出 Python help）。 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">help</span>(pressure)</span><br></pre></td></tr></table></figure> 注释：Python
+中的注释可以附加到 <code>#</code> 号后的行尾。例如，上面代码中的注释 <code>玻尔兹曼常数</code> 描述了 <code>k</code> 变量的含义。这些注释不会出现在
+Python
+的 <code>help</code> 中，而且会被解释器忽略，它们只为人类而存在。</p>
+<h4 id="参数默认值">参数默认值</h4>
+<p>定义通用函数的结果是引入了额外的参数。具有许多参数的函数可能调用起来很麻烦并且难以阅读。</p>
+<p>在 Python
+中，我们可以为函数的参数提供默认值。当调用该函数时，具有默认值的参数是可选的。如果未提供，则将默认值绑定到形参上。例如，如果程序通常用于计算
+“一摩尔” 粒子的压力，则可以提供此值作为默认值：</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">pressure</span>(<span class="params">v, t, n=<span class="number">6.022e23</span></span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;计算理想气体的压力，单位为帕斯卡</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        使用理想气体定律：http://en.wikipedia.org/wiki/Ideal_gas_law</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        v -- 气体体积，单位为立方米</span></span><br><span class="line"><span class="string">        t -- 绝对温度，单位为开尔文</span></span><br><span class="line"><span class="string">        n -- 气体粒子，默认为一摩尔</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        k = <span class="number">1.38e-23</span>  <span class="comment"># 玻尔兹曼常数</span></span><br><span class="line">        <span class="keyword">return</span> n * k * t / v</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">=在这里有两种含义，def中不表示赋值，而是指示函数调用时的默认值。</span><br><span class="line">函数体中k的赋值语句将名称k与玻尔兹曼常数的近似值进行了绑定。</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="Designing-Functions"><a href="#Designing-Functions" class="headerlink" title="Designing Functions"></a>Designing Functions</h4><p>函数是所有程序（无论大小）的基本组成部分，并且是我们使用编程语言来表达计算过程的主要媒介。之前我们已经讨论过了函数的形式及其调用方式，而本节我们将讨论 “什么是一个好函数”。从根本上说，好函数共有的品质就是：它们都强化了“函数就是抽象” 的理念。</p>
+<h4 id="designing-functions">Designing Functions</h4>
+<p>函数是所有程序（无论大小）的基本组成部分，并且是我们使用编程语言来表达计算过程的主要媒介。之前我们已经讨论过了函数的形式及其调用方式，而本节我们将讨论
+“什么是一个好函数”。从根本上说，好函数共有的品质就是：它们都强化了“函数就是抽象”
+的理念。</p>
 <ul>
 <li>每个函数应该只负责一个任务，且该任务要用一个简短的名称来识别，并在一行文本中进行描述。按顺序执行多个任务的函数应该分为多个函数。</li>
-<li>不要重复自己（Don’t repeat yourself）是软件工程的核心原则。这个所谓的 DRY 原则指出，多个代码片段不应该描述重复的逻辑。相反，逻辑应该只实现一次，为其指定一个名称后多次使用。如果你发现自己正在复制粘贴一段代码，那么你可能已经找到了进行函数抽象的机会。</li>
-<li>定义通用的函数。比如作为 <code>pow</code> 函数的一个特例的平方函数就不在 Python 库中，因为 <code>pow</code> 函数可以将数字计算为任意次方。</li>
+<li>不要重复自己（Don't repeat
+yourself）是软件工程的核心原则。这个所谓的 DRY
+原则指出，多个代码片段不应该描述重复的逻辑。相反，逻辑应该只实现一次，为其指定一个名称后多次使用。如果你发现自己正在复制粘贴一段代码，那么你可能已经找到了进行函数抽象的机会。</li>
+<li>定义通用的函数。比如作为 <code>pow</code> 函数的一个特例的平方函数就不在
+Python 库中，因为 <code>pow</code> 函数可以将数字计算为任意次方。</li>
 </ul>
-<p>这些准则提高了代码的可读性，减少了错误的数量，并且通常最大限度地减少了编写的代码总量。将复杂的任务分解为简洁的功能是一项需要经验才能掌握的技能。幸运的是，Python 提供了多种特性来支持你的工作。</p>
+<p>这些准则提高了代码的可读性，减少了错误的数量，并且通常最大限度地减少了编写的代码总量。将复杂的任务分解为简洁的功能是一项需要经验才能掌握的技能。幸运的是，Python
+提供了多种特性来支持你的工作。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">注意hw01中有一道题涉及函数与if语句的区别，我觉得那个非常好，最后实现方法是利用if语句只判断一下二选一，但是函数需要评估所有的参数。例如以下：cond()是False，在if_statement中先判断False，然后执行if_else中的一个，但是在if_function中我们把True条件改变就可以轻而易举的做到cond()的选择效果不起作用</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">if_function</span>(<span class="params">condition, true_result, false_result</span>):</span><br><span class="line"></span><br><span class="line">    <span class="string">&quot;&quot;&quot;Return true_result if condition is a true value, and</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    false_result otherwise.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; if_function(True, 2, 3)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    2</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; if_function(False, 2, 3)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    3</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; if_function(3==2, &#x27;equal&#x27;, &#x27;not equal&#x27;)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &#x27;not equal&#x27;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; if_function(3&gt;2, &#x27;bigger&#x27;, &#x27;smaller&#x27;)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &#x27;bigger&#x27;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> condition:</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> true_result</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> false_result</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">with_if_statement</span>():</span><br><span class="line"></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; result = with_if_statement()</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    61A</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; print(result)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    None</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> cond():</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> true_func()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> false_func()</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">with_if_function</span>():</span><br><span class="line"></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; result = with_if_function()</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Welcome to</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    61A</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; print(result)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    None</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> if_function(cond(), true_func(), false_func())</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">cond</span>():</span><br><span class="line"></span><br><span class="line">    <span class="string">&quot;*** YOUR CODE HERE ***&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">global</span> x</span><br><span class="line"></span><br><span class="line">    x=<span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> x==<span class="number">1</span>:</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">true_func</span>():</span><br><span class="line"></span><br><span class="line">    <span class="string">&quot;*** YOUR CODE HERE ***&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">global</span> x</span><br><span class="line"></span><br><span class="line">    x=<span class="number">2</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> x==<span class="number">2</span>:</span><br><span class="line"></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Welcome to&quot;</span>)</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">false_func</span>():</span><br><span class="line"></span><br><span class="line">    <span class="string">&quot;*** YOUR CODE HERE ***&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">global</span> x</span><br><span class="line"></span><br><span class="line">    x=<span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> x==<span class="number">1</span>:</span><br><span class="line"></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;61A&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="Discussion-1-CS-61A-Spring-2021"><a href="#Discussion-1-CS-61A-Spring-2021" class="headerlink" title="Discussion 1 | CS 61A Spring 2021"></a>Discussion 1 | CS 61A Spring 2021</h3><h2 id="Conditional-statements"><a href="#Conditional-statements" class="headerlink" title="Conditional statements"></a>Conditional statements</h2><p><strong>Conditional statements</strong> let programs execute different lines of code depending on certain conditions. Let’s review the <code>if-elif-else</code> syntax.</p>
+<h3 id="discussion-1-cs-61a-spring-2021">Discussion 1 | CS 61A Spring
+2021</h3>
+<h2 id="conditional-statements">Conditional statements</h2>
+<p><strong>Conditional statements</strong> let programs execute
+different lines of code depending on certain conditions. Let’s review
+the <code>if-elif-else</code> syntax.</p>
 <p>Recall the following points:</p>
 <ul>
-<li><p>The <code>else</code> and <code>elif</code> clauses are optional, and you can have any number of <code>elif</code> clauses.</p>
-</li>
-<li><p>A <strong>conditional expression</strong> is an expression that evaluates to either a truthy value (<code>True</code>, a non-zero integer, etc.) or a falsy value (<code>False</code>, <code>0</code>, <code>None</code>, <code>&quot;&quot;</code>, <code>[]</code>, etc.).</p>
-</li>
-<li><p>Only the <strong>suite</strong> that is indented under the first <code>if</code>&#x2F;<code>elif</code> whose conditional expression evaluates to a true value will be executed.</p>
-</li>
-<li><p>If none of the conditional expressions evaluate to a true value, then the <code>else</code> suite is executed. There can only be one <code>else</code> clause in a conditional statement!</p>
-<p>  if <conditional expression>:<br>  <suite of statements>;<br>  elif <conditional expression>:<br>  <suite of statements>;<br>  else:<br>  <suite of statements>;</p>
-</li>
+<li><p>The <code>else</code> and <code>elif</code> clauses are optional,
+and you can have any number of <code>elif</code> clauses.</p></li>
+<li><p>A <strong>conditional expression</strong> is an expression that
+evaluates to either a truthy value (<code>True</code>, a non-zero
+integer, etc.) or a falsy value
+(<code>False</code>, <code>0</code>, <code>None</code>, <code>""</code>, <code>[]</code>,
+etc.).</p></li>
+<li><p>Only the <strong>suite</strong> that is indented under the
+first <code>if</code>/<code>elif</code> whose conditional expression
+evaluates to a true value will be executed.</p></li>
+<li><p>If none of the conditional expressions evaluate to a true value,
+then the <code>else</code> suite is executed. There can only be
+one <code>else</code> clause in a conditional statement!</p>
+<p>if <conditional expression>: <suite of statements>; elif
+<conditional expression>: <suite of statements>; else:
+<suite of statements>;</p></li>
 </ul>
-<h2 id="Boolean-Operators"><a href="#Boolean-Operators" class="headerlink" title="Boolean Operators"></a>Boolean Operators</h2><p>Python also includes the <strong>boolean operators</strong> <code>and</code>, <code>or</code>, and <code>not</code>. These operators are used to combine and manipulate boolean values.</p>
+<h2 id="boolean-operators">Boolean Operators</h2>
+<p>Python also includes the <strong>boolean
+operators</strong> <code>and</code>, <code>or</code>,
+and <code>not</code>. These operators are used to combine and manipulate
+boolean values.</p>
 <ul>
-<li><p><code>not</code> returns the opposite truth value of the following expression (so not will always return either <code>True</code> or <code>False</code>).</p>
-</li>
-<li><p><code>and</code> evaluates expressions in order and stops evaluating (short-circuits) once it reaches the first false value, and then returns it. If all values evaluate to a true value, the last value is returned.</p>
-</li>
-<li><p><code>or</code> short-circuits at the first true value and returns it. If all values evaluate to a false value, the last value is returned.</p>
+<li><p><code>not</code> returns the opposite truth value of the
+following expression (so not will always return
+either <code>True</code> or <code>False</code>).</p></li>
+<li><p><code>and</code> evaluates expressions in order and stops
+evaluating (short-circuits) once it reaches the first false value, and
+then returns it. If all values evaluate to a true value, the last value
+is returned.</p></li>
+<li><p><code>or</code> short-circuits at the first true value and
+returns it. If all values evaluate to a false value, the last value is
+returned.</p>
 <blockquote>
 <blockquote>
 <blockquote>
-<p>not None<br>  True<br>not True<br>  False<br>-1 and 0 and 1<br>  0<br>False or 9999 or 1&#x2F;0<br>  9999</p>
+<p>not None True not True False -1 and 0 and 1 0 False or 9999 or 1/0
+9999</p>
 </blockquote>
 </blockquote>
-</blockquote>
-</li>
+</blockquote></li>
 </ul>
 
       
@@ -601,21 +642,7 @@
                 </span>
             </span>
 
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
+          
 
         </div>
       </header>
@@ -626,30 +653,23 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Higher-Order-Funcrtions"><a href="#Higher-Order-Funcrtions" class="headerlink" title="Higher Order Funcrtions"></a>Higher Order Funcrtions</h1><p>让我们做一个功能组合</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">combine_funcs</span>(<span class="params">op</span>):</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;&quot;&quot;combine funcs(OP)(f,g)(x)=OP(f(x),g(x))&quot;&quot;&quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>	<span class="keyword">def</span> <span class="title function_">combine</span>(<span class="params">f,g</span>):</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>		<span class="keyword">def</span> <span class="title function_">val</span>(<span class="params">x</span>):</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>			<span class="keyword">return</span> op(f(x),g(x))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>		<span class="keyword">return</span> val</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>	<span class="keyword">return</span> combined</span><br></pre></td></tr></table></figure>
-
+          <h1 id="higher-order-funcrtions">Higher Order Funcrtions</h1>
+<p>让我们做一个功能组合 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">combine_funcs</span>(<span class="params">op</span>):</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;&quot;&quot;combine funcs(OP)(f,g)(x)=OP(f(x),g(x))&quot;&quot;&quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>	<span class="keyword">def</span> <span class="title function_">combine</span>(<span class="params">f,g</span>):</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>		<span class="keyword">def</span> <span class="title function_">val</span>(<span class="params">x</span>):</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>			<span class="keyword">return</span> op(f(x),g(x))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>		<span class="keyword">return</span> val</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>	<span class="keyword">return</span> combined</span><br></pre></td></tr></table></figure></p>
 <p>功能实例</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">combine_func</span>(<span class="params">op</span>):</span><br><span class="line">	<span class="keyword">def</span> <span class="title function_">combined</span>(<span class="params">f,g</span>):</span><br><span class="line">		<span class="keyword">def</span> <span class="title function_">val</span>(<span class="params">x</span>):</span><br><span class="line">			<span class="keyword">return</span> op(f(x),g(x))</span><br><span class="line">		<span class="keyword">return</span> val</span><br><span class="line">	<span class="keyword">return</span> combined</span><br><span class="line"><span class="keyword">from</span> operator <span class="keyword">import</span> add</span><br><span class="line">add_func=combine_func(add)</span><br><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> sin,cos,pi</span><br><span class="line">h=add_func(sin,cos)</span><br><span class="line">h(pi/<span class="number">4</span>)</span><br></pre></td></tr></table></figure>
-
-<p>为什么要返回val和combined，而不是val(x),combined(f,g)?<br>combined直至<code>h=add_func(sin,cos)</code>之前都没有赋值，这里的<code>return combined</code>是返回combined函数本身而不是调用后的结果，同样的在没对val赋值时返回的也只是函数val</p>
-<h4 id="challenge-Conditional-Function"><a href="#challenge-Conditional-Function" class="headerlink" title="challenge: Conditional Function"></a>challenge: Conditional Function</h4><p>是否可以写一个python函数<code>if_func</code>: <code>if_func(x/1,x&gt;0,0)</code><br>使得返回值和条件语句<code>1/x if x&gt;0 else 0</code> </p>
-<ul>
-<li>答案是不行的，函数调用时会计算操作数也就是已经计算好了<code>1/x</code></li>
-</ul>
-<p>但是我们可以这样写</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">define if_func(then_expr,condition,else_expr):</span><br><span class="line">	<span class="keyword">return</span> then_expr() <span class="keyword">if</span> condition <span class="keyword">else</span> else_expr()</span><br></pre></td></tr></table></figure>
-
-<p>之后这样调用:</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if_func(<span class="keyword">lambda</span>: <span class="number">1</span>/x,x&gt;<span class="number">0</span>,<span class="keyword">lambda</span>:<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-
-
+<p>为什么要返回val和combined，而不是val(x),combined(f,g)?
+combined直至<code>h=add_func(sin,cos)</code>之前都没有赋值，这里的<code>return combined</code>是返回combined函数本身而不是调用后的结果，同样的在没对val赋值时返回的也只是函数val</p>
+<h4 id="challenge-conditional-function">challenge: Conditional
+Function</h4>
+<p>是否可以写一个python函数<code>if_func</code>:
+<code>if_func(x/1,x&gt;0,0)</code>
+使得返回值和条件语句<code>1/x if x&gt;0 else 0</code> -
+答案是不行的，函数调用时会计算操作数也就是已经计算好了<code>1/x</code></p>
+<p>但是我们可以这样写 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">define if_func(then_expr,condition,else_expr):</span><br><span class="line">	<span class="keyword">return</span> then_expr() <span class="keyword">if</span> condition <span class="keyword">else</span> else_expr()</span><br></pre></td></tr></table></figure></p>
+<p>之后这样调用: <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if_func(<span class="keyword">lambda</span>: <span class="number">1</span>/x,x&gt;<span class="number">0</span>,<span class="keyword">lambda</span>:<span class="number">0</span>)</span><br></pre></td></tr></table></figure></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">到目前为止，每当我们想要定义一个新函数时，都需要给它取一个名字。但是对于其他类型的表达式，我们不需要将中间值与名称相关联。也就是说，我们可以计算 `a * b + c * d` 而不必命名子表达式 `a*b` 或 `c*d` 或完整的表达式。在 Python 中，我们可以使用 lambda 表达式临时创建函数，这些表达式会计算为未命名的函数。一个 lambda 表达式的计算结果是一个函数，它仅有一个返回表达式作为主体。不允许使用赋值和控制语句。</span><br></pre></td></tr></table></figure>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">compose1</span>(<span class="params">f,g</span>):</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">return</span> <span class="keyword">lambda</span> x: f(g(x))</span><br></pre></td></tr></table></figure>
-<p>可以构造相应的句子理解:</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">lambda</span>           x       :           f(g(x))</span><br><span class="line">A function that  takes x <span class="keyword">and</span> returns f(g(x))</span><br></pre></td></tr></table></figure>
-
-
+<p>可以构造相应的句子理解: <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">lambda</span>           x       :           f(g(x))</span><br><span class="line">A function that  takes x <span class="keyword">and</span> returns f(g(x))</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -716,21 +736,7 @@
                 </span>
             </span>
 
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>191</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
+          
 
         </div>
       </header>
@@ -741,273 +747,27 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h1><img src="https://raw.githubusercontent.com/XuandYu000/picture/main/20230627122952.png"/>
-
-<h3 id="这门课关于什么？"><a href="#这门课关于什么？" class="headerlink" title="这门课关于什么？"></a>这门课关于什么？</h3><ul>
-<li><p>一门关于掌握complexity(复杂性的课程)</p>
+          <h1 id="intro">Intro</h1>
+<p><img src="https://raw.githubusercontent.com/XuandYu000/picture/main/20230627122952.png"/></p>
+<h3 id="这门课关于什么">这门课关于什么？</h3>
+<ul>
+<li>一门关于掌握complexity(复杂性的课程)
 <ul>
 <li>抽象</li>
 <li>编程</li>
 <li>但并完全包括01</li>
-</ul>
-</li>
-<li><p>python入门</p>
+</ul></li>
+<li>python入门
 <ul>
 <li>深入理解语言基础</li>
 <li>程序执行</li>
 <li>计算机对编程语言怎么执行</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h3 id="Types-of-expressions"><a href="#Types-of-expressions" class="headerlink" title="Types of expressions"></a>Types of expressions</h3><p>表达式描绘计算过程并且执行得出计算结果<br>事实证明在诸多表达式中函数可以表示出其他代数表达式，这是计算机所需要的 </p>
-<p>推荐教材:<br><a target="_blank" rel="noopener" href="http://www.composingprograms.com/">http://www.composingprograms.com/</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/Lecture%204%20%E6%95%B0%E6%8D%AE%E6%95%B4%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
-      <meta itemprop="name" content="XuandYu000">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="viewoverlook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/07/02/Lecture%204%20%E6%95%B0%E6%8D%AE%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">Lecture 4 数据整理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:06:51" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/csdiy/" itemprop="url" rel="index"><span itemprop="name">csdiy</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/csdiy/missing-semester/" itemprop="url" rel="index"><span itemprop="name">missing semester</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.9k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Lecture-4-数据整理"><a href="#Lecture-4-数据整理" class="headerlink" title="Lecture 4 数据整理"></a>Lecture 4 数据整理</h1><h3 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h3><ol>
-<li>学习一下这篇简短的 <a target="_blank" rel="noopener" href="https://regexone.com/">交互式正则表达式教程</a>.</li>
-<li>统计words文件 (&#x2F;usr&#x2F;share&#x2F;dict&#x2F;words) 中包含至少三个a 且不以’s 结尾的单词个数。这些单词中，出现频率前三的末尾两个字母是什么？ sed的 y命令，或者 tr 程序也许可以帮你解决大小写的问题。共存在多少种词尾两字母组合？还有一个很 有挑战性的问题：哪个组合从未出现过？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat /usr/share/dict/words | tr &quot;[:upper:]&quot; &quot;[:lower:]&quot; | grep -E &quot;^([^a]*a)&#123;3&#125;.*$&quot; | grep -v &quot;&#x27;s$&quot; | wc -l </span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; cat /usr/share/dict/words 打开这个文件</span><br><span class="line">&gt; tr &quot;[:upper:]&quot; &quot;[:lower:]&quot; tr命令将所有大写都转化为小写</span><br><span class="line">&gt; grep -E &quot;^([^a]*a)&#123;3&#125;.*$&quot; -E 使用正则表达式，([^a]*a)&#123;3&#125; 匹配零个或多个非&quot;a&quot;字符，后跟一个&quot;a&quot;字符匹配3次，之后匹配任意字符</span><br><span class="line">&gt; grep -v &quot;&#x27;s$&quot; &quot;&#x27;s$&quot; 匹配以&#x27;s结尾的字符，grep -v 不显示匹配字符</span><br><span class="line">&gt; wc -l 这个命令计算输出的行数，输出结果为符合要求的单词数。</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /usr/share/dict/words | tr &quot;[:upper:]&quot; &quot;[:lower:]&quot; | grep -E &quot;^([^a]*a)&#123;3&#125;.*$&quot; | grep -v &quot;&#x27;s$&quot; | sed -E &quot;s/.*([a-z]&#123;2&#125;)$/\1/&quot; | sort | uniq -c | sort | tail -n3</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -E &quot;s/.*([a-z]&#123;2&#125;)$/\1/&quot; &quot;s/&quot;进入替换模式 .*匹配任意字符 ([a-z]&#123;2&#125;)$ 结尾处捕获两字符 &quot;\1&quot;使用捕获的字符替换</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">for i in &#123;a..z&#125;;do</span><br><span class="line"> for j in &#123;a..z&#125;;do</span><br><span class="line">    echo  &quot;$i$j&quot;</span><br><span class="line"> done</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./all.sh &gt; all.txt</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /usr/share/dict/words | tr &quot;[:upper:]&quot; &quot;[:lower:]&quot; | grep -E &quot;^([^a]*a)&#123;3&#125;.*$&quot; | grep -v &quot;&#x27;s$&quot; | sed -E &quot;s/.*([a-z]&#123;2&#125;)$/\1/&quot; | sort | uniq &gt; occurance.txt</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diff --unchanged-group-format=&#x27;&#x27; &lt;(cat occurance.txt) &lt;(cat all.txt) | wc -l</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">diff --unchanged-group-format=&#x27;&#x27; </span><br><span class="line">将两个文件中相同的部分设置为空字符串，剩下的就是不相同的部分，之后输出行数即可</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>进行原地替换听上去很有诱惑力，例如： sed s&#x2F;REGEX&#x2F;SUBSTITUTION&#x2F; input.txt &gt; input.txt。但是这并不是一个明智的做法，为什么呢？还是说只有 sed是这样的? 查看 man sed 来完成这个问题</li>
-</ol>
-<ul>
-<li>sed s&#x2F;REGEX&#x2F;SUBSTITUTION&#x2F; input.txt &gt; input.txt 表达式中后一个 input.txt会首先被清空，而且是发生在前的。所以前面一个input.txt在还没有被 sed 处理时已经为空了。在使用正则处理文件前最好是首先备份文件。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i.bak s/REGEX/SUBSTITION/ input.txt</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这段命令如果数据没有备份会自动创建.bak备份文件，直接对文件进行修改</span><br></pre></td></tr></table></figure></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/Lecture%202%20Shell%20Tools%20and%20Scripting/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
-      <meta itemprop="name" content="XuandYu000">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="viewoverlook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/07/02/Lecture%202%20Shell%20Tools%20and%20Scripting/" class="post-title-link" itemprop="url">Lecture 2 Shell Tools and Scripting</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:10:56" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/csdiy/" itemprop="url" rel="index"><span itemprop="name">csdiy</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/csdiy/missing-semester/" itemprop="url" rel="index"><span itemprop="name">missing semester</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>4.1k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Lecture-2-Shell-Tools-and-Scripting"><a href="#Lecture-2-Shell-Tools-and-Scripting" class="headerlink" title="Lecture 2 Shell Tools and Scripting"></a>Lecture 2 Shell Tools and Scripting</h1><p>homework:</p>
-<p>1.Read man ls and write an ls command that lists files in the following manner<br>读取 man ls 并编写按以下方式列出文件的 ls 命令</p>
-<p>Includes all files, including hidden files<br>包括所有文件，包括隐藏文件<br>Sizes are listed in human readable format (e.g. 454M instead of 454279954)<br>尺寸以人类可读的格式列出（例如 454M 而不是 454279954）<br>Files are ordered by recency 文件按新近度排序<br>Output is colorized 输出已着色<br>A sample output would look like this<br>示例输出如下所示</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-rw-r--r--   1 user group 1.1M Jan 14 09:53 baz</span><br><span class="line">drwxr-xr-x   5 user group  160 Jan 14 09:53 .</span><br><span class="line">-rw-r--r--   1 user group  514 Jan 14 06:42 bar</span><br><span class="line">-rw-r--r--   1 user group 106M Jan 13 12:12 foo</span><br><span class="line">drwx------+ 47 user group 1.5K Jan 12 18:08 ..</span><br></pre></td></tr></table></figure>
-<blockquote>
-<ol>
-<li>先man ls找具体命令要用 -l -h -t -c</li>
-<li>执行<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l -h -t -c</span><br></pre></td></tr></table></figure>
-效果：<img src="https://raw.githubusercontent.com/XuandYu000/picture/main/1.png"/></li>
-</ol>
-</blockquote>
-<ol start="2">
-<li>Write bash functions marco and polo that do the following. Whenever you execute marco the current working directory should be saved in some manner, then when you execute polo, no matter what directory you are in, polo should cd you back to the directory where you executed marco. For ease of debugging you can write the code in a file marco.sh and (re)load the definitions to your shell by executing source marco.sh.<br>编写执行以下操作的 bash 函数 marco 和 polo 。每当你执行 marco 时，当前工作目录应该以某种方式保存，那么当你执行 polo 时，无论你在哪个目录， polo 都应该 cd 你回到你执行 marco 的目录。为了便于调试，您可以将代码编写在文件 marco.sh 中，并通过执行 source marco.sh 将定义（重新）加载到 shell 中。</li>
-</ol>
-<blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">marco()&#123;</span><br><span class="line">       export MARCO=$(pwd)</span><br><span class="line">&#125;</span><br><span class="line">polo()&#123;</span><br><span class="line">       cd &quot;$MARCO&quot;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
-<p>解释：</p>
-</blockquote>
-<ul>
-<li>export命令将新增MARCO内的内容到其之后所有创建的子进程中，在相同脚本中相当于定义全局变量，不同的脚本中直接引入即可。</li>
-<li>source 将脚本内嵌到shell中，这时脚本中的命令可以直接执行 </li>
-<li>注意”$”的好多用法</li>
-</ul>
-<ol start="3">
-<li><p>Say you have a command that fails rarely. In order to debug it you need to capture its output but it can be time consuming to get a failure run. Write a bash script that runs the following script until it fails and captures its standard output and error streams to files and prints everything at the end. Bonus points if you can also report how many runs it took for the script to fail.<br>假设您有一个很少失败的命令。为了调试它，您需要捕获其输出，但运行失败可能很耗时。编写一个 bash 脚本，该脚本运行以下脚本，直到它失败并将其标准输出和错误流捕获到文件并在最后打印所有内容。如果还可以报告脚本失败所花费的运行次数，则为奖励积分。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env bash</span><br><span class="line"></span><br><span class="line">n=$(( RANDOM % 100 ))</span><br><span class="line"></span><br><span class="line">if [[ n -eq 42 ]]; then</span><br><span class="line">   echo &quot;Something went wrong&quot;</span><br><span class="line">   &gt;&amp;2 echo &quot;The error was using magic numbers&quot;</span><br><span class="line">   exit 1</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>上网查一查shell中for或者while循环的语法即可，若将n改为对我文件进行执行，然后-eq参数改为0，不断循环然后加一个变量记录循环次数即可</p>
-</blockquote>
-</li>
-<li><p>echo “Everything went according to plan”<br>As we covered in the lecture find’s -exec can be very powerful for performing operations over the files we are searching for. However, what if we want to do something with all the files, like creating a zip file? As you have seen so far commands will take input from both arguments and STDIN. When piping commands, we are connecting STDOUT to STDIN, but some commands like tar take inputs from arguments. To bridge this disconnect there’s the xargs command which will execute a command using STDIN as arguments. For example ls | xargs rm will delete the files in the current directory.<br>正如我们在讲座中介绍的那样 find 的 -exec 对于对我们正在寻找的文件执行操作非常强大。但是，如果我们想对所有文件执行某些操作，例如创建zip文件，该怎么办？如您所见，命令将从参数和 STDIN 中获取输入。管道命令时，我们将 STDOUT 连接到 STDIN，但像 tar 这样的命令从参数中获取输入。为了弥合这种断开连接，有 xargs 命令，它将使用STDIN作为参数执行命令。例如 ls | xargs rm 将删除当前目录中的文件。<br>Your task is to write a command that recursively finds all HTML files in the folder and makes a zip with them. Note that your command should work even if the files have spaces (hint: check -d flag for xargs).<br>您的任务是编写一个命令，该命令以递归方式查找文件夹中的所有 HTML 文件，并用它们制作一个 zip。请注意，即使文件有空格，您的命令也应该有效（提示：检查 -d 标志的 xargs ）。<br>If you’re on macOS, note that the default BSD find is different from the one included in GNU coreutils. You can use -print0 on find and the -0 flag on xargs. As a macOS user, you should be aware that command-line utilities shipped with macOS may differ from the GNU counterparts; you can install the GNU versions if you like by using brew.<br>如果您使用的是 macOS，请注意默认的 BSD find 与 GNU coreutils 中包含的不同。您可以在 find 上使用 -print0 ，在 xargs 上使用 -0 标志。作为 macOS 用户，您应该知道 macOS 附带的命令行实用程序可能与 GNU 对应工具不同;如果您愿意，您可以使用 brew 安装 GNU 版本。</p>
-</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -type f -name &quot;*.html&quot; -print0 | xargs -0 tar -czf html_files.zip</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>解释：</p>
-<ol>
-<li>find命令递归的寻找指定目录下所有符合条件的文件：用’.’代表在当前目录下寻找， -type f 寻找普通的file文件 -name指定名称 -print0 将文件名以null字符分隔输出(\0)</li>
-<li>| xargs -0 从管道左侧接受以null分隔符的输入流</li>
-<li>tar -czf html_files.zip 此时xargs传递的输入符合tar的输入要求链接了tar命令和find<blockquote>
-<p>tar: 压缩、打包命令<br>-c: 创建一个新的压缩包<br>-z: 使用 gzip 压缩算法进行压缩<br>-f: 指定压缩包的文件名<br>html_files.zip: 压缩包的文件名，可以根据需要修改</p>
-</blockquote>
-</li>
-</ol>
-</blockquote>
-<ol start="5">
-<li>(Advanced) Write a command or script to recursively find the most recently modified file in a directory. More generally, can you list all files by recency?<br>（高级）编写命令或脚本以递归方式查找目录中最近修改的文件。更一般地说，您可以按新近度列出所有文件吗？<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -type f -printf &#x27;%T+ %p\n&#x27; | sort -r | head -n 1 | cut -d&#x27; &#x27; -f2-</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>查找最近修改过的文件，解释:<br>-printf ‘%T+ %p\n’ 输出以时间在前，之后加上路径<br>sort -r :即reverse把时间按照倒序进行处理<br>head -n 1 :只取第一个<br>cut -d’ ‘ -f2-：从输出中删除修改时间，只保留文件路径</p>
-</blockquote>
-</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -type f -printf &#x27;%T+ %p\n&#x27; | sort -r | cut -d&#x27; &#x27; -f2-</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>实现新近度排列只需要不要head的那个命令即可</p>
-</blockquote>
+<h3 id="types-of-expressions">Types of expressions</h3>
+<p>表达式描绘计算过程并且执行得出计算结果
+事实证明在诸多表达式中函数可以表示出其他代数表达式，这是计算机所需要的</p>
+<p>推荐教材: http://www.composingprograms.com/</p>
 
       
     </div>
@@ -1068,21 +828,7 @@
                 </span>
             </span>
 
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>583</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
+          
 
         </div>
       </header>
@@ -1093,26 +839,302 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Lecture-3-vim"><a href="#Lecture-3-vim" class="headerlink" title="Lecture 3 vim"></a>Lecture 3 vim</h1><ol>
-<li><p>完成 vimtutor。 备注： 它在一个 80x24（80 列，24 行） 终端窗口看起来最好。<br> 直接执行</p>
- <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vimtutor</span><br></pre></td></tr></table></figure></li>
-<li><p>下载我们的vimrc，然后把它保存到 ~&#x2F;.vimrc。 通读这个注释详细的文件 （用 Vim!）， 然后观察 Vim 在这个新的设置下看起来和使用起来有哪些细微的区别。<br>下载后他禁用了上下左右键使用hjkl代替，挺反人类的但是用习惯还可以</p>
-</li>
+          <h1 id="lecture-3-vim">Lecture 3 vim</h1>
+<ol type="1">
+<li><p>完成 vimtutor。 备注： 它在一个 80x24（80 列，24 行）
+终端窗口看起来最好。 直接执行 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vimtutor</span><br></pre></td></tr></table></figure></p></li>
+<li><p>下载我们的vimrc，然后把它保存到 ~/.vimrc。 通读这个注释详细的文件
+（用 Vim!）， 然后观察 Vim
+在这个新的设置下看起来和使用起来有哪些细微的区别。
+下载后他禁用了上下左右键使用hjkl代替，挺反人类的但是用习惯还可以</p></li>
 <li><p>安装和配置一个插件： ctrlp.vim</p>
 <ul>
-<li>这里建议使用vim-plug，在.vimrc添加：Plug ‘插件名称’<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">call plug#begin(&#x27;~/.vim/plugged&#x27;)</span><br><span class="line"> Plug &#x27;vim-airline/vim-airline&#x27;</span><br><span class="line"> call plug#end()</span><br></pre></td></tr></table></figure>
-之后重新打开vim，执行<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:PlugInstall</span><br></pre></td></tr></table></figure>
-*删除插件<br>删除插件，只需要将写在 .vimrc 配置文件内的插件删除，重启 vim 并执行命令 :PlugClean</li>
+<li>这里建议使用vim-plug，在.vimrc添加：Plug ‘插件名称’ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">call plug#begin(&#x27;~/.vim/plugged&#x27;)</span><br><span class="line"> Plug &#x27;vim-airline/vim-airline&#x27;</span><br><span class="line"> call plug#end()</span><br></pre></td></tr></table></figure>
+之后重新打开vim，执行 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:PlugInstall</span><br></pre></td></tr></table></figure> *删除插件 删除插件，只需要将写在
+.vimrc 配置文件内的插件删除，重启 vim 并执行命令 :PlugClean</li>
 </ul>
-<p>练习使用 Vim, 在你自己的机器上重做 演示。</p>
-</li>
-<li><p>下个月用 Vim 完成所有的文件编辑。每当不够高效的时候，或者你感觉 “一定有一个更好的方式”时， 尝试求助搜索引擎，很有可能有一个更好的方式。如果你遇到难题，可以来我们的答疑时间或者给我们发邮件。</p>
-</li>
-<li><p>在其他工具中设置 Vim 快捷键 （见上面的操作指南）。</p>
-</li>
-<li><p>进一步自定义你的 ~&#x2F;.vimrc 和安装更多插件。</p>
-</li>
+<p>练习使用 Vim, 在你自己的机器上重做 演示。</p></li>
+<li><p>下个月用 Vim 完成所有的文件编辑。每当不够高效的时候，或者你感觉
+“一定有一个更好的方式”时，
+尝试求助搜索引擎，很有可能有一个更好的方式。如果你遇到难题，可以来我们的答疑时间或者给我们发邮件。</p></li>
+<li><p>在其他工具中设置 Vim 快捷键 （见上面的操作指南）。</p></li>
+<li><p>进一步自定义你的 ~/.vimrc 和安装更多插件。</p></li>
 </ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/Lecture%202%20Shell%20Tools%20and%20Scripting/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
+      <meta itemprop="name" content="XuandYu000">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="viewoverlook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/07/02/Lecture%202%20Shell%20Tools%20and%20Scripting/" class="post-title-link" itemprop="url">Lecture 2 Shell Tools and Scripting</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:10:56" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/csdiy/" itemprop="url" rel="index"><span itemprop="name">csdiy</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/csdiy/missing-semester/" itemprop="url" rel="index"><span itemprop="name">missing semester</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="lecture-2-shell-tools-and-scripting">Lecture 2 Shell Tools and
+Scripting</h1>
+<p>homework:</p>
+<p>1.Read man ls and write an ls command that lists files in the
+following manner 读取 man ls 并编写按以下方式列出文件的 ls 命令</p>
+<p>Includes all files, including hidden files 包括所有文件，包括隐藏文件
+Sizes are listed in human readable format (e.g. 454M instead of
+454279954) 尺寸以人类可读的格式列出（例如 454M 而不是 454279954） Files
+are ordered by recency 文件按新近度排序 Output is colorized 输出已着色 A
+sample output would look like this 示例输出如下所示 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-rw-r--r--   1 user group 1.1M Jan 14 09:53 baz</span><br><span class="line">drwxr-xr-x   5 user group  160 Jan 14 09:53 .</span><br><span class="line">-rw-r--r--   1 user group  514 Jan 14 06:42 bar</span><br><span class="line">-rw-r--r--   1 user group 106M Jan 13 12:12 foo</span><br><span class="line">drwx------+ 47 user group 1.5K Jan 12 18:08 ..</span><br></pre></td></tr></table></figure> &gt;
+1. 先man ls找具体命令要用 -l -h -t -c &gt; 2. 执行 &gt; <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l -h -t -c</span><br></pre></td></tr></table></figure>
+&gt;
+效果：<img src="https://raw.githubusercontent.com/XuandYu000/picture/main/1.png"/></p>
+<ol start="2" type="1">
+<li>Write bash functions marco and polo that do the following. Whenever
+you execute marco the current working directory should be saved in some
+manner, then when you execute polo, no matter what directory you are in,
+polo should cd you back to the directory where you executed marco. For
+ease of debugging you can write the code in a file marco.sh and (re)load
+the definitions to your shell by executing source marco.sh.
+编写执行以下操作的 bash 函数 marco 和 polo 。每当你执行 marco
+时，当前工作目录应该以某种方式保存，那么当你执行 polo
+时，无论你在哪个目录， polo 都应该 cd 你回到你执行 marco
+的目录。为了便于调试，您可以将代码编写在文件 marco.sh 中，并通过执行
+source marco.sh 将定义（重新）加载到 shell 中。</li>
+</ol>
+<blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">marco()&#123;</span><br><span class="line">       export MARCO=$(pwd)</span><br><span class="line">&#125;</span><br><span class="line">polo()&#123;</span><br><span class="line">       cd &quot;$MARCO&quot;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+<p>解释： *
+export命令将新增MARCO内的内容到其之后所有创建的子进程中，在相同脚本中相当于定义全局变量，不同的脚本中直接引入即可。
+* source 将脚本内嵌到shell中，这时脚本中的命令可以直接执行 *
+注意"$"的好多用法</p>
+</blockquote>
+<ol start="3" type="1">
+<li><p>Say you have a command that fails rarely. In order to debug it
+you need to capture its output but it can be time consuming to get a
+failure run. Write a bash script that runs the following script until it
+fails and captures its standard output and error streams to files and
+prints everything at the end. Bonus points if you can also report how
+many runs it took for the script to fail.
+假设您有一个很少失败的命令。为了调试它，您需要捕获其输出，但运行失败可能很耗时。编写一个
+bash
+脚本，该脚本运行以下脚本，直到它失败并将其标准输出和错误流捕获到文件并在最后打印所有内容。如果还可以报告脚本失败所花费的运行次数，则为奖励积分。
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env bash</span><br><span class="line"></span><br><span class="line">n=$(( RANDOM % 100 ))</span><br><span class="line"></span><br><span class="line">if [[ n -eq 42 ]]; then</span><br><span class="line">   echo &quot;Something went wrong&quot;</span><br><span class="line">   &gt;&amp;2 echo &quot;The error was using magic numbers&quot;</span><br><span class="line">   exit 1</span><br><span class="line">fi</span><br></pre></td></tr></table></figure> &gt;
+上网查一查shell中for或者while循环的语法即可，若将n改为对我文件进行执行，然后-eq参数改为0，不断循环然后加一个变量记录循环次数即可</p></li>
+<li><p>echo "Everything went according to plan" As we covered in the
+lecture find’s -exec can be very powerful for performing operations over
+the files we are searching for. However, what if we want to do something
+with all the files, like creating a zip file? As you have seen so far
+commands will take input from both arguments and STDIN. When piping
+commands, we are connecting STDOUT to STDIN, but some commands like tar
+take inputs from arguments. To bridge this disconnect there’s the xargs
+command which will execute a command using STDIN as arguments. For
+example ls | xargs rm will delete the files in the current directory.
+正如我们在讲座中介绍的那样 find 的 -exec
+对于对我们正在寻找的文件执行操作非常强大。但是，如果我们想对所有文件执行某些操作，例如创建zip文件，该怎么办？如您所见，命令将从参数和
+STDIN 中获取输入。管道命令时，我们将 STDOUT 连接到 STDIN，但像 tar
+这样的命令从参数中获取输入。为了弥合这种断开连接，有 xargs
+命令，它将使用STDIN作为参数执行命令。例如 ls | xargs rm
+将删除当前目录中的文件。 Your task is to write a command that
+recursively finds all HTML files in the folder and makes a zip with
+them. Note that your command should work even if the files have spaces
+(hint: check -d flag for xargs).
+您的任务是编写一个命令，该命令以递归方式查找文件夹中的所有 HTML
+文件，并用它们制作一个
+zip。请注意，即使文件有空格，您的命令也应该有效（提示：检查 -d 标志的
+xargs ）。 If you’re on macOS, note that the default BSD find is
+different from the one included in GNU coreutils. You can use -print0 on
+find and the -0 flag on xargs. As a macOS user, you should be aware that
+command-line utilities shipped with macOS may differ from the GNU
+counterparts; you can install the GNU versions if you like by using
+brew. 如果您使用的是 macOS，请注意默认的 BSD find 与 GNU coreutils
+中包含的不同。您可以在 find 上使用 -print0 ，在 xargs 上使用 -0
+标志。作为 macOS 用户，您应该知道 macOS 附带的命令行实用程序可能与 GNU
+对应工具不同;如果您愿意，您可以使用 brew 安装 GNU 版本。</p></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -type f -name &quot;*.html&quot; -print0 | xargs -0 tar -czf html_files.zip</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>解释： 1.
+find命令递归的寻找指定目录下所有符合条件的文件：用'.'代表在当前目录下寻找，
+-type f 寻找普通的file文件 -name指定名称 -print0
+将文件名以null字符分隔输出(\0) 2. | xargs -0
+从管道左侧接受以null分隔符的输入流 3. tar -czf html_files.zip
+此时xargs传递的输入符合tar的输入要求链接了tar命令和find &gt; tar:
+压缩、打包命令 &gt; -c: 创建一个新的压缩包 &gt; -z: 使用 gzip
+压缩算法进行压缩 &gt; -f: 指定压缩包的文件名 &gt; html_files.zip:
+压缩包的文件名，可以根据需要修改</p>
+</blockquote>
+<ol start="5" type="1">
+<li>(Advanced) Write a command or script to recursively find the most
+recently modified file in a directory. More generally, can you list all
+files by recency?
+（高级）编写命令或脚本以递归方式查找目录中最近修改的文件。更一般地说，您可以按新近度列出所有文件吗？
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -type f -printf &#x27;%T+ %p\n&#x27; | sort -r | head -n 1 | cut -d&#x27; &#x27; -f2-</span><br></pre></td></tr></table></figure> &gt;查找最近修改过的文件，解释: &gt;-printf '%T+ %p'
+输出以时间在前，之后加上路径 &gt; sort -r
+:即reverse把时间按照倒序进行处理 &gt; head -n 1 :只取第一个 &gt; cut -d'
+' -f2-：从输出中删除修改时间，只保留文件路径</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -type f -printf &#x27;%T+ %p\n&#x27; | sort -r | cut -d&#x27; &#x27; -f2-</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>实现新近度排列只需要不要head的那个命令即可</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/Lecture%204%20%E6%95%B0%E6%8D%AE%E6%95%B4%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
+      <meta itemprop="name" content="XuandYu000">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="viewoverlook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/07/02/Lecture%204%20%E6%95%B0%E6%8D%AE%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">Lecture 4 数据整理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:06:51" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/csdiy/" itemprop="url" rel="index"><span itemprop="name">csdiy</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/csdiy/missing-semester/" itemprop="url" rel="index"><span itemprop="name">missing semester</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="lecture-4-数据整理">Lecture 4 数据整理</h1>
+<h3 id="练习">练习</h3>
+<ol type="1">
+<li>学习一下这篇简短的 <a
+target="_blank" rel="noopener" href="https://regexone.com/">交互式正则表达式教程</a>.</li>
+<li>统计words文件 (/usr/share/dict/words) 中包含至少三个a 且不以's
+结尾的单词个数。这些单词中，出现频率前三的末尾两个字母是什么？ sed的
+y命令，或者 tr
+程序也许可以帮你解决大小写的问题。共存在多少种词尾两字母组合？还有一个很
+有挑战性的问题：哪个组合从未出现过？ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat /usr/share/dict/words | tr &quot;[:upper:]&quot; &quot;[:lower:]&quot; | grep -E &quot;^([^a]*a)&#123;3&#125;.*$&quot; | grep -v &quot;&#x27;s$&quot; | wc -l </span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; cat /usr/share/dict/words 打开这个文件</span><br><span class="line">&gt; tr &quot;[:upper:]&quot; &quot;[:lower:]&quot; tr命令将所有大写都转化为小写</span><br><span class="line">&gt; grep -E &quot;^([^a]*a)&#123;3&#125;.*$&quot; -E 使用正则表达式，([^a]*a)&#123;3&#125; 匹配零个或多个非&quot;a&quot;字符，后跟一个&quot;a&quot;字符匹配3次，之后匹配任意字符</span><br><span class="line">&gt; grep -v &quot;&#x27;s$&quot; &quot;&#x27;s$&quot; 匹配以&#x27;s结尾的字符，grep -v 不显示匹配字符</span><br><span class="line">&gt; wc -l 这个命令计算输出的行数，输出结果为符合要求的单词数。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /usr/share/dict/words | tr &quot;[:upper:]&quot; &quot;[:lower:]&quot; | grep -E &quot;^([^a]*a)&#123;3&#125;.*$&quot; | grep -v &quot;&#x27;s$&quot; | sed -E &quot;s/.*([a-z]&#123;2&#125;)$/\1/&quot; | sort | uniq -c | sort | tail -n3</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -E &quot;s/.*([a-z]&#123;2&#125;)$/\1/&quot; &quot;s/&quot;进入替换模式 .*匹配任意字符 ([a-z]&#123;2&#125;)$ 结尾处捕获两字符 &quot;\1&quot;使用捕获的字符替换</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">for i in &#123;a..z&#125;;do</span><br><span class="line"> for j in &#123;a..z&#125;;do</span><br><span class="line">    echo  &quot;$i$j&quot;</span><br><span class="line"> done</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./all.sh &gt; all.txt</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /usr/share/dict/words | tr &quot;[:upper:]&quot; &quot;[:lower:]&quot; | grep -E &quot;^([^a]*a)&#123;3&#125;.*$&quot; | grep -v &quot;&#x27;s$&quot; | sed -E &quot;s/.*([a-z]&#123;2&#125;)$/\1/&quot; | sort | uniq &gt; occurance.txt</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diff --unchanged-group-format=&#x27;&#x27; &lt;(cat occurance.txt) &lt;(cat all.txt) | wc -l</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">diff --unchanged-group-format=&#x27;&#x27; </span><br><span class="line">将两个文件中相同的部分设置为空字符串，剩下的就是不相同的部分，之后输出行数即可</span><br></pre></td></tr></table></figure>
+<ol start="3" type="1">
+<li>进行原地替换听上去很有诱惑力，例如： sed s/REGEX/SUBSTITUTION/
+input.txt &gt;
+input.txt。但是这并不是一个明智的做法，为什么呢？还是说只有 sed是这样的?
+查看 man sed 来完成这个问题</li>
+</ol>
+<ul>
+<li>sed s/REGEX/SUBSTITUTION/ input.txt &gt; input.txt 表达式中后一个
+input.txt会首先被清空，而且是发生在前的。所以前面一个input.txt在还没有被
+sed 处理时已经为空了。在使用正则处理文件前最好是首先备份文件。
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i.bak s/REGEX/SUBSTITION/ input.txt</span><br></pre></td></tr></table></figure> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这段命令如果数据没有备份会自动创建.bak备份文件，直接对文件进行修改</span><br></pre></td></tr></table></figure></li>
+</ul>
 
       
     </div>
@@ -1173,21 +1195,7 @@
                 </span>
             </span>
 
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.9k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
+          
 
         </div>
       </header>
@@ -1198,49 +1206,68 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Lecture-5-命令行环境"><a href="#Lecture-5-命令行环境" class="headerlink" title="Lecture 5 命令行环境"></a>Lecture 5 命令行环境</h1><h2 id="课后练习"><a href="#课后练习" class="headerlink" title="课后练习"></a>课后练习</h2><h4 id="任务控制"><a href="#任务控制" class="headerlink" title="任务控制"></a>任务控制</h4><ol>
-<li>我们可以使用类似 ps aux | grep 这样的命令来获取任务的 pid ，然后您可以基于pid 来结束这些进程。但我们其实有更好的方法来做这件事。在终端中执行 sleep 10000 这个任务。然后用 Ctrl-Z 将其切换到后台并使用 bg来继续允许它。现在，使用 pgrep 来查找 pid 并使用 pkill 结束进程而不需要手动输入pid。(提示：: 使用 -af 标记)。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sleep 10000</span><br><span class="line">ctrl+z</span><br><span class="line">bg</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pgrep sleep #列出包含关键字sleep的进程id</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pkill -af sleep #杀死包含关键字sleep的进程</span><br></pre></td></tr></table></figure>
-解释：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pkill 杀死进程的命令</span><br><span class="line">-a 用于匹配进程名和命令行参数</span><br><span class="line">-f 强制匹配整个命令行参数，而不仅仅是匹配进程名</span><br></pre></td></tr></table></figure></li>
-<li>如果您希望某个进程结束后再开始另外一个进程， 应该如何实现呢？在这个练习中，我们使用 sleep 60 &amp; 作为先执行的程序。一种方法是使用 wait 命令。尝试启动这个休眠命令，然后待其结束后再执行 ls 命令。但是，如果我们在不同的 bash 会话中进行操作，则上述方法就不起作用了。因为 wait 只能对子进程起作用。之前我们没有提过的一个特性是，kill 命令成功退出时其状态码为 0 ，其他状态则是非0。kill -0 则不会发送信号，但是会在进程不存在时返回一个不为0的状态码。请编写一个 bash 函数 pidwait ，它接受一个 pid 作为输入参数，然后一直等待直到该进程结束。您需要使用 sleep 来避免浪费 CPU 性能。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sleep 60 &amp;</span><br><span class="line">pgrep sleep | wait; </span><br><span class="line">ls</span><br></pre></td></tr></table></figure></li>
+          <h1 id="lecture-5-命令行环境">Lecture 5 命令行环境</h1>
+<h2 id="课后练习">课后练习</h2>
+<h4 id="任务控制">任务控制</h4>
+<ol type="1">
+<li>我们可以使用类似 ps aux | grep 这样的命令来获取任务的 pid
+，然后您可以基于pid
+来结束这些进程。但我们其实有更好的方法来做这件事。在终端中执行 sleep
+10000 这个任务。然后用 Ctrl-Z 将其切换到后台并使用
+bg来继续允许它。现在，使用 pgrep 来查找 pid 并使用 pkill
+结束进程而不需要手动输入pid。(提示：: 使用 -af 标记)。 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sleep 10000</span><br><span class="line">ctrl+z</span><br><span class="line">bg</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pgrep sleep #列出包含关键字sleep的进程id</span><br></pre></td></tr></table></figure> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pkill -af sleep #杀死包含关键字sleep的进程</span><br></pre></td></tr></table></figure> 解释： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pkill 杀死进程的命令</span><br><span class="line">-a 用于匹配进程名和命令行参数</span><br><span class="line">-f 强制匹配整个命令行参数，而不仅仅是匹配进程名</span><br></pre></td></tr></table></figure></li>
+<li>如果您希望某个进程结束后再开始另外一个进程，
+应该如何实现呢？在这个练习中，我们使用 sleep 60 &amp;
+作为先执行的程序。一种方法是使用 wait
+命令。尝试启动这个休眠命令，然后待其结束后再执行 ls
+命令。但是，如果我们在不同的 bash
+会话中进行操作，则上述方法就不起作用了。因为 wait
+只能对子进程起作用。之前我们没有提过的一个特性是，kill
+命令成功退出时其状态码为 0 ，其他状态则是非0。kill -0
+则不会发送信号，但是会在进程不存在时返回一个不为0的状态码。请编写一个
+bash 函数 pidwait ，它接受一个 pid
+作为输入参数，然后一直等待直到该进程结束。您需要使用 sleep 来避免浪费
+CPU 性能。 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sleep 60 &amp;</span><br><span class="line">pgrep sleep | wait; </span><br><span class="line">ls</span><br></pre></td></tr></table></figure></li>
 </ol>
-<p>解释：</p>
-<ul>
-<li>sleep 60 &amp; 中&amp;表示后台运行</li>
-<li>wait 接收pgrpe sleep的输出，等待其结束之后再执行ls命令给</li>
-</ul>
+<p>解释： * sleep 60 &amp; 中&amp;表示后台运行 * wait 接收pgrpe
+sleep的输出，等待其结束之后再执行ls命令给</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pidwait()&#123;</span><br><span class="line">    while kill -0 $1 do</span><br><span class="line">        sleep 1</span><br><span class="line">    done</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>解释:</p>
-<ul>
-<li>kill -0 $1 判断进程是否存在，存在则返回0，不存在则返回1</li>
-<li><ul>
-<li>$1表示第一个参数</li>
-</ul>
-</li>
-<li><ul>
-<li>kill -0 表示不会发送信号，但是会在进程不存在时返回一个不为0的状态码</li>
-</ul>
-</li>
-</ul>
-<h4 id="终端多路复用"><a href="#终端多路复用" class="headerlink" title="终端多路复用"></a>终端多路复用</h4><ol>
-<li>请完成这个 tmux 教程 参考这些步骤来学习如何自定义 tmux。<br>当您在使用命令行时，您通常会希望同时执行多个任务。举例来说，您可以想要同时运行您的编辑器，并在终端的另外一侧执行程序。尽管再打开一个新的终端窗口也能达到目的，使用终端多路复用器则是一种更好的办法。<br>像 tmux 这类的终端多路复用器可以允许我们基于面板和标签分割出多个终端窗口，这样您便可以同时与多个 shell 会话进行交互。<br>tmux 的快捷键需要我们掌握，它们都是类似 &lt;C-b&gt; x 这样的组合，即需要先按下Ctrl+b，松开后再按下 x，但是一般使用CTRL+a重新映射为前缀键。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">常用快捷键：</span><br><span class="line">会话：</span><br><span class="line">tmux 开始新会话</span><br><span class="line">tmux new -s session_name #新建一个会话</span><br><span class="line">tmux ls #查看会话</span><br><span class="line">tmux a -t session_name #进入会话，不加name默认连接最后一个会话</span><br><span class="line">窗口：</span><br><span class="line">&lt;C-b&gt; c 创建一个新的窗口，使用 &lt;C-d&gt;关闭</span><br><span class="line">&lt;C-b&gt; N 跳转到第 N 个窗口，注意每个窗口都是有编号的</span><br><span class="line">&lt;C-b&gt; p 切换到前一个窗口</span><br><span class="line">&lt;C-b&gt; n 切换到下一个窗口</span><br><span class="line">&lt;C-b&gt; , 重命名当前窗口</span><br><span class="line">&lt;C-b&gt; w 列出当前所有窗口</span><br><span class="line">面板：</span><br><span class="line">&lt;C-b&gt; &quot; 水平分割</span><br><span class="line">&lt;C-b&gt; % 垂直分割</span><br><span class="line">&lt;C-b&gt; &lt;方向&gt; 切换到指定方向的面板，&lt;方向&gt; 指的是键盘上的方向键</span><br><span class="line">&lt;C-b&gt; z 切换当前面板的缩放</span><br><span class="line">&lt;C-b&gt; [ 开始往回卷动屏幕。您可以按下空格键来开始选择，回车键复制选中的部分</span><br><span class="line">&lt;C-b&gt; &lt;空格&gt; 在不同的面板排布间切换</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h4 id="别名"><a href="#别名" class="headerlink" title="别名"></a>别名</h4><p>输入一长串包含许多选项的命令会非常麻烦。因此，大多数 shell 都支持设置别名。shell 的别名相当于一个长命令的缩写，shell 会自动将其替换成原本的命令。例如，bash 中的别名语法如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alias alias_name=&quot;command_to_alias arg1 arg2&quot;</span><br></pre></td></tr></table></figure>
-<p>注意， &#x3D;两边是没有空格的，因为 alias 是一个 shell 命令，它只接受一个参数。<br>别名有许多很方便的特性:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"># 创建常用命令的缩写</span><br><span class="line">alias ll=&quot;ls -lh&quot;</span><br><span class="line"></span><br><span class="line"># 能够少输入很多</span><br><span class="line">alias gs=&quot;git status&quot;</span><br><span class="line">alias gc=&quot;git commit&quot;</span><br><span class="line">alias v=&quot;vim&quot;</span><br><span class="line"></span><br><span class="line"># 手误打错命令也没关系</span><br><span class="line">alias sl=ls</span><br><span class="line"></span><br><span class="line"># 重新定义一些命令行的默认行为</span><br><span class="line">alias mv=&quot;mv -i&quot;           # -i prompts before overwrite</span><br><span class="line">alias mkdir=&quot;mkdir -p&quot;     # -p make parent dirs as needed</span><br><span class="line">alias df=&quot;df -h&quot;           # -h prints human readable format</span><br><span class="line"></span><br><span class="line"># 别名可以组合使用</span><br><span class="line">alias la=&quot;ls -A&quot;</span><br><span class="line">alias lla=&quot;la -l&quot;</span><br><span class="line"></span><br><span class="line"># 在忽略某个别名</span><br><span class="line">\ls</span><br><span class="line"># 或者禁用别名</span><br><span class="line">unalias la</span><br><span class="line"></span><br><span class="line"># 获取别名的定义</span><br><span class="line">alias ll</span><br><span class="line"># 会打印 ll=&#x27;ls -lh&#x27;</span><br></pre></td></tr></table></figure>
-<p>值得注意的是，在默认情况下 shell 并不会保存别名。为了让别名持续生效，您需要将配置放进 shell 的启动文件里，像是.bashrc 或 .zshrc，下一节我们就会讲到。</p>
-<h4 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h4><p>让我们帮助您进一步学习配置文件：</p>
-<ol>
+<p>解释: * kill -0 $1 判断进程是否存在，存在则返回0，不存在则返回1 * *
+$1表示第一个参数 * * kill -0
+表示不会发送信号，但是会在进程不存在时返回一个不为0的状态码</p>
+<h4 id="终端多路复用">终端多路复用</h4>
+<ol type="1">
+<li>请完成这个 tmux 教程 参考这些步骤来学习如何自定义 tmux。
+当您在使用命令行时，您通常会希望同时执行多个任务。举例来说，您可以想要同时运行您的编辑器，并在终端的另外一侧执行程序。尽管再打开一个新的终端窗口也能达到目的，使用终端多路复用器则是一种更好的办法。
+像 tmux
+这类的终端多路复用器可以允许我们基于面板和标签分割出多个终端窗口，这样您便可以同时与多个
+shell 会话进行交互。 tmux 的快捷键需要我们掌握，它们都是类似 &lt;C-b&gt;
+x 这样的组合，即需要先按下Ctrl+b，松开后再按下
+x，但是一般使用CTRL+a重新映射为前缀键。 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">常用快捷键：</span><br><span class="line">会话：</span><br><span class="line">tmux 开始新会话</span><br><span class="line">tmux new -s session_name #新建一个会话</span><br><span class="line">tmux ls #查看会话</span><br><span class="line">tmux a -t session_name #进入会话，不加name默认连接最后一个会话</span><br><span class="line">窗口：</span><br><span class="line">&lt;C-b&gt; c 创建一个新的窗口，使用 &lt;C-d&gt;关闭</span><br><span class="line">&lt;C-b&gt; N 跳转到第 N 个窗口，注意每个窗口都是有编号的</span><br><span class="line">&lt;C-b&gt; p 切换到前一个窗口</span><br><span class="line">&lt;C-b&gt; n 切换到下一个窗口</span><br><span class="line">&lt;C-b&gt; , 重命名当前窗口</span><br><span class="line">&lt;C-b&gt; w 列出当前所有窗口</span><br><span class="line">面板：</span><br><span class="line">&lt;C-b&gt; &quot; 水平分割</span><br><span class="line">&lt;C-b&gt; % 垂直分割</span><br><span class="line">&lt;C-b&gt; &lt;方向&gt; 切换到指定方向的面板，&lt;方向&gt; 指的是键盘上的方向键</span><br><span class="line">&lt;C-b&gt; z 切换当前面板的缩放</span><br><span class="line">&lt;C-b&gt; [ 开始往回卷动屏幕。您可以按下空格键来开始选择，回车键复制选中的部分</span><br><span class="line">&lt;C-b&gt; &lt;空格&gt; 在不同的面板排布间切换</span><br></pre></td></tr></table></figure> #### 别名
+输入一长串包含许多选项的命令会非常麻烦。因此，大多数 shell
+都支持设置别名。shell 的别名相当于一个长命令的缩写，shell
+会自动将其替换成原本的命令。例如，bash 中的别名语法如下： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alias alias_name=&quot;command_to_alias arg1 arg2&quot;</span><br></pre></td></tr></table></figure>
+注意， =两边是没有空格的，因为 alias 是一个 shell
+命令，它只接受一个参数。 别名有许多很方便的特性: <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"># 创建常用命令的缩写</span><br><span class="line">alias ll=&quot;ls -lh&quot;</span><br><span class="line"></span><br><span class="line"># 能够少输入很多</span><br><span class="line">alias gs=&quot;git status&quot;</span><br><span class="line">alias gc=&quot;git commit&quot;</span><br><span class="line">alias v=&quot;vim&quot;</span><br><span class="line"></span><br><span class="line"># 手误打错命令也没关系</span><br><span class="line">alias sl=ls</span><br><span class="line"></span><br><span class="line"># 重新定义一些命令行的默认行为</span><br><span class="line">alias mv=&quot;mv -i&quot;           # -i prompts before overwrite</span><br><span class="line">alias mkdir=&quot;mkdir -p&quot;     # -p make parent dirs as needed</span><br><span class="line">alias df=&quot;df -h&quot;           # -h prints human readable format</span><br><span class="line"></span><br><span class="line"># 别名可以组合使用</span><br><span class="line">alias la=&quot;ls -A&quot;</span><br><span class="line">alias lla=&quot;la -l&quot;</span><br><span class="line"></span><br><span class="line"># 在忽略某个别名</span><br><span class="line">\ls</span><br><span class="line"># 或者禁用别名</span><br><span class="line">unalias la</span><br><span class="line"></span><br><span class="line"># 获取别名的定义</span><br><span class="line">alias ll</span><br><span class="line"># 会打印 ll=&#x27;ls -lh&#x27;</span><br></pre></td></tr></table></figure>
+值得注意的是，在默认情况下 shell
+并不会保存别名。为了让别名持续生效，您需要将配置放进 shell
+的启动文件里，像是.bashrc 或 .zshrc，下一节我们就会讲到。 #### 配置文件
+让我们帮助您进一步学习配置文件：</li>
 <li>为您的配置文件新建一个文件夹，并设置好版本控制</li>
-<li>在其中添加至少一个配置文件，比如说您的 shell，在其中包含一些自定义设置（可以从设置 $PS1 开始）。</li>
-<li>建立一种在新设备进行快速安装配置的方法（无需手动操作）。最简单的方法是写一个 shell 脚本对每个文件使用 ln -s，也可以使用专用工具在新的虚拟机上测试该安装脚本。将您现有的所有配置文件移动到项目仓库里。将项目发布到GitHub。<br>做的时候GitHub报错暂未解决，先不写了。</li>
-</ol>
-<h4 id="远端设备"><a href="#远端设备" class="headerlink" title="远端设备"></a>远端设备</h4><p>进行下面的练习需要您先安装一个 Linux 虚拟机（如果已经安装过则可以直接使用），如果您对虚拟机尚不熟悉，可以参考这篇教程 来进行安装。</p>
-<ol>
-<li>前往 ~&#x2F;.ssh&#x2F; 并查看是否已经存在 SSH 密钥对。如果不存在，请使用ssh-keygen -o -a 100 -t ed25519来创建一个。建议为密钥设置密码然后使用ssh-agent 这里；</li>
-<li>在.ssh&#x2F;config加入下面内容：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Host vm #ssh连接的别名</span><br><span class="line">   User username_goes_here #用户名</span><br><span class="line">   HostName ip_goes_here #ip地址</span><br><span class="line">   IdentityFile ~/.ssh/id_ed25519 #密钥文件</span><br><span class="line">   LocalForward 9999 localhost:8888  #本地端口转发</span><br></pre></td></tr></table></figure></li>
+<li>在其中添加至少一个配置文件，比如说您的
+shell，在其中包含一些自定义设置（可以从设置 $PS1 开始）。</li>
+<li>建立一种在新设备进行快速安装配置的方法（无需手动操作）。最简单的方法是写一个
+shell 脚本对每个文件使用 ln
+-s，也可以使用专用工具在新的虚拟机上测试该安装脚本。将您现有的所有配置文件移动到项目仓库里。将项目发布到GitHub。
+做的时候GitHub报错暂未解决，先不写了。 #### 远端设备
+进行下面的练习需要您先安装一个 Linux
+虚拟机（如果已经安装过则可以直接使用），如果您对虚拟机尚不熟悉，可以参考这篇教程
+来进行安装。</li>
+<li>前往 ~/.ssh/ 并查看是否已经存在 SSH
+密钥对。如果不存在，请使用ssh-keygen -o -a 100 -t
+ed25519来创建一个。建议为密钥设置密码然后使用ssh-agent 这里；</li>
+<li>在.ssh/config加入下面内容： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Host vm #ssh连接的别名</span><br><span class="line">   User username_goes_here #用户名</span><br><span class="line">   HostName ip_goes_here #ip地址</span><br><span class="line">   IdentityFile ~/.ssh/id_ed25519 #密钥文件</span><br><span class="line">   LocalForward 9999 localhost:8888  #本地端口转发</span><br></pre></td></tr></table></figure></li>
 </ol>
 
       
@@ -1261,7 +1288,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/bzoj3032%20%E4%B8%83%E5%A4%95%E7%A5%AD/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/cf1823/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
@@ -1275,7 +1302,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/07/02/bzoj3032%20%E4%B8%83%E5%A4%95%E7%A5%AD/" class="post-title-link" itemprop="url">bzoj3032 七夕祭</a>
+            <a href="/2023/07/02/cf1823/" class="post-title-link" itemprop="url">cf1823</a>
         </h2>
 
         <div class="post-meta">
@@ -1286,7 +1313,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:28:01" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
+              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:27:20" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1298,21 +1325,7 @@
                 </span>
             </span>
 
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
+          
 
         </div>
       </header>
@@ -1323,23 +1336,40 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="bzoj3032-七夕祭"><a href="#bzoj3032-七夕祭" class="headerlink" title="bzoj3032 七夕祭"></a>bzoj3032 七夕祭</h1><p><a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/107/">题目链接</a><br>解析:</p>
-<ol>
-<li>如果交换左右两边的位置每一行感兴趣的摊位数量不变<br>  同理交换上下两边的位置每一列感兴趣的摊位数量不变<br>  所以该问题可以分解为两个一维的问题：<ul>
-<li>用最少的步数使每一行的摊位数目相等</li>
-<li>用最少的步数使每一列的摊位数目相等</li>
-<li>前提是总的行数上的感兴趣的数目或总的列数上感兴趣的摊位数目可以被均分</li>
-</ul>
-</li>
-<li>接下来解决两个相似的一维问题即可<br>这和均分纸牌问题相似：M个人拍成一行，每个人手中有C[1]~C[M]张纸牌，每个人都想要拿到相同数量的纸牌，可以让某个人将自己手中的一张牌交给身边的一个人,问最少需要多少次交换。这里假设均分纸牌问题有解：<br>考虑第一个人：<ol>
-<li>若C[1] &gt; avg, 则他需要将C[1] - avg张牌交给第二个人</li>
-<li>若C[1] &lt; avg, 则他需要从第二个人那里拿avg - C[1]张牌<br>接下来以此考虑2~M个人。所需最小步数即为   $\sum_{i&#x3D;1}^M abs(i<em>avg-G[i])$ ，其中G[i]&#x3D;$\sum_{i&#x3D;1}^MC[i]$<br>其含义是每个“前缀“持有者最初共有G[i]张牌，最终会共有i</em>avg张牌，设A[i]&#x3D;C[i]-avg,即从一开始就减掉avg最终每个人只有0张牌<br>3.但是这个问题可以将头尾互换相当于“环形均分纸牌”，该问题一定有最优解，并且所求的答案可以看作是将环从某一点k断开，其持有的纸牌数，前缀和分别是<br>A[k+1]  S[k+1]-S[k]<br>A[k+2]  S[k+2]-S[k]<br>……      ……</li>
-</ol>
-<p>A[M]  S[M]-S[k]<br>A[1]  S[1]+S[M]-S[k]<br>……     ……<br>A[k]  S[k]+S[M]-S[k]<br>经推导S[M]一定为0所需最小步数为$\sum_{i&#x3D;k+1}^M abs(S[k]-S[i])$ S[i]&#x3D;$\sum_{j&#x3D;1}^iA[j]$ 步数最小时上述公式又转为货舱选址问题，选择中位数即可</p>
-</li>
-</ol>
-<p>代码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">// Problem: 七夕祭</span><br><span class="line">// Contest: AcWing</span><br><span class="line">// URL: https://www.acwing.com/problem/content/107/</span><br><span class="line">// Memory Limit: 64 MB</span><br><span class="line">// Time Limit: 1000 ms</span><br><span class="line">// </span><br><span class="line">// Powered by CP Editor (https://cpeditor.org)</span><br><span class="line"></span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;queue&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#include&lt;cmath&gt;</span><br><span class="line">#include&lt;stack&gt;</span><br><span class="line">#include&lt;vector&gt;</span><br><span class="line">#include&lt;map&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">#define x first</span><br><span class="line">#define y second</span><br><span class="line">typedef pair&lt;int,int&gt; PII;</span><br><span class="line">typedef long long LL;</span><br><span class="line">const int N=1e5+10;</span><br><span class="line">int n,m,t;</span><br><span class="line">LL lx[N],ly[N],f[N];</span><br><span class="line">LL handle(LL arr[],int n)&#123;</span><br><span class="line">	for(int i=1;i&lt;=n;i++) f[i]=f[i-1]+arr[i]-arr[0]/n;</span><br><span class="line">	sort(f+1,f+1+n);</span><br><span class="line">	int loc=(n+1)&gt;&gt;1;</span><br><span class="line">	LL res=0;</span><br><span class="line">	for(int i=1;i&lt;=n;i++)&#123;</span><br><span class="line">		res+=abs(f[i]-f[loc]);</span><br><span class="line">	&#125;</span><br><span class="line">	return res;</span><br><span class="line">&#125;</span><br><span class="line">int main()&#123;</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;m&gt;&gt;t;</span><br><span class="line">	while(t--)&#123;</span><br><span class="line">		int x,y;</span><br><span class="line">		cin&gt;&gt;x&gt;&gt;y;</span><br><span class="line">		lx[x]++,ly[y]++;</span><br><span class="line">	&#125;</span><br><span class="line">	for(int i=1;i&lt;=n;i++) lx[0]+=lx[i];</span><br><span class="line">	for(int i=1;i&lt;=m;i++) ly[0]+=ly[i];</span><br><span class="line">	if(lx[0]%n==0&amp;&amp;ly[0]%m==0) printf(&quot;both %lld\n&quot;,handle(lx,n)+handle(ly,m));</span><br><span class="line">	else if(lx[0]%n==0) printf(&quot;row %lld\n&quot;,handle(lx,n));</span><br><span class="line">	else if(ly[0]%m==0) printf(&quot;column %lld\n&quot;,handle(ly,m));</span><br><span class="line">	else printf(&quot;impossible\n&quot;);</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+          <h1 id="cf1823">cf1823</h1>
+<h4 id="a.-a-characteristic">A. A-characteristic</h4>
+<p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1823/problem/A">题目链接</a>
+由于出现数字只可能是1或-1，那么假设数列全为-1，依次枚举1出现的个数，可以得出结论不是所有数字都有答案的，由于会有重复数字出现，只需要枚举1的个数x&lt;=n/2即可。
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">// Problem: A. A-characteristic</span><br><span class="line">// Contest: Codeforces - Codeforces Round 868 (Div. 2)</span><br><span class="line">// URL: https://codeforces.com/contest/1823/problem/A</span><br><span class="line">// Memory Limit: 256 MB</span><br><span class="line">// Time Limit: 1000 ms</span><br><span class="line">// </span><br><span class="line">// Powered by CP Editor (https://cpeditor.org)</span><br><span class="line"></span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;queue&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#include&lt;cmath&gt;</span><br><span class="line">#include&lt;stack&gt;</span><br><span class="line">#include&lt;vector&gt;</span><br><span class="line">#include&lt;map&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">#define x first</span><br><span class="line">#define y second</span><br><span class="line">typedef pair&lt;int,int&gt; PII;</span><br><span class="line">typedef long long LL;</span><br><span class="line">const int N=110;</span><br><span class="line">int t,n,k;</span><br><span class="line">int res[N];</span><br><span class="line">bool cal(int l,int r)&#123;</span><br><span class="line">	if(l*(l-1)/2+r*(r-1)/2==k)&#123;</span><br><span class="line">		for(int i=1;i&lt;=l;i++) res[i]=1;</span><br><span class="line">		for(int i=l+1;i&lt;=n;i++) res[i]=-1;</span><br><span class="line">		return true;</span><br><span class="line">	&#125;</span><br><span class="line">	return false;</span><br><span class="line">&#125;</span><br><span class="line">bool check(int x)&#123;</span><br><span class="line">	int mid=x&gt;&gt;1;</span><br><span class="line">	for(int i=x;i&gt;=mid;i--)&#123;</span><br><span class="line">		if(cal(i,x-i))&#123;</span><br><span class="line">			return true;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return false;</span><br><span class="line">&#125;</span><br><span class="line">int main()&#123;</span><br><span class="line">	cin&gt;&gt;t;</span><br><span class="line">	while(t--)&#123;</span><br><span class="line">		cin&gt;&gt;n&gt;&gt;k;</span><br><span class="line">		if(check(n))&#123;</span><br><span class="line">			puts(&quot;YES&quot;);</span><br><span class="line">			for(int i=1;i&lt;=n;i++)&#123;</span><br><span class="line">				cout&lt;&lt;res[i]&lt;&lt;&quot; &quot;;</span><br><span class="line">			&#125;</span><br><span class="line">			puts(&quot;&quot;);</span><br><span class="line">		&#125;else&#123;</span><br><span class="line">			puts(&quot;NO&quot;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="b.-sort-with-step">B. Sort with Step</h4>
+<p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1823/problem/B">题目链接</a>
+只能交换相隔k个位置的数字，假如k为1，那么可以看作冒泡排序必然有解
+k&gt;1时，将数组按照下标i分组，i%k==0的为一组，i%k==1的为一组，...，i%k==k-1的为一组，要想可以按照递增序列上升，同时由于数字x&lt;n,且只会出现一次。所以如果不先更换一组数据就有解的话，同一组内的数字对k取模的结果必然一致。不一致的话当不一致的数字为2时，可以交换一次得到解，否则无解。
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line">// Problem: B. Sort with Step</span><br><span class="line">// Contest: Codeforces - Codeforces Round 868 (Div. 2)</span><br><span class="line">// URL: https://codeforces.com/contest/1823/problem/B</span><br><span class="line">// Memory Limit: 256 MB</span><br><span class="line">// Time Limit: 1000 ms</span><br><span class="line">// </span><br><span class="line">// Powered by CP Editor (https://cpeditor.org)</span><br><span class="line"></span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;queue&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#include&lt;cmath&gt;</span><br><span class="line">#include&lt;stack&gt;</span><br><span class="line">#include&lt;vector&gt;</span><br><span class="line">#include&lt;map&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">#define x first</span><br><span class="line">#define y second</span><br><span class="line">typedef pair&lt;int,int&gt; PII;</span><br><span class="line">typedef long long LL;</span><br><span class="line">const int N=2e5+10;</span><br><span class="line">int t,n,k;</span><br><span class="line">int p[N],tmp[N];</span><br><span class="line">vector&lt;int&gt; q[N];</span><br><span class="line">LL getnum(int l,int r)&#123;</span><br><span class="line">	if(l&gt;=r) return 0;</span><br><span class="line">	int mid=(l+r)&gt;&gt;1;</span><br><span class="line">	LL ans=getnum(l,mid)+getnum(mid+1,r);</span><br><span class="line">	int i=l,j=mid+1,cnt=0;</span><br><span class="line">	while(i&lt;=mid&amp;&amp;j&lt;=r)&#123;</span><br><span class="line">		if(p[i]&lt;=p[j]) tmp[cnt++]=p[i++];</span><br><span class="line">		else&#123;</span><br><span class="line">			ans+=mid-i+1;</span><br><span class="line">			tmp[cnt++]=p[j++];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	while(i&lt;=mid) tmp[cnt++]=p[i++];</span><br><span class="line">	while(j&lt;=r) tmp[cnt++]=p[j++];</span><br><span class="line">	for(i=l,j=0;i&lt;=r;i++,j++)&#123;</span><br><span class="line">		p[i]=tmp[j];</span><br><span class="line">	&#125;</span><br><span class="line">	return ans;</span><br><span class="line">&#125;</span><br><span class="line">int main()&#123;</span><br><span class="line">	scanf(&quot;%d&quot;,&amp;t);</span><br><span class="line">	while(t--)&#123;</span><br><span class="line">		scanf(&quot;%d%d&quot;,&amp;n,&amp;k);</span><br><span class="line">		for(int i=0;i&lt;k;i++)&#123;</span><br><span class="line">			q[i].clear();</span><br><span class="line">		&#125;</span><br><span class="line">		for(int i=1;i&lt;=n;i++)&#123;</span><br><span class="line">			scanf(&quot;%d&quot;,&amp;p[i]);</span><br><span class="line">			q[i%k].push_back(p[i]);</span><br><span class="line">		&#125;</span><br><span class="line">		if(k==1)&#123;</span><br><span class="line">			puts(&quot;0&quot;);</span><br><span class="line">			continue;</span><br><span class="line">		&#125;</span><br><span class="line">		int res=0;</span><br><span class="line">		for(int i=0;i&lt;k;i++)&#123;</span><br><span class="line">			// sort(q[i].begin(),q[i].end());</span><br><span class="line">			// for(int j=0;j&lt;q[i].size();j++)&#123;</span><br><span class="line">				// p[i+j*k]=q[i][j];</span><br><span class="line">				// cout&lt;&lt;q[i][j]&lt;&lt;&quot; &quot;;</span><br><span class="line">			// &#125;</span><br><span class="line">			// cout&lt;&lt;endl;</span><br><span class="line">			for(int j=0;j&lt;q[i].size();j++)&#123;</span><br><span class="line">				if(q[i][j]%k!=i) res++; </span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		// LL res=getnum(1,n);</span><br><span class="line">		// cout&lt;&lt;res&lt;&lt;endl;</span><br><span class="line">		// for(int i=1;i&lt;=n;i++)&#123;</span><br><span class="line">			// cout&lt;&lt;p[i]&lt;&lt;&quot; &quot;;</span><br><span class="line">		// &#125;</span><br><span class="line">		// cout&lt;&lt;endl;</span><br><span class="line">		if(res==0) puts(&quot;0&quot;);</span><br><span class="line">		else if(res==2) puts(&quot;1&quot;);</span><br><span class="line">		else puts(&quot;-1&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="c.-strongly-composite">C. Strongly Composite</h4>
+<p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1823/problem/C">题目链接</a>
+比赛的时候没做出来但是思路对的，先贴代码 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">// Problem: C. Strongly Composite</span><br><span class="line">// Contest: Codeforces - Codeforces Round 868 (Div. 2)</span><br><span class="line">// URL: https://codeforces.com/contest/1823/problem/C</span><br><span class="line">// Memory Limit: 256 MB</span><br><span class="line">// Time Limit: 2000 ms</span><br><span class="line">// </span><br><span class="line">// Powered by CP Editor (https://cpeditor.org)</span><br><span class="line"></span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;queue&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#include&lt;cmath&gt;</span><br><span class="line">#include&lt;stack&gt;</span><br><span class="line">#include&lt;vector&gt;</span><br><span class="line">#include&lt;map&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">#define x first</span><br><span class="line">#define y second</span><br><span class="line">typedef pair&lt;int,int&gt; PII;</span><br><span class="line">typedef long long LL;</span><br><span class="line">const int N=1010,M=1e5+10;</span><br><span class="line">int T;</span><br><span class="line">int n,k;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">	/*</span><br><span class="line">	res</span><br><span class="line">	暂时想出来的思路是计算出所有乘数中每个质数的数量，</span><br><span class="line">	然后同一个素数下每两个组合，直至每个素数均剩下0或1个,res+=每个素数的数量/2</span><br><span class="line">	然后计算剩余个数为1的素数的个数count如果可以整除3那么res+=count/3,否则就看乘积是不是强合数，是的话res=1,不是res=0</span><br><span class="line">	*/</span><br><span class="line">	scanf(&quot;%d&quot;,&amp;T);</span><br><span class="line">	while(T--)&#123;</span><br><span class="line">		scanf(&quot;%d&quot;,&amp;n);</span><br><span class="line">		map&lt;int,int&gt; q;</span><br><span class="line">		for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">			int x;</span><br><span class="line">			scanf(&quot;%d&quot;,&amp;x);</span><br><span class="line">			for(int j=2;j&lt;=x/j;j++)&#123;</span><br><span class="line">				while(x%j==0)&#123;</span><br><span class="line">					x/=j;</span><br><span class="line">					q[j]++;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			if(x!=1) q[x]++;</span><br><span class="line">		&#125;</span><br><span class="line">		int res=0,rem=0;</span><br><span class="line">		for(PII p:q)&#123;</span><br><span class="line">			int num=p.x;</span><br><span class="line">			int cnt=p.y;</span><br><span class="line">			res+=cnt/2;</span><br><span class="line">			rem+=cnt%2;</span><br><span class="line">		&#125;</span><br><span class="line">		res+=rem/3;</span><br><span class="line">		printf(&quot;%d\n&quot;,res);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+思路证明：对于一个强合数x，对其进行因式分解x=<span
+class="math inline">\(d^{p_1}_{1}\)</span><span
+class="math inline">\(d^{p_2}_{2}……\)</span><span
+class="math inline">\(d^{p_{m-1}}_{m-1}\)</span><span
+class="math inline">\(d^{p_m}_{m}\)</span>,那么x的因子数量为D=$_{i=1}^m{(d_i+1)}
+$
+数字的质因子个数为m,合因数的个数为D-m-1.x是强合数m&lt;=D-m-1即2<em>m+1&lt;=D,由于<span
+class="math inline">\(d_i\)</span>+1&gt;=2,那么D&gt;=<span
+class="math inline">\(2^m\)</span>
+对于强合数的一个弱条件，2</em>m+1&lt;=<span
+class="math inline">\(2^m\)</span>,当m为1或2时不成立其余成立，那么由于D&gt;=<span
+class="math inline">\(2^m\)</span>,所以当m为1或2时，x为强合数
+即如果是一个强合数，质因子个数大于等于3
+接下来找出所有数列中的质因子得到(<span
+class="math inline">\(p^i\)</span>,<span
+class="math inline">\(c^i\)</span>),前为质因子，后为所有数中质因子个数。
+最优策略是对于同一质因子求<span
+class="math inline">\(\sum_i{ci/2}\)</span>,剩下个数r=<span
+class="math inline">\(\sum_i(ci\%2)\)</span><br />
+res+=<span class="math inline">\(\sum_i{ci/2}\)</span>+r/3即可</p>
+
       
     </div>
 
@@ -1471,16 +1501,6 @@
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">XuandYu000</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-chart-area"></i>
-    </span>
-    <span title="站点总字数">336k</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-coffee"></i>
-    </span>
-    <span title="站点阅读时长">5:05</span>
 </div>
 
 <!--
