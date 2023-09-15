@@ -23,12 +23,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Higher Order Funcrtions 让我们做一个功能组合 1234567&gt;&gt;&gt; def combine_funcs(op):&gt;&gt;&gt; &quot;&quot;&quot;combine funcs(OP)(f,g)(x)&#x3D;OP(f(x),g(x))&quot;&quot;&quot;&gt;&gt;&gt; 	def combine(f,g):&amp;gt">
+  <meta name="description" content="Higher Order Funcrtions让我们做一个功能组合1234567&gt;&gt;&gt; def combine_funcs(op):&gt;&gt;&gt; &quot;&quot;&quot;combine funcs(OP)(f,g)(x)&#x3D;OP(f(x),g(x))&quot;&quot;&quot;&gt;&gt;&gt; 	def combine(f,g):&gt;&amp;g">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Higher Order Funcrtions">
 <meta property="og:url" content="http://example.com/2023/07/02/Higher%20Order%20Funcrtions/index.html">
 <meta property="og:site_name" content="viewoverlook">
-<meta property="og:description" content="Higher Order Funcrtions 让我们做一个功能组合 1234567&gt;&gt;&gt; def combine_funcs(op):&gt;&gt;&gt; &quot;&quot;&quot;combine funcs(OP)(f,g)(x)&#x3D;OP(f(x),g(x))&quot;&quot;&quot;&gt;&gt;&gt; 	def combine(f,g):&amp;gt">
+<meta property="og:description" content="Higher Order Funcrtions让我们做一个功能组合1234567&gt;&gt;&gt; def combine_funcs(op):&gt;&gt;&gt; &quot;&quot;&quot;combine funcs(OP)(f,g)(x)&#x3D;OP(f(x),g(x))&quot;&quot;&quot;&gt;&gt;&gt; 	def combine(f,g):&gt;&amp;g">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-07-01T16:00:00.000Z">
 <meta property="article:modified_time" content="2023-07-02T08:12:33.750Z">
@@ -243,23 +243,19 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="higher-order-funcrtions">Higher Order Funcrtions</h1>
-<p>让我们做一个功能组合 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">combine_funcs</span>(<span class="params">op</span>):</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;&quot;&quot;combine funcs(OP)(f,g)(x)=OP(f(x),g(x))&quot;&quot;&quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>	<span class="keyword">def</span> <span class="title function_">combine</span>(<span class="params">f,g</span>):</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>		<span class="keyword">def</span> <span class="title function_">val</span>(<span class="params">x</span>):</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>			<span class="keyword">return</span> op(f(x),g(x))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>		<span class="keyword">return</span> val</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>	<span class="keyword">return</span> combined</span><br></pre></td></tr></table></figure></p>
+        <h1 id="Higher-Order-Funcrtions"><a href="#Higher-Order-Funcrtions" class="headerlink" title="Higher Order Funcrtions"></a>Higher Order Funcrtions</h1><p>让我们做一个功能组合<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">combine_funcs</span>(<span class="params">op</span>):</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;&quot;&quot;combine funcs(OP)(f,g)(x)=OP(f(x),g(x))&quot;&quot;&quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>	<span class="keyword">def</span> <span class="title function_">combine</span>(<span class="params">f,g</span>):</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>		<span class="keyword">def</span> <span class="title function_">val</span>(<span class="params">x</span>):</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>			<span class="keyword">return</span> op(f(x),g(x))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>		<span class="keyword">return</span> val</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>	<span class="keyword">return</span> combined</span><br></pre></td></tr></table></figure></p>
 <p>功能实例</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">combine_func</span>(<span class="params">op</span>):</span><br><span class="line">	<span class="keyword">def</span> <span class="title function_">combined</span>(<span class="params">f,g</span>):</span><br><span class="line">		<span class="keyword">def</span> <span class="title function_">val</span>(<span class="params">x</span>):</span><br><span class="line">			<span class="keyword">return</span> op(f(x),g(x))</span><br><span class="line">		<span class="keyword">return</span> val</span><br><span class="line">	<span class="keyword">return</span> combined</span><br><span class="line"><span class="keyword">from</span> operator <span class="keyword">import</span> add</span><br><span class="line">add_func=combine_func(add)</span><br><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> sin,cos,pi</span><br><span class="line">h=add_func(sin,cos)</span><br><span class="line">h(pi/<span class="number">4</span>)</span><br></pre></td></tr></table></figure>
-<p>为什么要返回val和combined，而不是val(x),combined(f,g)?
-combined直至<code>h=add_func(sin,cos)</code>之前都没有赋值，这里的<code>return combined</code>是返回combined函数本身而不是调用后的结果，同样的在没对val赋值时返回的也只是函数val</p>
-<h4 id="challenge-conditional-function">challenge: Conditional
-Function</h4>
-<p>是否可以写一个python函数<code>if_func</code>:
-<code>if_func(x/1,x&gt;0,0)</code>
-使得返回值和条件语句<code>1/x if x&gt;0 else 0</code> -
-答案是不行的，函数调用时会计算操作数也就是已经计算好了<code>1/x</code></p>
-<p>但是我们可以这样写 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">define if_func(then_expr,condition,else_expr):</span><br><span class="line">	<span class="keyword">return</span> then_expr() <span class="keyword">if</span> condition <span class="keyword">else</span> else_expr()</span><br></pre></td></tr></table></figure></p>
-<p>之后这样调用: <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if_func(<span class="keyword">lambda</span>: <span class="number">1</span>/x,x&gt;<span class="number">0</span>,<span class="keyword">lambda</span>:<span class="number">0</span>)</span><br></pre></td></tr></table></figure></p>
+<p>为什么要返回val和combined，而不是val(x),combined(f,g)?<br>combined直至<code>h=add_func(sin,cos)</code>之前都没有赋值，这里的<code>return combined</code>是返回combined函数本身而不是调用后的结果，同样的在没对val赋值时返回的也只是函数val</p>
+<h4 id="challenge-Conditional-Function"><a href="#challenge-Conditional-Function" class="headerlink" title="challenge: Conditional Function"></a>challenge: Conditional Function</h4><p>是否可以写一个python函数<code>if_func</code>: <code>if_func(x/1,x&gt;0,0)</code><br>使得返回值和条件语句<code>1/x if x&gt;0 else 0</code> </p>
+<ul>
+<li>答案是不行的，函数调用时会计算操作数也就是已经计算好了<code>1/x</code></li>
+</ul>
+<p>但是我们可以这样写<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">define if_func(then_expr,condition,else_expr):</span><br><span class="line">	<span class="keyword">return</span> then_expr() <span class="keyword">if</span> condition <span class="keyword">else</span> else_expr()</span><br></pre></td></tr></table></figure></p>
+<p>之后这样调用:<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if_func(<span class="keyword">lambda</span>: <span class="number">1</span>/x,x&gt;<span class="number">0</span>,<span class="keyword">lambda</span>:<span class="number">0</span>)</span><br></pre></td></tr></table></figure></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">到目前为止，每当我们想要定义一个新函数时，都需要给它取一个名字。但是对于其他类型的表达式，我们不需要将中间值与名称相关联。也就是说，我们可以计算 `a * b + c * d` 而不必命名子表达式 `a*b` 或 `c*d` 或完整的表达式。在 Python 中，我们可以使用 lambda 表达式临时创建函数，这些表达式会计算为未命名的函数。一个 lambda 表达式的计算结果是一个函数，它仅有一个返回表达式作为主体。不允许使用赋值和控制语句。</span><br></pre></td></tr></table></figure>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">compose1</span>(<span class="params">f,g</span>):</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">return</span> <span class="keyword">lambda</span> x: f(g(x))</span><br></pre></td></tr></table></figure>
-<p>可以构造相应的句子理解: <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">lambda</span>           x       :           f(g(x))</span><br><span class="line">A function that  takes x <span class="keyword">and</span> returns f(g(x))</span><br></pre></td></tr></table></figure></p>
+<p>可以构造相应的句子理解:<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">lambda</span>           x       :           f(g(x))</span><br><span class="line">A function that  takes x <span class="keyword">and</span> returns f(g(x))</span><br></pre></td></tr></table></figure></p>
 
     </div>
 
@@ -344,8 +340,7 @@ Function</h4>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#higher-order-funcrtions"><span class="nav-number">1.</span> <span class="nav-text">Higher Order Funcrtions</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#challenge-conditional-function"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">challenge: Conditional
-Function</span></a></li></ol></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Higher-Order-Funcrtions"><span class="nav-number">1.</span> <span class="nav-text">Higher Order Funcrtions</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#challenge-Conditional-Function"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">challenge: Conditional Function</span></a></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -428,7 +423,6 @@ Function</span></a></li></ol></li></ol></li></ol></li></ol></div>
   </div>
 
   
-  <script size="300" alpha="0.6" zIndex="-1" src="true"></script>
   <script src="/lib/anime.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
@@ -444,6 +438,8 @@ Function</span></a></li></ol></li></ol></li></ol></li></ol></div>
 <script src="/js/next-boot.js"></script>
 
 
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="true"></script>
 
 
   
