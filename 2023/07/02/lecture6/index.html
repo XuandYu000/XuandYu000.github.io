@@ -23,22 +23,18 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="lecture6 Welcome! Python Hello Types Speller Image Recognition CS50 Library Conditionals Variables Loops Calculator Compare Object-Oriented Programming Meow Mario Scores Uppercase Greet Exit Status Se">
+  <meta name="description" content="lecture6  Welcome! Python Hello Types Speller Image Recognition CS50 Library Conditionals Variables Loops Calculator Compare Object-Oriented Programming Meow Mario Scores Uppercase">
 <meta property="og:type" content="article">
 <meta property="og:title" content="lecture6">
 <meta property="og:url" content="http://example.com/2023/07/02/lecture6/index.html">
 <meta property="og:site_name" content="viewoverlook">
-<meta property="og:description" content="lecture6 Welcome! Python Hello Types Speller Image Recognition CS50 Library Conditionals Variables Loops Calculator Compare Object-Oriented Programming Meow Mario Scores Uppercase Greet Exit Status Se">
+<meta property="og:description" content="lecture6  Welcome! Python Hello Types Speller Image Recognition CS50 Library Conditionals Variables Loops Calculator Compare Object-Oriented Programming Meow Mario Scores Uppercase">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cs50.harvard.edu/x/2023/notes/6/cs50Week6Slide073.png">
-<meta property="og:image" content="https://cs50.harvard.edu/x/2023/notes/6/cs50Week6Slide075.png">
-<meta property="og:image" content="https://cs50.harvard.edu/x/2023/notes/6/cs50Week6Slide078.png">
 <meta property="article:published_time" content="2023-07-01T16:00:00.000Z">
 <meta property="article:modified_time" content="2023-07-02T08:15:16.183Z">
 <meta property="article:author" content="XuandYu000">
 <meta property="article:tag" content="programming">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cs50.harvard.edu/x/2023/notes/6/cs50Week6Slide073.png">
 
 <link rel="canonical" href="http://example.com/2023/07/02/lecture6/">
 
@@ -247,7 +243,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="lecture6"><a href="#lecture6" class="headerlink" title="lecture6"></a>lecture6</h1><ul>
+        <h1 id="lecture6">lecture6</h1>
+<ul>
 <li><a href="#welcome">Welcome!</a></li>
 <li><a href="#python">Python</a></li>
 <li><a href="#hello">Hello</a></li>
@@ -260,7 +257,8 @@
 <li><a href="#loops">Loops</a></li>
 <li><a href="#calculator">Calculator</a></li>
 <li><a href="#compare">Compare</a></li>
-<li><a href="#object-oriented-programming">Object-Oriented Programming</a></li>
+<li><a href="#object-oriented-programming">Object-Oriented
+Programming</a></li>
 <li><a href="#meow">Meow</a></li>
 <li><a href="#mario">Mario</a></li>
 <li><a href="#scores">Scores</a></li>
@@ -275,316 +273,463 @@
 <li><a href="#speech">Speech</a></li>
 <li><a href="#summing-up">Summing Up</a></li>
 </ul>
-<h2 id="Welcome"><a href="#Welcome" class="headerlink" title="Welcome!"></a><a href="#welcome">Welcome!</a></h2><ul>
-<li>In previous weeks, you were introduced to the fundamental building blocks of programming.</li>
-<li>You learned about programming in a lower-level programming language called C.</li>
-<li>Today, we are going to work with a higher-level programming language called _Python_.</li>
-<li>As you learn this new language, you’re going to find that you are going to be more able to teach yourself new programming languages.</li>
+<h2 id="welcome"><a href="#welcome">Welcome!</a></h2>
+<ul>
+<li>In previous weeks, you were introduced to the fundamental building
+blocks of programming.</li>
+<li>You learned about programming in a lower-level programming language
+called C.</li>
+<li>Today, we are going to work with a higher-level programming language
+called <em>Python</em>.</li>
+<li>As you learn this new language, you’re going to find that you are
+going to be more able to teach yourself new programming languages.</li>
 </ul>
-<h2 id="Python"><a href="#Python" class="headerlink" title="Python"></a><a href="#python">Python</a></h2><ul>
-<li>Humans, over the decades, have seen how previous design decisions could be improved upon.</li>
-<li>Python is a programming language that builds upon what you have already learned in C.</li>
+<h2 id="python"><a href="#python">Python</a></h2>
+<ul>
+<li>Humans, over the decades, have seen how previous design decisions
+could be improved upon.</li>
+<li>Python is a programming language that builds upon what you have
+already learned in C.</li>
 </ul>
-<h2 id="Hello"><a href="#Hello" class="headerlink" title="Hello"></a><a href="#hello">Hello</a></h2><ul>
+<h2 id="hello"><a href="#hello">Hello</a></h2>
+<ul>
 <li><p>Up until this point, the code has looked like this:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// A program that says hello to the world</span><br><span class="line"></span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">int main(void) &#123;</span><br><span class="line">    printf(&quot;hello, world\n&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Today, you’ll find that the process of writing and compiling code has been simplified.</p>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// A program that says hello to the world</span><br><span class="line"></span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">int main(void) &#123;</span><br><span class="line">    printf(&quot;hello, world\n&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>Today, you’ll find that the process of writing and compiling code
+has been simplified.</p></li>
 <li><p>For example, the above code will be rendered in Python as:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># A program that says hello to the world</span><br><span class="line"></span><br><span class="line">print(&quot;hello, world&quot;)</span><br></pre></td></tr></table></figure>
-<p>Notice that the semicolon is gone.</p>
-</li>
+<p>Notice that the semicolon is gone.</p></li>
 <li><p>In C, you might remember this code:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// get_string and printf with %s</span><br><span class="line"></span><br><span class="line">#include &lt;cs50.h&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">int main(void) &#123;</span><br><span class="line">    string answer = get_string(&quot;What&#x27;s your name? &quot;);</span><br><span class="line">    printf(&quot;hello, %s\n&quot;, answer);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// get_string and printf with %s</span><br><span class="line"></span><br><span class="line">#include &lt;cs50.h&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">int main(void) &#123;</span><br><span class="line">    string answer = get_string(&quot;What&#x27;s your name? &quot;);</span><br><span class="line">    printf(&quot;hello, %s\n&quot;, answer);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 <li><p>This code is transformed in Python to:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># get_string and print, with concatenation</span><br><span class="line"></span><br><span class="line">from cs50 import get_string</span><br><span class="line"></span><br><span class="line">answer = get_string(&quot;What&#x27;s your name? &quot;)</span><br><span class="line">print(&quot;hello, &quot; + answer)</span><br></pre></td></tr></table></figure>
-<p>You can write this code by executing <code>code hello.py</code> in the terminal window. Then, you can execute this code by running <code>python hello.py</code>. Notice how the <code>+</code> sign concatenates <code>&quot;hello, &quot;</code> and <code>answer</code>.</p>
-</li>
+<p>You can write this code by executing <code>code hello.py</code> in
+the terminal window. Then, you can execute this code by running
+<code>python hello.py</code>. Notice how the <code>+</code> sign
+concatenates <code>"hello, "</code> and <code>answer</code>.</p></li>
 <li><p>Similarly, you could implement the above code as:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># get_string and print, with format strings</span><br><span class="line"></span><br><span class="line">from cs50 import get_string</span><br><span class="line"></span><br><span class="line">answer = get_string(&quot;What&#x27;s your name? &quot;)</span><br><span class="line">print(f&quot;hello, &#123;answer&#125;&quot;)</span><br></pre></td></tr></table></figure>
-<p>Notice how the curly braces allow for the <code>print</code> function to interpolate the <code>answer</code> such that <code>answer</code> appears within.</p>
-</li>
+<p>Notice how the curly braces allow for the <code>print</code> function
+to interpolate the <code>answer</code> such that <code>answer</code>
+appears within.</p></li>
 </ul>
-<h2 id="Types"><a href="#Types" class="headerlink" title="Types"></a><a href="#types">Types</a></h2><ul>
-<li>Data types in Python do not need to be explicitly declared. For example, you saw how <code>answer</code> above is a string, but we did not have to tell the interpreter this was the case: It knew on its own.</li>
+<h2 id="types"><a href="#types">Types</a></h2>
+<ul>
+<li><p>Data types in Python do not need to be explicitly declared. For
+example, you saw how <code>answer</code> above is a string, but we did
+not have to tell the interpreter this was the case: It knew on its
+own.</p></li>
 <li><p>In Python, commonly used types include:</p>
-<p>Notice that <code>long</code> and <code>double</code> are missing. Python will handle what data type should be used for larger and smaller numbers.</p>
-</li>
+<p>Notice that <code>long</code> and <code>double</code> are missing.
+Python will handle what data type should be used for larger and smaller
+numbers.</p></li>
 <li><p>Some other data types in Python include:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bool</span><br><span class="line">  float</span><br><span class="line">  int</span><br><span class="line">  str</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Each of these data types can be implemented in C, but in Python they can be implemented more simply.</p>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bool</span><br><span class="line">  float</span><br><span class="line">  int</span><br><span class="line">  str</span><br></pre></td></tr></table></figure></li>
+<li><p>Each of these data types can be implemented in C, but in Python
+they can be implemented more simply.</p></li>
 </ul>
-<h2 id="Speller"><a href="#Speller" class="headerlink" title="Speller"></a><a href="#speller">Speller</a></h2><ul>
-<li><p>To illustrate this simplicity, let’s type ‘code dictionary.py’ in the terminal window and write code as follows:</p>
+<h2 id="speller"><a href="#speller">Speller</a></h2>
+<ul>
+<li><p>To illustrate this simplicity, let’s type ‘code dictionary.py’ in
+the terminal window and write code as follows:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">range</span><br><span class="line">  list</span><br><span class="line">  tuple</span><br><span class="line">  dict</span><br><span class="line">  set</span><br></pre></td></tr></table></figure>
-<p>Notice that there are four functions above. In the <code>check</code> function, if a <code>word</code> is in <code>words</code>, it returns <code>True</code>. So much easier than an implementation in C! Similarly, in the <code>load</code> function the dictionary file is opened. For each line in that file, we add that line to <code>words</code>. Using <code>rstrip</code>, the trailing new line is removed from the added word. <code>size</code> simply returns the <code>len</code> or length of <code>words</code>. <code>unload</code> only needs to return <code>True</code> because Python handles memory management on its own.</p>
-</li>
-<li><p>The above code illustrates why higher-level languages exist: To simplify and allow you to write code more easily.</p>
-</li>
-<li>However, speed is a tradeoff. Because C allows you, the programmer, to make decisions about memory management, it may run faster than Python – depending on your code. While C only runs your lines of code, Python runs all the code that comes under the hood with it when you call Python’s built-in functions.</li>
-<li>You can learn more about functions in the <a target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html">Python documentation</a></li>
+<p>Notice that there are four functions above. In the <code>check</code>
+function, if a <code>word</code> is in <code>words</code>, it returns
+<code>True</code>. So much easier than an implementation in C!
+Similarly, in the <code>load</code> function the dictionary file is
+opened. For each line in that file, we add that line to
+<code>words</code>. Using <code>rstrip</code>, the trailing new line is
+removed from the added word. <code>size</code> simply returns the
+<code>len</code> or length of <code>words</code>. <code>unload</code>
+only needs to return <code>True</code> because Python handles memory
+management on its own.</p></li>
+<li><p>The above code illustrates why higher-level languages exist: To
+simplify and allow you to write code more easily.</p></li>
+<li><p>However, speed is a tradeoff. Because C allows you, the
+programmer, to make decisions about memory management, it may run faster
+than Python – depending on your code. While C only runs your lines of
+code, Python runs all the code that comes under the hood with it when
+you call Python’s built-in functions.</p></li>
+<li><p>You can learn more about functions in the <a
+target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html">Python
+documentation</a></p></li>
 </ul>
-<h2 id="Image-Recognition"><a href="#Image-Recognition" class="headerlink" title="Image Recognition"></a><a href="#image-recognition">Image Recognition</a></h2><ul>
+<h2 id="image-recognition"><a href="#image-recognition">Image
+Recognition</a></h2>
+<ul>
 <li>Numerous libraries have been written by contributors to Python.</li>
 <li>You can utilize these libraries in your own code.</li>
-<li>For example, you could simply import facial recognition utilizing a Python library like <code>PIL</code>.</li>
-<li>David provided a demo of facial recognition utilizing Python and third-party libraries.</li>
+<li>For example, you could simply import facial recognition utilizing a
+Python library like <code>PIL</code>.</li>
+<li>David provided a demo of facial recognition utilizing Python and
+third-party libraries.</li>
 </ul>
-<h2 id="CS50-Library"><a href="#CS50-Library" class="headerlink" title="CS50 Library"></a><a href="#cs50-library">CS50 Library</a></h2><ul>
-<li>As with C, the CS50 library can be utilized within Python.</li>
+<h2 id="cs50-library"><a href="#cs50-library">CS50 Library</a></h2>
+<ul>
+<li><p>As with C, the CS50 library can be utilized within
+Python.</p></li>
 <li><p>The following functions will be of particular use:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"># Words in dictionary</span><br><span class="line">words = set()</span><br><span class="line"></span><br><span class="line">def check(word):</span><br><span class="line">    &quot;&quot;&quot;Return true if word is in dictionary else false&quot;&quot;&quot;</span><br><span class="line">    if word.lower() in words:</span><br><span class="line">        return True</span><br><span class="line">    else:</span><br><span class="line">        return False</span><br><span class="line"></span><br><span class="line">def load(dictionary):</span><br><span class="line">    &quot;&quot;&quot;Load dictionary into memory, returning true if successful else false&quot;&quot;&quot;</span><br><span class="line">    file = open(dictionary, &quot;r&quot;)</span><br><span class="line">    for line in file:</span><br><span class="line">        word = line.rstrip()</span><br><span class="line">        words.add(word)</span><br><span class="line">    file.close()</span><br><span class="line">    return True</span><br><span class="line"></span><br><span class="line">def size():</span><br><span class="line">    &quot;&quot;&quot;Returns number of words in dictionary if loaded else 0 if not yet loaded&quot;&quot;&quot;</span><br><span class="line">    return len(words)</span><br><span class="line"></span><br><span class="line">def unload():</span><br><span class="line">    &quot;&quot;&quot;Unloads dictionary from memory, returning true if successful else false&quot;&quot;&quot;</span><br><span class="line">    return True</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>You also have the option of importing only specific functions from the CS50 library as follows:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">get_float</span><br><span class="line">  get_int</span><br><span class="line">  get_string</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"># Words in dictionary</span><br><span class="line">words = set()</span><br><span class="line"></span><br><span class="line">def check(word):</span><br><span class="line">    &quot;&quot;&quot;Return true if word is in dictionary else false&quot;&quot;&quot;</span><br><span class="line">    if word.lower() in words:</span><br><span class="line">        return True</span><br><span class="line">    else:</span><br><span class="line">        return False</span><br><span class="line"></span><br><span class="line">def load(dictionary):</span><br><span class="line">    &quot;&quot;&quot;Load dictionary into memory, returning true if successful else false&quot;&quot;&quot;</span><br><span class="line">    file = open(dictionary, &quot;r&quot;)</span><br><span class="line">    for line in file:</span><br><span class="line">        word = line.rstrip()</span><br><span class="line">        words.add(word)</span><br><span class="line">    file.close()</span><br><span class="line">    return True</span><br><span class="line"></span><br><span class="line">def size():</span><br><span class="line">    &quot;&quot;&quot;Returns number of words in dictionary if loaded else 0 if not yet loaded&quot;&quot;&quot;</span><br><span class="line">    return len(words)</span><br><span class="line"></span><br><span class="line">def unload():</span><br><span class="line">    &quot;&quot;&quot;Unloads dictionary from memory, returning true if successful else false&quot;&quot;&quot;</span><br><span class="line">    return True</span><br></pre></td></tr></table></figure></li>
+<li><p>You also have the option of importing only specific functions
+from the CS50 library as follows:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">get_float</span><br><span class="line">  get_int</span><br><span class="line">  get_string</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h2 id="Conditionals"><a href="#Conditionals" class="headerlink" title="Conditionals"></a><a href="#conditionals">Conditionals</a></h2><ul>
+<h2 id="conditionals"><a href="#conditionals">Conditionals</a></h2>
+<ul>
 <li><p>In C, you might remember a program like this:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">from CS50 import get_float, get_int, get_string</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">from CS50 import get_float, get_int, get_string</span><br></pre></td></tr></table></figure></li>
 <li><p>In Python, it would appear as follows:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">// Conditionals, Boolean expressions, relational operators</span><br><span class="line"></span><br><span class="line">#include &lt;cs50.h&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">int main(void) &#123;</span><br><span class="line">    // Prompt user for integers</span><br><span class="line">    int x = get_int(&quot;What&#x27;s x? &quot;);</span><br><span class="line">    int y = get_int(&quot;What&#x27;s y? &quot;);</span><br><span class="line"></span><br><span class="line">    // Compare integers</span><br><span class="line">    if (x &lt; y)</span><br><span class="line">    &#123;</span><br><span class="line">        printf(&quot;x is less than y\n&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    else if (x &gt; y)</span><br><span class="line">    &#123;</span><br><span class="line">        printf(&quot;x is greater than y\n&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">        printf(&quot;x is equal to y\n&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Notice that there are no more curly braces. Instead, indentations are utilized. Second, a colon is utilized in the <code>if</code> statement. Further, <code>elif</code> replaces <code>else if</code>. Parentheses are also no longer required in the <code>if</code> and <code>elif</code> statements.</p>
-</li>
+<p>Notice that there are no more curly braces. Instead, indentations are
+utilized. Second, a colon is utilized in the <code>if</code> statement.
+Further, <code>elif</code> replaces <code>else if</code>. Parentheses
+are also no longer required in the <code>if</code> and <code>elif</code>
+statements.</p></li>
 </ul>
-<h2 id="Variables"><a href="#Variables" class="headerlink" title="Variables"></a><a href="#variables">Variables</a></h2><ul>
-<li>Variable declaration is simplified too. In C, you might have <code>int counter = 1;</code>. In Python, this same line would read <code>counter = 1</code>. You need not declare the type of the variable.</li>
-<li>Python favors <code>counter += 1</code> to increment by one, losing the ability found in C to type <code>counter++</code>.</li>
+<h2 id="variables"><a href="#variables">Variables</a></h2>
+<ul>
+<li>Variable declaration is simplified too. In C, you might have
+<code>int counter = 1;</code>. In Python, this same line would read
+<code>counter = 1</code>. You need not declare the type of the
+variable.</li>
+<li>Python favors <code>counter += 1</code> to increment by one, losing
+the ability found in C to type <code>counter++</code>.</li>
 </ul>
-<h2 id="Loops"><a href="#Loops" class="headerlink" title="Loops"></a><a href="#loops">Loops</a></h2><ul>
-<li><p>Loops in Python are very similar to C. You may recall the following code in C:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># Conditionals, Boolean expressions, relational operators</span><br><span class="line"></span><br><span class="line">from cs50 import get_int</span><br><span class="line"></span><br><span class="line"># Prompt user for integers</span><br><span class="line">x = get_int(&quot;What&#x27;s x? &quot;)</span><br><span class="line">y = get_int(&quot;What&#x27;s y? &quot;)</span><br><span class="line"></span><br><span class="line"># Compare integers</span><br><span class="line">if x &lt; y:</span><br><span class="line">    print(&quot;x is less than y&quot;)</span><br><span class="line">elif x &gt; y:</span><br><span class="line">    print(&quot;x is greater than y&quot;)</span><br><span class="line">else:</span><br><span class="line">    print(&quot;x is equal to y&quot;)</span><br></pre></td></tr></table></figure>
-</li>
+<h2 id="loops"><a href="#loops">Loops</a></h2>
+<ul>
+<li><p>Loops in Python are very similar to C. You may recall the
+following code in C:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># Conditionals, Boolean expressions, relational operators</span><br><span class="line"></span><br><span class="line">from cs50 import get_int</span><br><span class="line"></span><br><span class="line"># Prompt user for integers</span><br><span class="line">x = get_int(&quot;What&#x27;s x? &quot;)</span><br><span class="line">y = get_int(&quot;What&#x27;s y? &quot;)</span><br><span class="line"></span><br><span class="line"># Compare integers</span><br><span class="line">if x &lt; y:</span><br><span class="line">    print(&quot;x is less than y&quot;)</span><br><span class="line">elif x &gt; y:</span><br><span class="line">    print(&quot;x is greater than y&quot;)</span><br><span class="line">else:</span><br><span class="line">    print(&quot;x is equal to y&quot;)</span><br></pre></td></tr></table></figure></li>
 <li><p>In Python, this code appears as:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// Demonstrates while loop</span><br><span class="line"></span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">int main(void) &#123;</span><br><span class="line">    int i = 0;</span><br><span class="line">    while (i &lt; 3)</span><br><span class="line">    &#123;</span><br><span class="line">        printf(&quot;meow\n&quot;);</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>for</code> loops can be implemented in Python as follows:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Demonstrates while loop</span><br><span class="line"></span><br><span class="line">i = 0</span><br><span class="line">while i &lt; 3:</span><br><span class="line">    print(&quot;meow&quot;)</span><br><span class="line">    i += 1</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// Demonstrates while loop</span><br><span class="line"></span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">int main(void) &#123;</span><br><span class="line">    int i = 0;</span><br><span class="line">    while (i &lt; 3)</span><br><span class="line">    &#123;</span><br><span class="line">        printf(&quot;meow\n&quot;);</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p><code>for</code> loops can be implemented in Python as
+follows:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Demonstrates while loop</span><br><span class="line"></span><br><span class="line">i = 0</span><br><span class="line">while i &lt; 3:</span><br><span class="line">    print(&quot;meow&quot;)</span><br><span class="line">    i += 1</span><br></pre></td></tr></table></figure></li>
 <li><p>Similarly, one could express the above code as:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Better design</span><br><span class="line"></span><br><span class="line">for i in range(3):</span><br><span class="line">    print(&quot;meow&quot;)</span><br></pre></td></tr></table></figure>
-<p>Notice that a function is utilized to abstract away the meowing.</p>
-</li>
+<p>Notice that a function is utilized to abstract away the
+meowing.</p></li>
 </ul>
-<h2 id="Calculator"><a href="#Calculator" class="headerlink" title="Calculator"></a><a href="#calculator">Calculator</a></h2><ul>
-<li><p>We can implement a simple calculator just as we did within C. Type <code>code calculator.py</code> into the terminal window and write code as follows:</p>
+<h2 id="calculator"><a href="#calculator">Calculator</a></h2>
+<ul>
+<li><p>We can implement a simple calculator just as we did within C.
+Type <code>code calculator.py</code> into the terminal window and write
+code as follows:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># Abstraction with parameterization</span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    meow(3)</span><br><span class="line"></span><br><span class="line"># Meow some number of times</span><br><span class="line">def meow(n):</span><br><span class="line">    for i in range(n):</span><br><span class="line">        print(&quot;meow&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">main()</span><br></pre></td></tr></table></figure>
-<p>Notice how the CS50 library is imported. Then, <code>x</code> and <code>y</code> are gathered from the user. Finally, the result is printed. Notice that the <code>main</code> function that would have been seen in a C program is gone entirely! While one could utilize a <code>main</code> function, it is not required.</p>
-</li>
-<li><p>It’s possible for one to remove the training wheels of the CS50 library. Modify your code as follows:</p>
+<p>Notice how the CS50 library is imported. Then, <code>x</code> and
+<code>y</code> are gathered from the user. Finally, the result is
+printed. Notice that the <code>main</code> function that would have been
+seen in a C program is gone entirely! While one could utilize a
+<code>main</code> function, it is not required.</p></li>
+<li><p>It’s possible for one to remove the training wheels of the CS50
+library. Modify your code as follows:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># Addition with int [using get_int]</span><br><span class="line"></span><br><span class="line">from cs50 import get_int</span><br><span class="line"></span><br><span class="line"># Prompt user for x</span><br><span class="line">x = get_int(&quot;x: &quot;)</span><br><span class="line"></span><br><span class="line"># Prompt user for y</span><br><span class="line">y = get_int(&quot;y: &quot;)</span><br><span class="line"></span><br><span class="line"># Perform addition</span><br><span class="line">print(x + y)</span><br></pre></td></tr></table></figure>
-<p>Notice how executing the above code results in strange program behavior. Why might this be so?</p>
-</li>
-<li><p>You may have guessed that the interpreter understood <code>x</code> and <code>y</code> to be strings. You can fix your code by employing the <code>int</code> function as follows:</p>
+<p>Notice how executing the above code results in strange program
+behavior. Why might this be so?</p></li>
+<li><p>You may have guessed that the interpreter understood
+<code>x</code> and <code>y</code> to be strings. You can fix your code
+by employing the <code>int</code> function as follows:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># Addition with int [using input]</span><br><span class="line"></span><br><span class="line"># Prompt user for x</span><br><span class="line">x = input(&quot;x: &quot;)</span><br><span class="line"></span><br><span class="line"># Prompt user for y</span><br><span class="line">y = input(&quot;y: &quot;)</span><br><span class="line"></span><br><span class="line"># Perform addition</span><br><span class="line">print(x + y)</span><br></pre></td></tr></table></figure>
-<p>Notice how the input for <code>x</code> and <code>y</code> is passed to the <code>int</code> function which converts it to an integer.</p>
-</li>
-<li><p>We can expand the abilities of our calculator. Modify your code as follows:</p>
+<p>Notice how the input for <code>x</code> and <code>y</code> is passed
+to the <code>int</code> function which converts it to an
+integer.</p></li>
+<li><p>We can expand the abilities of our calculator. Modify your code
+as follows:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># Addition with int [using input]</span><br><span class="line"></span><br><span class="line"># Prompt user for x</span><br><span class="line">x = int(input(&quot;x: &quot;))</span><br><span class="line"></span><br><span class="line"># Prompt user for y</span><br><span class="line">y = int(input(&quot;y: &quot;))</span><br><span class="line"></span><br><span class="line"># Perform addition</span><br><span class="line">print(x + y)</span><br></pre></td></tr></table></figure>
-<p>Notice that executing this code results in a value, but that if you were to see more digits after <code>.333333</code> you’d see that we are faced with _floating-point imprecision_.</p>
-</li>
-<li><p>We can reveal this imprecision by modifying our codes slightly:</p>
+<p>Notice that executing this code results in a value, but that if you
+were to see more digits after <code>.333333</code> you’d see that we are
+faced with <em>floating-point imprecision</em>.</p></li>
+<li><p>We can reveal this imprecision by modifying our codes
+slightly:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># Division with integers, demonstration lack of truncation</span><br><span class="line"></span><br><span class="line"># Prompt user for x</span><br><span class="line">x = int(input(&quot;x: &quot;))</span><br><span class="line"></span><br><span class="line"># Prompt user for y</span><br><span class="line">y = int(input(&quot;y: &quot;))</span><br><span class="line"></span><br><span class="line"># Divide x by y</span><br><span class="line">z = x / y</span><br><span class="line">print(z)</span><br></pre></td></tr></table></figure>
-<p>Notice that this code reveals the imprecision. Python still faces this issue, just as C does.</p>
-</li>
+<p>Notice that this code reveals the imprecision. Python still faces
+this issue, just as C does.</p></li>
 </ul>
-<h2 id="Compare"><a href="#Compare" class="headerlink" title="Compare"></a><a href="#compare">Compare</a></h2><ul>
-<li><p>In C, we faced challenges when we wanted to compare two values. Consider the following code:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># Floating-point imprecision</span><br><span class="line"></span><br><span class="line"># Prompt user for x</span><br><span class="line">x = int(input(&quot;x: &quot;))</span><br><span class="line"></span><br><span class="line"># Prompt user for y</span><br><span class="line">y = int(input(&quot;y: &quot;))</span><br><span class="line"></span><br><span class="line"># Divide x by y</span><br><span class="line">z = x / y</span><br><span class="line">print(f&quot;&#123;z:.50f&#125;&quot;)</span><br></pre></td></tr></table></figure>
-</li>
+<h2 id="compare"><a href="#compare">Compare</a></h2>
+<ul>
+<li><p>In C, we faced challenges when we wanted to compare two values.
+Consider the following code:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># Floating-point imprecision</span><br><span class="line"></span><br><span class="line"># Prompt user for x</span><br><span class="line">x = int(input(&quot;x: &quot;))</span><br><span class="line"></span><br><span class="line"># Prompt user for y</span><br><span class="line">y = int(input(&quot;y: &quot;))</span><br><span class="line"></span><br><span class="line"># Divide x by y</span><br><span class="line">z = x / y</span><br><span class="line">print(f&quot;&#123;z:.50f&#125;&quot;)</span><br></pre></td></tr></table></figure></li>
 <li><p>In Python, we can execute the above as follows:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">// Conditionals, Boolean expressions, relational operators</span><br><span class="line"></span><br><span class="line">#include &lt;cs50.h&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">int main(void) &#123;</span><br><span class="line">    // Prompt user for integers</span><br><span class="line">    int x = get_int(&quot;What&#x27;s x? &quot;);</span><br><span class="line">    int y = get_int(&quot;What&#x27;s y? &quot;);</span><br><span class="line"></span><br><span class="line">    // Compare integers</span><br><span class="line">    if (x &lt; y)</span><br><span class="line">    &#123;</span><br><span class="line">        printf(&quot;x is less than y\n&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    else if (x &gt; y)</span><br><span class="line">    &#123;</span><br><span class="line">        printf(&quot;x is greater than y\n&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">        printf(&quot;x is equal to y\n&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Notice that the CS50 library is imported. Further, minor changes exist in the <code>if</code> statement.</p>
-</li>
-<li><p>Further looking at comparisons, consider the following code in C:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># Conditionals, Boolean expressions, relational operators</span><br><span class="line"></span><br><span class="line">from cs50 import get_int</span><br><span class="line"></span><br><span class="line"># Prompt user for integers</span><br><span class="line">x = get_int(&quot;What&#x27;s x? &quot;)</span><br><span class="line">y = get_int(&quot;What&#x27;s y? &quot;)</span><br><span class="line"></span><br><span class="line"># Compare integers</span><br><span class="line">if x &lt; y:</span><br><span class="line">    print(&quot;x is less than y&quot;)</span><br><span class="line">elif x &gt; y:</span><br><span class="line">    print(&quot;x is greater than y&quot;)</span><br><span class="line">else:</span><br><span class="line">    print(&quot;x is equal to y&quot;)</span><br></pre></td></tr></table></figure>
-</li>
+<p>Notice that the CS50 library is imported. Further, minor changes
+exist in the <code>if</code> statement.</p></li>
+<li><p>Further looking at comparisons, consider the following code in
+C:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># Conditionals, Boolean expressions, relational operators</span><br><span class="line"></span><br><span class="line">from cs50 import get_int</span><br><span class="line"></span><br><span class="line"># Prompt user for integers</span><br><span class="line">x = get_int(&quot;What&#x27;s x? &quot;)</span><br><span class="line">y = get_int(&quot;What&#x27;s y? &quot;)</span><br><span class="line"></span><br><span class="line"># Compare integers</span><br><span class="line">if x &lt; y:</span><br><span class="line">    print(&quot;x is less than y&quot;)</span><br><span class="line">elif x &gt; y:</span><br><span class="line">    print(&quot;x is greater than y&quot;)</span><br><span class="line">else:</span><br><span class="line">    print(&quot;x is equal to y&quot;)</span><br></pre></td></tr></table></figure></li>
 <li><p>The above can be implemented as follows:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">// Logical operators</span><br><span class="line"></span><br><span class="line">#include &lt;cs50.h&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">int main(void) &#123;</span><br><span class="line">    // Prompt user to agree</span><br><span class="line">    char c = get_char(&quot;Do you agree? &quot;);</span><br><span class="line"></span><br><span class="line">    // Check whether agreed</span><br><span class="line">    if (c == &#x27;Y&#x27; || c == &#x27;y&#x27;)</span><br><span class="line">    &#123;</span><br><span class="line">        printf(&quot;Agreed.\n&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    else if (c == &#x27;N&#x27; || c == &#x27;n&#x27;)</span><br><span class="line">    &#123;</span><br><span class="line">        printf(&quot;Not agreed.\n&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Notice that the two vertical bars utilized in C is replaced with <code>or</code>. Indeed, people often enjoy Python because it is more readable by humans. Also, notice that <code>char</code> does not exist in Python. Instead, <code>str</code>s are utilized.</p>
-</li>
+<p>Notice that the two vertical bars utilized in C is replaced with
+<code>or</code>. Indeed, people often enjoy Python because it is more
+readable by humans. Also, notice that <code>char</code> does not exist
+in Python. Instead, <code>str</code>s are utilized.</p></li>
 <li><p>Another approach to this same code could be as follows:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># Logical operators</span><br><span class="line"></span><br><span class="line">from cs50 import get_string</span><br><span class="line"></span><br><span class="line"># Prompt user to agree</span><br><span class="line">s = get_string(&quot;Do you agree? &quot;)</span><br><span class="line"></span><br><span class="line"># Check whether agreed</span><br><span class="line">if s == &quot;Y&quot; or s == &quot;y&quot;:</span><br><span class="line">    print(&quot;Agreed.&quot;)</span><br><span class="line">elif s == &quot;N&quot; or s == &quot;n&quot;:</span><br><span class="line">    print(&quot;Not agreed.&quot;)</span><br></pre></td></tr></table></figure>
-<p>Notice how we are able to express multiple keywords like <code>y</code> and <code>yes</code>.</p>
-</li>
+<p>Notice how we are able to express multiple keywords like
+<code>y</code> and <code>yes</code>.</p></li>
 </ul>
-<h2 id="Object-Oriented-Programming"><a href="#Object-Oriented-Programming" class="headerlink" title="Object-Oriented Programming"></a><a href="#object-oriented-programming">Object-Oriented Programming</a></h2><ul>
-<li>Up until this point, our programs in this course have been linear: sequential.</li>
-<li>It’s possible to have certain types of values not only have properties or attributes inside of them but have functions as well. In Python, these values are known as _objects_</li>
-<li>In C, we could create a <code>struct</code> where you could associate multiple variables inside a single self-created data type. In Python, we can do this and also include functions in a self-created data type. When a function belongs to a specific _object_, it is known as a _method_.</li>
-<li><p>For example, <code>strs</code> in Python have a built-in _methods_. Therefore, you could modify your code as follows:</p>
+<h2 id="object-oriented-programming"><a
+href="#object-oriented-programming">Object-Oriented Programming</a></h2>
+<ul>
+<li><p>Up until this point, our programs in this course have been
+linear: sequential.</p></li>
+<li><p>It’s possible to have certain types of values not only have
+properties or attributes inside of them but have functions as well. In
+Python, these values are known as <em>objects</em></p></li>
+<li><p>In C, we could create a <code>struct</code> where you could
+associate multiple variables inside a single self-created data type. In
+Python, we can do this and also include functions in a self-created data
+type. When a function belongs to a specific <em>object</em>, it is known
+as a <em>method</em>.</p></li>
+<li><p>For example, <code>strs</code> in Python have a built-in
+<em>methods</em>. Therefore, you could modify your code as follows:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># Logical operators, using lists</span><br><span class="line"></span><br><span class="line">from cs50 import get_string</span><br><span class="line"></span><br><span class="line"># Prompt user to agree</span><br><span class="line">s = get_string(&quot;Do you agree? &quot;)</span><br><span class="line"></span><br><span class="line"># Check whether agreed</span><br><span class="line">if s in [&quot;y&quot;, &quot;yes&quot;]:</span><br><span class="line">    print(&quot;Agreed.&quot;)</span><br><span class="line">elif s in [&quot;n&quot;, &quot;no&quot;]:</span><br><span class="line">    print(&quot;Not agreed.&quot;)</span><br></pre></td></tr></table></figure>
-<p>Notice how we are able to express multiple keywords like <code>y</code> and <code>yes</code> and convert any user input to lowercase.</p>
-</li>
+<p>Notice how we are able to express multiple keywords like
+<code>y</code> and <code>yes</code> and convert any user input to
+lowercase.</p></li>
 <li><p>This could be further simplified as:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># Logical operators, using lists</span><br><span class="line"></span><br><span class="line">from cs50 import get_string</span><br><span class="line"></span><br><span class="line"># Prompt user to agree</span><br><span class="line">s = get_string(&quot;Do you agree? &quot;)</span><br><span class="line"></span><br><span class="line"># Check whether agreed</span><br><span class="line">if s.lower() in [&quot;y&quot;, &quot;yes&quot;]:</span><br><span class="line">    print(&quot;Agreed.&quot;)</span><br><span class="line">elif s.lower() in [&quot;n&quot;, &quot;no&quot;]:</span><br><span class="line">    print(&quot;Not agreed.&quot;)</span><br></pre></td></tr></table></figure>
-<p>Notice how the old value of <code>s</code> is overwritten with the result of <code>s.lower()</code>.</p>
-</li>
-<li><p>In this class, we will only scratch the surface of Python. Therefore, the <a target="_blank" rel="noopener" href="https://docs.python.org/">Python documentation</a> will be of particular importance as you continue.</p>
-</li>
-<li>You can learn more about string methods in the <a target="_blank" rel="noopener" href="https://docs.python.org/3/library/stdtypes.html#string-methods">Python documentation</a></li>
+<p>Notice how the old value of <code>s</code> is overwritten with the
+result of <code>s.lower()</code>.</p></li>
+<li><p>In this class, we will only scratch the surface of Python.
+Therefore, the <a target="_blank" rel="noopener" href="https://docs.python.org/">Python
+documentation</a> will be of particular importance as you
+continue.</p></li>
+<li><p>You can learn more about string methods in the <a
+target="_blank" rel="noopener" href="https://docs.python.org/3/library/stdtypes.html#string-methods">Python
+documentation</a></p></li>
 </ul>
-<h2 id="Meow"><a href="#Meow" class="headerlink" title="Meow"></a><a href="#meow">Meow</a></h2><ul>
-<li><p>Returning to <code>meow.c</code> from weeks earlier, recall the following code:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># Logical operators, using lists</span><br><span class="line"></span><br><span class="line">from cs50 import get_string</span><br><span class="line"></span><br><span class="line"># Prompt user to agree</span><br><span class="line">s = get_string(&quot;Do you agree? &quot;)</span><br><span class="line"></span><br><span class="line">s = s.lower()</span><br><span class="line"></span><br><span class="line"># Check whether agreed</span><br><span class="line">if s in [&quot;y&quot;, &quot;yes&quot;]:</span><br><span class="line">    print(&quot;Agreed.&quot;)</span><br><span class="line">elif s in [&quot;n&quot;, &quot;no&quot;]:</span><br><span class="line">    print(&quot;Not agreed.&quot;)</span><br></pre></td></tr></table></figure>
-</li>
+<h2 id="meow"><a href="#meow">Meow</a></h2>
+<ul>
+<li><p>Returning to <code>meow.c</code> from weeks earlier, recall the
+following code:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># Logical operators, using lists</span><br><span class="line"></span><br><span class="line">from cs50 import get_string</span><br><span class="line"></span><br><span class="line"># Prompt user to agree</span><br><span class="line">s = get_string(&quot;Do you agree? &quot;)</span><br><span class="line"></span><br><span class="line">s = s.lower()</span><br><span class="line"></span><br><span class="line"># Check whether agreed</span><br><span class="line">if s in [&quot;y&quot;, &quot;yes&quot;]:</span><br><span class="line">    print(&quot;Agreed.&quot;)</span><br><span class="line">elif s in [&quot;n&quot;, &quot;no&quot;]:</span><br><span class="line">    print(&quot;Not agreed.&quot;)</span><br></pre></td></tr></table></figure></li>
 <li><p>The above can be implemented within Python as:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// Demonstrates while loop</span><br><span class="line"></span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">int main(void) &#123;</span><br><span class="line">    int i = 0;</span><br><span class="line">    while (i &lt; 3)</span><br><span class="line">    &#123;</span><br><span class="line">        printf(&quot;meow\n&quot;);</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Similarly, using a <code>for</code> loop, we can write code as follows:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Demonstrates while loop</span><br><span class="line"></span><br><span class="line">i = 0</span><br><span class="line">while i &lt; 3:</span><br><span class="line">    print(&quot;meow&quot;)</span><br><span class="line">    i += 1</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>As we hinted at earlier today, you can further improve upon this code using functions. Modify your code as follows:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// Demonstrates while loop</span><br><span class="line"></span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">int main(void) &#123;</span><br><span class="line">    int i = 0;</span><br><span class="line">    while (i &lt; 3)</span><br><span class="line">    &#123;</span><br><span class="line">        printf(&quot;meow\n&quot;);</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>Similarly, using a <code>for</code> loop, we can write code as
+follows:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Demonstrates while loop</span><br><span class="line"></span><br><span class="line">i = 0</span><br><span class="line">while i &lt; 3:</span><br><span class="line">    print(&quot;meow&quot;)</span><br><span class="line">    i += 1</span><br></pre></td></tr></table></figure></li>
+<li><p>As we hinted at earlier today, you can further improve upon this
+code using functions. Modify your code as follows:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Better design</span><br><span class="line"></span><br><span class="line">for i in range(3):</span><br><span class="line">    print(&quot;meow&quot;)</span><br></pre></td></tr></table></figure>
-<p>Notice that the <code>meow</code> function abstracts away the <code>print</code> statement. Further, notice that the <code>main</code> function appears at the top of the file. At the bottom of the file, the <code>main</code> function is called. By convention, it’s expected that you create a <code>main</code> function in Python.</p>
-</li>
-<li><p>Indeed, we can pass variables between our functions as follows:</p>
+<p>Notice that the <code>meow</code> function abstracts away the
+<code>print</code> statement. Further, notice that the <code>main</code>
+function appears at the top of the file. At the bottom of the file, the
+<code>main</code> function is called. By convention, it’s expected that
+you create a <code>main</code> function in Python.</p></li>
+<li><p>Indeed, we can pass variables between our functions as
+follows:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># Abstraction</span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    for i in range(3):</span><br><span class="line">        meow()</span><br><span class="line"></span><br><span class="line"># Meow once</span><br><span class="line">def meow():</span><br><span class="line">    print(&quot;meow&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">main()</span><br></pre></td></tr></table></figure>
-<p>Notice how <code>meow</code> now takes a variable <code>n</code>. In the <code>main</code> function, you can call <code>meow</code> and pass a value like <code>3</code> to it. Then, <code>meow</code> utilizes the value of <code>n</code> in the <code>for</code> loop.</p>
-</li>
-<li><p>Reading the above code, notice how you, as a C programmer, are able to quite easily make sense of the above code. While some conventions are different, the building blocks you previously learned are very apparent in this new programming language.</p>
-</li>
+<p>Notice how <code>meow</code> now takes a variable <code>n</code>. In
+the <code>main</code> function, you can call <code>meow</code> and pass
+a value like <code>3</code> to it. Then, <code>meow</code> utilizes the
+value of <code>n</code> in the <code>for</code> loop.</p></li>
+<li><p>Reading the above code, notice how you, as a C programmer, are
+able to quite easily make sense of the above code. While some
+conventions are different, the building blocks you previously learned
+are very apparent in this new programming language.</p></li>
 </ul>
-<h2 id="Mario"><a href="#Mario" class="headerlink" title="Mario"></a><a href="#mario">Mario</a></h2><ul>
-<li><p>Recall a few weeks ago our challenge of building three blocks on top of one another, like in Mario.</p>
-<p><img src="https://cs50.harvard.edu/x/2023/notes/6/cs50Week6Slide073.png" alt=""></p>
-</li>
-<li><p>In Python, we can implement something akin to this as follows:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># Abstraction with parameterization</span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    meow(3)</span><br><span class="line"></span><br><span class="line"># Meow some number of times</span><br><span class="line">def meow(n):</span><br><span class="line">    for i in range(n):</span><br><span class="line">        print(&quot;meow&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">main()</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>In C, we had the advantage of a <code>do-while</code> loop. However, in Python it is convention to utilize a <code>while</code> loop, as Python does not have a <code>do while</code> loop. You can write code as follows in a file called <code>mario.py</code>:</p>
+<h2 id="mario"><a href="#mario">Mario</a></h2>
+<ul>
+<li><p>Recall a few weeks ago our challenge of building three blocks on
+top of one another, like in Mario.</p>
+<p><img
+src="https://cs50.harvard.edu/x/2023/notes/6/cs50Week6Slide073.png" /></p></li>
+<li><p>In Python, we can implement something akin to this as
+follows:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># Abstraction with parameterization</span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    meow(3)</span><br><span class="line"></span><br><span class="line"># Meow some number of times</span><br><span class="line">def meow(n):</span><br><span class="line">    for i in range(n):</span><br><span class="line">        print(&quot;meow&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">main()</span><br></pre></td></tr></table></figure></li>
+<li><p>In C, we had the advantage of a <code>do-while</code> loop.
+However, in Python it is convention to utilize a <code>while</code>
+loop, as Python does not have a <code>do while</code> loop. You can
+write code as follows in a file called <code>mario.py</code>:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Prints a column of 3 bricks with a loop</span><br><span class="line"></span><br><span class="line">for i in range(3):</span><br><span class="line">    print(&quot;#&quot;)</span><br></pre></td></tr></table></figure>
-<p>Notice how the scope of <code>n</code> is everywhere in the <code>get_height</code> function once it is assigned a value. Further notice that by convention, there are double spaces between functions.</p>
-</li>
-<li><p>We can take away the training wheels of the CS50 library as follows:</p>
+<p>Notice how the scope of <code>n</code> is everywhere in the
+<code>get_height</code> function once it is assigned a value. Further
+notice that by convention, there are double spaces between
+functions.</p></li>
+<li><p>We can take away the training wheels of the CS50 library as
+follows:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># Prints a column of bricks, using a helper function to get input</span><br><span class="line"></span><br><span class="line">from cs50 import get_int</span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    height = get_height()</span><br><span class="line">    for i in range(height):</span><br><span class="line">        print(&quot;#&quot;)</span><br><span class="line"></span><br><span class="line">def get_height():</span><br><span class="line">    while True:</span><br><span class="line">        n = get_int(&quot;Height: &quot;)</span><br><span class="line">        if n &gt; 0:</span><br><span class="line">            return n</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">main()</span><br></pre></td></tr></table></figure>
-<p>Notice that <code>try</code> is utilized to attempt to convert <code>n</code> to an integer. If it cannot do so, an error is outputted.</p>
-</li>
+<p>Notice that <code>try</code> is utilized to attempt to convert
+<code>n</code> to an integer. If it cannot do so, an error is
+outputted.</p></li>
 <li><p>Consider the following image:</p>
-<p><img src="https://cs50.harvard.edu/x/2023/notes/6/cs50Week6Slide075.png" alt=""></p>
-</li>
-<li><p>In Python, we could implement by modifying your code as follows:</p>
+<p><img
+src="https://cs50.harvard.edu/x/2023/notes/6/cs50Week6Slide075.png" /></p></li>
+<li><p>In Python, we could implement by modifying your code as
+follows:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># Prints a column of bricks, catching exceptions</span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    height = get_height()</span><br><span class="line">    for i in range(height):</span><br><span class="line">        print(&quot;#&quot;)</span><br><span class="line"></span><br><span class="line">def get_height():</span><br><span class="line">    while True:</span><br><span class="line">        try:</span><br><span class="line">            n = int(input(&quot;Height: &quot;))</span><br><span class="line">            if n &gt; 0:</span><br><span class="line">                return n</span><br><span class="line">        except ValueError:</span><br><span class="line">            print(&quot;Not an integer&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">main()</span><br></pre></td></tr></table></figure>
-<p>Notice that you can override the behavior of the <code>print</code> function to stay on the same line as the previous print.</p>
-</li>
-<li><p>Similar in spirit to previous iterations, we can further simplify this program:</p>
+<p>Notice that you can override the behavior of the <code>print</code>
+function to stay on the same line as the previous print.</p></li>
+<li><p>Similar in spirit to previous iterations, we can further simplify
+this program:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Prints a row of 4 question marks with a loop</span><br><span class="line"></span><br><span class="line">for i in range(4):</span><br><span class="line">    print(&quot;?&quot;, end=&quot;&quot;)</span><br><span class="line">print()</span><br></pre></td></tr></table></figure>
-<p>Notice that we can utilize <code>*</code> to multiply the print statement to repeat <code>4</code> times.</p>
-</li>
+<p>Notice that we can utilize <code>*</code> to multiply the print
+statement to repeat <code>4</code> times.</p></li>
 <li><p>What about a large block of bricks?</p>
-<p><img src="https://cs50.harvard.edu/x/2023/notes/6/cs50Week6Slide078.png" alt=""></p>
-</li>
+<p><img
+src="https://cs50.harvard.edu/x/2023/notes/6/cs50Week6Slide078.png" /></p></li>
 <li><p>To implement the above, you can modify your code as follows:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># Prints a row of 4 question marks without a loop</span><br><span class="line"></span><br><span class="line">print(&quot;?&quot; * 4)</span><br></pre></td></tr></table></figure>
-<p>Notice how one <code>for</code> loop exists inside another. The <code>print</code> statement adds a new line at the end of each row of bricks.</p>
-</li>
-<li><p>You can learn more about the <code>print</code> function in the <a target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#print">Python documentation</a></p>
-</li>
+<p>Notice how one <code>for</code> loop exists inside another. The
+<code>print</code> statement adds a new line at the end of each row of
+bricks.</p></li>
+<li><p>You can learn more about the <code>print</code> function in the
+<a target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#print">Python
+documentation</a></p></li>
 </ul>
-<h2 id="Scores"><a href="#Scores" class="headerlink" title="Scores"></a><a href="#scores">Scores</a></h2><ul>
-<li><code>list</code>s are a data structure within Python.</li>
-<li><code>list</code>s have built in methods or functions within them.</li>
+<h2 id="scores"><a href="#scores">Scores</a></h2>
+<ul>
+<li><p><code>list</code>s are a data structure within Python.</p></li>
+<li><p><code>list</code>s have built in methods or functions within
+them.</p></li>
 <li><p>For example, consider the following code:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Prints a 3-by-3 grid of bricks with loops</span><br><span class="line"></span><br><span class="line">for i in range(3):</span><br><span class="line">    for j in range(3):</span><br><span class="line">        print(&quot;#&quot;, end=&quot;&quot;)</span><br><span class="line">    print()</span><br></pre></td></tr></table></figure>
-<p>Notice that you can use the built-in <code>append</code> method, whereby you can <code>append</code> the score to the list. Also notice that we use the <code>sum</code> function to add all elements in the list.</p>
-</li>
+<p>Notice that you can use the built-in <code>append</code> method,
+whereby you can <code>append</code> the score to the list. Also notice
+that we use the <code>sum</code> function to add all elements in the
+list.</p></li>
 <li><p>You can even ultilize the following syntax:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># Averages three numbers using a list and a loop</span><br><span class="line"></span><br><span class="line">from cs50 import get_int</span><br><span class="line"></span><br><span class="line"># Get scores</span><br><span class="line">scores = []</span><br><span class="line">for i in range(3):</span><br><span class="line">    score = get_int(&quot;Score: &quot;)</span><br><span class="line">    scores.append(score)</span><br><span class="line"></span><br><span class="line"># Print average</span><br><span class="line">average = sum(scores) / len(scores)</span><br><span class="line">print(f&quot;Average: &#123;average&#125;&quot;)</span><br></pre></td></tr></table></figure>
-<p>Notice that <code>+=</code> is utilized to append the score to the list. In this case we place square brackets around <code>score</code> because only a <code>list</code> can be added to another <code>list</code> using <code>+</code> or <code>+=</code>.</p>
-</li>
-<li><p>You can learn more about lists in the <a target="_blank" rel="noopener" href="https://docs.python.org/3/library/stdtypes.html#sequence-types-list-tuple-range">Python documentation</a></p>
-</li>
-<li>You can also learn more about <code>len</code> in the <a target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#len">Python documentation</a></li>
+<p>Notice that <code>+=</code> is utilized to append the score to the
+list. In this case we place square brackets around <code>score</code>
+because only a <code>list</code> can be added to another
+<code>list</code> using <code>+</code> or <code>+=</code>.</p></li>
+<li><p>You can learn more about lists in the <a
+target="_blank" rel="noopener" href="https://docs.python.org/3/library/stdtypes.html#sequence-types-list-tuple-range">Python
+documentation</a></p></li>
+<li><p>You can also learn more about <code>len</code> in the <a
+target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#len">Python
+documentation</a></p></li>
 </ul>
-<h2 id="Uppercase"><a href="#Uppercase" class="headerlink" title="Uppercase"></a><a href="#uppercase">Uppercase</a></h2><ul>
+<h2 id="uppercase"><a href="#uppercase">Uppercase</a></h2>
+<ul>
 <li><p>Similarly, consider the following code:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># Averages three numbers using a list and a loop with + operator</span><br><span class="line"></span><br><span class="line">from cs50 import get_int</span><br><span class="line"></span><br><span class="line"># Get scores</span><br><span class="line">scores = []</span><br><span class="line">for i in range(3):</span><br><span class="line">    score = get_int(&quot;Score: &quot;)</span><br><span class="line">    scores += [score]</span><br><span class="line"></span><br><span class="line"># Print average</span><br><span class="line">average = sum(scores) / len(scores)</span><br><span class="line">print(f&quot;Average: &#123;average&#125;&quot;)</span><br></pre></td></tr></table></figure>
-<p>Notice that each character is uppercased one at a time.</p>
-</li>
-<li><p>Python has a built-in method for <code>str</code>s. You could modify your code as follows:</p>
+<p>Notice that each character is uppercased one at a time.</p></li>
+<li><p>Python has a built-in method for <code>str</code>s. You could
+modify your code as follows:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># Uppercases string one character at a time</span><br><span class="line"></span><br><span class="line">before = input(&quot;Before: &quot;)</span><br><span class="line">print(&quot;After:  &quot;, end=&quot;&quot;)</span><br><span class="line">for c in before:</span><br><span class="line">    print(c.upper(), end=&quot;&quot;)</span><br><span class="line">print()</span><br></pre></td></tr></table></figure>
-<p>Notice the <code>upper</code> method is utilized to uppercase the entire string at once.</p>
-</li>
+<p>Notice the <code>upper</code> method is utilized to uppercase the
+entire string at once.</p></li>
 </ul>
-<h2 id="Greet"><a href="#Greet" class="headerlink" title="Greet"></a><a href="#greet">Greet</a></h2><ul>
-<li><p>As with C, you can also utilize command-line arguments. Consider the following code:</p>
+<h2 id="greet"><a href="#greet">Greet</a></h2>
+<ul>
+<li><p>As with C, you can also utilize command-line arguments. Consider
+the following code:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Uppercases string all at once</span><br><span class="line"></span><br><span class="line">before = input(&quot;Before: &quot;)</span><br><span class="line">after = before.upper()</span><br><span class="line">print(f&quot;After:  &#123;after&#125;&quot;)</span><br></pre></td></tr></table></figure>
-<p>Notice that <code>argv[1]</code> is printed using a _formatted string_, noted by the <code>f</code> present in the <code>print</code> statement.</p>
-</li>
-<li><p>You can print all the arguments in <code>argv</code> as follows:</p>
+<p>Notice that <code>argv[1]</code> is printed using a <em>formatted
+string</em>, noted by the <code>f</code> present in the
+<code>print</code> statement.</p></li>
+<li><p>You can print all the arguments in <code>argv</code> as
+follows:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># Prints a command-line argument</span><br><span class="line"></span><br><span class="line">from sys import argv</span><br><span class="line"></span><br><span class="line">if len(argv) == 2:</span><br><span class="line">    print(f&quot;hello, &#123;argv[1]&#125;&quot;)</span><br><span class="line">else:</span><br><span class="line">    print(&quot;hello, world&quot;)</span><br></pre></td></tr></table></figure>
-<p>Notice that the above will not present the word <code>python</code> if executed, and the first argument will be the name of the file you are running. You can think of the word <code>python</code> as being analogous to <code>./</code> when we were running programs in C.</p>
-</li>
-<li><p>You can slice pieces of lists away. Consider the following code:</p>
+<p>Notice that the above will not present the word <code>python</code>
+if executed, and the first argument will be the name of the file you are
+running. You can think of the word <code>python</code> as being
+analogous to <code>./</code> when we were running programs in
+C.</p></li>
+<li><p>You can slice pieces of lists away. Consider the following
+code:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Printing command-line arguments, indexing into argv</span><br><span class="line"></span><br><span class="line">from sys import argv</span><br><span class="line"></span><br><span class="line">for i in range(len(argv)):</span><br><span class="line">    print(argv[i])</span><br></pre></td></tr></table></figure>
-<p>Notice that executing this code will result in the name of the file you are running being sliced away.</p>
-</li>
-<li><p>You can learn more about the <code>sys</code> library in the <a target="_blank" rel="noopener" href="https://docs.python.org/3/library/sys.html">Python documentation</a></p>
-</li>
+<p>Notice that executing this code will result in the name of the file
+you are running being sliced away.</p></li>
+<li><p>You can learn more about the <code>sys</code> library in the <a
+target="_blank" rel="noopener" href="https://docs.python.org/3/library/sys.html">Python
+documentation</a></p></li>
 </ul>
-<h2 id="Exit-Status"><a href="#Exit-Status" class="headerlink" title="Exit Status"></a><a href="#exit-status">Exit Status</a></h2><ul>
-<li><p>The <code>sys</code> library also has built-in methods. We can use <code>sys.exit(i)</code> to exit the program with a specific exit code:</p>
+<h2 id="exit-status"><a href="#exit-status">Exit Status</a></h2>
+<ul>
+<li><p>The <code>sys</code> library also has built-in methods. We can
+use <code>sys.exit(i)</code> to exit the program with a specific exit
+code:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Printing command-line arguments using a slice</span><br><span class="line"></span><br><span class="line">from sys import argv</span><br><span class="line"></span><br><span class="line">for arg in argv[1:]:</span><br><span class="line">    print(arg)</span><br></pre></td></tr></table></figure>
-<p>Notice that dot-notation is used to utilize the built-in functions of <code>sys</code>.</p>
-</li>
+<p>Notice that dot-notation is used to utilize the built-in functions of
+<code>sys</code>.</p></li>
 </ul>
-<h2 id="Search"><a href="#Search" class="headerlink" title="Search"></a><a href="#search">Search</a></h2><ul>
-<li><p>Python can also be utilized to search. In your terminal window, type <code>code names.py</code> and write code as follows:</p>
+<h2 id="search"><a href="#search">Search</a></h2>
+<ul>
+<li><p>Python can also be utilized to search. In your terminal window,
+type <code>code names.py</code> and write code as follows:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># Exits with explicit value, importing sys</span><br><span class="line"></span><br><span class="line">import sys</span><br><span class="line"></span><br><span class="line">if len(sys.argv) != 2:</span><br><span class="line">    print(&quot;Missing command-line argument&quot;)</span><br><span class="line">    sys.exit(1)</span><br><span class="line"></span><br><span class="line">print(f&quot;hello, &#123;sys.argv[1]&#125;&quot;)</span><br><span class="line">sys.exit(0)</span><br></pre></td></tr></table></figure>
-<p>Notice that this code functions. Indeed, it implements a linear search.</p>
-</li>
+<p>Notice that this code functions. Indeed, it implements a linear
+search.</p></li>
 <li><p>You can utilize the built-in abilities of Python as follows:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># Implements linear search for names</span><br><span class="line"></span><br><span class="line">import sys</span><br><span class="line"></span><br><span class="line"># A list of names</span><br><span class="line">names = [&quot;Bill&quot;, &quot;Charlie&quot;, &quot;Fred&quot;, &quot;George&quot;, &quot;Ginny&quot;, &quot;Percy&quot;, &quot;Ron&quot;]</span><br><span class="line"></span><br><span class="line"># Ask for name</span><br><span class="line">name = input(&quot;Name: &quot;)</span><br><span class="line"></span><br><span class="line"># Search for name</span><br><span class="line">for n in names:</span><br><span class="line">    if n == name:</span><br><span class="line">        print(&quot;Found&quot;)</span><br><span class="line">        sys.exit(0)</span><br><span class="line"></span><br><span class="line">print(&quot;Not found&quot;)</span><br><span class="line">sys.exit(1)</span><br></pre></td></tr></table></figure>
-<p>Notice that the <code>in</code> preposition is utilized. Python understands how to implement the lower-level code to do a linear search.</p>
-</li>
+<p>Notice that the <code>in</code> preposition is utilized. Python
+understands how to implement the lower-level code to do a linear
+search.</p></li>
 </ul>
-<h2 id="Phonebook"><a href="#Phonebook" class="headerlink" title="Phonebook"></a><a href="#phonebook">Phonebook</a></h2><ul>
-<li>Recall that a _dictionary_ or <code>dict</code> is a collection of _key_ and _value_ pairs.</li>
+<h2 id="phonebook"><a href="#phonebook">Phonebook</a></h2>
+<ul>
+<li><p>Recall that a <em>dictionary</em> or <code>dict</code> is a
+collection of <em>key</em> and <em>value</em> pairs.</p></li>
 <li><p>You can implement a dictionary in Python as follows:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># Implements linear search for names using `in`</span><br><span class="line"></span><br><span class="line">import sys</span><br><span class="line"></span><br><span class="line"># A list of names</span><br><span class="line">names = [&quot;Bill&quot;, &quot;Charlie&quot;, &quot;Fred&quot;, &quot;George&quot;, &quot;Ginny&quot;, &quot;Percy&quot;, &quot;Ron&quot;]</span><br><span class="line"></span><br><span class="line"># Ask for name</span><br><span class="line">name = input(&quot;Name: &quot;)</span><br><span class="line"></span><br><span class="line"># Search for name</span><br><span class="line">if name in names:</span><br><span class="line">    print(&quot;Found&quot;)</span><br><span class="line">    sys.exit(0)</span><br><span class="line"></span><br><span class="line">print(&quot;Not found&quot;)</span><br><span class="line">sys.exit(1)</span><br></pre></td></tr></table></figure>
-<p>Notice that the dictionary is implemented using curly braces. Then, the statement <code>if name in people</code> searches to see if the <code>name</code> is in the <code>people</code> dictionary. Further, notice how, in the <code>print</code> statement, we can index into the people dictionary using the value of <code>name</code>. Very useful!</p>
-</li>
-<li><p>Python has done their best to get to _constant time_ using their built-in searches.</p>
-</li>
+<p>Notice that the dictionary is implemented using curly braces. Then,
+the statement <code>if name in people</code> searches to see if the
+<code>name</code> is in the <code>people</code> dictionary. Further,
+notice how, in the <code>print</code> statement, we can index into the
+people dictionary using the value of <code>name</code>. Very
+useful!</p></li>
+<li><p>Python has done their best to get to <em>constant time</em> using
+their built-in searches.</p></li>
 </ul>
-<h2 id="Comparison"><a href="#Comparison" class="headerlink" title="Comparison"></a><a href="#comparison">Comparison</a></h2><ul>
+<h2 id="comparison"><a href="#comparison">Comparison</a></h2>
+<ul>
 <li><p>We can implement comparisons as follows in Python:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># Implements a phone book</span><br><span class="line"></span><br><span class="line">from cs50 import get_string</span><br><span class="line"></span><br><span class="line">people = &#123;</span><br><span class="line">    &quot;Carter&quot;: &quot;+1-617-495-1000&quot;,</span><br><span class="line">    &quot;David&quot;: &quot;+1-949-468-2750&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># Search for name</span><br><span class="line">name = get_string(&quot;Name: &quot;)</span><br><span class="line">if name in people:</span><br><span class="line">    print(f&quot;Number: &#123;people[name]&#125;&quot;)</span><br></pre></td></tr></table></figure>
-<p>Notice how Python utilizes the <code>==</code> to be able to compare two variables. Further, notice that Python allows you to compare two strings without examining strings character by character using pointers as in C.</p>
-</li>
+<p>Notice how Python utilizes the <code>==</code> to be able to compare
+two variables. Further, notice that Python allows you to compare two
+strings without examining strings character by character using pointers
+as in C.</p></li>
 </ul>
-<h2 id="Swap"><a href="#Swap" class="headerlink" title="Swap"></a><a href="#swap">Swap</a></h2><ul>
-<li><p>Further, we can implement a program that swaps values as we did in C. Consider the following code in Python:</p>
+<h2 id="swap"><a href="#swap">Swap</a></h2>
+<ul>
+<li><p>Further, we can implement a program that swaps values as we did
+in C. Consider the following code in Python:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># Compares two strings</span><br><span class="line"></span><br><span class="line"># Get two strings</span><br><span class="line">s = input(&quot;s: &quot;)</span><br><span class="line">t = input(&quot;t: &quot;)</span><br><span class="line"></span><br><span class="line"># Compare strings</span><br><span class="line">if s == t:</span><br><span class="line">    print(&quot;Same&quot;)</span><br><span class="line">else:</span><br><span class="line">    print(&quot;Different&quot;)</span><br></pre></td></tr></table></figure>
-<p>Notice that each value is swapped, using some very _Pythonic_ syntax <code>x, y = y, x</code>.</p>
-</li>
+<p>Notice that each value is swapped, using some very <em>Pythonic</em>
+syntax <code>x, y = y, x</code>.</p></li>
 </ul>
-<h2 id="CSV"><a href="#CSV" class="headerlink" title="CSV"></a><a href="#csv">CSV</a></h2><ul>
-<li><p>You can also utilize Python to engage with CSV files. Consider the following program called <code>phonebook.py</code>:</p>
+<h2 id="csv"><a href="#csv">CSV</a></h2>
+<ul>
+<li><p>You can also utilize Python to engage with CSV files. Consider
+the following program called <code>phonebook.py</code>:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># Swaps two integers</span><br><span class="line"></span><br><span class="line">x = 1</span><br><span class="line">y = 2</span><br><span class="line"></span><br><span class="line">print(f&quot;x is &#123;x&#125;, y is &#123;y&#125;&quot;)</span><br><span class="line">x, y = y, x</span><br><span class="line">print(f&quot;x is &#123;x&#125;, y is &#123;y&#125;&quot;)</span><br></pre></td></tr></table></figure>
-<p>Notice that utilizing the <code>with</code> block of code, with the <code>writer</code> and its work happening below it indented, prevents us from needing to <code>close</code> our file once finished.</p>
-</li>
-<li><p>Commonly, CSV files have columns that carry specific names. A <code>DictWriter</code> can used to create the CSV file and assign specific names to each column. Consider the following modification to our code:</p>
+<p>Notice that utilizing the <code>with</code> block of code, with the
+<code>writer</code> and its work happening below it indented, prevents
+us from needing to <code>close</code> our file once finished.</p></li>
+<li><p>Commonly, CSV files have columns that carry specific names. A
+<code>DictWriter</code> can used to create the CSV file and assign
+specific names to each column. Consider the following modification to
+our code:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># Saves names and numbers to a CSV file</span><br><span class="line"></span><br><span class="line">import csv</span><br><span class="line"></span><br><span class="line"># Get name and number</span><br><span class="line">name = input(&quot;Name: &quot;)</span><br><span class="line">number = input(&quot;Number: &quot;)</span><br><span class="line"></span><br><span class="line"># Open CSV file</span><br><span class="line">with open(&quot;phonebook.csv&quot;, &quot;a&quot;) as file:</span><br><span class="line"></span><br><span class="line">    # Print to file</span><br><span class="line">    writer = csv.writer(file)</span><br><span class="line">    writer.writerow([name, number])</span><br></pre></td></tr></table></figure>
-<p>Notice the <code>name</code> and <code>number</code> columns are defined in the penultimate row of code, and values are added in the final line.</p>
-</li>
-<li><p>You can learn more about the CSV files in Python in the <a target="_blank" rel="noopener" href="https://docs.python.org/3/library/csv.html">Python documentation</a></p>
-</li>
+<p>Notice the <code>name</code> and <code>number</code> columns are
+defined in the penultimate row of code, and values are added in the
+final line.</p></li>
+<li><p>You can learn more about the CSV files in Python in the <a
+target="_blank" rel="noopener" href="https://docs.python.org/3/library/csv.html">Python
+documentation</a></p></li>
 </ul>
-<h2 id="Speech"><a href="#Speech" class="headerlink" title="Speech"></a><a href="#speech">Speech</a></h2><ul>
+<h2 id="speech"><a href="#speech">Speech</a></h2>
+<ul>
 <li><p>Using a third-party library, Python can do text-to-speech.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># Saves names and numbers to a CSV file using a DictWriter</span><br><span class="line"></span><br><span class="line">import csv</span><br><span class="line"></span><br><span class="line"># Get name and number</span><br><span class="line">name = input(&quot;Name: &quot;)</span><br><span class="line">number = input(&quot;Number: &quot;)</span><br><span class="line"></span><br><span class="line"># Open CSV file</span><br><span class="line">with open(&quot;phonebook.csv&quot;, &quot;a&quot;) as file:</span><br><span class="line"></span><br><span class="line">    # Print to file</span><br><span class="line">    writer = csv.DictWriter(file, fieldnames=[&quot;name&quot;, &quot;number&quot;])</span><br><span class="line">    writer.writerow(&#123;&quot;name&quot;: name, &quot;number&quot;: number&#125;)</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># Saves names and numbers to a CSV file using a DictWriter</span><br><span class="line"></span><br><span class="line">import csv</span><br><span class="line"></span><br><span class="line"># Get name and number</span><br><span class="line">name = input(&quot;Name: &quot;)</span><br><span class="line">number = input(&quot;Number: &quot;)</span><br><span class="line"></span><br><span class="line"># Open CSV file</span><br><span class="line">with open(&quot;phonebook.csv&quot;, &quot;a&quot;) as file:</span><br><span class="line"></span><br><span class="line">    # Print to file</span><br><span class="line">    writer = csv.DictWriter(file, fieldnames=[&quot;name&quot;, &quot;number&quot;])</span><br><span class="line">    writer.writerow(&#123;&quot;name&quot;: name, &quot;number&quot;: number&#125;)</span><br></pre></td></tr></table></figure></li>
 <li><p>Further, you can run the following code:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># Says hello to someone</span><br><span class="line"></span><br><span class="line">import pyttsx3</span><br><span class="line"></span><br><span class="line">engine = pyttsx3.init()</span><br><span class="line">name = input(&quot;What&#x27;s your name? &quot;)</span><br><span class="line">engine.say(f&quot;hello, &#123;name&#125;&quot;)</span><br><span class="line">engine.runAndWait()</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># Says hello to someone</span><br><span class="line"></span><br><span class="line">import pyttsx3</span><br><span class="line"></span><br><span class="line">engine = pyttsx3.init()</span><br><span class="line">name = input(&quot;What&#x27;s your name? &quot;)</span><br><span class="line">engine.say(f&quot;hello, &#123;name&#125;&quot;)</span><br><span class="line">engine.runAndWait()</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h2 id="Summing-Up"><a href="#Summing-Up" class="headerlink" title="Summing Up"></a><a href="#summing-up">Summing Up</a></h2><p>In this lesson, you learned how the building blocks of programming from prior lessons can be implemented within Python. Further, you learned about how Python allowed for more simplified code. Also, you learned how to utilize various Python libraries. In the end, you learned that your skills as a programmer are not limited to a single programming language. Already, you are seeing how you are discovering a new way of learning through this course that could serve you in any programming language – and, perhaps, in nearly any avenue of learning! Specifically, we discussed…</p>
+<h2 id="summing-up"><a href="#summing-up">Summing Up</a></h2>
+<p>In this lesson, you learned how the building blocks of programming
+from prior lessons can be implemented within Python. Further, you
+learned about how Python allowed for more simplified code. Also, you
+learned how to utilize various Python libraries. In the end, you learned
+that your skills as a programmer are not limited to a single programming
+language. Already, you are seeing how you are discovering a new way of
+learning through this course that could serve you in any programming
+language – and, perhaps, in nearly any avenue of learning! Specifically,
+we discussed…</p>
 <ul>
 <li>Python</li>
 <li>Variables</li>
@@ -616,12 +761,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2023/07/02/lecture7/" rel="prev" title="lecture7">
-      <i class="fa fa-chevron-left"></i> lecture7
+    <a href="/2023/07/02/lecture9/" rel="prev" title="lecture9">
+      <i class="fa fa-chevron-left"></i> lecture9
     </a></div>
       <div class="post-nav-item">
-    <a href="/2023/07/02/lecture5/" rel="next" title="lecture5">
-      lecture5 <i class="fa fa-chevron-right"></i>
+    <a href="/2023/07/02/lecture4/" rel="next" title="lecture4">
+      lecture4 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -681,7 +826,8 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#lecture6"><span class="nav-number">1.</span> <span class="nav-text">lecture6</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Welcome"><span class="nav-number">1.1.</span> <span class="nav-text">Welcome!</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python"><span class="nav-number">1.2.</span> <span class="nav-text">Python</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hello"><span class="nav-number">1.3.</span> <span class="nav-text">Hello</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Types"><span class="nav-number">1.4.</span> <span class="nav-text">Types</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Speller"><span class="nav-number">1.5.</span> <span class="nav-text">Speller</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Image-Recognition"><span class="nav-number">1.6.</span> <span class="nav-text">Image Recognition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CS50-Library"><span class="nav-number">1.7.</span> <span class="nav-text">CS50 Library</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conditionals"><span class="nav-number">1.8.</span> <span class="nav-text">Conditionals</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Variables"><span class="nav-number">1.9.</span> <span class="nav-text">Variables</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Loops"><span class="nav-number">1.10.</span> <span class="nav-text">Loops</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Calculator"><span class="nav-number">1.11.</span> <span class="nav-text">Calculator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Compare"><span class="nav-number">1.12.</span> <span class="nav-text">Compare</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Object-Oriented-Programming"><span class="nav-number">1.13.</span> <span class="nav-text">Object-Oriented Programming</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Meow"><span class="nav-number">1.14.</span> <span class="nav-text">Meow</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mario"><span class="nav-number">1.15.</span> <span class="nav-text">Mario</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scores"><span class="nav-number">1.16.</span> <span class="nav-text">Scores</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Uppercase"><span class="nav-number">1.17.</span> <span class="nav-text">Uppercase</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Greet"><span class="nav-number">1.18.</span> <span class="nav-text">Greet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Exit-Status"><span class="nav-number">1.19.</span> <span class="nav-text">Exit Status</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Search"><span class="nav-number">1.20.</span> <span class="nav-text">Search</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Phonebook"><span class="nav-number">1.21.</span> <span class="nav-text">Phonebook</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Comparison"><span class="nav-number">1.22.</span> <span class="nav-text">Comparison</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Swap"><span class="nav-number">1.23.</span> <span class="nav-text">Swap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSV"><span class="nav-number">1.24.</span> <span class="nav-text">CSV</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Speech"><span class="nav-number">1.25.</span> <span class="nav-text">Speech</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summing-Up"><span class="nav-number">1.26.</span> <span class="nav-text">Summing Up</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#lecture6"><span class="nav-number">1.</span> <span class="nav-text">lecture6</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#welcome"><span class="nav-number">1.1.</span> <span class="nav-text">Welcome!</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python"><span class="nav-number">1.2.</span> <span class="nav-text">Python</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hello"><span class="nav-number">1.3.</span> <span class="nav-text">Hello</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#types"><span class="nav-number">1.4.</span> <span class="nav-text">Types</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#speller"><span class="nav-number">1.5.</span> <span class="nav-text">Speller</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#image-recognition"><span class="nav-number">1.6.</span> <span class="nav-text">Image
+Recognition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cs50-library"><span class="nav-number">1.7.</span> <span class="nav-text">CS50 Library</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#conditionals"><span class="nav-number">1.8.</span> <span class="nav-text">Conditionals</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#variables"><span class="nav-number">1.9.</span> <span class="nav-text">Variables</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#loops"><span class="nav-number">1.10.</span> <span class="nav-text">Loops</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#calculator"><span class="nav-number">1.11.</span> <span class="nav-text">Calculator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#compare"><span class="nav-number">1.12.</span> <span class="nav-text">Compare</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#object-oriented-programming"><span class="nav-number">1.13.</span> <span class="nav-text">Object-Oriented Programming</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#meow"><span class="nav-number">1.14.</span> <span class="nav-text">Meow</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mario"><span class="nav-number">1.15.</span> <span class="nav-text">Mario</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#scores"><span class="nav-number">1.16.</span> <span class="nav-text">Scores</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#uppercase"><span class="nav-number">1.17.</span> <span class="nav-text">Uppercase</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#greet"><span class="nav-number">1.18.</span> <span class="nav-text">Greet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#exit-status"><span class="nav-number">1.19.</span> <span class="nav-text">Exit Status</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#search"><span class="nav-number">1.20.</span> <span class="nav-text">Search</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#phonebook"><span class="nav-number">1.21.</span> <span class="nav-text">Phonebook</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#comparison"><span class="nav-number">1.22.</span> <span class="nav-text">Comparison</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#swap"><span class="nav-number">1.23.</span> <span class="nav-text">Swap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#csv"><span class="nav-number">1.24.</span> <span class="nav-text">CSV</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#speech"><span class="nav-number">1.25.</span> <span class="nav-text">Speech</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#summing-up"><span class="nav-number">1.26.</span> <span class="nav-text">Summing Up</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
