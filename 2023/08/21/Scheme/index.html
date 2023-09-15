@@ -23,12 +23,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Schemescheme fundamentalsscheme programs consist of expressions, which can be:  primitive expression: 2, 3.3, true, +, quotient …… combination: (qutient 10 2), (not true)……Numbers are self-evaluating;">
+  <meta name="description" content="Scheme scheme fundamentals scheme programs consist of expressions, which can be: - primitive expression: 2, 3.3, true, +, quotient …… - combination: (qutient 10 2), (not true)…… Numbers are self-e">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Scheme">
 <meta property="og:url" content="http://example.com/2023/08/21/Scheme/index.html">
 <meta property="og:site_name" content="viewoverlook">
-<meta property="og:description" content="Schemescheme fundamentalsscheme programs consist of expressions, which can be:  primitive expression: 2, 3.3, true, +, quotient …… combination: (qutient 10 2), (not true)……Numbers are self-evaluating;">
+<meta property="og:description" content="Scheme scheme fundamentals scheme programs consist of expressions, which can be: - primitive expression: 2, 3.3, true, +, quotient …… - combination: (qutient 10 2), (not true)…… Numbers are self-e">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/20230805141030.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/20230805142209.png">
@@ -247,94 +247,164 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Scheme"><a href="#Scheme" class="headerlink" title="Scheme"></a>Scheme</h1><h3 id="scheme-fundamentals"><a href="#scheme-fundamentals" class="headerlink" title="scheme fundamentals"></a>scheme fundamentals</h3><p>scheme programs consist of expressions, which can be:</p>
-<ul>
-<li>primitive expression: 2, 3.3, true, +, quotient ……</li>
-<li>combination: (qutient 10 2), (not true)……<br>Numbers are self-evaluating; symbols are bound to values<br>Call expressions include an operands and 0 or more operands(操作数) in parentheses(括号)<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;(quotient 10 2)</span><br><span class="line">5</span><br><span class="line">&gt;(quotient (+ 8 7) 5)</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>A combination that is not a call expression is a special form:</p>
-<ul>
-<li>If expression: <code>if &lt;predicate&gt; &lt;consequent&gt; &lt;alternative&gt;</code></li>
-<li>And and or: (and &lt;$e_1$&gt; $\dots$ &lt;$e_n$&gt;), (or &lt;$e_1$&gt; $\dots$ &lt;$e_n$&gt;)</li>
-<li>Binding symbols: <code>define &lt;symbol&gt; &lt;expression&gt;</code> </li>
-<li>New procedures: <code>define (&lt;symbol&gt; &lt;formal parameters&gt;) &lt;body&gt;</code></li>
-</ul>
+        <h1 id="scheme">Scheme</h1>
+<h3 id="scheme-fundamentals">scheme fundamentals</h3>
+<p>scheme programs consist of expressions, which can be: - primitive
+expression: 2, 3.3, true, +, quotient …… - combination: (qutient 10 2),
+(not true)…… Numbers are self-evaluating; symbols are bound to values
+Call expressions include an operands and 0 or more operands(操作数) in
+parentheses(括号) <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;(quotient 10 2)</span><br><span class="line">5</span><br><span class="line">&gt;(quotient (+ 8 7) 5)</span><br><span class="line">3</span><br></pre></td></tr></table></figure></p>
+<p>A combination that is not a call expression is a special form: - If
+expression:
+<code>if &lt;predicate&gt; &lt;consequent&gt; &lt;alternative&gt;</code>
+- And and or: (and &lt;<span class="math inline">\(e_1\)</span>&gt;
+<span class="math inline">\(\dots\)</span> &lt;<span
+class="math inline">\(e_n\)</span>&gt;), (or &lt;<span
+class="math inline">\(e_1\)</span>&gt; <span
+class="math inline">\(\dots\)</span> &lt;<span
+class="math inline">\(e_n\)</span>&gt;) - Binding symbols:
+<code>define &lt;symbol&gt; &lt;expression&gt;</code> - New procedures:
+<code>define (&lt;symbol&gt; &lt;formal parameters&gt;) &lt;body&gt;</code></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(define (sqrt x)</span><br><span class="line">	(define (update guess)</span><br><span class="line">		(if (= (square guess) x)</span><br><span class="line">			guess</span><br><span class="line">			(update (average guess (/ x guess)))))</span><br><span class="line">(update 1)</span><br></pre></td></tr></table></figure>
-<h3 id="Lambda-expressions"><a href="#Lambda-expressions" class="headerlink" title="Lambda expressions"></a>Lambda expressions</h3><p>与python类似:<br><code>&lt;lambda (&lt;formal-parameters) &lt;body&gt;</code></p>
-<h3 id="Lists"><a href="#Lists" class="headerlink" title="Lists"></a>Lists</h3><ul>
+<h3 id="lambda-expressions">Lambda expressions</h3>
+<p>与python类似:
+<code>&lt;lambda (&lt;formal-parameters) &lt;body&gt;</code></p>
+<h3 id="lists">Lists</h3>
+<ul>
 <li>cons: Two-argument procedure that creates a linked list</li>
 <li>car: procedure that returns the first element of a list</li>
 <li>cdr: Procedures that returns the rest of a list</li>
-<li>nil: The empty list<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Scheme lists are written in parentheses with elements separated by space</span><br><span class="line">(cons 1 (cons 2 nil))</span><br><span class="line"></span><br><span class="line">(1 2)</span><br></pre></td></tr></table></figure>
-正常的显示应该向链表结构:<br><img src="https://raw.githubusercontent.com/XuandYu000/picture/main/20230805141030.png"/></li>
+<li>nil: The empty list <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Scheme lists are written in parentheses with elements separated by space</span><br><span class="line">(cons 1 (cons 2 nil))</span><br><span class="line"></span><br><span class="line">(1 2)</span><br></pre></td></tr></table></figure> 正常的显示应该向链表结构:
+<img src="https://raw.githubusercontent.com/XuandYu000/picture/main/20230805141030.png"/></li>
 </ul>
-<h3 id="Symbolic-Programming"><a href="#Symbolic-Programming" class="headerlink" title="Symbolic Programming"></a>Symbolic Programming</h3><p><img src="https://raw.githubusercontent.com/XuandYu000/picture/main/20230805142209.png"/><br>引用: 使用<code>&#39;</code>在需要引用的对象前面<br>解引用:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; (define b 2)</span><br><span class="line">b</span><br><span class="line">&gt; &#x27;(a b c)</span><br><span class="line">(a b c)</span><br></pre></td></tr></table></figure><br>以上我们希望只是引用而不直接调用b绑定的值<br>但是如果需要将b=2放入时 可以使用`表示 同时使用<code>,</code>表明解引用的对象<br>但是解引用作用和引用相同除非我们告诉其准确的目标<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; `(a b c)</span><br><span class="line">(a b c)</span><br><span class="line">&gt; `(a ,b c)</span><br><span class="line">(a 2 c)</span><br></pre></td></tr></table></figure></p>
-<h4 id="example-中缀表达式转换为前缀表达式"><a href="#example-中缀表达式转换为前缀表达式" class="headerlink" title="example: 中缀表达式转换为前缀表达式"></a>example: 中缀表达式转换为前缀表达式</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(define (infix e)</span><br><span class="line">	(if (not (list? e)) e</span><br><span class="line">		`(,(cadr e) ,(infix(car e)) ,(infix(caddr e)))</span><br><span class="line">	)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<h4 id="Dynamic-Scope"><a href="#Dynamic-Scope" class="headerlink" title="Dynamic Scope"></a>Dynamic Scope</h4><p>Scheme和python查找命名时通过lexical scope(static scope)</p>
-<ul>
-<li>lexical scope: 父帧是程序被定义时的环境</li>
-<li>Dynamic scope: 父帧是程序被调用的环境</li>
-</ul>
-<p>example:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(define f (lambda (x) (+ x y)))</span><br><span class="line">(define g (lambda (x y) (f (+ x x)))</span><br></pre></td></tr></table></figure><br>lexical scope:f帧的父帧是全局帧(在这里会报错因为y没定义)<br>Dynamic scope: f帧的父帧是g帧</p>
-<h4 id="Tail-recursion"><a href="#Tail-recursion" class="headerlink" title="Tail recursion"></a>Tail recursion</h4><p>key observations:</p>
-<ul>
-<li>people in the middle of the line don’t wait for an answer<ul>
-<li>Tail recursive calls</li>
-</ul>
-</li>
-<li>information is passed down, as the questions are being asked.<ul>
-<li>intermediate variable</li>
-</ul>
-</li>
-<li>Last person announces answer(there’s no going back and forth)<ul>
-<li>base case returns this intermediate variable<h5 id="Tail-contexts"><a href="#Tail-contexts" class="headerlink" title="Tail contexts"></a>Tail contexts</h5><img src="https://raw.githubusercontent.com/XuandYu000/picture/main/20230812160914.png"/></li>
-</ul>
-</li>
-</ul>
-<p>尾递归在传递时并不传递答案的形成过程，而是不断传递子问题(一般通过中间变量传递，没有中间变量可选通常定义一个辅助函数加一个中间变量)<br>例如:<br><figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name"><span class="built_in">define</span></span> (<span class="name">replicate</span> x n)</span><br><span class="line">  (<span class="name"><span class="built_in">define</span></span> (<span class="name">replicate-help</span> x n lst-sofar)</span><br><span class="line">    (<span class="name"><span class="built_in">if</span></span> (<span class="name"><span class="built_in">=</span></span> n <span class="number">0</span>)</span><br><span class="line">        lst-sofar</span><br><span class="line">        (<span class="name">replicate-help</span> x (<span class="name"><span class="built_in">-</span></span> n <span class="number">1</span>) (<span class="name"><span class="built_in">cons</span></span> x lst-sofar))))</span><br><span class="line">    (<span class="name">replicate-help</span> x n nil))</span><br></pre></td></tr></table></figure></p>
-<h4 id="Macros-宏"><a href="#Macros-宏" class="headerlink" title="Macros(宏)"></a>Macros(宏)</h4><p>宏是Scheme的一个功能,允许你在语言中定义新的特殊的形式。类似于<code>cond</code>,<code>car</code>……</p>
-<p>Macro是源代码在计算前对代码的转化<br>Macro存在于许多语言中，但是在像Lisp语言中最易实现</p>
-<p>So far we’ve been able to define our own procedures in Scheme using the <code>define</code> special form. When we call these procedures, we have to follow the rules for evaluating call expressions, which involve evaluating all the operands.</p>
+<h3 id="symbolic-programming">Symbolic Programming</h3>
+<p><img src="https://raw.githubusercontent.com/XuandYu000/picture/main/20230805142209.png"/>
+引用: 使用<code>'</code>在需要引用的对象前面 解引用: <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; (define b 2)</span><br><span class="line">b</span><br><span class="line">&gt; &#x27;(a b c)</span><br><span class="line">(a b c)</span><br></pre></td></tr></table></figure>
+以上我们希望只是引用而不直接调用b绑定的值 但是如果需要将b=2放入时
+可以使用`表示 同时使用<code>,</code>表明解引用的对象
+但是解引用作用和引用相同除非我们告诉其准确的目标 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; `(a b c)</span><br><span class="line">(a b c)</span><br><span class="line">&gt; `(a ,b c)</span><br><span class="line">(a 2 c)</span><br></pre></td></tr></table></figure></p>
+<h4 id="example-中缀表达式转换为前缀表达式">example:
+中缀表达式转换为前缀表达式</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(define (infix e)</span><br><span class="line">	(if (not (list? e)) e</span><br><span class="line">		`(,(cadr e) ,(infix(car e)) ,(infix(caddr e)))</span><br><span class="line">	)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h4 id="dynamic-scope">Dynamic Scope</h4>
+<p>Scheme和python查找命名时通过lexical scope(static scope) - lexical
+scope: 父帧是程序被定义时的环境 - Dynamic scope:
+父帧是程序被调用的环境</p>
+<p>example: <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(define f (lambda (x) (+ x y)))</span><br><span class="line">(define g (lambda (x y) (f (+ x x)))</span><br></pre></td></tr></table></figure> lexical
+scope:f帧的父帧是全局帧(在这里会报错因为y没定义) Dynamic scope:
+f帧的父帧是g帧</p>
+<h4 id="tail-recursion">Tail recursion</h4>
+<p>key observations: - people in the middle of the line don't wait for
+an answer - Tail recursive calls - information is passed down, as the
+questions are being asked. - intermediate variable - Last person
+announces answer(there's no going back and forth) - base case returns
+this intermediate variable ##### Tail contexts
+<img src="https://raw.githubusercontent.com/XuandYu000/picture/main/20230812160914.png"/></p>
+<p>尾递归在传递时并不传递答案的形成过程，而是不断传递子问题(一般通过中间变量传递，没有中间变量可选通常定义一个辅助函数加一个中间变量)
+例如: <figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name"><span class="built_in">define</span></span> (<span class="name">replicate</span> x n)</span><br><span class="line">  (<span class="name"><span class="built_in">define</span></span> (<span class="name">replicate-help</span> x n lst-sofar)</span><br><span class="line">    (<span class="name"><span class="built_in">if</span></span> (<span class="name"><span class="built_in">=</span></span> n <span class="number">0</span>)</span><br><span class="line">        lst-sofar</span><br><span class="line">        (<span class="name">replicate-help</span> x (<span class="name"><span class="built_in">-</span></span> n <span class="number">1</span>) (<span class="name"><span class="built_in">cons</span></span> x lst-sofar))))</span><br><span class="line">    (<span class="name">replicate-help</span> x n nil))</span><br></pre></td></tr></table></figure> #### Macros(宏)
+宏是Scheme的一个功能,允许你在语言中定义新的特殊的形式。类似于<code>cond</code>,<code>car</code>……</p>
+<p>Macro是源代码在计算前对代码的转化
+Macro存在于许多语言中，但是在像Lisp语言中最易实现</p>
+<p>So far we've been able to define our own procedures in Scheme using
+the <code>define</code> special form. When we call these procedures, we
+have to follow the rules for evaluating call expressions, which involve
+evaluating all the operands.</p>
 <p>目前为止我们已经可以通过<code>define</code>自定义特殊形式代码段。当我们调用代码段时，我们会根据代码段内的规则来计算操作数。</p>
-<p>We know that special form expressions do not follow the evaluation rules of call expressions. Instead, each special form has its own rules of evaluation, which may include not evaluating all the operands. Wouldn’t it be cool if we could define our own special forms where we decide which operands are evaluated? Consider the following example where we attempt to write a function that evaluates a given expression twice:</p>
+<p>We know that special form expressions do not follow the evaluation
+rules of call expressions. Instead, each special form has its own rules
+of evaluation, which may include not evaluating all the operands.
+Wouldn't it be cool if we could define our own special forms where we
+decide which operands are evaluated? Consider the following example
+where we attempt to write a function that evaluates a given expression
+twice:</p>
 <p>我们知道特殊形式表达并不遵循表达式的求值规则。相反，每种特殊形式都有自己的求值规则，其中可能包括不求值所有操作数。如果我们可以定义自己的特殊形式来决定计算那些操作数，那不是很酷？考虑以下实例，我们尝试编写一个对给定表达式求值两次的函数。</p>
 <figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">scm&gt; (<span class="name"><span class="built_in">define</span></span> (<span class="name">twice</span> f) (<span class="name"><span class="built_in">begin</span></span> f f))</span><br><span class="line">twice</span><br><span class="line">scm&gt; (<span class="name">twice</span> (<span class="name">print</span> <span class="symbol">&#x27;woof</span>&#x27;))</span><br><span class="line">woof</span><br></pre></td></tr></table></figure>
-<p>由于<code>twice</code>是常规过程，对<code>twice</code>的调用过程回遵循于常规调用表达式相同的求值规则；首先评估运算符之后计算操作数。这意味着当计算操作数<code>(print &#39;woof)</code>时打印了<code>woof</code>。在<code>twice</code>主体内，<code>f</code>绑定的是print返回值None，因此<code>(begin f f)</code>不进行任何操作</p>
-<p>The problem here is clear: we need to prevent the given expression from evaluating until we’re inside the body of the procedure. This is where the <code>define-macro</code> special form, which has identical syntax to the regular <code>define</code> form, comes in:  </p>
-<p>这里的问题很明显：我们需要阻止给定的表达式求值，直到我们进入过程主体。这就是 <code>define-macro</code> 特殊形式的用武之地，它与常规 <code>define</code> 形式具有相同的语法：</p>
+<p>由于<code>twice</code>是常规过程，对<code>twice</code>的调用过程回遵循于常规调用表达式相同的求值规则；首先评估运算符之后计算操作数。这意味着当计算操作数<code>(print 'woof)</code>时打印了<code>woof</code>。在<code>twice</code>主体内，<code>f</code>绑定的是print返回值None，因此<code>(begin f f)</code>不进行任何操作</p>
+<p>The problem here is clear: we need to prevent the given expression
+from evaluating until we're inside the body of the procedure. This is
+where the <code>define-macro</code> special form, which has identical
+syntax to the regular <code>define</code> form, comes in:</p>
+<p>这里的问题很明显：我们需要阻止给定的表达式求值，直到我们进入过程主体。这就是 <code>define-macro</code> 特殊形式的用武之地，它与常规 <code>define</code> 形式具有相同的语法：</p>
 <figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scm&gt; (<span class="name">define-macro</span> (<span class="name">twice</span> f) (<span class="name"><span class="built_in">list</span></span> <span class="symbol">&#x27;begin</span> f f))</span><br><span class="line">twice</span><br></pre></td></tr></table></figure>
-<p><code>define-macro</code> allows us to define what’s known as a <code>macro</code>, which is simply a way for us to combine unevaluated input expressions together into another expression. When we call macros, the operands are not evaluated, but rather are treated as Scheme data. This means that any operands that are call expressions or special form expression are treated like lists.  </p>
-<p><code>define-macro</code> 允许我们定义所谓的 <code>macro</code> ，这只是我们将未计算的输入表达式组合到另一个表达式中的一种方法。当我们调用宏时，操作数不会被计算，而是被视为方案数据。这意味着作为调用表达式或特殊形式表达式的任何操作数都将被视为列表。</p>
-<p>If we call <code>(twice (print &#39;woof))</code>, <code>f</code> will actually be bound to the list <code>(print &#39;woof)</code> instead of the value <code>undefined</code>. Inside the body of <code>define-macro</code>, we can insert these expressions into a larger Scheme expression. In our case, we would want a <code>begin</code> expression that looks like the following:  </p>
-<p>如果我们调用 <code>(twice (print &#39;woof))</code> ， <code>f</code> 实际上将绑定到列表 <code>(print &#39;woof)</code> 而不是值 <code>undefined</code> 。在 <code>define-macro</code> 的主体中，我们可以将这些表达式插入到更大的Scheme表达式中。在我们的例子中，我们需要一个如下所示的 <code>begin</code> 表达式：</p>
+<p><code>define-macro</code> allows us to define what's known as
+a <code>macro</code>, which is simply a way for us to combine
+unevaluated input expressions together into another expression. When we
+call macros, the operands are not evaluated, but rather are treated as
+Scheme data. This means that any operands that are call expressions or
+special form expression are treated like lists.</p>
+<p><code>define-macro</code> 允许我们定义所谓的 <code>macro</code> ，这只是我们将未计算的输入表达式组合到另一个表达式中的一种方法。当我们调用宏时，操作数不会被计算，而是被视为方案数据。这意味着作为调用表达式或特殊形式表达式的任何操作数都将被视为列表。</p>
+<p>If we call <code>(twice (print 'woof))</code>, <code>f</code> will
+actually be bound to the list <code>(print 'woof)</code> instead of the
+value <code>undefined</code>. Inside the body
+of <code>define-macro</code>, we can insert these expressions into a
+larger Scheme expression. In our case, we would want
+a <code>begin</code> expression that looks like the following:</p>
+<p>如果我们调用 <code>(twice (print 'woof))</code> ， <code>f</code> 实际上将绑定到列表 <code>(print 'woof)</code> 而不是值 <code>undefined</code> 。在 <code>define-macro</code> 的主体中，我们可以将这些表达式插入到更大的Scheme表达式中。在我们的例子中，我们需要一个如下所示的 <code>begin</code> 表达式：</p>
 <figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name"><span class="built_in">begin</span></span> (<span class="name">print</span> <span class="symbol">&#x27;woof</span>) (<span class="name">print</span> <span class="symbol">&#x27;woof</span>))</span><br></pre></td></tr></table></figure>
-<p>To recap, macros are called similarly to regular procedures, but the rules for evaluating them are different. We evaluated lambda procedures in the following way:<br>回顾一下，宏的调用方式与常规过程类似，但评估它们的规则不同。我们通过以下方式评估 lambda 过程：</p>
+<p>To recap, macros are called similarly to regular procedures, but the
+rules for evaluating them are different. We evaluated lambda procedures
+in the following way:<br />
+回顾一下，宏的调用方式与常规过程类似，但评估它们的规则不同。我们通过以下方式评估
+lambda 过程：</p>
 <ul>
 <li>Evaluate operator</li>
 <li>Evaluate operands</li>
-<li>Apply operator to operands, evaluating the body of the procedure<br>  将运算符应用于操作数，评估过程的主体</li>
+<li>Apply operator to operands, evaluating the body of the
+procedure<br />
+将运算符应用于操作数，评估过程的主体</li>
 </ul>
-<p>However, the rules for evaluating calls to macro procedures are:<br>然而，评估对宏过程的调用的规则是：</p>
+<p>However, the rules for evaluating calls to macro procedures
+are:<br />
+然而，评估对宏过程的调用的规则是：</p>
 <ul>
 <li>Evaluate operator</li>
-<li>Apply operator to unevaluated operands<br>  将运算符应用于未计算的操作数</li>
-<li>Evaluate the expression returned by the macro in the frame it was called in.<br>  评估宏在调用它的框架中返回的表达式。</li>
+<li>Apply operator to unevaluated operands<br />
+将运算符应用于未计算的操作数</li>
+<li>Evaluate the expression returned by the macro in the frame it was
+called in.<br />
+评估宏在调用它的框架中返回的表达式。</li>
 </ul>
-<h4 id="Quasiquotes"><a href="#Quasiquotes" class="headerlink" title="Quasiquotes"></a>Quasiquotes</h4><p>Recall that the <code>quote</code> special form prevents the Scheme interpreter from executing a following expression. We saw that this helps us create complex lists more easily than repeatedly calling <code>cons</code> or trying to get the structure right with <code>list</code>. It seems like this form would come in handy if we are trying to construct complex Scheme expressions with many nested lists.</p>
-<p>回想一下， <code>quote</code> 特殊形式阻止Scheme 解释器执行以下表达式。我们发现这可以帮助我们更轻松地创建复杂的列表，而不是重复调用 <code>cons</code> 或尝试使用 <code>list</code> 获得正确的结构。如果我们试图用许多嵌套列表构造复杂的Scheme表达式，这种形式似乎会派上用场。</p>
-<p>Consider that we rewrite the <code>twice</code> macro as follows:<br>考虑一下我们重写 <code>twice</code> 宏如下：</p>
+<h4 id="quasiquotes">Quasiquotes</h4>
+<p>Recall that the <code>quote</code> special form prevents the Scheme
+interpreter from executing a following expression. We saw that this
+helps us create complex lists more easily than repeatedly
+calling <code>cons</code> or trying to get the structure right
+with <code>list</code>. It seems like this form would come in handy if
+we are trying to construct complex Scheme expressions with many nested
+lists.</p>
+<p>回想一下， <code>quote</code> 特殊形式阻止Scheme
+解释器执行以下表达式。我们发现这可以帮助我们更轻松地创建复杂的列表，而不是重复调用 <code>cons</code> 或尝试使用 <code>list</code> 获得正确的结构。如果我们试图用许多嵌套列表构造复杂的Scheme表达式，这种形式似乎会派上用场。</p>
+<p>Consider that we rewrite the <code>twice</code> macro as
+follows:<br />
+考虑一下我们重写 <code>twice</code> 宏如下：</p>
 <figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">define-macro</span> (<span class="name">twice</span> f)</span><br><span class="line">  &#x27;(begin f f))</span><br></pre></td></tr></table></figure>
-<p>This seems like it would have the same effect, but since the <code>quote</code> form prevents any evaluation, the resulting expression we create would actually be <code>(begin f f)</code>, which is not what we want.<br>这似乎具有相同的效果，但由于 <code>quote</code> 形式阻止任何计算，我们创建的结果表达式实际上是 <code>(begin f f)</code> ，这不是我们想要的。</p>
-<p>The <strong>quasiquote</strong> allows us to construct literal lists in a similar way as quote, but also lets us specify if any sub-expression within the list should be evaluated.  </p>
-<p>quasiquote 允许我们以与 quote 类似的方式构造文字列表，而且还允许我们指定是否应计算列表中的任何子表达式。</p>
-<p>At first glance, the quasiquote (which can be invoked with the backtick <code>` </code> or the <code>quasiquote</code> special form) behaves exactly the same as <code>&#39;</code> or <code>quote</code>. However, using quasiquotes gives you the ability to <strong>unquote</strong> (which can be invoked with the comma <code>,</code> or the <code>unquote</code> special form). This removes an expression from the quoted context, evaluates it, and places it back in.  </p>
-<p>乍一看，准引号（可以使用反引号 <code>` </code> 或 <code>quasiquote</code> 特殊形式调用）的行为与 <code>&#39;</code> 或 <code>quote</code> 完全相同。但是，使用准引号使您能够取消引号（可以使用逗号 <code>,</code> 或 <code>unquote</code> 特殊形式调用）。这会从引用的上下文中删除表达式，对其求值，然后将其放回原处。</p>
-<p>By combining quasiquotes and unquoting, we can often save ourselves a lot of trouble when building macro expressions.  </p>
+<p>This seems like it would have the same effect, but since
+the <code>quote</code> form prevents any evaluation, the resulting
+expression we create would actually be <code>(begin f f)</code>, which
+is not what we want.<br />
+这似乎具有相同的效果，但由于 <code>quote</code> 形式阻止任何计算，我们创建的结果表达式实际上是 <code>(begin f f)</code> ，这不是我们想要的。</p>
+<p>The <strong>quasiquote</strong> allows us to construct literal lists
+in a similar way as quote, but also lets us specify if any
+sub-expression within the list should be evaluated.</p>
+<p>quasiquote 允许我们以与 quote
+类似的方式构造文字列表，而且还允许我们指定是否应计算列表中的任何子表达式。</p>
+<p>At first glance, the quasiquote (which can be invoked with the
+backtick <code>`</code> or the <code>quasiquote</code> special form)
+behaves exactly the same as <code>'</code> or <code>quote</code>.
+However, using quasiquotes gives you the ability
+to <strong>unquote</strong> (which can be invoked with the
+comma <code>,</code> or the <code>unquote</code> special form). This
+removes an expression from the quoted context, evaluates it, and places
+it back in.</p>
+<p>乍一看，准引号（可以使用反引号 <code>`</code> 或 <code>quasiquote</code> 特殊形式调用）的行为与 <code>'</code> 或 <code>quote</code> 完全相同。但是，使用准引号使您能够取消引号（可以使用逗号 <code>,</code> 或 <code>unquote</code> 特殊形式调用）。这会从引用的上下文中删除表达式，对其求值，然后将其放回原处。</p>
+<p>By combining quasiquotes and unquoting, we can often save ourselves a
+lot of trouble when building macro expressions.</p>
 <p>通过结合准引号和取消引号，我们在构建宏表达式时通常可以省去很多麻烦。</p>
-<p>Here is how we could use quasiquoting to rewrite our previous example:  </p>
+<p>Here is how we could use quasiquoting to rewrite our previous
+example:</p>
 <p>以下是我们如何使用准引用来重写我们之前的示例：</p>
 <figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">define-macro</span> (<span class="name">twice</span> f)</span><br><span class="line">  `(begin ,f ,f))</span><br></pre></td></tr></table></figure>
+
     </div>
 
     
@@ -418,7 +488,8 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Scheme"><span class="nav-number">1.</span> <span class="nav-text">Scheme</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#scheme-fundamentals"><span class="nav-number">1.0.1.</span> <span class="nav-text">scheme fundamentals</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lambda-expressions"><span class="nav-number">1.0.2.</span> <span class="nav-text">Lambda expressions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lists"><span class="nav-number">1.0.3.</span> <span class="nav-text">Lists</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Symbolic-Programming"><span class="nav-number">1.0.4.</span> <span class="nav-text">Symbolic Programming</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#example-%E4%B8%AD%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BD%AC%E6%8D%A2%E4%B8%BA%E5%89%8D%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">1.0.4.1.</span> <span class="nav-text">example: 中缀表达式转换为前缀表达式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Dynamic-Scope"><span class="nav-number">1.0.4.2.</span> <span class="nav-text">Dynamic Scope</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Tail-recursion"><span class="nav-number">1.0.4.3.</span> <span class="nav-text">Tail recursion</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Tail-contexts"><span class="nav-number">1.0.4.3.1.</span> <span class="nav-text">Tail contexts</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Macros-%E5%AE%8F"><span class="nav-number">1.0.4.4.</span> <span class="nav-text">Macros(宏)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Quasiquotes"><span class="nav-number">1.0.4.5.</span> <span class="nav-text">Quasiquotes</span></a></li></ol></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#scheme"><span class="nav-number">1.</span> <span class="nav-text">Scheme</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#scheme-fundamentals"><span class="nav-number">1.0.1.</span> <span class="nav-text">scheme fundamentals</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lambda-expressions"><span class="nav-number">1.0.2.</span> <span class="nav-text">Lambda expressions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lists"><span class="nav-number">1.0.3.</span> <span class="nav-text">Lists</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#symbolic-programming"><span class="nav-number">1.0.4.</span> <span class="nav-text">Symbolic Programming</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#example-%E4%B8%AD%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BD%AC%E6%8D%A2%E4%B8%BA%E5%89%8D%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">1.0.4.1.</span> <span class="nav-text">example:
+中缀表达式转换为前缀表达式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dynamic-scope"><span class="nav-number">1.0.4.2.</span> <span class="nav-text">Dynamic Scope</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tail-recursion"><span class="nav-number">1.0.4.3.</span> <span class="nav-text">Tail recursion</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#quasiquotes"><span class="nav-number">1.0.4.4.</span> <span class="nav-text">Quasiquotes</span></a></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -434,7 +505,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-count">47</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -443,7 +514,7 @@
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
