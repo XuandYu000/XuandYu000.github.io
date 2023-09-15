@@ -441,6 +441,491 @@ class="math inline">\(x/2^k\)</span> 。</p>
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/21/2_7%20Object%20Abstraction/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
+      <meta itemprop="name" content="XuandYu000">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="viewoverlook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/08/21/2_7%20Object%20Abstraction/" class="post-title-link" itemprop="url">2_7 Object Abstraction</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-08-21 00:00:00 / 修改时间：10:53:19" itemprop="dateCreated datePublished" datetime="2023-08-21T00:00:00+08:00">2023-08-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/csdiy/" itemprop="url" rel="index"><span itemprop="name">csdiy</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/csdiy/cs61A/" itemprop="url" rel="index"><span itemprop="name">cs61A</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="object-abstraction">2_7 Object Abstraction</h1>
+<p>The object system allows programmers to build and use abstract data
+representations efficiently. It is also designed to allow multiple
+representations of abstract data to coexist in the same program.</p>
+<p>A central concept in object abstraction is a <em>generic
+function</em>, which is a function that can accept values of multiple
+different types. We will consider three different techniques for
+implementing generic functions: shared interfaces, type dispatching, and
+type coercion. In the process of building up these concepts, we will
+also discover features of the Python object system that support the
+creation of generic functions.</p>
+<h3 id="string-conversion">2.7.1   String Conversion</h3>
+<p>To represent data effectively, an object value should behave like the
+kind of data it is meant to represent, including producing a string
+representation of itself. String representations of data values are
+especially important in an interactive language such as Python that
+automatically displays the string representation of the values of
+expressions in an interactive session.</p>
+<p>为了更有效率的表示数据，一个对象值应该表现得像它旨在表示的数据，包括其自身的字符串表示。</p>
+<p>String values provide a fundamental medium for communicating
+information among humans. Sequences of characters can be rendered on a
+screen, printed to paper, read aloud, converted to braille, or broadcast
+as Morse code. Strings are also fundamental to programming because they
+can represent Python expressions.</p>
+<p>Python stipulates that all objects should produce two different
+string representations: one that is human-interpretable (interpretable
+可解释的) text and one that is a Python-interpretable expression. The
+constructor function for strings, str, returns a human-readable string.
+Where possible, the repr function returns a Python expression that
+evaluates to an equal object. The docstring for <em>repr</em> explains
+this property:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">repr(object) -&gt; string</span><br><span class="line"></span><br><span class="line">Return the canonical(典范) string representation of the object.</span><br><span class="line">For most object types, eval(repr(object)) == object.</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>The result of calling repr on the value of an expression is what
+Python prints in an interactive session.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; 12e12</span><br><span class="line">12000000000000.0</span><br><span class="line">&gt;&gt;&gt; print(repr(12e12))</span><br><span class="line">12000000000000.0</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>In cases where no representation exists that evaluates to the
+original value, Python typically produces a description surrounded by
+angled brackets.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; repr(min)</span><br><span class="line">&#x27;&lt;built-in function min&gt;&#x27;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>The str constructor often coincides with repr, but provides a more
+interpretable text representation in some cases. For instance, we see a
+difference between str and repr with dates.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; from datetime import date</span><br><span class="line">&gt;&gt;&gt; tues = date(2011, 9, 12)</span><br><span class="line">&gt;&gt;&gt; repr(tues)</span><br><span class="line">&#x27;datetime.date(2011, 9, 12)&#x27;</span><br><span class="line">&gt;&gt;&gt; str(tues)</span><br><span class="line">&#x27;2011-09-12&#x27;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Defining the repr function presents a new challenge: we would like it
+to apply correctly to all data types, even those that did not exist when
+repr was implemented. We would like it to be a generic or
+<em>polymorphic function</em>, one that can be applied to many
+(<em>poly</em>) different forms (<em>morph</em>) of data.</p>
+<p>The object system provides an elegant solution in this case: the repr
+function always invokes a method called <code>__repr__</code> on its
+argument.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; tues.__repr__()</span><br><span class="line">&#x27;datetime.date(2011, 9, 12)&#x27;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>By implementing this same method in user-defined classes, we can
+extend the applicability of repr to any class we create in the future.
+This example highlights another benefit of dot expressions in general,
+that they provide a mechanism(机制) for extending the domain of existing
+functions to new object types.</p>
+<p>The str constructor is implemented in a similar manner: it invokes a
+method called ·、<code>__str__</code> on its argument.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; tues.__str__()</span><br><span class="line">&#x27;2011-09-12&#x27;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>These polymorphic(多态) functions are examples of a more general
+principle: certain functions should apply to multiple data types.
+Moreover, one way to create such a function is to use a shared attribute
+name with a different definition in each class.</p>
+<p>这些多态性函数是一则规则的具体实例:
+相当一部分函数应该被应用与多种数据类型中。而且，一种实现这种函数的方法是用一个可以有不同功能但被共享的类的属性名称</p>
+<h3 id="special-methods">2.7.2   Special Methods</h3>
+<p>In Python, certain <em>special names</em> are invoked by the Python
+interpreter in special circumstances. For instance, the
+<code>__init__</code> method of a class is automatically invoked
+whenever an object is constructed. The <code>__str__</code> method is
+invoked automatically when printing, and <code>__repr__</code> is
+invoked in an interactive session to display values.</p>
+<p>在python中有相当一部分特殊名字被python在特殊环境中交互式调用。比如，<code>__init__</code>方法在类中被一个对象自动调用。<code>__str__</code>方法在print中被自动调用。<code>__repr__</code>在交互式窗口中自动展示</p>
+<p>There are special names for many other behaviors in Python. Some of
+those used most commonly are described below.</p>
+<p><strong>True and false values.</strong> We saw previously that
+numbers in Python have a truth value; more specifically, 0 is a false
+value and all other numbers are true values. In fact, all objects in
+Python have a truth value. By default, objects of user-defined classes
+are considered to be true, but the special <code>__bool__</code> method
+can be used to override this behavior. If an object defines the
+<code>__bool__</code> method, then Python calls that method to determine
+its truth value.</p>
+<p>As an example, suppose we want a bank account with 0 balance to be
+false. We can add a <code>__bool__</code> method to the Account class to
+create this behavior.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; Account.__bool__ = lambda self: self.balance != 0</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>We can call the bool constructor to see the truth value of an object,
+and we can use any object in a boolean context.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; bool(Account(&#x27;Jack&#x27;))</span><br><span class="line">False</span><br><span class="line">&gt;&gt;&gt; if not Account(&#x27;Jack&#x27;):</span><br><span class="line">        print(&#x27;Jack has nothing&#x27;)</span><br><span class="line">Jack has nothing</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>Sequence operations.</strong> We have seen that we can call
+the len function to determine the length of a sequence.</p>
+<p>The len function invokes the <strong>len</strong> method of its
+argument to determine its length. All built-in sequence types implement
+this method.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; &#x27;Go Bears!&#x27;.__len__()</span><br><span class="line">9</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Python uses a sequence's length to determine its truth value, if it
+does not provide a <strong>bool</strong> method. Empty sequences are
+false, while non-empty sequences are true.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; bool(&#x27;&#x27;)</span><br><span class="line">False</span><br><span class="line">&gt;&gt;&gt; bool([])</span><br><span class="line">False</span><br><span class="line">&gt;&gt;&gt; bool(&#x27;Go Bears!&#x27;)</span><br><span class="line">True</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>The <strong>getitem</strong> method is invoked by the element
+selection operator, but it can also be invoked directly.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; &#x27;Go Bears!&#x27;[3]</span><br><span class="line">&#x27;B&#x27;</span><br><span class="line">&gt;&gt;&gt; &#x27;Go Bears!&#x27;.__getitem__(3)</span><br><span class="line">&#x27;B&#x27;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>Callable objects.</strong> In Python, functions are
+first-class objects, so they can be passed around as data and have
+attributes like any other object. Python also allows us to define
+objects that can be "called" like functions by including a
+<code>__call__</code> method. With this method, we can define a class
+that behaves like a higher-order function.</p>
+<p>As an example, consider the following higher-order function, which
+returns a function that adds a constant value to its argument.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def make_adder(n):</span><br><span class="line">        def adder(k):</span><br><span class="line">            return n + k</span><br><span class="line">        return adder</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; add_three = make_adder(3)</span><br><span class="line">&gt;&gt;&gt; add_three(4)</span><br><span class="line">7</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>We can create an Adder class that defines a <code>__call__</code>
+method to provide the same functionality.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; class Adder(object):</span><br><span class="line">        def __init__(self, n):</span><br><span class="line">            self.n = n</span><br><span class="line">        def __call__(self, k):</span><br><span class="line">            return self.n + k</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; add_three_obj = Adder(3)</span><br><span class="line">&gt;&gt;&gt; add_three_obj(4)</span><br><span class="line">7</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Here, the Adder class behaves like the make_adder higher-order
+function, and the add_three_obj object behaves like the add_three
+function. We have further blurred the line between data and
+functions.</p>
+<p>在这里，<code>Adder</code>类就像高阶函数的表示，<code>add_three_obj</code>类就像<code>add_three</code>函数。这样我们可以进一步模糊数据和函数的界限</p>
+<p><strong>Arithmetic.</strong> Special methods can also define the
+behavior of built-in operators applied to user-defined objects. In order
+to provide this generality, Python follows specific protocols to apply
+each operator. For example, to evaluate expressions that contain the +
+operator, Python checks for special methods on both the left and right
+operands of the expression. First, Python checks for an
+<code>__add__</code> method on the value of the left operand, then
+checks for an <code>__radd__</code> method on the value of the right
+operand. If either is found, that method is invoked with the value of
+the other operand as its argument. Some examples are given in the
+following sections. For readers interested in further details, the
+Python documentation describes the exhaustive set of <a
+target="_blank" rel="noopener" href="http://docs.python.org/py3k/reference/datamodel.html#special-method-names">method
+names for operators</a>. Dive into Python 3 has a chapter on <a
+target="_blank" rel="noopener" href="http://getpython3.com/diveintopython3/special-method-names.html">special
+method names</a> that describes how many of these special method names
+are used.</p>
+<h3 id="multiple-representations">2.7.3   Multiple Representations</h3>
+<p>Abstraction barriers allow us to separate the use and representation
+of data. However, in large programs, it may not always make sense to
+speak of "the underlying representation" for a data type in a program.
+For one thing, there might be more than one useful representation for a
+data object, and we might like to design systems that can deal with
+multiple representations.</p>
+<p>To take a simple example, complex numbers may be represented in two
+almost equivalent ways: in rectangular form (real and imaginary parts)
+and in polar form (magnitude and angle). Sometimes the rectangular form
+is more appropriate and sometimes the polar form is more appropriate.
+Indeed, it is perfectly plausible to imagine a system in which complex
+numbers are represented in both ways, and in which the functions for
+manipulating complex numbers work with either representation. We
+implement such a system below. As a side note, we are developing a
+system that performs arithmetic operations on complex numbers as a
+simple but unrealistic example of a program that uses generic
+operations. A <a
+target="_blank" rel="noopener" href="http://docs.python.org/py3k/library/stdtypes.html#typesnumeric">complex
+number type</a> is actually built into Python, but for this example we
+will implement our own.</p>
+<p>The idea of allowing for multiple representations of data arises
+regularly. Large software systems are often designed by many people
+working over extended periods of time, subject to requirements that
+change over time. In such an environment, it is simply not possible for
+everyone to agree in advance on choices of data representation. In
+addition to the data-abstraction barriers that isolate representation
+from use, we need abstraction barriers that isolate different design
+choices from each other and permit different choices to coexist in a
+single program.</p>
+<p>允许出现多种数据表示的想法时常出现。大型软件系统通常是由许多在很长一段时间内工作的人设计的，但必须随着时间的推移而改变。在这样的环境中，每个人根本不可能就数据表示的选择提前达成共识。除了隔离使用的数据障碍外，我们还需要互相隔离设计选择的抽象障碍，并允许不同的选择在一个程序中共存。</p>
+<p>We will begin our implementation at the highest level of abstraction
+and work towards concrete representations. A Complex number is a Number,
+and numbers can be added or multiplied together. How numbers can be
+added or multiplied is abstracted by the method names add and mul.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; class Number:</span><br><span class="line">        def __add__(self, other):</span><br><span class="line">            return self.add(other)</span><br><span class="line">        def __mul__(self, other):</span><br><span class="line">            return self.mul(other)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>This class requires that Number objects have add and mul methods, but
+does not define them. Moreover, it does not have an
+<strong>init</strong> method. The purpose of Number is not to be
+instantiated(实例化) directly, but instead to serve as a superclass of
+various specific number classes. Our next task is to define add and mul
+appropriately for complex numbers.</p>
+<p>A complex number can be thought of as a point in two-dimensional
+space with two orthogonal axes, the real axis and the imaginary axis.
+From this perspective, the complex number c = real + imag * i (where i *
+i = -1) can be thought of as the point in the plane whose horizontal
+coordinate is real and whose vertical coordinate is imag. Adding complex
+numbers involves adding their respective real and imag coordinates.</p>
+<p>When multiplying complex numbers, it is more natural to think in
+terms of(in term of 按照) representing a complex number in polar form,
+as a magnitude and an angle. The product of two complex numbers is the
+vector obtained by stretching one complex number by a factor of the
+length of the other, and then rotating it through the angle of the
+other.</p>
+<p>The Complex class inherits from Number and describes arithmetic for
+complex numbers.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; class Complex(Number):</span><br><span class="line">        def add(self, other):</span><br><span class="line">            return ComplexRI(self.real + other.real, self.imag + other.imag)</span><br><span class="line">        def mul(self, other):</span><br><span class="line">            magnitude = self.magnitude * other.magnitude</span><br><span class="line">            return ComplexMA(magnitude, self.angle + other.angle)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>This implementation assumes that two classes exist for complex
+numbers, corresponding to their two natural representations:</p>
+<ul>
+<li>ComplexRI constructs a complex number from real and imaginary
+parts.</li>
+<li>ComplexMA constructs a complex number from a magnitude and
+angle.</li>
+</ul>
+<p><strong>Interfaces.</strong> Object attributes, which are a form of
+message passing, allows different data types to respond to the same
+message in different ways. A shared set of messages that elicit similar
+behavior from different classes is a powerful method of abstraction. An
+<em>interface</em> is a set of shared attribute names, along with a
+specification of their behavior. In the case of complex numbers, the
+interface needed to implement arithmetic consists of four attributes:
+real, imag, magnitude, and angle.</p>
+<p>For complex arithmetic to be correct, these attributes must be
+consistent. That is, the rectangular coordinates (real, imag) and the
+polar coordinates (magnitude, angle) must describe the same point on the
+complex plane. The Complex class implicitly defines this interface by
+determining how these attributes are used to add and mul complex
+numbers.</p>
+<p><strong>Properties.</strong> The requirement that two or more
+attribute values maintain a fixed relationship with each other is a new
+problem. One solution is to store attribute values for only one
+representation and compute the other representation whenever it is
+needed.</p>
+<p>两个或多个属性值之间保持固定关系的要求是一个新问题。一种解决方案是仅存储一个表示属性值，并在需要时计算另一个表示值。</p>
+<p>Python has a simple feature for computing attributes on the fly from
+zero-argument functions. The <span class="citation"
+data-cites="property">@property</span> decorator allows functions to be
+called without call expression syntax (parentheses following an
+expression). The ComplexRI class stores real and imag attributes and
+computes magnitude and angle on demand.</p>
+<p>python有一种简单的特性来计算0参数函数。<code>@property</code>可以在不调用函数的情况下自动调用。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; from math import atan2</span><br><span class="line">&gt;&gt;&gt; class ComplexRI(Complex):</span><br><span class="line">        def __init__(self, real, imag):</span><br><span class="line">            self.real = real</span><br><span class="line">            self.imag = imag</span><br><span class="line">        @property</span><br><span class="line">        def magnitude(self):</span><br><span class="line">            return (self.real ** 2 + self.imag ** 2) ** 0.5</span><br><span class="line">        @property</span><br><span class="line">        def angle(self):</span><br><span class="line">            return atan2(self.imag, self.real)</span><br><span class="line">        def __repr__(self):</span><br><span class="line">            return &#x27;ComplexRI(&#123;0:g&#125;, &#123;1:g&#125;)&#x27;.format(self.real, self.imag)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>As a result of this implementation, all four attributes needed for
+complex arithmetic can be accessed without any call expressions, and
+changes to real or imag are reflected in the magnitude and angle.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; ri = ComplexRI(5, 12)</span><br><span class="line">&gt;&gt;&gt; ri.real</span><br><span class="line">5</span><br><span class="line">&gt;&gt;&gt; ri.magnitude</span><br><span class="line">13.0</span><br><span class="line">&gt;&gt;&gt; ri.real = 9</span><br><span class="line">&gt;&gt;&gt; ri.real</span><br><span class="line">9</span><br><span class="line">&gt;&gt;&gt; ri.magnitude</span><br><span class="line">15.0</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Similarly, the ComplexMA class stores magnitude and angle, but
+computes real and imag whenever those attributes are looked up.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; from math import sin, cos, pi</span><br><span class="line">&gt;&gt;&gt; class ComplexMA(Complex):</span><br><span class="line">        def __init__(self, magnitude, angle):</span><br><span class="line">            self.magnitude = magnitude</span><br><span class="line">            self.angle = angle</span><br><span class="line">        @property</span><br><span class="line">        def real(self):</span><br><span class="line">            return self.magnitude * cos(self.angle)</span><br><span class="line">        @property</span><br><span class="line">        def imag(self):</span><br><span class="line">            return self.magnitude * sin(self.angle)</span><br><span class="line">        def __repr__(self):</span><br><span class="line">            return &#x27;ComplexMA(&#123;0:g&#125;, &#123;1:g&#125; * pi)&#x27;.format(self.magnitude, self.angle/pi)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Changes to the magnitude or angle are reflected immediately in the
+real and imag attributes.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; ma = ComplexMA(2, pi/2)</span><br><span class="line">&gt;&gt;&gt; ma.imag</span><br><span class="line">2.0</span><br><span class="line">&gt;&gt;&gt; ma.angle = pi</span><br><span class="line">&gt;&gt;&gt; ma.real</span><br><span class="line">-2.0</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Our implementation of complex numbers is now complete. Either class
+implementing complex numbers can be used for either argument in either
+arithmetic function in Complex.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; from math import pi</span><br><span class="line">&gt;&gt;&gt; ComplexRI(1, 2) + ComplexMA(2, pi/2)</span><br><span class="line">ComplexRI(1, 4)</span><br><span class="line">&gt;&gt;&gt; ComplexRI(0, 1) * ComplexRI(0, 1)</span><br><span class="line">ComplexMA(1, 1 * pi)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>The interface approach to encoding multiple representations has
+appealing properties. The class for each representation can be developed
+separately; they must only agree on the names of the attributes they
+share, as well as any behavior conditions for those attributes. The
+interface is also <em>additive</em>. If another programmer wanted to add
+a third representation of complex numbers to the same program, they
+would only have to create another class with the same attributes.</p>
+<p>Multiple representations of data are closely related to the idea of
+data abstraction with which we began this chapter. Using data
+abstraction, we were able to change the implementation of a data type
+without changing the meaning of the program. With interfaces and message
+passing, we can have multiple different representations within the same
+program. In both cases, a set of names and corresponding behavior
+conditions define the abstraction that enables this flexibility.</p>
+<h3 id="generic-functions">2.7.4   Generic Functions</h3>
+<p>Generic functions are methods or functions that apply to arguments of
+different types. We have seen many examples already. The Complex.add
+method is generic, because it can take either a ComplexRI or ComplexMA
+as the value for other. This flexibility was gained by ensuring that
+both ComplexRI and ComplexMA share an interface. Using interfaces and
+message passing is only one of several methods used to implement generic
+functions. We will consider two others in this section: type dispatching
+and type coercion.</p>
+<p>Suppose that, in addition to our complex number classes, we implement
+a Rational class to represent fractions exactly. The add and mul methods
+express the same computations as the add_rational and mul_rational
+functions from earlier in the chapter.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; from fractions import gcd</span><br><span class="line">&gt;&gt;&gt; class Rational(Number):</span><br><span class="line">        def __init__(self, numer, denom):</span><br><span class="line">            g = gcd(numer, denom)</span><br><span class="line">            self.numer = numer // g</span><br><span class="line">            self.denom = denom // g</span><br><span class="line">        def __repr__(self):</span><br><span class="line">            return &#x27;Rational(&#123;0&#125;, &#123;1&#125;)&#x27;.format(self.numer, self.denom)</span><br><span class="line">        def add(self, other):</span><br><span class="line">            nx, dx = self.numer, self.denom</span><br><span class="line">            ny, dy = other.numer, other.denom</span><br><span class="line">            return Rational(nx * dy + ny * dx, dx * dy)</span><br><span class="line">        def mul(self, other):</span><br><span class="line">            numer = self.numer * other.numer</span><br><span class="line">            denom = self.denom * other.denom</span><br><span class="line">            return Rational(numer, denom)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>We have implemented the interface of the Number superclass by
+including add and mul methods. As a result, we can add and multiply
+rational numbers using familiar operators.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; Rational(2, 5) + Rational(1, 10)</span><br><span class="line">Rational(1, 2)</span><br><span class="line">&gt;&gt;&gt; Rational(1, 4) * Rational(2, 3)</span><br><span class="line">Rational(1, 6)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>However, we cannot yet add a rational number to a complex number,
+although in mathematics such a combination is well-defined. We would
+like to introduce this cross-type operation in some carefully controlled
+way, so that we can support it without seriously violating our
+abstraction barriers. There is a tension between the outcomes we desire:
+we would like to be able to add a complex number to a rational number,
+and we would like to do so using a generic <strong>add</strong> method
+that does the right thing with all numeric types. At the same time, we
+would like to separate the concerns of complex numbers and rational
+numbers whenever possible, in order to maintain a modular program.</p>
+<p><strong>Type dispatching(类型转换).</strong> One way to implement
+cross-type operations is to select behavior based on the types of the
+arguments to a function or method. The idea of type dispatching is to
+write functions that inspect the type of arguments they receive, then
+execute code that is appropriate for those types.</p>
+<p>The built-in function isinstance takes an object and a class. It
+returns true if the object has a class that either is or inherits from
+the given class.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; c = ComplexRI(1, 1)</span><br><span class="line">&gt;&gt;&gt; isinstance(c, ComplexRI)</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; isinstance(c, Complex)</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; isinstance(c, ComplexMA)</span><br><span class="line">False</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>A simple example of type dispatching is an is_real function that uses
+a different implementation for each type of complex number.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def is_real(c):</span><br><span class="line">        &quot;&quot;&quot;Return whether c is a real number with no imaginary part.&quot;&quot;&quot;</span><br><span class="line">        if isinstance(c, ComplexRI):</span><br><span class="line">            return c.imag == 0</span><br><span class="line">        elif isinstance(c, ComplexMA):</span><br><span class="line">            return c.angle % pi == 0</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; is_real(ComplexRI(1, 1))</span><br><span class="line">False</span><br><span class="line">&gt;&gt;&gt; is_real(ComplexMA(2, pi))</span><br><span class="line">True</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Type dispatching is not always performed using isinstance. For
+arithmetic, we will give a type_tag attribute to Rational and Complex
+instances that has a string value. When two values x and y have the same
+type_tag, then we can combine them directly with x.add(y). If not, we
+need a cross-type operation.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; Rational.type_tag = &#x27;rat&#x27;</span><br><span class="line">&gt;&gt;&gt; Complex.type_tag = &#x27;com&#x27;</span><br><span class="line">&gt;&gt;&gt; Rational(2, 5).type_tag == Rational(1, 2).type_tag</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; ComplexRI(1, 1).type_tag == ComplexMA(2, pi/2).type_tag</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; Rational(2, 5).type_tag == ComplexRI(1, 1).type_tag</span><br><span class="line">False</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>To combine complex and rational numbers, we write functions that rely
+on both of their representations simultaneously. Below, we rely on the
+fact that a Rational can be converted approximately to a float value
+that is a real number. The result can be combined with a complex
+number.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def add_complex_and_rational(c, r):</span><br><span class="line">        return ComplexRI(c.real + r.numer/r.denom, c.imag)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Multiplication involves a similar conversion. In polar form, a real
+number in the complex plane always has a positive magnitude. The angle 0
+indicates a positive number. The angle pi indicates a negative
+number.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def mul_complex_and_rational(c, r):</span><br><span class="line">        r_magnitude, r_angle = r.numer/r.denom, 0</span><br><span class="line">        if r_magnitude &lt; 0:</span><br><span class="line">            r_magnitude, r_angle = -r_magnitude, pi</span><br><span class="line">        return ComplexMA(c.magnitude * r_magnitude, c.angle + r_angle)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Both addition and multiplication are commutative, so swapping the
+argument order can use the same implementations of these cross-type
+operations.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def add_rational_and_complex(r, c):</span><br><span class="line">        return add_complex_and_rational(c, r)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def mul_rational_and_complex(r, c):</span><br><span class="line">        return mul_complex_and_rational(c, r)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>The role of type dispatching is to ensure that these cross-type
+operations are used at appropriate times. Below, we rewrite the Number
+superclass to use type dispatching for its <code>__add__</code> and
+<code>__mul__</code> methods.</p>
+<p>We use the type_tag attribute to distinguish types of arguments. One
+could directly use the built-in isinstance method as well, but tags
+simplify the implementation. Using type tags also illustrates that type
+dispatching is not necessarily linked to the Python object system, but
+instead a general technique for creating generic functions over
+heterogeneous domains.</p>
+<p>The <code>__add__</code> method considers two cases. First, if two
+arguments have the same type tag, then it assumes that add method of the
+first can take the second as an argument. Otherwise, it checks whether a
+dictionary of cross-type implementations, called adders, contains a
+function that can add arguments of those type tags. If there is such a
+function, the cross_apply method finds and applies it. The
+<strong>mul</strong> method has a similar structure.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; class Number:</span><br><span class="line">        def __add__(self, other):</span><br><span class="line">            if self.type_tag == other.type_tag:</span><br><span class="line">                return self.add(other)</span><br><span class="line">            elif (self.type_tag, other.type_tag) in self.adders:</span><br><span class="line">                return self.cross_apply(other, self.adders)</span><br><span class="line">        def __mul__(self, other):</span><br><span class="line">            if self.type_tag == other.type_tag:</span><br><span class="line">                return self.mul(other)</span><br><span class="line">            elif (self.type_tag, other.type_tag) in self.multipliers:</span><br><span class="line">                return self.cross_apply(other, self.multipliers)</span><br><span class="line">        def cross_apply(self, other, cross_fns):</span><br><span class="line">            cross_fn = cross_fns[(self.type_tag, other.type_tag)]</span><br><span class="line">            return cross_fn(self, other)</span><br><span class="line">        adders = &#123;(&quot;com&quot;, &quot;rat&quot;): add_complex_and_rational,</span><br><span class="line">                  (&quot;rat&quot;, &quot;com&quot;): add_rational_and_complex&#125;</span><br><span class="line">        multipliers = &#123;(&quot;com&quot;, &quot;rat&quot;): mul_complex_and_rational,</span><br><span class="line">                       (&quot;rat&quot;, &quot;com&quot;): mul_rational_and_complex&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>In this new definition of the Number class, all cross-type
+implementations are indexed by pairs of type tags in the adders and
+multipliers dictionaries.</p>
+<p>This dictionary-based approach to type dispatching is extensible. New
+subclasses of Number could install themselves into the system by
+declaring a type tag and adding cross-type operations to Number.adders
+and Number.multipliers. They could also define their own adders and
+multipliers in a subclass.</p>
+<p>While we have introduced some complexity to the system, we can now
+mix types in addition and multiplication expressions.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; ComplexRI(1.5, 0) + Rational(3, 2)</span><br><span class="line">ComplexRI(3, 0)</span><br><span class="line">&gt;&gt;&gt; Rational(-1, 2) * ComplexMA(4, pi/2)</span><br><span class="line">ComplexMA(2, 1.5 * pi)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>Coercion.</strong> In the general situation of completely
+unrelated operations acting on completely unrelated types, implementing
+explicit cross-type operations, cumbersome(麻烦) though it may be, is
+the best that one can hope for. Fortunately, we can sometimes do better
+by taking advantage of additional structure that may be latent in our
+type system. Often the different data types are not completely
+independent, and there may be ways by which objects of one type may be
+viewed as being of another type. This process is called
+<em>coercion</em>. For example, if we are asked to arithmetically
+combine a rational number with a complex number, we can view the
+rational number as a complex number whose imaginary part is zero. After
+doing so, we can use Complex.add and Complex.mul to combine them.</p>
+<p>In general, we can implement this idea by designing coercion
+functions that transform an object of one type into an equivalent object
+of another type. Here is a typical coercion function, which transforms a
+rational number to a complex number with zero imaginary part:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def rational_to_complex(r):</span><br><span class="line">        return ComplexRI(r.numer/r.denom, 0)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>The alternative definition of the Number class performs cross-type
+operations by attempting to coerce both arguments to the same type. The
+coercions dictionary indexes all possible coercions by a pair of type
+tags, indicating that the corresponding value coerces a value of the
+first type to a value of the second type.</p>
+<p>It is not generally possible to coerce an arbitrary data object of
+each type into all other types. For example, there is no way to coerce
+an arbitrary complex number to a rational number, so there will be no
+such conversion implementation in the coercions dictionary.</p>
+<p>The coerce method returns two values with the same type tag. It
+inspects the type tags of its arguments, compares them to entries in the
+coercions dictionary, and converts one argument to the type of the other
+using coerce_to. Only one entry in coercions is necessary to complete
+our cross-type arithmetic system, replacing the four cross-type
+functions in the type-dispatching version of Number.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; class Number:</span><br><span class="line">        def __add__(self, other):</span><br><span class="line">            x, y = self.coerce(other)</span><br><span class="line">            return x.add(y)</span><br><span class="line">        def __mul__(self, other):</span><br><span class="line">            x, y = self.coerce(other)</span><br><span class="line">            return x.mul(y)</span><br><span class="line">        def coerce(self, other):</span><br><span class="line">            if self.type_tag == other.type_tag:</span><br><span class="line">                return self, other</span><br><span class="line">            elif (self.type_tag, other.type_tag) in self.coercions:</span><br><span class="line">                return (self.coerce_to(other.type_tag), other)</span><br><span class="line">            elif (other.type_tag, self.type_tag) in self.coercions:</span><br><span class="line">                return (self, other.coerce_to(self.type_tag))</span><br><span class="line">        def coerce_to(self, other_tag):</span><br><span class="line">            coercion_fn = self.coercions[(self.type_tag, other_tag)]</span><br><span class="line">            return coercion_fn(self)</span><br><span class="line">        coercions = &#123;(&#x27;rat&#x27;, &#x27;com&#x27;): rational_to_complex&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>This coercion scheme has some advantages over the method of defining
+explicit(显式) cross-type operations. Although we still need to write
+coercion functions to relate the types, we need to write only one
+function for each pair of types rather than a different function for
+each set of types and each generic operation. What we are counting on
+here is the fact that the appropriate transformation between types
+depends only on the types themselves, not on the particular operation to
+be applied.</p>
+<p>Further advantages come from extending coercion. Some more
+sophisticated coercion schemes do not just try to coerce one type into
+another, but instead may try to coerce two different types each into a
+third common type. Consider a rhombus and a rectangle: neither is a
+special case of the other, but both can be viewed as quadrilaterals.
+Another extension to coercion is iterative coercion, in which one data
+type is coerced into another via intermediate types. Consider that an
+integer can be converted into a real number by first converting it into
+a rational number, then converting that rational number into a real
+number. Chaining coercion in this way can reduce the total number of
+coercion functions that are required by a program.</p>
+<p>Despite its advantages, coercion does have potential drawbacks. For
+one, coercion functions can lose information when they are applied. In
+our example, rational numbers are exact representations, but become
+approximations when they are converted to complex numbers.</p>
+<p>Some programming languages have automatic coercion systems built in.
+In fact, early versions of Python had a <strong>coerce</strong> special
+method on objects. In the end, the complexity of the built-in coercion
+system did not justify its use, and so it was removed. Instead,
+particular operators apply coercion to their arguments as needed.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/21/2_5%20Object-Oriented%20Programming/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1019,730 +1504,6 @@ software engineering that deserves careful attention.</p>
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/21/2_7%20Object%20Abstraction/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
-      <meta itemprop="name" content="XuandYu000">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="viewoverlook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/08/21/2_7%20Object%20Abstraction/" class="post-title-link" itemprop="url">2_7 Object Abstraction</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-08-21 00:00:00 / 修改时间：10:53:19" itemprop="dateCreated datePublished" datetime="2023-08-21T00:00:00+08:00">2023-08-21</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/csdiy/" itemprop="url" rel="index"><span itemprop="name">csdiy</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/csdiy/cs61A/" itemprop="url" rel="index"><span itemprop="name">cs61A</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="object-abstraction">2_7 Object Abstraction</h1>
-<p>The object system allows programmers to build and use abstract data
-representations efficiently. It is also designed to allow multiple
-representations of abstract data to coexist in the same program.</p>
-<p>A central concept in object abstraction is a <em>generic
-function</em>, which is a function that can accept values of multiple
-different types. We will consider three different techniques for
-implementing generic functions: shared interfaces, type dispatching, and
-type coercion. In the process of building up these concepts, we will
-also discover features of the Python object system that support the
-creation of generic functions.</p>
-<h3 id="string-conversion">2.7.1   String Conversion</h3>
-<p>To represent data effectively, an object value should behave like the
-kind of data it is meant to represent, including producing a string
-representation of itself. String representations of data values are
-especially important in an interactive language such as Python that
-automatically displays the string representation of the values of
-expressions in an interactive session.</p>
-<p>为了更有效率的表示数据，一个对象值应该表现得像它旨在表示的数据，包括其自身的字符串表示。</p>
-<p>String values provide a fundamental medium for communicating
-information among humans. Sequences of characters can be rendered on a
-screen, printed to paper, read aloud, converted to braille, or broadcast
-as Morse code. Strings are also fundamental to programming because they
-can represent Python expressions.</p>
-<p>Python stipulates that all objects should produce two different
-string representations: one that is human-interpretable (interpretable
-可解释的) text and one that is a Python-interpretable expression. The
-constructor function for strings, str, returns a human-readable string.
-Where possible, the repr function returns a Python expression that
-evaluates to an equal object. The docstring for <em>repr</em> explains
-this property:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">repr(object) -&gt; string</span><br><span class="line"></span><br><span class="line">Return the canonical(典范) string representation of the object.</span><br><span class="line">For most object types, eval(repr(object)) == object.</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>The result of calling repr on the value of an expression is what
-Python prints in an interactive session.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; 12e12</span><br><span class="line">12000000000000.0</span><br><span class="line">&gt;&gt;&gt; print(repr(12e12))</span><br><span class="line">12000000000000.0</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>In cases where no representation exists that evaluates to the
-original value, Python typically produces a description surrounded by
-angled brackets.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; repr(min)</span><br><span class="line">&#x27;&lt;built-in function min&gt;&#x27;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>The str constructor often coincides with repr, but provides a more
-interpretable text representation in some cases. For instance, we see a
-difference between str and repr with dates.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; from datetime import date</span><br><span class="line">&gt;&gt;&gt; tues = date(2011, 9, 12)</span><br><span class="line">&gt;&gt;&gt; repr(tues)</span><br><span class="line">&#x27;datetime.date(2011, 9, 12)&#x27;</span><br><span class="line">&gt;&gt;&gt; str(tues)</span><br><span class="line">&#x27;2011-09-12&#x27;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>Defining the repr function presents a new challenge: we would like it
-to apply correctly to all data types, even those that did not exist when
-repr was implemented. We would like it to be a generic or
-<em>polymorphic function</em>, one that can be applied to many
-(<em>poly</em>) different forms (<em>morph</em>) of data.</p>
-<p>The object system provides an elegant solution in this case: the repr
-function always invokes a method called <code>__repr__</code> on its
-argument.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; tues.__repr__()</span><br><span class="line">&#x27;datetime.date(2011, 9, 12)&#x27;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>By implementing this same method in user-defined classes, we can
-extend the applicability of repr to any class we create in the future.
-This example highlights another benefit of dot expressions in general,
-that they provide a mechanism(机制) for extending the domain of existing
-functions to new object types.</p>
-<p>The str constructor is implemented in a similar manner: it invokes a
-method called ·、<code>__str__</code> on its argument.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; tues.__str__()</span><br><span class="line">&#x27;2011-09-12&#x27;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>These polymorphic(多态) functions are examples of a more general
-principle: certain functions should apply to multiple data types.
-Moreover, one way to create such a function is to use a shared attribute
-name with a different definition in each class.</p>
-<p>这些多态性函数是一则规则的具体实例:
-相当一部分函数应该被应用与多种数据类型中。而且，一种实现这种函数的方法是用一个可以有不同功能但被共享的类的属性名称</p>
-<h3 id="special-methods">2.7.2   Special Methods</h3>
-<p>In Python, certain <em>special names</em> are invoked by the Python
-interpreter in special circumstances. For instance, the
-<code>__init__</code> method of a class is automatically invoked
-whenever an object is constructed. The <code>__str__</code> method is
-invoked automatically when printing, and <code>__repr__</code> is
-invoked in an interactive session to display values.</p>
-<p>在python中有相当一部分特殊名字被python在特殊环境中交互式调用。比如，<code>__init__</code>方法在类中被一个对象自动调用。<code>__str__</code>方法在print中被自动调用。<code>__repr__</code>在交互式窗口中自动展示</p>
-<p>There are special names for many other behaviors in Python. Some of
-those used most commonly are described below.</p>
-<p><strong>True and false values.</strong> We saw previously that
-numbers in Python have a truth value; more specifically, 0 is a false
-value and all other numbers are true values. In fact, all objects in
-Python have a truth value. By default, objects of user-defined classes
-are considered to be true, but the special <code>__bool__</code> method
-can be used to override this behavior. If an object defines the
-<code>__bool__</code> method, then Python calls that method to determine
-its truth value.</p>
-<p>As an example, suppose we want a bank account with 0 balance to be
-false. We can add a <code>__bool__</code> method to the Account class to
-create this behavior.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; Account.__bool__ = lambda self: self.balance != 0</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>We can call the bool constructor to see the truth value of an object,
-and we can use any object in a boolean context.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; bool(Account(&#x27;Jack&#x27;))</span><br><span class="line">False</span><br><span class="line">&gt;&gt;&gt; if not Account(&#x27;Jack&#x27;):</span><br><span class="line">        print(&#x27;Jack has nothing&#x27;)</span><br><span class="line">Jack has nothing</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><strong>Sequence operations.</strong> We have seen that we can call
-the len function to determine the length of a sequence.</p>
-<p>The len function invokes the <strong>len</strong> method of its
-argument to determine its length. All built-in sequence types implement
-this method.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; &#x27;Go Bears!&#x27;.__len__()</span><br><span class="line">9</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>Python uses a sequence's length to determine its truth value, if it
-does not provide a <strong>bool</strong> method. Empty sequences are
-false, while non-empty sequences are true.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; bool(&#x27;&#x27;)</span><br><span class="line">False</span><br><span class="line">&gt;&gt;&gt; bool([])</span><br><span class="line">False</span><br><span class="line">&gt;&gt;&gt; bool(&#x27;Go Bears!&#x27;)</span><br><span class="line">True</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>The <strong>getitem</strong> method is invoked by the element
-selection operator, but it can also be invoked directly.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; &#x27;Go Bears!&#x27;[3]</span><br><span class="line">&#x27;B&#x27;</span><br><span class="line">&gt;&gt;&gt; &#x27;Go Bears!&#x27;.__getitem__(3)</span><br><span class="line">&#x27;B&#x27;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><strong>Callable objects.</strong> In Python, functions are
-first-class objects, so they can be passed around as data and have
-attributes like any other object. Python also allows us to define
-objects that can be "called" like functions by including a
-<code>__call__</code> method. With this method, we can define a class
-that behaves like a higher-order function.</p>
-<p>As an example, consider the following higher-order function, which
-returns a function that adds a constant value to its argument.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def make_adder(n):</span><br><span class="line">        def adder(k):</span><br><span class="line">            return n + k</span><br><span class="line">        return adder</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; add_three = make_adder(3)</span><br><span class="line">&gt;&gt;&gt; add_three(4)</span><br><span class="line">7</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>We can create an Adder class that defines a <code>__call__</code>
-method to provide the same functionality.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; class Adder(object):</span><br><span class="line">        def __init__(self, n):</span><br><span class="line">            self.n = n</span><br><span class="line">        def __call__(self, k):</span><br><span class="line">            return self.n + k</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; add_three_obj = Adder(3)</span><br><span class="line">&gt;&gt;&gt; add_three_obj(4)</span><br><span class="line">7</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>Here, the Adder class behaves like the make_adder higher-order
-function, and the add_three_obj object behaves like the add_three
-function. We have further blurred the line between data and
-functions.</p>
-<p>在这里，<code>Adder</code>类就像高阶函数的表示，<code>add_three_obj</code>类就像<code>add_three</code>函数。这样我们可以进一步模糊数据和函数的界限</p>
-<p><strong>Arithmetic.</strong> Special methods can also define the
-behavior of built-in operators applied to user-defined objects. In order
-to provide this generality, Python follows specific protocols to apply
-each operator. For example, to evaluate expressions that contain the +
-operator, Python checks for special methods on both the left and right
-operands of the expression. First, Python checks for an
-<code>__add__</code> method on the value of the left operand, then
-checks for an <code>__radd__</code> method on the value of the right
-operand. If either is found, that method is invoked with the value of
-the other operand as its argument. Some examples are given in the
-following sections. For readers interested in further details, the
-Python documentation describes the exhaustive set of <a
-target="_blank" rel="noopener" href="http://docs.python.org/py3k/reference/datamodel.html#special-method-names">method
-names for operators</a>. Dive into Python 3 has a chapter on <a
-target="_blank" rel="noopener" href="http://getpython3.com/diveintopython3/special-method-names.html">special
-method names</a> that describes how many of these special method names
-are used.</p>
-<h3 id="multiple-representations">2.7.3   Multiple Representations</h3>
-<p>Abstraction barriers allow us to separate the use and representation
-of data. However, in large programs, it may not always make sense to
-speak of "the underlying representation" for a data type in a program.
-For one thing, there might be more than one useful representation for a
-data object, and we might like to design systems that can deal with
-multiple representations.</p>
-<p>To take a simple example, complex numbers may be represented in two
-almost equivalent ways: in rectangular form (real and imaginary parts)
-and in polar form (magnitude and angle). Sometimes the rectangular form
-is more appropriate and sometimes the polar form is more appropriate.
-Indeed, it is perfectly plausible to imagine a system in which complex
-numbers are represented in both ways, and in which the functions for
-manipulating complex numbers work with either representation. We
-implement such a system below. As a side note, we are developing a
-system that performs arithmetic operations on complex numbers as a
-simple but unrealistic example of a program that uses generic
-operations. A <a
-target="_blank" rel="noopener" href="http://docs.python.org/py3k/library/stdtypes.html#typesnumeric">complex
-number type</a> is actually built into Python, but for this example we
-will implement our own.</p>
-<p>The idea of allowing for multiple representations of data arises
-regularly. Large software systems are often designed by many people
-working over extended periods of time, subject to requirements that
-change over time. In such an environment, it is simply not possible for
-everyone to agree in advance on choices of data representation. In
-addition to the data-abstraction barriers that isolate representation
-from use, we need abstraction barriers that isolate different design
-choices from each other and permit different choices to coexist in a
-single program.</p>
-<p>允许出现多种数据表示的想法时常出现。大型软件系统通常是由许多在很长一段时间内工作的人设计的，但必须随着时间的推移而改变。在这样的环境中，每个人根本不可能就数据表示的选择提前达成共识。除了隔离使用的数据障碍外，我们还需要互相隔离设计选择的抽象障碍，并允许不同的选择在一个程序中共存。</p>
-<p>We will begin our implementation at the highest level of abstraction
-and work towards concrete representations. A Complex number is a Number,
-and numbers can be added or multiplied together. How numbers can be
-added or multiplied is abstracted by the method names add and mul.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; class Number:</span><br><span class="line">        def __add__(self, other):</span><br><span class="line">            return self.add(other)</span><br><span class="line">        def __mul__(self, other):</span><br><span class="line">            return self.mul(other)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>This class requires that Number objects have add and mul methods, but
-does not define them. Moreover, it does not have an
-<strong>init</strong> method. The purpose of Number is not to be
-instantiated(实例化) directly, but instead to serve as a superclass of
-various specific number classes. Our next task is to define add and mul
-appropriately for complex numbers.</p>
-<p>A complex number can be thought of as a point in two-dimensional
-space with two orthogonal axes, the real axis and the imaginary axis.
-From this perspective, the complex number c = real + imag * i (where i *
-i = -1) can be thought of as the point in the plane whose horizontal
-coordinate is real and whose vertical coordinate is imag. Adding complex
-numbers involves adding their respective real and imag coordinates.</p>
-<p>When multiplying complex numbers, it is more natural to think in
-terms of(in term of 按照) representing a complex number in polar form,
-as a magnitude and an angle. The product of two complex numbers is the
-vector obtained by stretching one complex number by a factor of the
-length of the other, and then rotating it through the angle of the
-other.</p>
-<p>The Complex class inherits from Number and describes arithmetic for
-complex numbers.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; class Complex(Number):</span><br><span class="line">        def add(self, other):</span><br><span class="line">            return ComplexRI(self.real + other.real, self.imag + other.imag)</span><br><span class="line">        def mul(self, other):</span><br><span class="line">            magnitude = self.magnitude * other.magnitude</span><br><span class="line">            return ComplexMA(magnitude, self.angle + other.angle)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>This implementation assumes that two classes exist for complex
-numbers, corresponding to their two natural representations:</p>
-<ul>
-<li>ComplexRI constructs a complex number from real and imaginary
-parts.</li>
-<li>ComplexMA constructs a complex number from a magnitude and
-angle.</li>
-</ul>
-<p><strong>Interfaces.</strong> Object attributes, which are a form of
-message passing, allows different data types to respond to the same
-message in different ways. A shared set of messages that elicit similar
-behavior from different classes is a powerful method of abstraction. An
-<em>interface</em> is a set of shared attribute names, along with a
-specification of their behavior. In the case of complex numbers, the
-interface needed to implement arithmetic consists of four attributes:
-real, imag, magnitude, and angle.</p>
-<p>For complex arithmetic to be correct, these attributes must be
-consistent. That is, the rectangular coordinates (real, imag) and the
-polar coordinates (magnitude, angle) must describe the same point on the
-complex plane. The Complex class implicitly defines this interface by
-determining how these attributes are used to add and mul complex
-numbers.</p>
-<p><strong>Properties.</strong> The requirement that two or more
-attribute values maintain a fixed relationship with each other is a new
-problem. One solution is to store attribute values for only one
-representation and compute the other representation whenever it is
-needed.</p>
-<p>两个或多个属性值之间保持固定关系的要求是一个新问题。一种解决方案是仅存储一个表示属性值，并在需要时计算另一个表示值。</p>
-<p>Python has a simple feature for computing attributes on the fly from
-zero-argument functions. The <span class="citation"
-data-cites="property">@property</span> decorator allows functions to be
-called without call expression syntax (parentheses following an
-expression). The ComplexRI class stores real and imag attributes and
-computes magnitude and angle on demand.</p>
-<p>python有一种简单的特性来计算0参数函数。<code>@property</code>可以在不调用函数的情况下自动调用。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; from math import atan2</span><br><span class="line">&gt;&gt;&gt; class ComplexRI(Complex):</span><br><span class="line">        def __init__(self, real, imag):</span><br><span class="line">            self.real = real</span><br><span class="line">            self.imag = imag</span><br><span class="line">        @property</span><br><span class="line">        def magnitude(self):</span><br><span class="line">            return (self.real ** 2 + self.imag ** 2) ** 0.5</span><br><span class="line">        @property</span><br><span class="line">        def angle(self):</span><br><span class="line">            return atan2(self.imag, self.real)</span><br><span class="line">        def __repr__(self):</span><br><span class="line">            return &#x27;ComplexRI(&#123;0:g&#125;, &#123;1:g&#125;)&#x27;.format(self.real, self.imag)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>As a result of this implementation, all four attributes needed for
-complex arithmetic can be accessed without any call expressions, and
-changes to real or imag are reflected in the magnitude and angle.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; ri = ComplexRI(5, 12)</span><br><span class="line">&gt;&gt;&gt; ri.real</span><br><span class="line">5</span><br><span class="line">&gt;&gt;&gt; ri.magnitude</span><br><span class="line">13.0</span><br><span class="line">&gt;&gt;&gt; ri.real = 9</span><br><span class="line">&gt;&gt;&gt; ri.real</span><br><span class="line">9</span><br><span class="line">&gt;&gt;&gt; ri.magnitude</span><br><span class="line">15.0</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>Similarly, the ComplexMA class stores magnitude and angle, but
-computes real and imag whenever those attributes are looked up.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; from math import sin, cos, pi</span><br><span class="line">&gt;&gt;&gt; class ComplexMA(Complex):</span><br><span class="line">        def __init__(self, magnitude, angle):</span><br><span class="line">            self.magnitude = magnitude</span><br><span class="line">            self.angle = angle</span><br><span class="line">        @property</span><br><span class="line">        def real(self):</span><br><span class="line">            return self.magnitude * cos(self.angle)</span><br><span class="line">        @property</span><br><span class="line">        def imag(self):</span><br><span class="line">            return self.magnitude * sin(self.angle)</span><br><span class="line">        def __repr__(self):</span><br><span class="line">            return &#x27;ComplexMA(&#123;0:g&#125;, &#123;1:g&#125; * pi)&#x27;.format(self.magnitude, self.angle/pi)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>Changes to the magnitude or angle are reflected immediately in the
-real and imag attributes.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; ma = ComplexMA(2, pi/2)</span><br><span class="line">&gt;&gt;&gt; ma.imag</span><br><span class="line">2.0</span><br><span class="line">&gt;&gt;&gt; ma.angle = pi</span><br><span class="line">&gt;&gt;&gt; ma.real</span><br><span class="line">-2.0</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>Our implementation of complex numbers is now complete. Either class
-implementing complex numbers can be used for either argument in either
-arithmetic function in Complex.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; from math import pi</span><br><span class="line">&gt;&gt;&gt; ComplexRI(1, 2) + ComplexMA(2, pi/2)</span><br><span class="line">ComplexRI(1, 4)</span><br><span class="line">&gt;&gt;&gt; ComplexRI(0, 1) * ComplexRI(0, 1)</span><br><span class="line">ComplexMA(1, 1 * pi)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>The interface approach to encoding multiple representations has
-appealing properties. The class for each representation can be developed
-separately; they must only agree on the names of the attributes they
-share, as well as any behavior conditions for those attributes. The
-interface is also <em>additive</em>. If another programmer wanted to add
-a third representation of complex numbers to the same program, they
-would only have to create another class with the same attributes.</p>
-<p>Multiple representations of data are closely related to the idea of
-data abstraction with which we began this chapter. Using data
-abstraction, we were able to change the implementation of a data type
-without changing the meaning of the program. With interfaces and message
-passing, we can have multiple different representations within the same
-program. In both cases, a set of names and corresponding behavior
-conditions define the abstraction that enables this flexibility.</p>
-<h3 id="generic-functions">2.7.4   Generic Functions</h3>
-<p>Generic functions are methods or functions that apply to arguments of
-different types. We have seen many examples already. The Complex.add
-method is generic, because it can take either a ComplexRI or ComplexMA
-as the value for other. This flexibility was gained by ensuring that
-both ComplexRI and ComplexMA share an interface. Using interfaces and
-message passing is only one of several methods used to implement generic
-functions. We will consider two others in this section: type dispatching
-and type coercion.</p>
-<p>Suppose that, in addition to our complex number classes, we implement
-a Rational class to represent fractions exactly. The add and mul methods
-express the same computations as the add_rational and mul_rational
-functions from earlier in the chapter.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; from fractions import gcd</span><br><span class="line">&gt;&gt;&gt; class Rational(Number):</span><br><span class="line">        def __init__(self, numer, denom):</span><br><span class="line">            g = gcd(numer, denom)</span><br><span class="line">            self.numer = numer // g</span><br><span class="line">            self.denom = denom // g</span><br><span class="line">        def __repr__(self):</span><br><span class="line">            return &#x27;Rational(&#123;0&#125;, &#123;1&#125;)&#x27;.format(self.numer, self.denom)</span><br><span class="line">        def add(self, other):</span><br><span class="line">            nx, dx = self.numer, self.denom</span><br><span class="line">            ny, dy = other.numer, other.denom</span><br><span class="line">            return Rational(nx * dy + ny * dx, dx * dy)</span><br><span class="line">        def mul(self, other):</span><br><span class="line">            numer = self.numer * other.numer</span><br><span class="line">            denom = self.denom * other.denom</span><br><span class="line">            return Rational(numer, denom)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>We have implemented the interface of the Number superclass by
-including add and mul methods. As a result, we can add and multiply
-rational numbers using familiar operators.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; Rational(2, 5) + Rational(1, 10)</span><br><span class="line">Rational(1, 2)</span><br><span class="line">&gt;&gt;&gt; Rational(1, 4) * Rational(2, 3)</span><br><span class="line">Rational(1, 6)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>However, we cannot yet add a rational number to a complex number,
-although in mathematics such a combination is well-defined. We would
-like to introduce this cross-type operation in some carefully controlled
-way, so that we can support it without seriously violating our
-abstraction barriers. There is a tension between the outcomes we desire:
-we would like to be able to add a complex number to a rational number,
-and we would like to do so using a generic <strong>add</strong> method
-that does the right thing with all numeric types. At the same time, we
-would like to separate the concerns of complex numbers and rational
-numbers whenever possible, in order to maintain a modular program.</p>
-<p><strong>Type dispatching(类型转换).</strong> One way to implement
-cross-type operations is to select behavior based on the types of the
-arguments to a function or method. The idea of type dispatching is to
-write functions that inspect the type of arguments they receive, then
-execute code that is appropriate for those types.</p>
-<p>The built-in function isinstance takes an object and a class. It
-returns true if the object has a class that either is or inherits from
-the given class.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; c = ComplexRI(1, 1)</span><br><span class="line">&gt;&gt;&gt; isinstance(c, ComplexRI)</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; isinstance(c, Complex)</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; isinstance(c, ComplexMA)</span><br><span class="line">False</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>A simple example of type dispatching is an is_real function that uses
-a different implementation for each type of complex number.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def is_real(c):</span><br><span class="line">        &quot;&quot;&quot;Return whether c is a real number with no imaginary part.&quot;&quot;&quot;</span><br><span class="line">        if isinstance(c, ComplexRI):</span><br><span class="line">            return c.imag == 0</span><br><span class="line">        elif isinstance(c, ComplexMA):</span><br><span class="line">            return c.angle % pi == 0</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; is_real(ComplexRI(1, 1))</span><br><span class="line">False</span><br><span class="line">&gt;&gt;&gt; is_real(ComplexMA(2, pi))</span><br><span class="line">True</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>Type dispatching is not always performed using isinstance. For
-arithmetic, we will give a type_tag attribute to Rational and Complex
-instances that has a string value. When two values x and y have the same
-type_tag, then we can combine them directly with x.add(y). If not, we
-need a cross-type operation.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; Rational.type_tag = &#x27;rat&#x27;</span><br><span class="line">&gt;&gt;&gt; Complex.type_tag = &#x27;com&#x27;</span><br><span class="line">&gt;&gt;&gt; Rational(2, 5).type_tag == Rational(1, 2).type_tag</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; ComplexRI(1, 1).type_tag == ComplexMA(2, pi/2).type_tag</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; Rational(2, 5).type_tag == ComplexRI(1, 1).type_tag</span><br><span class="line">False</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>To combine complex and rational numbers, we write functions that rely
-on both of their representations simultaneously. Below, we rely on the
-fact that a Rational can be converted approximately to a float value
-that is a real number. The result can be combined with a complex
-number.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def add_complex_and_rational(c, r):</span><br><span class="line">        return ComplexRI(c.real + r.numer/r.denom, c.imag)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>Multiplication involves a similar conversion. In polar form, a real
-number in the complex plane always has a positive magnitude. The angle 0
-indicates a positive number. The angle pi indicates a negative
-number.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def mul_complex_and_rational(c, r):</span><br><span class="line">        r_magnitude, r_angle = r.numer/r.denom, 0</span><br><span class="line">        if r_magnitude &lt; 0:</span><br><span class="line">            r_magnitude, r_angle = -r_magnitude, pi</span><br><span class="line">        return ComplexMA(c.magnitude * r_magnitude, c.angle + r_angle)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>Both addition and multiplication are commutative, so swapping the
-argument order can use the same implementations of these cross-type
-operations.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def add_rational_and_complex(r, c):</span><br><span class="line">        return add_complex_and_rational(c, r)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def mul_rational_and_complex(r, c):</span><br><span class="line">        return mul_complex_and_rational(c, r)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>The role of type dispatching is to ensure that these cross-type
-operations are used at appropriate times. Below, we rewrite the Number
-superclass to use type dispatching for its <code>__add__</code> and
-<code>__mul__</code> methods.</p>
-<p>We use the type_tag attribute to distinguish types of arguments. One
-could directly use the built-in isinstance method as well, but tags
-simplify the implementation. Using type tags also illustrates that type
-dispatching is not necessarily linked to the Python object system, but
-instead a general technique for creating generic functions over
-heterogeneous domains.</p>
-<p>The <code>__add__</code> method considers two cases. First, if two
-arguments have the same type tag, then it assumes that add method of the
-first can take the second as an argument. Otherwise, it checks whether a
-dictionary of cross-type implementations, called adders, contains a
-function that can add arguments of those type tags. If there is such a
-function, the cross_apply method finds and applies it. The
-<strong>mul</strong> method has a similar structure.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; class Number:</span><br><span class="line">        def __add__(self, other):</span><br><span class="line">            if self.type_tag == other.type_tag:</span><br><span class="line">                return self.add(other)</span><br><span class="line">            elif (self.type_tag, other.type_tag) in self.adders:</span><br><span class="line">                return self.cross_apply(other, self.adders)</span><br><span class="line">        def __mul__(self, other):</span><br><span class="line">            if self.type_tag == other.type_tag:</span><br><span class="line">                return self.mul(other)</span><br><span class="line">            elif (self.type_tag, other.type_tag) in self.multipliers:</span><br><span class="line">                return self.cross_apply(other, self.multipliers)</span><br><span class="line">        def cross_apply(self, other, cross_fns):</span><br><span class="line">            cross_fn = cross_fns[(self.type_tag, other.type_tag)]</span><br><span class="line">            return cross_fn(self, other)</span><br><span class="line">        adders = &#123;(&quot;com&quot;, &quot;rat&quot;): add_complex_and_rational,</span><br><span class="line">                  (&quot;rat&quot;, &quot;com&quot;): add_rational_and_complex&#125;</span><br><span class="line">        multipliers = &#123;(&quot;com&quot;, &quot;rat&quot;): mul_complex_and_rational,</span><br><span class="line">                       (&quot;rat&quot;, &quot;com&quot;): mul_rational_and_complex&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>In this new definition of the Number class, all cross-type
-implementations are indexed by pairs of type tags in the adders and
-multipliers dictionaries.</p>
-<p>This dictionary-based approach to type dispatching is extensible. New
-subclasses of Number could install themselves into the system by
-declaring a type tag and adding cross-type operations to Number.adders
-and Number.multipliers. They could also define their own adders and
-multipliers in a subclass.</p>
-<p>While we have introduced some complexity to the system, we can now
-mix types in addition and multiplication expressions.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; ComplexRI(1.5, 0) + Rational(3, 2)</span><br><span class="line">ComplexRI(3, 0)</span><br><span class="line">&gt;&gt;&gt; Rational(-1, 2) * ComplexMA(4, pi/2)</span><br><span class="line">ComplexMA(2, 1.5 * pi)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><strong>Coercion.</strong> In the general situation of completely
-unrelated operations acting on completely unrelated types, implementing
-explicit cross-type operations, cumbersome(麻烦) though it may be, is
-the best that one can hope for. Fortunately, we can sometimes do better
-by taking advantage of additional structure that may be latent in our
-type system. Often the different data types are not completely
-independent, and there may be ways by which objects of one type may be
-viewed as being of another type. This process is called
-<em>coercion</em>. For example, if we are asked to arithmetically
-combine a rational number with a complex number, we can view the
-rational number as a complex number whose imaginary part is zero. After
-doing so, we can use Complex.add and Complex.mul to combine them.</p>
-<p>In general, we can implement this idea by designing coercion
-functions that transform an object of one type into an equivalent object
-of another type. Here is a typical coercion function, which transforms a
-rational number to a complex number with zero imaginary part:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def rational_to_complex(r):</span><br><span class="line">        return ComplexRI(r.numer/r.denom, 0)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>The alternative definition of the Number class performs cross-type
-operations by attempting to coerce both arguments to the same type. The
-coercions dictionary indexes all possible coercions by a pair of type
-tags, indicating that the corresponding value coerces a value of the
-first type to a value of the second type.</p>
-<p>It is not generally possible to coerce an arbitrary data object of
-each type into all other types. For example, there is no way to coerce
-an arbitrary complex number to a rational number, so there will be no
-such conversion implementation in the coercions dictionary.</p>
-<p>The coerce method returns two values with the same type tag. It
-inspects the type tags of its arguments, compares them to entries in the
-coercions dictionary, and converts one argument to the type of the other
-using coerce_to. Only one entry in coercions is necessary to complete
-our cross-type arithmetic system, replacing the four cross-type
-functions in the type-dispatching version of Number.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; class Number:</span><br><span class="line">        def __add__(self, other):</span><br><span class="line">            x, y = self.coerce(other)</span><br><span class="line">            return x.add(y)</span><br><span class="line">        def __mul__(self, other):</span><br><span class="line">            x, y = self.coerce(other)</span><br><span class="line">            return x.mul(y)</span><br><span class="line">        def coerce(self, other):</span><br><span class="line">            if self.type_tag == other.type_tag:</span><br><span class="line">                return self, other</span><br><span class="line">            elif (self.type_tag, other.type_tag) in self.coercions:</span><br><span class="line">                return (self.coerce_to(other.type_tag), other)</span><br><span class="line">            elif (other.type_tag, self.type_tag) in self.coercions:</span><br><span class="line">                return (self, other.coerce_to(self.type_tag))</span><br><span class="line">        def coerce_to(self, other_tag):</span><br><span class="line">            coercion_fn = self.coercions[(self.type_tag, other_tag)]</span><br><span class="line">            return coercion_fn(self)</span><br><span class="line">        coercions = &#123;(&#x27;rat&#x27;, &#x27;com&#x27;): rational_to_complex&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>This coercion scheme has some advantages over the method of defining
-explicit(显式) cross-type operations. Although we still need to write
-coercion functions to relate the types, we need to write only one
-function for each pair of types rather than a different function for
-each set of types and each generic operation. What we are counting on
-here is the fact that the appropriate transformation between types
-depends only on the types themselves, not on the particular operation to
-be applied.</p>
-<p>Further advantages come from extending coercion. Some more
-sophisticated coercion schemes do not just try to coerce one type into
-another, but instead may try to coerce two different types each into a
-third common type. Consider a rhombus and a rectangle: neither is a
-special case of the other, but both can be viewed as quadrilaterals.
-Another extension to coercion is iterative coercion, in which one data
-type is coerced into another via intermediate types. Consider that an
-integer can be converted into a real number by first converting it into
-a rational number, then converting that rational number into a real
-number. Chaining coercion in this way can reduce the total number of
-coercion functions that are required by a program.</p>
-<p>Despite its advantages, coercion does have potential drawbacks. For
-one, coercion functions can lose information when they are applied. In
-our example, rational numbers are exact representations, but become
-approximations when they are converted to complex numbers.</p>
-<p>Some programming languages have automatic coercion systems built in.
-In fact, early versions of Python had a <strong>coerce</strong> special
-method on objects. In the end, the complexity of the built-in coercion
-system did not justify its use, and so it was removed. Instead,
-particular operators apply coercion to their arguments as needed.</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/21/3_5%20Interpreters%20for%20Languages%20with%20Abstraction/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
-      <meta itemprop="name" content="XuandYu000">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="viewoverlook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/08/21/3_5%20Interpreters%20for%20Languages%20with%20Abstraction/" class="post-title-link" itemprop="url">3_5 Interpreters for Languages with Abstraction</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-08-21 00:00:00 / 修改时间：10:53:54" itemprop="dateCreated datePublished" datetime="2023-08-21T00:00:00+08:00">2023-08-21</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/csdiy/" itemprop="url" rel="index"><span itemprop="name">csdiy</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/csdiy/cs61A/" itemprop="url" rel="index"><span itemprop="name">cs61A</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="interpreters-for-languages-with-abstraction">3_5 Interpreters
-for Languages with Abstraction</h1>
-<p>The Calculator language provides a means of combination through
-nested call expressions. However, there is no way to define new
-operators, give names to values, or express general methods of
-computation. Calculator does not support abstraction in any way. As a
-result, it is not a particularly powerful or general programming
-language. We now turn to the task of defining a general programming
-language that supports abstraction by binding names to values and
-defining new operations.</p>
-<p>Unlike the previous section, which presented a complete interpreter
-as Python source code, this section takes a descriptive(描述性)
-approach. The companion project asks you to implement the ideas
-presented here by building a fully functional Scheme interpreter.</p>
-<h3 id="structure">3.5.1   Structure</h3>
-<p>This section describes the general structure of a Scheme interpreter.
-Completing that project will produce a working implementation of the
-interpreter described here.</p>
-<p>An interpreter for Scheme can share much of the same structure as the
-Calculator interpreter. A parser(解析器) produces an expression that is
-interpreted by an evaluator. The evaluation function inspects the form
-of an expression, and for call expressions it calls a function to apply
-a procedure to some arguments. Much of the difference in evaluators is
-associated with special forms, user-defined functions, and implementing
-the environment model of computation.</p>
-<p><strong>Parsing.</strong> The <a
-target="_blank" rel="noopener" href="http://www.composingprograms.com/examples/scalc/scheme_reader.py.html">scheme_reader</a>
-and <a
-target="_blank" rel="noopener" href="http://www.composingprograms.com/examples/scalc/scheme_tokens.py.html">scheme_tokens</a>
-modules from the Calculator interpreter are nearly sufficient to parse
-any valid Scheme expression. However, it does not yet support quotation
-or dotted lists. A full Scheme interpreter should be able to parse the
-following input expression.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; read_line(&quot;(car &#x27;(1 . 2))&quot;)</span><br><span class="line">Pair(&#x27;car&#x27;, Pair(Pair(&#x27;quote&#x27;, Pair(Pair(1, 2), nil)), nil))</span><br></pre></td></tr></table></figure>
-<p>Your first task in implementing the Scheme interpreter will be to
-extend <a
-target="_blank" rel="noopener" href="http://www.composingprograms.com/examples/scalc/scheme_reader.py.html">scheme_reader</a>
-to correctly parse dotted lists and quotation.</p>
-<p><strong>Evaluation.</strong> Scheme is evaluated one expression at a
-time. A skeleton implementation of the evaluator is defined in scheme.py
-of the companion project. Each expression returned from scheme_read is
-passed to the scheme_eval function, which evaluates an expression expr
-in the current environment env.</p>
-<p>The scheme_eval function evaluates the different forms of expressions
-in Scheme: primitives, special forms, and call expressions. The form of
-a combination in Scheme can be determined by inspecting its first
-element. Each special form has its own evaluation rule. A simplified
-implementation of scheme_eval appears below. Some error checking and
-special form handling has been removed in order to focus our discussion.
-A complete implementation appears in the companion project.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def scheme_eval(expr, env):</span><br><span class="line">        &quot;&quot;&quot;Evaluate Scheme expression expr in environment env.&quot;&quot;&quot;</span><br><span class="line">        if scheme_symbolp(expr):</span><br><span class="line">            return env[expr]</span><br><span class="line">        elif scheme_atomp(expr):</span><br><span class="line">            return expr</span><br><span class="line">        first, rest = expr.first, expr.second</span><br><span class="line">        if first == &quot;lambda&quot;:</span><br><span class="line">            return do_lambda_form(rest, env)</span><br><span class="line">        elif first == &quot;define&quot;:</span><br><span class="line">            do_define_form(rest, env)</span><br><span class="line">            return None</span><br><span class="line">        else:</span><br><span class="line">            procedure = scheme_eval(first, env)</span><br><span class="line">            args = rest.map(lambda operand: scheme_eval(operand, env))</span><br><span class="line">            return scheme_apply(procedure, args, env)</span><br></pre></td></tr></table></figure>
-<p><strong>Procedure application.</strong> The final case above invokes
-a second process, procedure application, that is implemented by the
-function scheme_apply. The procedure application process in Scheme is
-considerably more general than the calc_apply function in Calculator. It
-applies two kinds of arguments: a PrimtiveProcedure or a
-LambdaProcedure. A PrimitiveProcedure is implemented in Python; it has
-an instance attribute fn that is bound to a Python function. In
-addition, it may or may not require access to the current environment.
-This Python function is called whenever the procedure is applied.</p>
-<p>A LambdaProcedure is implemented in Scheme. It has a body attribute
-that is a Scheme expression, evaluated whenever the procedure is
-applied. To apply the procedure to a list of arguments, the body
-expression is evaluated in a new environment. To construct this
-environment, a new frame is added to the environment, in which the
-formal parameters of the procedure are bound to the arguments. The body
-is evaluated using scheme_eval.</p>
-<p><strong>Eval/apply recursion.</strong> The functions that implement
-the evaluation process, scheme_eval and scheme_apply, are mutually
-recursive. Evaluation requires application whenever a call expression is
-encountered. Application uses evaluation to evaluate operand expressions
-into arguments, as well as to evaluate the body of user-defined
-procedures. The general structure of this mutually recursive process
-appears in interpreters quite generally: evaluation is defined in terms
-of application and application is defined in terms of evaluation.</p>
-<p>This recursive cycle ends with language primitives. Evaluation has a
-base case that is evaluating a primitive expression. Some special forms
-also constitute(构成) base cases without recursive calls. Function
-application has a base case that is applying a primitive procedure. This
-mutually recursive structure, between an eval function that processes
-expression forms and an apply function that processes functions and
-their arguments, constitutes the essence of the evaluation process.</p>
-<h3 id="environments">3.5.2   Environments</h3>
-<p>Now that we have described the structure of our Scheme interpreter,
-we turn to implementing the Frame class that forms environments. Each
-Frame instance represents an environment in which symbols are bound to
-values. A frame has a dictionary of bindings, as well as a parent frame
-that is None for the global frame.</p>
-<p>Bindings are not accessed directly, but instead through two Frame
-methods: lookup and define. The first implements the look-up procedure
-of the environment model of computation described in Chapter 1. A symbol
-is matched against the bindings of the current frame. If it is found,
-the value to which it is bound is returned. If it is not found, look-up
-proceeds to the parent frame. On the other hand, the define method
-always binds a symbol to a value in the current frame.</p>
-<p>The implementation of lookup and the use of define are left as
-exercises. As an illustration of their use, consider the following
-example Scheme program:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(define (factorial n))</span><br><span class="line">	(if (= n 0) 1 (* n (factorial (- n 1))))</span><br><span class="line"></span><br><span class="line">(factorial 5)</span><br><span class="line">120</span><br></pre></td></tr></table></figure>
-<p>The first input expression is a define special form, evaluated by the
-do_define_form Python function. Defining a function has several
-steps:</p>
-<ol type="1">
-<li>Check the format of the expression to ensure that it is a
-well-formed Scheme list with at least two elements following the keyword
-define.</li>
-<li>Analyze the first element, in this case a Pair, to find the function
-name factorial and formal parameter list (n).</li>
-<li>Create a LambdaProcedure with the supplied formal parameters, body,
-and parent environment.</li>
-<li>Bind the symbol factorial to this function, in the first frame of
-the current environment. In this case, the environment consists only of
-the global frame.</li>
-</ol>
-<p>The second input is a call expression. The procedure passed to
-scheme_apply is the LambdaProcedure just created and bound to the symbol
-factorial. The args passed is a one-element Scheme list (5). To apply
-the procedure, a new frame is created that extends the global frame (the
-parent environment of the factorial procedure). In this frame, the
-symbol n is bound to the value 5. Then, the body of factorial is
-evaluated in that environment, and its value is returned.</p>
-<h3 id="data-as-programs">3.5.3   Data as Programs</h3>
-<p>In thinking about a program that evaluates Scheme expressions, an
-analogy might be helpful. One operational view of the meaning of a
-program is that a program is a description of an abstract machine. For
-example, consider again this procedure to compute factorials:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(define (factorial n))</span><br><span class="line">	(if (= n 0) 1 (* n (factorial (- n 1))))</span><br></pre></td></tr></table></figure>
-<p>We could express an equivalent program in Python as well, using a
-conditional expression.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def factorial(n):</span><br><span class="line">        return 1 if n == 1 else n * factorial(n - 1)</span><br></pre></td></tr></table></figure>
-<p>We may regard this program as the description of a machine containing
-parts that decrement, multiply, and test for equality, together with a
-two-position switch and another factorial machine. (The factorial
-machine is infinite because it contains another factorial machine within
-it.) The figure below is a flow diagram for the factorial machine,
-showing how the parts are wired together.</p>
-<p><img
-src="http://www.composingprograms.com/img/factorial_machine.png" /></p>
-<p>In a similar way, we can regard the Scheme interpreter as a very
-special machine that takes as input a description of a machine. Given
-this input, the interpreter configures itself to emulate the machine
-described. For example, if we feed our evaluator the definition of
-factorial the evaluator will be able to compute factorials.</p>
-<p>From this perspective, our Scheme interpreter is seen to be a
-universal machine. It mimics other machines when these are described as
-Scheme programs. It acts as a bridge between the data objects that are
-manipulated by our programming language and the programming language
-itself. Image that a user types a Scheme expression into our running
-Scheme interpreter. From the perspective of the user, an input
-expression such as (+ 2 2) is an expression in the programming language,
-which the interpreter should evaluate. From the perspective of the
-Scheme interpreter, however, the expression is simply a sentence of
-words that is to be manipulated according to a well-defined set of
-rules.</p>
-<p>That the user's programs are the interpreter's data need not be a
-source of confusion. In fact, it is sometimes convenient to ignore this
-distinction, and to give the user the ability to explicitly evaluate a
-data object as an expression. In Scheme, we use this facility whenever
-employing the run procedure. Similar functions exist in Python: the eval
-function will evaluate a Python expression and the exec function will
-execute a Python statement. Thus, <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; eval(&#x27;2+2&#x27;)</span><br><span class="line">4</span><br></pre></td></tr></table></figure></p>
-<p>and <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; 2+2</span><br><span class="line">4</span><br></pre></td></tr></table></figure></p>
-<p>both return the same result. Evaluating expressions that are
-constructed as a part of execution is a common and powerful feature in
-dynamic programming languages. In few languages is this practice as
-common as in Scheme, but the ability to construct and evaluate
-expressions during the course of execution of a program can prove to be
-a valuable tool for any programmer.</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/21/2_9%20Recursive%20Objects/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2116,6 +1877,245 @@ sets cannot contain mutable data types, such as lists, dictionaries, or
 other sets. To allow for nested sets, Python also includes a built-in
 immutable frozenset class that shares methods with the set class but
 excludes mutation methods and operators.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/21/3_5%20Interpreters%20for%20Languages%20with%20Abstraction/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
+      <meta itemprop="name" content="XuandYu000">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="viewoverlook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/08/21/3_5%20Interpreters%20for%20Languages%20with%20Abstraction/" class="post-title-link" itemprop="url">3_5 Interpreters for Languages with Abstraction</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-08-21 00:00:00 / 修改时间：10:53:54" itemprop="dateCreated datePublished" datetime="2023-08-21T00:00:00+08:00">2023-08-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/csdiy/" itemprop="url" rel="index"><span itemprop="name">csdiy</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/csdiy/cs61A/" itemprop="url" rel="index"><span itemprop="name">cs61A</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="interpreters-for-languages-with-abstraction">3_5 Interpreters
+for Languages with Abstraction</h1>
+<p>The Calculator language provides a means of combination through
+nested call expressions. However, there is no way to define new
+operators, give names to values, or express general methods of
+computation. Calculator does not support abstraction in any way. As a
+result, it is not a particularly powerful or general programming
+language. We now turn to the task of defining a general programming
+language that supports abstraction by binding names to values and
+defining new operations.</p>
+<p>Unlike the previous section, which presented a complete interpreter
+as Python source code, this section takes a descriptive(描述性)
+approach. The companion project asks you to implement the ideas
+presented here by building a fully functional Scheme interpreter.</p>
+<h3 id="structure">3.5.1   Structure</h3>
+<p>This section describes the general structure of a Scheme interpreter.
+Completing that project will produce a working implementation of the
+interpreter described here.</p>
+<p>An interpreter for Scheme can share much of the same structure as the
+Calculator interpreter. A parser(解析器) produces an expression that is
+interpreted by an evaluator. The evaluation function inspects the form
+of an expression, and for call expressions it calls a function to apply
+a procedure to some arguments. Much of the difference in evaluators is
+associated with special forms, user-defined functions, and implementing
+the environment model of computation.</p>
+<p><strong>Parsing.</strong> The <a
+target="_blank" rel="noopener" href="http://www.composingprograms.com/examples/scalc/scheme_reader.py.html">scheme_reader</a>
+and <a
+target="_blank" rel="noopener" href="http://www.composingprograms.com/examples/scalc/scheme_tokens.py.html">scheme_tokens</a>
+modules from the Calculator interpreter are nearly sufficient to parse
+any valid Scheme expression. However, it does not yet support quotation
+or dotted lists. A full Scheme interpreter should be able to parse the
+following input expression.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; read_line(&quot;(car &#x27;(1 . 2))&quot;)</span><br><span class="line">Pair(&#x27;car&#x27;, Pair(Pair(&#x27;quote&#x27;, Pair(Pair(1, 2), nil)), nil))</span><br></pre></td></tr></table></figure>
+<p>Your first task in implementing the Scheme interpreter will be to
+extend <a
+target="_blank" rel="noopener" href="http://www.composingprograms.com/examples/scalc/scheme_reader.py.html">scheme_reader</a>
+to correctly parse dotted lists and quotation.</p>
+<p><strong>Evaluation.</strong> Scheme is evaluated one expression at a
+time. A skeleton implementation of the evaluator is defined in scheme.py
+of the companion project. Each expression returned from scheme_read is
+passed to the scheme_eval function, which evaluates an expression expr
+in the current environment env.</p>
+<p>The scheme_eval function evaluates the different forms of expressions
+in Scheme: primitives, special forms, and call expressions. The form of
+a combination in Scheme can be determined by inspecting its first
+element. Each special form has its own evaluation rule. A simplified
+implementation of scheme_eval appears below. Some error checking and
+special form handling has been removed in order to focus our discussion.
+A complete implementation appears in the companion project.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def scheme_eval(expr, env):</span><br><span class="line">        &quot;&quot;&quot;Evaluate Scheme expression expr in environment env.&quot;&quot;&quot;</span><br><span class="line">        if scheme_symbolp(expr):</span><br><span class="line">            return env[expr]</span><br><span class="line">        elif scheme_atomp(expr):</span><br><span class="line">            return expr</span><br><span class="line">        first, rest = expr.first, expr.second</span><br><span class="line">        if first == &quot;lambda&quot;:</span><br><span class="line">            return do_lambda_form(rest, env)</span><br><span class="line">        elif first == &quot;define&quot;:</span><br><span class="line">            do_define_form(rest, env)</span><br><span class="line">            return None</span><br><span class="line">        else:</span><br><span class="line">            procedure = scheme_eval(first, env)</span><br><span class="line">            args = rest.map(lambda operand: scheme_eval(operand, env))</span><br><span class="line">            return scheme_apply(procedure, args, env)</span><br></pre></td></tr></table></figure>
+<p><strong>Procedure application.</strong> The final case above invokes
+a second process, procedure application, that is implemented by the
+function scheme_apply. The procedure application process in Scheme is
+considerably more general than the calc_apply function in Calculator. It
+applies two kinds of arguments: a PrimtiveProcedure or a
+LambdaProcedure. A PrimitiveProcedure is implemented in Python; it has
+an instance attribute fn that is bound to a Python function. In
+addition, it may or may not require access to the current environment.
+This Python function is called whenever the procedure is applied.</p>
+<p>A LambdaProcedure is implemented in Scheme. It has a body attribute
+that is a Scheme expression, evaluated whenever the procedure is
+applied. To apply the procedure to a list of arguments, the body
+expression is evaluated in a new environment. To construct this
+environment, a new frame is added to the environment, in which the
+formal parameters of the procedure are bound to the arguments. The body
+is evaluated using scheme_eval.</p>
+<p><strong>Eval/apply recursion.</strong> The functions that implement
+the evaluation process, scheme_eval and scheme_apply, are mutually
+recursive. Evaluation requires application whenever a call expression is
+encountered. Application uses evaluation to evaluate operand expressions
+into arguments, as well as to evaluate the body of user-defined
+procedures. The general structure of this mutually recursive process
+appears in interpreters quite generally: evaluation is defined in terms
+of application and application is defined in terms of evaluation.</p>
+<p>This recursive cycle ends with language primitives. Evaluation has a
+base case that is evaluating a primitive expression. Some special forms
+also constitute(构成) base cases without recursive calls. Function
+application has a base case that is applying a primitive procedure. This
+mutually recursive structure, between an eval function that processes
+expression forms and an apply function that processes functions and
+their arguments, constitutes the essence of the evaluation process.</p>
+<h3 id="environments">3.5.2   Environments</h3>
+<p>Now that we have described the structure of our Scheme interpreter,
+we turn to implementing the Frame class that forms environments. Each
+Frame instance represents an environment in which symbols are bound to
+values. A frame has a dictionary of bindings, as well as a parent frame
+that is None for the global frame.</p>
+<p>Bindings are not accessed directly, but instead through two Frame
+methods: lookup and define. The first implements the look-up procedure
+of the environment model of computation described in Chapter 1. A symbol
+is matched against the bindings of the current frame. If it is found,
+the value to which it is bound is returned. If it is not found, look-up
+proceeds to the parent frame. On the other hand, the define method
+always binds a symbol to a value in the current frame.</p>
+<p>The implementation of lookup and the use of define are left as
+exercises. As an illustration of their use, consider the following
+example Scheme program:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(define (factorial n))</span><br><span class="line">	(if (= n 0) 1 (* n (factorial (- n 1))))</span><br><span class="line"></span><br><span class="line">(factorial 5)</span><br><span class="line">120</span><br></pre></td></tr></table></figure>
+<p>The first input expression is a define special form, evaluated by the
+do_define_form Python function. Defining a function has several
+steps:</p>
+<ol type="1">
+<li>Check the format of the expression to ensure that it is a
+well-formed Scheme list with at least two elements following the keyword
+define.</li>
+<li>Analyze the first element, in this case a Pair, to find the function
+name factorial and formal parameter list (n).</li>
+<li>Create a LambdaProcedure with the supplied formal parameters, body,
+and parent environment.</li>
+<li>Bind the symbol factorial to this function, in the first frame of
+the current environment. In this case, the environment consists only of
+the global frame.</li>
+</ol>
+<p>The second input is a call expression. The procedure passed to
+scheme_apply is the LambdaProcedure just created and bound to the symbol
+factorial. The args passed is a one-element Scheme list (5). To apply
+the procedure, a new frame is created that extends the global frame (the
+parent environment of the factorial procedure). In this frame, the
+symbol n is bound to the value 5. Then, the body of factorial is
+evaluated in that environment, and its value is returned.</p>
+<h3 id="data-as-programs">3.5.3   Data as Programs</h3>
+<p>In thinking about a program that evaluates Scheme expressions, an
+analogy might be helpful. One operational view of the meaning of a
+program is that a program is a description of an abstract machine. For
+example, consider again this procedure to compute factorials:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(define (factorial n))</span><br><span class="line">	(if (= n 0) 1 (* n (factorial (- n 1))))</span><br></pre></td></tr></table></figure>
+<p>We could express an equivalent program in Python as well, using a
+conditional expression.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def factorial(n):</span><br><span class="line">        return 1 if n == 1 else n * factorial(n - 1)</span><br></pre></td></tr></table></figure>
+<p>We may regard this program as the description of a machine containing
+parts that decrement, multiply, and test for equality, together with a
+two-position switch and another factorial machine. (The factorial
+machine is infinite because it contains another factorial machine within
+it.) The figure below is a flow diagram for the factorial machine,
+showing how the parts are wired together.</p>
+<p><img
+src="http://www.composingprograms.com/img/factorial_machine.png" /></p>
+<p>In a similar way, we can regard the Scheme interpreter as a very
+special machine that takes as input a description of a machine. Given
+this input, the interpreter configures itself to emulate the machine
+described. For example, if we feed our evaluator the definition of
+factorial the evaluator will be able to compute factorials.</p>
+<p>From this perspective, our Scheme interpreter is seen to be a
+universal machine. It mimics other machines when these are described as
+Scheme programs. It acts as a bridge between the data objects that are
+manipulated by our programming language and the programming language
+itself. Image that a user types a Scheme expression into our running
+Scheme interpreter. From the perspective of the user, an input
+expression such as (+ 2 2) is an expression in the programming language,
+which the interpreter should evaluate. From the perspective of the
+Scheme interpreter, however, the expression is simply a sentence of
+words that is to be manipulated according to a well-defined set of
+rules.</p>
+<p>That the user's programs are the interpreter's data need not be a
+source of confusion. In fact, it is sometimes convenient to ignore this
+distinction, and to give the user the ability to explicitly evaluate a
+data object as an expression. In Scheme, we use this facility whenever
+employing the run procedure. Similar functions exist in Python: the eval
+function will evaluate a Python expression and the exec function will
+execute a Python statement. Thus, <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; eval(&#x27;2+2&#x27;)</span><br><span class="line">4</span><br></pre></td></tr></table></figure></p>
+<p>and <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; 2+2</span><br><span class="line">4</span><br></pre></td></tr></table></figure></p>
+<p>both return the same result. Evaluating expressions that are
+constructed as a part of execution is a common and powerful feature in
+dynamic programming languages. In few languages is this practice as
+common as in Scheme, but the ability to construct and evaluate
+expressions during the course of execution of a program can prove to be
+a valuable tool for any programmer.</p>
 
       
     </div>
