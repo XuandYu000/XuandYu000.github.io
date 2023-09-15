@@ -186,6 +186,201 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/lecture8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
+      <meta itemprop="name" content="XuandYu000">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="viewoverlook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/07/02/lecture8/" class="post-title-link" itemprop="url">lecture8</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:19:36" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/csdiy/" itemprop="url" rel="index"><span itemprop="name">csdiy</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/csdiy/cs50x/" itemprop="url" rel="index"><span itemprop="name">cs50x</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="lecture8">lecture8</h1>
+<h4 id="routers">Routers</h4>
+<p>为了将数据从一个地方转到另一个地方，我们需要做转发决定，也就是说需要某人来决定将数据转发到哪里。这个人就是路由器。</p>
+<p>TCP/IP 是两个协议，允许计算机间数据在网上传输。</p>
+<p>IP 是 Internet Protocol
+的缩写，它是一种协议，它定义了如何将数据从一个计算机发送到另一个计算机。IP
+协议定义了一种地址，它是一个 32
+位的数字，它唯一地标识了一个计算机。地址格式如下：<code>#.#.#.#</code>，其中每个
+<code>#</code> 是一个 8 位的数字，范围是 0 到 255。</p>
+<p>TCP 是 Transmission Control Protocol
+的缩写，它是一种协议，它定义了如何将数据从一个应用程序发送到另一个应用程序。TCP
+协议定义了一种端口，它是一个 16
+位的数字，它唯一地标识了一个应用程序。端口格式如下：<code>#</code>，范围是
+0 到 65535。</p>
+<p>当一个计算机想要发送数据到另一个计算机时，它需要知道目标计算机的 IP
+地址和目标应用程序的端口号。当数据到达目标计算机时，它会被发送到目标应用程序。</p>
+<p>这些协议也适用于大文件传输。当你下载一个大文件时，它会被分成许多小块，每个小块都有一个序号。当你的计算机接收到这些小块时，它会将它们重新组合成一个大文件。当一个<code>packet</code>丢失时，TCP/IP会要求丢失的<code>packet</code>重新发送。</p>
+<p>当所有的数据都被接收和确定时，TCP/IP会发送一个确认消息，告诉发送者数据已经被接收。如果发送者没有收到确认消息，它会重新发送数据。</p>
+<h4 id="dns">DNS</h4>
+<p>当需要使用IP地址访问网站时会非常乏味</p>
+<p>DNS 是 Domain Name System
+的缩写，它是一种协议，它定义了如何将域名转换为 IP
+地址。域名是一个字符串，它唯一地标识了一个网站。例如，<code>www.google.com</code>
+是一个域名。</p>
+<p>DNS维护着一张表或数据库，将特定的，完全限定的域名链接到特定的IP地址。当你的计算机想要访问一个网站时，它会向
+DNS 服务器发送一个请求，询问它该域名的 IP 地址是什么。DNS
+服务器会回复一个 IP 地址，然后你的计算机就可以使用该 IP
+地址访问该网站了。</p>
+<h4 id="http">HTTP</h4>
+<p>HTTP 是 HyperText Transfer Protocol
+的缩写，它是一种协议，它定义了如何在网上传输超文本。超文本是一种格式，它允许你在网页上放置图片、链接等等。</p>
+<p><code>https</code>用于连接到该网站的协议。http协议使用<code>GET</code>请求来获取网页，<code>POST</code>请求来提交表单。例如，可以启动
+<code>Google Chrome</code>，右键单击，然后单击<code>inspect</code>。当您打开<code>developer tools</code>并访问<code>Network</code>，选择<code>Preserve log</code>，您将看到请求<code>Request Headers</code>。你会看到
+<code>GET</code>
+的提及。这在其他浏览器中也是可能的，使用的方法略有不同</p>
+<p>有一些相应的状态码： - <code>200</code>：请求成功 -
+<code>301</code>：永久重定向 - <code>302</code>：临时重定向 -
+<code>304</code>：未修改 - <code>400</code>：错误请求 -
+<code>401</code>：未授权 - <code>403</code>：禁止 -
+<code>404</code>：未找到 - <code>500</code>：内部服务器错误 -
+<code>501</code>：未实现 - <code>503</code>：服务不可用 -
+<code>550</code>：权限不足 - <code>600</code>：未安全连接 -
+<code>601</code>：证书错误</p>
+<p>我们可以向服务器发送请求，服务器会返回响应。响应包含一个状态码，它告诉我们请求是否成功。响应还包含一个响应头，它包含一些元数据，例如响应的内容类型。响应还包含一个响应体，它包含实际的数据，例如网页的
+HTML。</p>
+<p>我们可以这样尝试： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GET /search?q=cats HTTP/1.1</span><br><span class="line">Host: www.google.comG</span><br></pre></td></tr></table></figure> 这是一个 GET 请求，它请求
+<code>/search</code> 路径，它有一个查询参数
+<code>q</code>意味着<code>query</code>，它的值是
+<code>cats</code>。它使用 HTTP/1.1 协议，它的主机是
+<code>www.google.com</code>。这里的<code>?</code>相当于将路径与查询参数分开，<code>&amp;</code>相当于将查询参数分开。</p>
+<h4 id="html">HTML</h4>
+<p>HTML 是 HyperText Markup Language
+的缩写，它是一种语言，它定义了网页的内容。HTML
+由标签组成，标签是一种格式，它告诉浏览器如何显示内容。标签由尖括号包围，例如
+<code>&lt;p&gt;</code>。标签可以包含属性，属性是一种格式，它告诉浏览器如何显示内容。属性由等号包围，例如
+<code>href="https://www.google.com"</code>。</p>
+<p>HTML有标签组成每个标签有一些特征来描述他</p>
+<p>看一个<code>hello.html</code>的例子： <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>Hello!<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello, world!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>标签结构如下：
+<img src="https://raw.githubusercontent.com/XuandYu000/picture/main/tag.png"/></p>
+<p>因为在 HTML 中空格实际上被忽略了，所以您需要使用
+<code>&lt;p&gt;</code> 段落标记来打开和关闭段落。</p>
+<p>HTML允许表示标题，使用<code>&lt;h1&gt;</code>到<code>&lt;h6&gt;</code>标签，数字越大，标题越小。</p>
+<p>HTML允许表示列表，使用<code>&lt;ul&gt;</code>标签，它表示无序列表，使用<code>&lt;ol&gt;</code>标签，它表示有序列表。两个标签之间的列表项使用<code>&lt;li&gt;</code>标签。</p>
+<p>使用<code>&lt;table&gt;</code>标签表示表格，使用<code>&lt;tr&gt;</code>标签表示行，使用<code>&lt;td&gt;</code>标签表示列。</p>
+<p>图片使用<code>&lt;img&gt;</code>标签，它有一个<code>src</code>属性，它是图片的
+URL。还有一个<code>alt</code>属性，它是图片的替代文本，如果图片无法显示，它将显示。</p>
+<p>视频使用<code>&lt;video&gt;</code>标签，它有一个<code>src</code>属性，它是视频的
+URL。还有一个<code>controls</code>属性，它允许用户控制视频。</p>
+<p><code>&lt;a&gt;</code>标签用于链接，它有一个<code>href</code>属性，它是链接的
+URL。还有一个<code>target</code>属性，它是链接的目标，例如<code>_blank</code>，它表示在新窗口中打开链接。</p>
+<p>Meta tags
+是一种特殊的标签，它们不会在网页上显示任何内容，但它们提供了一些元数据。例如，<code>&lt;meta charset="UTF-8"&gt;</code>表示网页使用
+UTF-8 编码。content
+属性是元数据的值,例如<code>&lt;meta name="description" content="This is a description"&gt;</code>表示网页的描述是<code>This is a description</code>。</p>
+<p><code>form</code>标签用于创建表单，它有一个<code>action</code>属性，它是表单的目标，例如<code>/search</code>，它表示表单将被提交到<code>/search</code>路径。还有一个<code>method</code>属性，它是表单的方法，例如<code>GET</code>，它表示表单将使用<code>GET</code>方法提交。<code>form</code>标签包含一个<code>input</code>标签，它有一个<code>type</code>属性，它是输入的类型，例如<code>text</code>，它表示输入是文本。还有一个<code>name</code>属性，它是输入的名称，例如<code>q</code>，它表示输入的名称是<code>q</code>。还有一个<code>value</code>属性，它是输入的值，例如<code>cats</code>，它表示输入的值是<code>cats</code>。</p>
+<h4 id="css">CSS</h4>
+<p>html对字体大小，颜色，位置等的控制是有限的，所以我们需要使用css来控制</p>
+<p>CSS 是 Cascading Style Sheets
+的缩写，它是一种语言，它定义了网页的样式。CSS
+由规则组成，规则由选择器和声明组成。选择器是一种格式，它告诉浏览器应该应用样式的元素。声明是一种格式，它告诉浏览器应该应用的样式。声明由属性和值组成。属性是一种格式，它告诉浏览器应该应用的样式。值是一种格式，它告诉浏览器应该应用的样式。</p>
+<p>CSS有三种方式： - 内联样式：在标签中使用<code>style</code>属性 -
+内部样式表：在<code>&lt;head&gt;</code>标签中使用<code>&lt;style&gt;</code>标签
+-
+外部样式表：在<code>&lt;head&gt;</code>标签中使用<code>&lt;link&gt;</code>标签
+- 优先级：内联样式 &gt; 内部样式表 &gt; 外部样式表</p>
+<h4 id="framworks">Framworks</h4>
+<p>框架是一种软件，它提供了一些功能，以便开发人员可以更轻松地构建应用程序。框架通常包含一些库，它们是一些代码，它们提供了一些功能，以便开发人员可以更轻松地构建应用程序。框架通常包含一些工具，它们是一些程序，它们提供了一些功能，以便开发人员可以更轻松地构建应用程序。</p>
+<p>bootstrap是一个框架，它提供了一些功能，以便开发人员可以更轻松地构建网站。它包含一些库，例如<code>jQuery</code>，它是一种语言，它定义了如何在网页上操作元素。它包含一些工具，例如<code>Sass</code>，它是一种语言，它定义了如何在网页上编写样式。</p>
+<p>可以向如下例子中使用bootstrap： <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css&quot;</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">integrity</span>=<span class="string">&quot;sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi&quot;</span> <span class="attr">crossorigin</span>=<span class="string">&quot;anonymous&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>favorites<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">&lt;\head&gt;</span><br></pre></td></tr></table></figure></p>
+<p>可以通过这里查看bootstrap的文档：<a
+target="_blank" rel="noopener" href="https://getbootstrap.com/docs/5.0/getting-started/introduction/">Bootstrap
+Documentaion</a></p>
+<h4 id="javascript">JavaScript</h4>
+<p>JavaScript 是一种语言，它定义了如何在网页上编写代码。JavaScript
+由语句组成，语句是一种格式，它告诉浏览器应该做什么。语句由关键字、运算符和表达式组成。</p>
+<p>JavaScript支持条件语句：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(x&lt;y)</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(x&gt;y)</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>也支持变量：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> x=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">const</span> y=<span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+<p>自增自减：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x++;</span><br><span class="line">x--;</span><br></pre></td></tr></table></figure>
+<p>循环：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>js允许动态的读取和修改网页的内容以便于不必用户重新加载网页到内存中</p>
+<h3 id="section">Section</h3>
+<p>本文旨在弥合习题集和讲课内容之间的差距</p>
+<h4 id="html代表着什么">HTML代表着什么？</h4>
+<p><img
+src="https://raw.githubusercontent.com/XuandYu000/picture/main/html%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84.png"
+alt="html基本结构" /> 可以以树状图表示一个html结构 示例： <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>Scoreboard<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">            <span class="selector-tag">table</span> &#123;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">                <span class="attribute">border</span>: <span class="number">2px</span> solid black;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">                <span class="attribute">border-collapse</span>: collapse;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">                <span class="attribute">margin-left</span>: auto;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">                <span class="attribute">margin-right</span>: auto;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">                <span class="attribute">text-align</span>: center;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">            &#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">  </span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">            <span class="selector-tag">td</span> &#123;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">                <span class="attribute">border</span>: <span class="number">2px</span> solid black;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">            &#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">        </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">table</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line"></span><br><span class="line">                <span class="tag">&lt;<span class="name">td</span>&gt;</span>Team 1<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line"></span><br><span class="line">                <span class="tag">&lt;<span class="name">td</span>&gt;</span>Team 2<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line"></span><br><span class="line">                <span class="tag">&lt;<span class="name">td</span> <span class="attr">id</span>=<span class="string">&quot;score1&quot;</span>&gt;</span>0<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line"></span><br><span class="line">                <span class="tag">&lt;<span class="name">td</span> <span class="attr">id</span>=<span class="string">&quot;score2&quot;</span>&gt;</span>0<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line"></span><br><span class="line">                <span class="tag">&lt;<span class="name">td</span>&gt;</span></span><br><span class="line"></span><br><span class="line">                    <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;add1&quot;</span>&gt;</span>+1<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line">                <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line"></span><br><span class="line">                <span class="tag">&lt;<span class="name">td</span>&gt;</span></span><br><span class="line"></span><br><span class="line">                    <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;add2&quot;</span>&gt;</span>+1<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line">                <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">let</span> team1 = <span class="number">0</span>;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">let</span> team2 = <span class="number">0</span>;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  </span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;#add1&#x27;</span>).<span class="property">onclick</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">                team1 = team1 + <span class="number">1</span>;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">                <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;#score1&#x27;</span>).<span class="property">innerHTML</span> = team1;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  </span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;#add2&#x27;</span>).<span class="property">onclick</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">                team2 = team2 + <span class="number">1</span>;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">                <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;#score2&#x27;</span>).<span class="property">innerHTML</span> = team2;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<img
+src="https://raw.githubusercontent.com/XuandYu000/picture/main/scoreboard%E7%A4%BA%E4%BE%8B.png"
+alt="scoreboard解析" /> 左端为树状图，右端为页面成果
+可以看到一个<code>&lt;table&gt;</code> 中有3行，每一行再来两列</p>
+<h4 id="css-1">css</h4>
+<p>层叠样式表，更多是使用这之中选择器的部分 例如将上述html的button变色
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#team1-button</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="attribute">background-color</span>: red;</span><br><span class="line">	<span class="attribute">border</span>: <span class="number">4pt</span> dashed;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-id">#team2-button</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="attribute">background-color</span>:blue;</span><br><span class="line">	<span class="attribute">border</span>: <span class="number">4pt</span> dashed;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">...</span><br><span class="line">&lt;<span class="selector-tag">button</span> id=&quot;team1-<span class="selector-tag">button</span>&quot;&gt;</span><br><span class="line">	Team1</span><br><span class="line">&lt;/<span class="selector-tag">button</span>&gt;</span><br><span class="line">...</span><br><span class="line">&lt;<span class="selector-tag">button</span> id=&quot;team2-<span class="selector-tag">button</span>&quot;&gt;</span><br><span class="line">	Team2</span><br><span class="line">&lt;/<span class="selector-tag">button</span>&gt;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+上述选择器只针对特定id，还有一种类选择器对于html包含的类进行修改
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.title</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="attribute">background-color</span>: gray;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">...</span><br><span class="line">&lt;<span class="selector-tag">tr</span>&gt;</span><br><span class="line">	&lt;<span class="selector-tag">td</span> class=&quot;title&quot;&gt;</span><br><span class="line">		Team <span class="number">1</span></span><br><span class="line">	&lt;/<span class="selector-tag">td</span>&gt;</span><br><span class="line">&lt;<span class="selector-tag">tr</span>&gt;</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>两者区别：</li>
+<li>类选择器可以应用于多个元素，ID应用于一个</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/lecture6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -756,7 +951,7 @@ we discussed…</p>
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/lecture3/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/lecture7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
@@ -770,7 +965,7 @@ we discussed…</p>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/07/02/lecture3/" class="post-title-link" itemprop="url">lecture3</a>
+            <a href="/2023/07/02/lecture7/" class="post-title-link" itemprop="url">lecture7</a>
         </h2>
 
         <div class="post-meta">
@@ -781,7 +976,7 @@ we discussed…</p>
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:14:53" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
+              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:15:26" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -808,208 +1003,132 @@ we discussed…</p>
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="lecture3">lecture3</h1>
-<h4 id="running-time">Running time</h4>
-<p>符号： - O：大O符号，表示上限 - <span
-class="math inline">\(\Omega\)</span>：大Omega符号，表示下限 - <span
-class="math inline">\(\Theta\)</span>：大Theta符号，表示上下限</p>
-<h4 id="seach.c">seach.c</h4>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;cs50.h&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">int main(void)&#123;</span><br><span class="line">    string strings[] = &#123;&quot;Bill&quot;, &quot;Charlie&quot;, &quot;Fred&quot;, &quot;George&quot;, &quot;Ginny&quot;, &quot;Percy&quot;, &quot;Ron&quot;&#125;;</span><br><span class="line">    string s=get_string(&quot;String: &quot;);</span><br><span class="line">    for (int i=0; i&lt;7; i++)&#123;</span><br><span class="line">        if (strings[i]==s)&#123;</span><br><span class="line">            printf(&quot;Found\n&quot;);</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>注意strings[i]==s这个比较是不对的，因为这是比较两个指针的地址，而不是比较两个字符串的内容，应该使用strcmp函数</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/lecture8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
-      <meta itemprop="name" content="XuandYu000">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="viewoverlook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/07/02/lecture8/" class="post-title-link" itemprop="url">lecture8</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:19:36" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/csdiy/" itemprop="url" rel="index"><span itemprop="name">csdiy</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/csdiy/cs50x/" itemprop="url" rel="index"><span itemprop="name">cs50x</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="lecture8">lecture8</h1>
-<h4 id="routers">Routers</h4>
-<p>为了将数据从一个地方转到另一个地方，我们需要做转发决定，也就是说需要某人来决定将数据转发到哪里。这个人就是路由器。</p>
-<p>TCP/IP 是两个协议，允许计算机间数据在网上传输。</p>
-<p>IP 是 Internet Protocol
-的缩写，它是一种协议，它定义了如何将数据从一个计算机发送到另一个计算机。IP
-协议定义了一种地址，它是一个 32
-位的数字，它唯一地标识了一个计算机。地址格式如下：<code>#.#.#.#</code>，其中每个
-<code>#</code> 是一个 8 位的数字，范围是 0 到 255。</p>
-<p>TCP 是 Transmission Control Protocol
-的缩写，它是一种协议，它定义了如何将数据从一个应用程序发送到另一个应用程序。TCP
-协议定义了一种端口，它是一个 16
-位的数字，它唯一地标识了一个应用程序。端口格式如下：<code>#</code>，范围是
-0 到 65535。</p>
-<p>当一个计算机想要发送数据到另一个计算机时，它需要知道目标计算机的 IP
-地址和目标应用程序的端口号。当数据到达目标计算机时，它会被发送到目标应用程序。</p>
-<p>这些协议也适用于大文件传输。当你下载一个大文件时，它会被分成许多小块，每个小块都有一个序号。当你的计算机接收到这些小块时，它会将它们重新组合成一个大文件。当一个<code>packet</code>丢失时，TCP/IP会要求丢失的<code>packet</code>重新发送。</p>
-<p>当所有的数据都被接收和确定时，TCP/IP会发送一个确认消息，告诉发送者数据已经被接收。如果发送者没有收到确认消息，它会重新发送数据。</p>
-<h4 id="dns">DNS</h4>
-<p>当需要使用IP地址访问网站时会非常乏味</p>
-<p>DNS 是 Domain Name System
-的缩写，它是一种协议，它定义了如何将域名转换为 IP
-地址。域名是一个字符串，它唯一地标识了一个网站。例如，<code>www.google.com</code>
-是一个域名。</p>
-<p>DNS维护着一张表或数据库，将特定的，完全限定的域名链接到特定的IP地址。当你的计算机想要访问一个网站时，它会向
-DNS 服务器发送一个请求，询问它该域名的 IP 地址是什么。DNS
-服务器会回复一个 IP 地址，然后你的计算机就可以使用该 IP
-地址访问该网站了。</p>
-<h4 id="http">HTTP</h4>
-<p>HTTP 是 HyperText Transfer Protocol
-的缩写，它是一种协议，它定义了如何在网上传输超文本。超文本是一种格式，它允许你在网页上放置图片、链接等等。</p>
-<p><code>https</code>用于连接到该网站的协议。http协议使用<code>GET</code>请求来获取网页，<code>POST</code>请求来提交表单。例如，可以启动
-<code>Google Chrome</code>，右键单击，然后单击<code>inspect</code>。当您打开<code>developer tools</code>并访问<code>Network</code>，选择<code>Preserve log</code>，您将看到请求<code>Request Headers</code>。你会看到
-<code>GET</code>
-的提及。这在其他浏览器中也是可能的，使用的方法略有不同</p>
-<p>有一些相应的状态码： - <code>200</code>：请求成功 -
-<code>301</code>：永久重定向 - <code>302</code>：临时重定向 -
-<code>304</code>：未修改 - <code>400</code>：错误请求 -
-<code>401</code>：未授权 - <code>403</code>：禁止 -
-<code>404</code>：未找到 - <code>500</code>：内部服务器错误 -
-<code>501</code>：未实现 - <code>503</code>：服务不可用 -
-<code>550</code>：权限不足 - <code>600</code>：未安全连接 -
-<code>601</code>：证书错误</p>
-<p>我们可以向服务器发送请求，服务器会返回响应。响应包含一个状态码，它告诉我们请求是否成功。响应还包含一个响应头，它包含一些元数据，例如响应的内容类型。响应还包含一个响应体，它包含实际的数据，例如网页的
-HTML。</p>
-<p>我们可以这样尝试： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GET /search?q=cats HTTP/1.1</span><br><span class="line">Host: www.google.comG</span><br></pre></td></tr></table></figure> 这是一个 GET 请求，它请求
-<code>/search</code> 路径，它有一个查询参数
-<code>q</code>意味着<code>query</code>，它的值是
-<code>cats</code>。它使用 HTTP/1.1 协议，它的主机是
-<code>www.google.com</code>。这里的<code>?</code>相当于将路径与查询参数分开，<code>&amp;</code>相当于将查询参数分开。</p>
-<h4 id="html">HTML</h4>
-<p>HTML 是 HyperText Markup Language
-的缩写，它是一种语言，它定义了网页的内容。HTML
-由标签组成，标签是一种格式，它告诉浏览器如何显示内容。标签由尖括号包围，例如
-<code>&lt;p&gt;</code>。标签可以包含属性，属性是一种格式，它告诉浏览器如何显示内容。属性由等号包围，例如
-<code>href="https://www.google.com"</code>。</p>
-<p>HTML有标签组成每个标签有一些特征来描述他</p>
-<p>看一个<code>hello.html</code>的例子： <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>Hello!<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello, world!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>标签结构如下：
-<img src="https://raw.githubusercontent.com/XuandYu000/picture/main/tag.png"/></p>
-<p>因为在 HTML 中空格实际上被忽略了，所以您需要使用
-<code>&lt;p&gt;</code> 段落标记来打开和关闭段落。</p>
-<p>HTML允许表示标题，使用<code>&lt;h1&gt;</code>到<code>&lt;h6&gt;</code>标签，数字越大，标题越小。</p>
-<p>HTML允许表示列表，使用<code>&lt;ul&gt;</code>标签，它表示无序列表，使用<code>&lt;ol&gt;</code>标签，它表示有序列表。两个标签之间的列表项使用<code>&lt;li&gt;</code>标签。</p>
-<p>使用<code>&lt;table&gt;</code>标签表示表格，使用<code>&lt;tr&gt;</code>标签表示行，使用<code>&lt;td&gt;</code>标签表示列。</p>
-<p>图片使用<code>&lt;img&gt;</code>标签，它有一个<code>src</code>属性，它是图片的
-URL。还有一个<code>alt</code>属性，它是图片的替代文本，如果图片无法显示，它将显示。</p>
-<p>视频使用<code>&lt;video&gt;</code>标签，它有一个<code>src</code>属性，它是视频的
-URL。还有一个<code>controls</code>属性，它允许用户控制视频。</p>
-<p><code>&lt;a&gt;</code>标签用于链接，它有一个<code>href</code>属性，它是链接的
-URL。还有一个<code>target</code>属性，它是链接的目标，例如<code>_blank</code>，它表示在新窗口中打开链接。</p>
-<p>Meta tags
-是一种特殊的标签，它们不会在网页上显示任何内容，但它们提供了一些元数据。例如，<code>&lt;meta charset="UTF-8"&gt;</code>表示网页使用
-UTF-8 编码。content
-属性是元数据的值,例如<code>&lt;meta name="description" content="This is a description"&gt;</code>表示网页的描述是<code>This is a description</code>。</p>
-<p><code>form</code>标签用于创建表单，它有一个<code>action</code>属性，它是表单的目标，例如<code>/search</code>，它表示表单将被提交到<code>/search</code>路径。还有一个<code>method</code>属性，它是表单的方法，例如<code>GET</code>，它表示表单将使用<code>GET</code>方法提交。<code>form</code>标签包含一个<code>input</code>标签，它有一个<code>type</code>属性，它是输入的类型，例如<code>text</code>，它表示输入是文本。还有一个<code>name</code>属性，它是输入的名称，例如<code>q</code>，它表示输入的名称是<code>q</code>。还有一个<code>value</code>属性，它是输入的值，例如<code>cats</code>，它表示输入的值是<code>cats</code>。</p>
-<h4 id="css">CSS</h4>
-<p>html对字体大小，颜色，位置等的控制是有限的，所以我们需要使用css来控制</p>
-<p>CSS 是 Cascading Style Sheets
-的缩写，它是一种语言，它定义了网页的样式。CSS
-由规则组成，规则由选择器和声明组成。选择器是一种格式，它告诉浏览器应该应用样式的元素。声明是一种格式，它告诉浏览器应该应用的样式。声明由属性和值组成。属性是一种格式，它告诉浏览器应该应用的样式。值是一种格式，它告诉浏览器应该应用的样式。</p>
-<p>CSS有三种方式： - 内联样式：在标签中使用<code>style</code>属性 -
-内部样式表：在<code>&lt;head&gt;</code>标签中使用<code>&lt;style&gt;</code>标签
--
-外部样式表：在<code>&lt;head&gt;</code>标签中使用<code>&lt;link&gt;</code>标签
-- 优先级：内联样式 &gt; 内部样式表 &gt; 外部样式表</p>
-<h4 id="framworks">Framworks</h4>
-<p>框架是一种软件，它提供了一些功能，以便开发人员可以更轻松地构建应用程序。框架通常包含一些库，它们是一些代码，它们提供了一些功能，以便开发人员可以更轻松地构建应用程序。框架通常包含一些工具，它们是一些程序，它们提供了一些功能，以便开发人员可以更轻松地构建应用程序。</p>
-<p>bootstrap是一个框架，它提供了一些功能，以便开发人员可以更轻松地构建网站。它包含一些库，例如<code>jQuery</code>，它是一种语言，它定义了如何在网页上操作元素。它包含一些工具，例如<code>Sass</code>，它是一种语言，它定义了如何在网页上编写样式。</p>
-<p>可以向如下例子中使用bootstrap： <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css&quot;</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">integrity</span>=<span class="string">&quot;sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi&quot;</span> <span class="attr">crossorigin</span>=<span class="string">&quot;anonymous&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>favorites<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">&lt;\head&gt;</span><br></pre></td></tr></table></figure></p>
-<p>可以通过这里查看bootstrap的文档：<a
-target="_blank" rel="noopener" href="https://getbootstrap.com/docs/5.0/getting-started/introduction/">Bootstrap
-Documentaion</a></p>
-<h4 id="javascript">JavaScript</h4>
-<p>JavaScript 是一种语言，它定义了如何在网页上编写代码。JavaScript
-由语句组成，语句是一种格式，它告诉浏览器应该做什么。语句由关键字、运算符和表达式组成。</p>
-<p>JavaScript支持条件语句：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(x&lt;y)</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(x&gt;y)</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>也支持变量：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> x=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">const</span> y=<span class="number">2</span>;</span><br></pre></td></tr></table></figure>
-<p>自增自减：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x++;</span><br><span class="line">x--;</span><br></pre></td></tr></table></figure>
-<p>循环：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>js允许动态的读取和修改网页的内容以便于不必用户重新加载网页到内存中</p>
-<h3 id="section">Section</h3>
-<p>本文旨在弥合习题集和讲课内容之间的差距</p>
-<h4 id="html代表着什么">HTML代表着什么？</h4>
-<p><img
-src="https://raw.githubusercontent.com/XuandYu000/picture/main/html%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84.png"
-alt="html基本结构" /> 可以以树状图表示一个html结构 示例： <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>Scoreboard<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">            <span class="selector-tag">table</span> &#123;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">                <span class="attribute">border</span>: <span class="number">2px</span> solid black;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">                <span class="attribute">border-collapse</span>: collapse;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">                <span class="attribute">margin-left</span>: auto;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">                <span class="attribute">margin-right</span>: auto;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">                <span class="attribute">text-align</span>: center;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">            &#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">  </span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">            <span class="selector-tag">td</span> &#123;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">                <span class="attribute">border</span>: <span class="number">2px</span> solid black;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">            &#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">        </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">table</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line"></span><br><span class="line">                <span class="tag">&lt;<span class="name">td</span>&gt;</span>Team 1<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line"></span><br><span class="line">                <span class="tag">&lt;<span class="name">td</span>&gt;</span>Team 2<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line"></span><br><span class="line">                <span class="tag">&lt;<span class="name">td</span> <span class="attr">id</span>=<span class="string">&quot;score1&quot;</span>&gt;</span>0<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line"></span><br><span class="line">                <span class="tag">&lt;<span class="name">td</span> <span class="attr">id</span>=<span class="string">&quot;score2&quot;</span>&gt;</span>0<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line"></span><br><span class="line">                <span class="tag">&lt;<span class="name">td</span>&gt;</span></span><br><span class="line"></span><br><span class="line">                    <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;add1&quot;</span>&gt;</span>+1<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line">                <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line"></span><br><span class="line">                <span class="tag">&lt;<span class="name">td</span>&gt;</span></span><br><span class="line"></span><br><span class="line">                    <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;add2&quot;</span>&gt;</span>+1<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line">                <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">let</span> team1 = <span class="number">0</span>;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">let</span> team2 = <span class="number">0</span>;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  </span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;#add1&#x27;</span>).<span class="property">onclick</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">                team1 = team1 + <span class="number">1</span>;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">                <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;#score1&#x27;</span>).<span class="property">innerHTML</span> = team1;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  </span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;#add2&#x27;</span>).<span class="property">onclick</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">                team2 = team2 + <span class="number">1</span>;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">                <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;#score2&#x27;</span>).<span class="property">innerHTML</span> = team2;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<img
-src="https://raw.githubusercontent.com/XuandYu000/picture/main/scoreboard%E7%A4%BA%E4%BE%8B.png"
-alt="scoreboard解析" /> 左端为树状图，右端为页面成果
-可以看到一个<code>&lt;table&gt;</code> 中有3行，每一行再来两列</p>
-<h4 id="css-1">css</h4>
-<p>层叠样式表，更多是使用这之中选择器的部分 例如将上述html的button变色
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#team1-button</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="attribute">background-color</span>: red;</span><br><span class="line">	<span class="attribute">border</span>: <span class="number">4pt</span> dashed;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-id">#team2-button</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="attribute">background-color</span>:blue;</span><br><span class="line">	<span class="attribute">border</span>: <span class="number">4pt</span> dashed;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">...</span><br><span class="line">&lt;<span class="selector-tag">button</span> id=&quot;team1-<span class="selector-tag">button</span>&quot;&gt;</span><br><span class="line">	Team1</span><br><span class="line">&lt;/<span class="selector-tag">button</span>&gt;</span><br><span class="line">...</span><br><span class="line">&lt;<span class="selector-tag">button</span> id=&quot;team2-<span class="selector-tag">button</span>&quot;&gt;</span><br><span class="line">	Team2</span><br><span class="line">&lt;/<span class="selector-tag">button</span>&gt;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-上述选择器只针对特定id，还有一种类选择器对于html包含的类进行修改
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.title</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="attribute">background-color</span>: gray;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">...</span><br><span class="line">&lt;<span class="selector-tag">tr</span>&gt;</span><br><span class="line">	&lt;<span class="selector-tag">td</span> class=&quot;title&quot;&gt;</span><br><span class="line">		Team <span class="number">1</span></span><br><span class="line">	&lt;/<span class="selector-tag">td</span>&gt;</span><br><span class="line">&lt;<span class="selector-tag">tr</span>&gt;</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+          <h1 id="lecture7">lecture7</h1>
+<h4 id="flat-file-database">Flat-File Database</h4>
 <ul>
-<li>两者区别：</li>
-<li>类选择器可以应用于多个元素，ID应用于一个</li>
+<li><p>数据常常可以视作表格，每一行是一个记录，每一列是一个属性</p></li>
+<li><p>电子表格例如Excel，Google
+Spreadsheet可以导出为csv格式文件。csv文件是纯文本文件，每一行是一个记录，每一列用逗号分隔，可以看作是最简单的数据库</p></li>
+<li><p>csv文件被称为flat-file
+database，因为它没有任何结构，只是一堆数据，所有的数据被存在一个表中</p></li>
+<li><p>python 原生支持csv文件的读写，可以用csv模块读写csv文件</p></li>
+<li><p>```python # Prints all favorites in CSV using csv.reader</p>
+<pre><code>  import csv</code></pre>
+<p># Open CSV file with open("favorites.csv", "r") as file:</p>
+<pre><code>  # Create reader
+  reader = csv.reader(file)
+
+  # Skip header row
+  next(reader)
+
+  # Iterate over CSV file, printing each favorite</code></pre>
+<p>for row in reader: print(row[1]) <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">- - 在这里我们导入了csv模块，然后用open函数打开csv文件，然后用csv.reader函数创建一个reader对象，csv.reader函数从文件中读取每一行。</span><br><span class="line">- 但是这样的方式有一个问题，在数据中我们会发现csv还会将每一列标题打印可以像这样改进</span><br><span class="line">- ```python</span><br><span class="line">    # Stores favorite in a variable</span><br><span class="line">    </span><br><span class="line">    import csv</span><br><span class="line">    </span><br><span class="line">    # Open CSV file</span><br><span class="line">    with open(&quot;favorites.csv&quot;, &quot;r&quot;) as file:</span><br><span class="line">    </span><br><span class="line">        # Create reader</span><br><span class="line">        reader = csv.reader(file)</span><br><span class="line">    </span><br><span class="line">        # Skip header row</span><br><span class="line">        next(reader)</span><br><span class="line">    </span><br><span class="line">        # Iterate over CSV file, printing each favorite</span><br><span class="line">        for row in reader:</span><br><span class="line">        favorite = row[1]</span><br><span class="line">        print(favorite)</span><br></pre></td></tr></table></figure></p></li>
+<li><ul>
+<li>使用next函数跳过第一行</li>
+</ul></li>
+<li><ul>
+<li>还有一种改进</li>
+</ul></li>
+<li><ul>
+<li><p>```python # Prints all favorites in CSV using csv.DictReader</p>
+<p>import csv</p>
+<h1 id="open-csv-file">Open CSV file</h1>
+<p>with open("favorites.csv", "r") as file:</p>
+<pre><code># Create DictReader
+reader = csv.DictReader(file)
+
+# Iterate over CSV file, printing each favorite
+for row in reader:
+print(row[&quot;language&quot;])</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- - 这里我们使用了csv.DictReader函数，它会将每一行转换为一个字典，字典的键是列标题，字典的值是每一行的值</span><br><span class="line">- 当对字典的值排排序时，若不想按值排序时单独创立函数，lambda函数可以很方便的解决这个问题</span><br><span class="line">- - ```python</span><br><span class="line">    # Sorts favorites by value using lambda function</span><br><span class="line">    </span><br><span class="line">    import csv</span><br><span class="line">    </span><br><span class="line">    # Open CSV file</span><br><span class="line">    with open(&quot;favorites.csv&quot;, &quot;r&quot;) as file:</span><br><span class="line">    </span><br><span class="line">        # Create DictReader</span><br><span class="line">        reader = csv.DictReader(file)</span><br><span class="line">    </span><br><span class="line">        # Counts</span><br><span class="line">        counts = &#123;&#125;</span><br><span class="line">    </span><br><span class="line">        # Iterate over CSV file, counting favorites</span><br><span class="line">        for row in reader:</span><br><span class="line">            favorite = row[&quot;language&quot;]</span><br><span class="line">            if favorite in counts:</span><br><span class="line">            counts[favorite] += 1</span><br><span class="line">            else:</span><br><span class="line">            counts[favorite] = 1</span><br><span class="line">    </span><br><span class="line">        # Print counts</span><br><span class="line">        for favorite in sorted(counts, key=lambda language: counts[language], reverse=True):</span><br><span class="line">        print(f&quot;&#123;favorite&#125;: &#123;counts[favorite]&#125;&quot;)</span><br></pre></td></tr></table></figure></li>
+</ul></li>
+<li><ul>
+<li>Notice that the get_value function has been removed. Instead,
+<code>lambda language: counts[language]</code> does in one line what our
+previous two-line function did.</li>
+</ul></li>
+</ul>
+<h4 id="realational-database">Realational Database</h4>
+<p>关系型数据库是一种流行的存储大量数据的方式 Relational
+databases借助表的数据结构以行和列存储数据</p>
+<p>SQL支持四种操作，被简记为CRUD - Create：创建表 - Read：读取表中的数据
+- Update：更新表中的数据 - Delete：删除表中的数据</p>
+<p>创建一个新的数据库<code>sqlite3 favorites.db</code></p>
+<p>可以使用<code>.mode csv</code>命令将sqlite3的模式设置为csv模式，这样就可以使用csv文件来创建表了<code>.import favorites.csv favorites</code>
+第一个参数是导入文件名字，第二个则为创建表的名称 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">```SELECT columns FROM table```从表中读取一个元素</span><br><span class="line"></span><br><span class="line">SQL支持一些基本函数</span><br><span class="line">- ```COUNT```：计算表中的行数</span><br><span class="line"></span><br><span class="line">- ```SUM```：计算表中某一列的和</span><br><span class="line"></span><br><span class="line">- ```AVG```：计算表中某一列的平均值</span><br><span class="line"></span><br><span class="line">- ```MIN```：计算表中某一列的最小值</span><br><span class="line">  </span><br><span class="line">  $\cdots$</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">使用方法为```SELECT function(column) FROM table```</span><br><span class="line"></span><br><span class="line">SQL的额外功能函数</span><br><span class="line">- ```WHERE```：过滤表中的数据</span><br><span class="line">- ```GROUP BY```：将表中的数据分组</span><br><span class="line">- ```ORDER BY```：将表中的数</span><br><span class="line">- ```LIMIT```：限制表中的数据</span><br><span class="line">- ```LIKE```：模糊匹配表中的数据</span><br><span class="line">- $\cdots $</span><br><span class="line">- 例如```SELECT language，COUNT(*) FROM favorites GROUP BY language```</span><br><span class="line"></span><br><span class="line">#### IMDB</span><br><span class="line">IMDB是一个电影数据库，可以从[这里](https://www.imdb.com/interfaces/)下载数据集</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">执行```.schema```不仅可以看到每一张表，还可以看到每一张表的结构</span><br><span class="line"></span><br><span class="line">#### Indexes</span><br><span class="line">索引是一种数据结构，可以加快数据库的查询速度，但是会降低数据库的写入速度</span><br><span class="line"></span><br><span class="line">我们可以跟踪查询的时间，使用```.timer on```命令，然后使用```.timer off```命令关闭</span><br><span class="line"></span><br><span class="line">之后我们可以创建表的索引，使用```CREATE INDEX index_name ON table(column)```命令，这将会创建一个B-tree索引</span><br><span class="line"></span><br><span class="line">#### Using SQL in Python</span><br><span class="line">```python</span><br><span class="line"># Searches database popularity of a problem</span><br><span class="line"></span><br><span class="line">import csv</span><br><span class="line"></span><br><span class="line">from cs50 import SQL</span><br><span class="line"></span><br><span class="line"># Open database</span><br><span class="line">db = SQL(&quot;sqlite:///favorites.db&quot;)</span><br><span class="line"></span><br><span class="line"># Prompt user for favorite</span><br><span class="line">favorite = input(&quot;Favorite: &quot;)</span><br><span class="line"></span><br><span class="line"># Search for title</span><br><span class="line">rows = db.execute(&quot;SELECT COUNT(*) FROM favorites WHERE problem LIKE ?&quot;, &quot;%&quot; + favorite + &quot;%&quot;)</span><br><span class="line"></span><br><span class="line"># Get first (and only) row</span><br><span class="line">row = rows[0]</span><br><span class="line"></span><br><span class="line"># Print popularity</span><br><span class="line">print(row[&quot;COUNT(*)&quot;])</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><code>db=SQL("sqlite:///favorites.db")</code>创建一个数据库对象，这个对象有一个execute方法，可以执行SQL语句</li>
+<li>在execute方法中，我们可以使用问号来代替变量，然后在execute方法的第二个参数中传入变量的值</li>
+<li>注意execute使用<code>?</code>作为占位符</li>
+</ul>
+<h4 id="race-conditions">Race Conditions</h4>
+<p>当两个进程同时访问数据库时，可能会发生race
+conditions，例如两个进程同时读取数据库，然后同时写入数据库，这样就会导致数据的不一致性</p>
+<p>SQL锁可以解决这个问题，当一个进程正在读取数据库时，其他进程无法读取数据库，当一个进程正在写入数据库时，其他进程无法读取和写入数据库</p>
+<h4 id="sql-injection-attacks">SQL Injection Attacks</h4>
+<p>在python中执行SQL语句时，我们可以使用问号来代替变量，然后在execute方法的第二个参数中传入变量的值，这样可以防止SQL注入攻击。</p>
+<p>但是为什么呢？</p>
+<p>假设我们有一个表，其中有两列，一列是用户名，一列是密码，我们想要查询某个用户的密码，我们可以使用<code>SELECT password FROM users WHERE username = 'username'</code>，但是如果我们的username是<code>' OR 1=1 --</code>，那么这个SQL语句就会变成<code>SELECT password FROM users WHERE username = '' OR 1=1 --'</code>，这样就会返回所有的密码，因为<code>OR 1=1</code>永远为真，<code>--</code>是注释，所以后面的语句都会被注释掉</p>
+<p>但是使用<code>?</code>占位符就可以防止这种攻击，因为<code>' OR 1=1 --</code>会被当作一个字符串，而不是SQL语句的一部分</p>
+<h4 id="homework">homeWork</h4>
+<h5 id="favorite">Favorite</h5>
+<p><code>SELECT * FROM shows ORDER BY title;</code>数据表杂乱无章使用以上命令排序</p>
+<p><code>UPDATE shows SET title="How I Met Your Mother" WHERE title LIKE "How i met your mother";</code>
+UPDATE修改表中数据使用LIKE模糊匹配提高效率</p>
+<h5 id="prophecy">prophecy</h5>
+<p>要求建三张表将原来只有一张表的数据库分开使用SQL in python</p>
+<p>三步总共：</p>
+<ul>
+<li>从已给出的csv文件将student，house，relationships三张表的数据提取出来放到分别放到三个字典中</li>
+<li>在schema.sql加入重新建立三张表的命令</li>
+<li>在students.py中加入将三个字典中的数据导入到三张表中的命令</li>
+</ul>
+<h5 id="lab-songs">Lab songs</h5>
+<ul>
+<li><p>In 1.sql, write a SQL query to list the names of all songs in the
+database. Your query should output a table with a single column for the
+name of each song. <code>SELECT name FROM songs;</code></p></li>
+<li><p>In 2.sql, write a SQL query to list the names of all songs in
+increasing order of tempo. Your query should output a table with a
+single column for the name of each song.
+<code>SELECT name from songs ORDER BY tempo;</code></p></li>
+<li><p>In 3.sql, write a SQL query to list the names of the top 5
+longest songs, in descending order of length. Your query should output a
+table with a single column for the name of each song.
+<code>SELECT name from songs ORDER BY duration_ms DESC LIMIT 5;</code></p></li>
+<li><ul>
+<li>DESC降序排列,LIMIT限制输出数量</li>
+</ul></li>
+<li><p>In 4.sql, write a SQL query that lists the names of any songs
+that have danceability, energy, and valence greater than 0.75. Your
+query should output a table with a single column for the name of each
+song.
+<code>SELECT name FROM songs WHERE (danceability&gt;0.75 and energy&gt;0.75 and valence&gt;0.75);</code></p></li>
+<li><p>In 5.sql, write a SQL query that returns the average energy of
+all the songs. Your query should output a table with a single column and
+a single row containing the average energy.
+<code>SELECT AVG(energy) FROM songs;</code></p></li>
+<li><p>In 6.sql, write a SQL query that lists the names of songs that
+are by Post Malone. Your query should output a table with a single
+column for the name of each song. You should not make any assumptions
+about what Post Malone’s artist_id is.
+<code>SELECT name FROM songs WHERE artist_id=(SELECT id FROM artists WHERE name='Post Malone');</code></p></li>
+<li><ul>
+<li>在一个表中查询可以使用子查询，子查询的结果作为外层查询的条件就像这里的artist_id，这里的artist_id是一个外键，它指向artists表中的id，所以我们可以使用artists表中的id来查询songs表中的数据</li>
+</ul></li>
+<li><p>In 7.sql, write a SQL query that returns the average energy of
+songs that are by Drake. Your query should output a table with a single
+column and a single row containing the average energy. You should not
+make any assumptions about what Drake’s artist_id is.
+<code>SELECT AVG(energy) FROM songs WHERE artist_id=(SELECT id FROM artists WHERE name='Drake');</code></p></li>
+<li><p>In 8.sql, write a SQL query that lists the names of the songs
+that feature other artists. Songs that feature other artists will
+include “feat.” in the name of the song. Your query should output a
+table with a single column for the name of each song.
+<code>SELECT name FROM songs WHERE name LIKE '%feat.%';</code></p></li>
+<li><ul>
+<li>注意占位符即可</li>
+</ul></li>
 </ul>
 
       
