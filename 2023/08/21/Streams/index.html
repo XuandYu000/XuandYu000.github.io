@@ -23,12 +23,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="StreamsSequence OperationsMap, filter, and reduce express sequence manipulation using compact expressions Example: Sum all primes in an interval from a(inclusive) to b(exclusive) 12345678def sum_prime">
+  <meta name="description" content="Streams Sequence Operations Map, filter, and reduce express sequence manipulation using compact expressions Example: Sum all primes in an interval from a(inclusive) to b(exclusive) 12345678def s">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Streams">
 <meta property="og:url" content="http://example.com/2023/08/21/Streams/index.html">
 <meta property="og:site_name" content="viewoverlook">
-<meta property="og:description" content="StreamsSequence OperationsMap, filter, and reduce express sequence manipulation using compact expressions Example: Sum all primes in an interval from a(inclusive) to b(exclusive) 12345678def sum_prime">
+<meta property="og:description" content="Streams Sequence Operations Map, filter, and reduce express sequence manipulation using compact expressions Example: Sum all primes in an interval from a(inclusive) to b(exclusive) 12345678def s">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/20230813172937.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/20230813174023.png">
@@ -247,25 +247,81 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Streams"><a href="#Streams" class="headerlink" title="Streams"></a>Streams</h1><h3 id="Sequence-Operations"><a href="#Sequence-Operations" class="headerlink" title="Sequence Operations"></a>Sequence Operations</h3><p>Map, filter, and reduce express sequence manipulation using compact expressions</p>
-<p>Example: Sum all primes in an interval from a(inclusive) to b(exclusive)</p>
+        <h1 id="streams">Streams</h1>
+<h3 id="sequence-operations">Sequence Operations</h3>
+<p>Map, filter, and reduce express sequence manipulation using compact
+expressions</p>
+<p>Example: Sum all primes in an interval from a(inclusive) to
+b(exclusive)</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">sum_primes</span>(<span class="params">a, b</span>):</span><br><span class="line">	total = <span class="number">0</span></span><br><span class="line">	x = a</span><br><span class="line">	<span class="keyword">while</span> x &lt; b:</span><br><span class="line">		<span class="keyword">if</span> is_prime(x):</span><br><span class="line">			total += x</span><br><span class="line">		x+=<span class="number">1</span></span><br><span class="line">	<span class="keyword">return</span> total</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">sum_primes</span>(<span class="params">a, b</span>):</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">sum</span>(<span class="built_in">filter</span>(is_prime, <span class="built_in">range</span>(a,b)))</span><br></pre></td></tr></table></figure>
 <p><img src="https://raw.githubusercontent.com/XuandYu000/picture/main/20230813172937.png"/></p>
-<p>Streams allow scheme to process sequences while using an efficient amount of space just like a Python iterator.<br>But unlike iterators which are mutable values, Steams are immutable.<br><img src="https://raw.githubusercontent.com/XuandYu000/picture/main/20230813174023.png"/></p>
-<p>stream can be infinite.<br>I can define a new procedure that takes a stream and returns another stream just by inspecting and manipulating some elements from the front of the input stream and then using con stream to build something new.<br><img src="https://raw.githubusercontent.com/XuandYu000/picture/main/20230813174923.png"/></p>
-<p>A stream is an example of a lazy sequence. Specifically, it is a lazily evaluated Scheme list. In other words, the stream’s elements (except for the first element) are only evaluated when the values are needed. In addition, streams are _memoized_: the elements that have already been computed are saved!<br>流是惰性序列的一个示例。具体来说，它是一个延迟计算的Scheme列表。换句话说，流的元素（第一个元素除外）仅在需要值时才计算。此外，流会被记忆：已经计算过的元素会被保存！</p>
-<p>Because a stream is simply a lazy list, the rest of a stream is also a stream (just like the rest of a list is also a list). In addition, <code>nil</code> can also serve as an empty stream. To check if a stream is empty, we can use the built-in procedure <code>null?</code>.<br>因为流只是一个惰性列表，所以流的其余部分也是一个流（就像列表的其余部分也是一个列表一样）。另外 <code>nil</code> 也可以作为空流。要检查流是否为空，我们可以使用内置过程 <code>null?</code> 。</p>
-<p>The procedures involved for working with streams are as follows:<br>使用流所涉及的过程如下：</p>
+<p>Streams allow scheme to process sequences while using an efficient
+amount of space just like a Python iterator. But unlike iterators which
+are mutable values, Steams are immutable.
+<img src="https://raw.githubusercontent.com/XuandYu000/picture/main/20230813174023.png"/></p>
+<p>stream can be infinite. I can define a new procedure that takes a
+stream and returns another stream just by inspecting and manipulating
+some elements from the front of the input stream and then using con
+stream to build something new.
+<img src="https://raw.githubusercontent.com/XuandYu000/picture/main/20230813174923.png"/></p>
+<p>A stream is an example of a lazy sequence. Specifically, it is a
+lazily evaluated Scheme list. In other words, the stream's elements
+(except for the first element) are only evaluated when the values are
+needed. In addition, streams are <em>memoized</em>: the elements that
+have already been computed are saved!<br />
+流是惰性序列的一个示例。具体来说，它是一个延迟计算的Scheme列表。换句话说，流的元素（第一个元素除外）仅在需要值时才计算。此外，流会被记忆：已经计算过的元素会被保存！</p>
+<p>Because a stream is simply a lazy list, the rest of a stream is also
+a stream (just like the rest of a list is also a list). In
+addition, <code>nil</code> can also serve as an empty stream. To check
+if a stream is empty, we can use the built-in
+procedure <code>null?</code>.<br />
+因为流只是一个惰性列表，所以流的其余部分也是一个流（就像列表的其余部分也是一个列表一样）。另外 <code>nil</code> 也可以作为空流。要检查流是否为空，我们可以使用内置过程 <code>null?</code> 。</p>
+<p>The procedures involved for working with streams are as
+follows:<br />
+使用流所涉及的过程如下：</p>
 <ul>
-<li><code>(cons-stream first rest)</code>: A special form that constructs a stream by evaluating the first operand <code>first</code> and storing its value as the first element in the stream, and storing the second operand <code>rest</code>, unevaluated, to be evaluated later.<br>  <code>(cons-stream first rest)</code> ：一种特殊形式，通过计算第一个操作数 <code>first</code> 并将其值存储为流中的第一个元素，并存储第二个操作数 <code>rest</code> （未计算，以便稍后计算）来构造流。</li>
-<li><code>(car s)</code>: A procedure that works on streams the same way it does on lists. It returns the first element of the stream, which had already been computed on construction of the stream.<br>  <code>(car s)</code> ：处理流的过程与处理列表的方式相同。它返回流的第一个元素，该元素已经在流的构造中计算出来。</li>
-<li><code>(cdr-stream s)</code>: A procedure that returns the rest of the stream by evaluating the <code>rest</code> expression that was stored on construction of the stream. It then stores the value of this expression so that on subsequent calls to <code>cdr-stream</code> on this stream, <code>rest</code> no longer has to be evaluated.<br>  <code>(cdr-stream s)</code> ：通过评估在构建流时存储的 <code>rest</code> 表达式来返回流的其余部分的过程。然后，它存储该表达式的值，以便后续调用该流上的 <code>cdr-stream</code> 时，不再需要计算 <code>rest</code> 。</li>
+<li><code>(cons-stream first rest)</code>: A special form that
+constructs a stream by evaluating the first
+operand <code>first</code> and storing its value as the first element in
+the stream, and storing the second operand <code>rest</code>,
+unevaluated, to be evaluated later.<br />
+<code>(cons-stream first rest)</code> ：一种特殊形式，通过计算第一个操作数 <code>first</code> 并将其值存储为流中的第一个元素，并存储第二个操作数 <code>rest</code> （未计算，以便稍后计算）来构造流。</li>
+<li><code>(car s)</code>: A procedure that works on streams the same way
+it does on lists. It returns the first element of the stream, which had
+already been computed on construction of the stream.<br />
+<code>(car s)</code> ：处理流的过程与处理列表的方式相同。它返回流的第一个元素，该元素已经在流的构造中计算出来。</li>
+<li><code>(cdr-stream s)</code>: A procedure that returns the rest of
+the stream by evaluating the <code>rest</code> expression that was
+stored on construction of the stream. It then stores the value of this
+expression so that on subsequent calls to <code>cdr-stream</code> on
+this stream, <code>rest</code> no longer has to be evaluated.<br />
+<code>(cdr-stream s)</code> ：通过评估在构建流时存储的 <code>rest</code> 表达式来返回流的其余部分的过程。然后，它存储该表达式的值，以便后续调用该流上的 <code>cdr-stream</code> 时，不再需要计算 <code>rest</code> 。</li>
 </ul>
-<p>Now we are ready to look at a simple example. This stream is an infinite stream where each element is 1.<br>现在我们准备看一个简单的例子。该流是一个无限流，其中每个元素都是 1。<br><figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">scm&gt; (<span class="name"><span class="built_in">define</span></span> ones (<span class="name">cons-stream</span> <span class="number">1</span> ones))</span><br><span class="line">ones</span><br><span class="line">scm&gt; (<span class="name"><span class="built_in">car</span></span> ones)</span><br><span class="line"><span class="number">1</span></span><br><span class="line">scm&gt; (<span class="name">cdr-stream</span> ones)</span><br><span class="line">(<span class="name">1</span> . #[<span class="name">promise</span> (<span class="name">forced</span>)])</span><br></pre></td></tr></table></figure></p>
-<p>The reason we are able to recursively reference this object without causing an error is because the second operand to <code>cons-stream</code> is not evaluated. Instead, it is stored until <code>cdr-stream</code> is called, at which point the expression will be evaluated and the resulting value will be stored.<br>我们能够递归引用该对象而不导致错误的原因是因为 <code>cons-stream</code> 的第二个操作数没有被求值。相反，它会被存储直到调用 <code>cdr-stream</code> ，此时将计算表达式并存储结果值。</p>
-<p>Next, here’s one way to build a stream of the natural numbers starting at <code>n</code>.<br>接下来，这是构建从 <code>n</code> 开始的自然数流的一种方法。<br><figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">scm&gt; (<span class="name"><span class="built_in">define</span></span> (<span class="name">naturals</span> (<span class="name">n</span>)) </span><br><span class="line">	   (<span class="name">cons-stream</span> n (<span class="name">naturals</span> (<span class="name"><span class="built_in">+</span></span> n <span class="number">1</span>)))) </span><br><span class="line">naturals </span><br><span class="line">scm&gt; (<span class="name"><span class="built_in">define</span></span> nat (<span class="name">naturals</span> <span class="number">0</span>)) </span><br><span class="line">nat </span><br><span class="line">scm&gt; (<span class="name"><span class="built_in">car</span></span> nat) </span><br><span class="line"><span class="number">0</span> </span><br><span class="line">scm&gt; (<span class="name"><span class="built_in">car</span></span> (<span class="name">cdr-stream</span> nat)) </span><br><span class="line"><span class="number">1</span> </span><br><span class="line">scm&gt; (<span class="name"><span class="built_in">car</span></span> (<span class="name">cdr-stream</span> (<span class="name">cdr-stream</span> nat))) </span><br><span class="line"><span class="number">2</span></span><br></pre></td></tr></table></figure></p>
-<p>Here, the expression that is stored is a recursive call to <code>naturals</code>. When we evaluate this call, we get another stream whose first element is one greater than the previous number in the sequence. The second element of this stream is uncomputed until <code>cdr-stream</code> is called on it, which will activate yet another call to <code>naturals</code>. Hence, we effectively get an infinite stream of integers, where each integer is computed one at a time. This is almost like infinite recursion, but one which can be viewed one step at a time, so it does not crash.<br>这里，存储的表达式是对 <code>naturals</code> 的递归调用。当我们评估这个调用时，我们得到另一个流，其第一个元素比序列中的前一个数字大一个。该流的第二个元素在调用 <code>cdr-stream</code> 之前不会被计算，这将激活对 <code>naturals</code> 的另一个调用。因此，我们有效地获得了无限的整数流，其中每个整数一次计算一个。这几乎就像无限递归，但可以一次查看一步，因此不会崩溃。</p>
+<p>Now we are ready to look at a simple example. This stream is an
+infinite stream where each element is 1.<br />
+现在我们准备看一个简单的例子。该流是一个无限流，其中每个元素都是 1。
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">scm&gt; (<span class="name"><span class="built_in">define</span></span> ones (<span class="name">cons-stream</span> <span class="number">1</span> ones))</span><br><span class="line">ones</span><br><span class="line">scm&gt; (<span class="name"><span class="built_in">car</span></span> ones)</span><br><span class="line"><span class="number">1</span></span><br><span class="line">scm&gt; (<span class="name">cdr-stream</span> ones)</span><br><span class="line">(<span class="name">1</span> . #[<span class="name">promise</span> (<span class="name">forced</span>)])</span><br></pre></td></tr></table></figure></p>
+<p>The reason we are able to recursively reference this object without
+causing an error is because the second operand
+to <code>cons-stream</code> is not evaluated. Instead, it is stored
+until <code>cdr-stream</code> is called, at which point the expression
+will be evaluated and the resulting value will be stored.<br />
+我们能够递归引用该对象而不导致错误的原因是因为 <code>cons-stream</code> 的第二个操作数没有被求值。相反，它会被存储直到调用 <code>cdr-stream</code> ，此时将计算表达式并存储结果值。</p>
+<p>Next, here's one way to build a stream of the natural numbers
+starting at <code>n</code>.<br />
+接下来，这是构建从 <code>n</code> 开始的自然数流的一种方法。
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">scm&gt; (<span class="name"><span class="built_in">define</span></span> (<span class="name">naturals</span> (<span class="name">n</span>)) </span><br><span class="line">	   (<span class="name">cons-stream</span> n (<span class="name">naturals</span> (<span class="name"><span class="built_in">+</span></span> n <span class="number">1</span>)))) </span><br><span class="line">naturals </span><br><span class="line">scm&gt; (<span class="name"><span class="built_in">define</span></span> nat (<span class="name">naturals</span> <span class="number">0</span>)) </span><br><span class="line">nat </span><br><span class="line">scm&gt; (<span class="name"><span class="built_in">car</span></span> nat) </span><br><span class="line"><span class="number">0</span> </span><br><span class="line">scm&gt; (<span class="name"><span class="built_in">car</span></span> (<span class="name">cdr-stream</span> nat)) </span><br><span class="line"><span class="number">1</span> </span><br><span class="line">scm&gt; (<span class="name"><span class="built_in">car</span></span> (<span class="name">cdr-stream</span> (<span class="name">cdr-stream</span> nat))) </span><br><span class="line"><span class="number">2</span></span><br></pre></td></tr></table></figure></p>
+<p>Here, the expression that is stored is a recursive call
+to <code>naturals</code>. When we evaluate this call, we get another
+stream whose first element is one greater than the previous number in
+the sequence. The second element of this stream is uncomputed
+until <code>cdr-stream</code> is called on it, which will activate yet
+another call to <code>naturals</code>. Hence, we effectively get an
+infinite stream of integers, where each integer is computed one at a
+time. This is almost like infinite recursion, but one which can be
+viewed one step at a time, so it does not crash.<br />
+这里，存储的表达式是对 <code>naturals</code> 的递归调用。当我们评估这个调用时，我们得到另一个流，其第一个元素比序列中的前一个数字大一个。该流的第二个元素在调用 <code>cdr-stream</code> 之前不会被计算，这将激活对 <code>naturals</code> 的另一个调用。因此，我们有效地获得了无限的整数流，其中每个整数一次计算一个。这几乎就像无限递归，但可以一次查看一步，因此不会崩溃。</p>
 
     </div>
 
@@ -350,7 +406,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Streams"><span class="nav-number">1.</span> <span class="nav-text">Streams</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Sequence-Operations"><span class="nav-number">1.0.1.</span> <span class="nav-text">Sequence Operations</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#streams"><span class="nav-number">1.</span> <span class="nav-text">Streams</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sequence-operations"><span class="nav-number">1.0.1.</span> <span class="nav-text">Sequence Operations</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
