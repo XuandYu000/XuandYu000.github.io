@@ -747,6 +747,93 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/Lecture%203%20vim/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
+      <meta itemprop="name" content="XuandYu000">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="viewoverlook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/07/02/Lecture%203%20vim/" class="post-title-link" itemprop="url">Lecture 3 vim</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:07:09" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/csdiy/" itemprop="url" rel="index"><span itemprop="name">csdiy</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/csdiy/missing-semester/" itemprop="url" rel="index"><span itemprop="name">missing semester</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Lecture-3-vim"><a href="#Lecture-3-vim" class="headerlink" title="Lecture 3 vim"></a>Lecture 3 vim</h1><ol>
+<li>完成 vimtutor。 备注： 它在一个 80x24（80 列，24 行） 终端窗口看起来最好。<br> 直接执行 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vimtutor</span><br></pre></td></tr></table></figure></li>
+<li><p>下载我们的vimrc，然后把它保存到 ~/.vimrc。 通读这个注释详细的文件 （用 Vim!）， 然后观察 Vim 在这个新的设置下看起来和使用起来有哪些细微的区别。<br>下载后他禁用了上下左右键使用hjkl代替，挺反人类的但是用习惯还可以</p>
+</li>
+<li><p>安装和配置一个插件： ctrlp.vim</p>
+<ul>
+<li>这里建议使用vim-plug，在.vimrc添加：Plug ‘插件名称’<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">call plug#begin(&#x27;~/.vim/plugged&#x27;)</span><br><span class="line"> Plug &#x27;vim-airline/vim-airline&#x27;</span><br><span class="line"> call plug#end()</span><br></pre></td></tr></table></figure>
+之后重新打开vim，执行<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:PlugInstall</span><br></pre></td></tr></table></figure>
+*删除插件<br>删除插件，只需要将写在 .vimrc 配置文件内的插件删除，重启 vim 并执行命令 :PlugClean </li>
+</ul>
+<p>练习使用 Vim, 在你自己的机器上重做 演示。</p>
+</li>
+<li>下个月用 Vim 完成所有的文件编辑。每当不够高效的时候，或者你感觉 “一定有一个更好的方式”时， 尝试求助搜索引擎，很有可能有一个更好的方式。如果你遇到难题，可以来我们的答疑时间或者给我们发邮件。</li>
+<li>在其他工具中设置 Vim 快捷键 （见上面的操作指南）。</li>
+<li>进一步自定义你的 ~/.vimrc 和安装更多插件。</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/Intro/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -969,93 +1056,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/Lecture%203%20vim/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
-      <meta itemprop="name" content="XuandYu000">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="viewoverlook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/07/02/Lecture%203%20vim/" class="post-title-link" itemprop="url">Lecture 3 vim</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:07:09" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/csdiy/" itemprop="url" rel="index"><span itemprop="name">csdiy</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/csdiy/missing-semester/" itemprop="url" rel="index"><span itemprop="name">missing semester</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Lecture-3-vim"><a href="#Lecture-3-vim" class="headerlink" title="Lecture 3 vim"></a>Lecture 3 vim</h1><ol>
-<li>完成 vimtutor。 备注： 它在一个 80x24（80 列，24 行） 终端窗口看起来最好。<br> 直接执行 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vimtutor</span><br></pre></td></tr></table></figure></li>
-<li><p>下载我们的vimrc，然后把它保存到 ~/.vimrc。 通读这个注释详细的文件 （用 Vim!）， 然后观察 Vim 在这个新的设置下看起来和使用起来有哪些细微的区别。<br>下载后他禁用了上下左右键使用hjkl代替，挺反人类的但是用习惯还可以</p>
-</li>
-<li><p>安装和配置一个插件： ctrlp.vim</p>
-<ul>
-<li>这里建议使用vim-plug，在.vimrc添加：Plug ‘插件名称’<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">call plug#begin(&#x27;~/.vim/plugged&#x27;)</span><br><span class="line"> Plug &#x27;vim-airline/vim-airline&#x27;</span><br><span class="line"> call plug#end()</span><br></pre></td></tr></table></figure>
-之后重新打开vim，执行<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:PlugInstall</span><br></pre></td></tr></table></figure>
-*删除插件<br>删除插件，只需要将写在 .vimrc 配置文件内的插件删除，重启 vim 并执行命令 :PlugClean </li>
-</ul>
-<p>练习使用 Vim, 在你自己的机器上重做 演示。</p>
-</li>
-<li>下个月用 Vim 完成所有的文件编辑。每当不够高效的时候，或者你感觉 “一定有一个更好的方式”时， 尝试求助搜索引擎，很有可能有一个更好的方式。如果你遇到难题，可以来我们的答疑时间或者给我们发邮件。</li>
-<li>在其他工具中设置 Vim 快捷键 （见上面的操作指南）。</li>
-<li>进一步自定义你的 ~/.vimrc 和安装更多插件。</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/Lecture%204%20%E6%95%B0%E6%8D%AE%E6%95%B4%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1148,7 +1148,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/Lecture%205%20%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%8E%AF%E5%A2%83/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/bzoj3032%20%E4%B8%83%E5%A4%95%E7%A5%AD/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
@@ -1162,7 +1162,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/07/02/Lecture%205%20%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%8E%AF%E5%A2%83/" class="post-title-link" itemprop="url">Lecture 5 命令行环境</a>
+            <a href="/2023/07/02/bzoj3032%20%E4%B8%83%E5%A4%95%E7%A5%AD/" class="post-title-link" itemprop="url">bzoj3032 七夕祭</a>
         </h2>
 
         <div class="post-meta">
@@ -1173,7 +1173,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:07:26" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
+              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:28:01" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1181,11 +1181,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/csdiy/" itemprop="url" rel="index"><span itemprop="name">csdiy</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/csdiy/missing-semester/" itemprop="url" rel="index"><span itemprop="name">missing semester</span></a>
+                  <a href="/categories/algorithms/" itemprop="url" rel="index"><span itemprop="name">algorithms</span></a>
                 </span>
             </span>
 
@@ -1200,43 +1196,21 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Lecture-5-命令行环境"><a href="#Lecture-5-命令行环境" class="headerlink" title="Lecture 5 命令行环境"></a>Lecture 5 命令行环境</h1><h2 id="课后练习"><a href="#课后练习" class="headerlink" title="课后练习"></a>课后练习</h2><h4 id="任务控制"><a href="#任务控制" class="headerlink" title="任务控制"></a>任务控制</h4><ol>
-<li>我们可以使用类似 ps aux | grep 这样的命令来获取任务的 pid ，然后您可以基于pid 来结束这些进程。但我们其实有更好的方法来做这件事。在终端中执行 sleep 10000 这个任务。然后用 Ctrl-Z 将其切换到后台并使用 bg来继续允许它。现在，使用 pgrep 来查找 pid 并使用 pkill 结束进程而不需要手动输入pid。(提示：: 使用 -af 标记)。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sleep 10000</span><br><span class="line">ctrl+z</span><br><span class="line">bg</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pgrep sleep #列出包含关键字sleep的进程id</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pkill -af sleep #杀死包含关键字sleep的进程</span><br></pre></td></tr></table></figure>
-解释：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pkill 杀死进程的命令</span><br><span class="line">-a 用于匹配进程名和命令行参数</span><br><span class="line">-f 强制匹配整个命令行参数，而不仅仅是匹配进程名</span><br></pre></td></tr></table></figure></li>
-<li>如果您希望某个进程结束后再开始另外一个进程， 应该如何实现呢？在这个练习中，我们使用 sleep 60 &amp; 作为先执行的程序。一种方法是使用 wait 命令。尝试启动这个休眠命令，然后待其结束后再执行 ls 命令。但是，如果我们在不同的 bash 会话中进行操作，则上述方法就不起作用了。因为 wait 只能对子进程起作用。之前我们没有提过的一个特性是，kill 命令成功退出时其状态码为 0 ，其他状态则是非0。kill -0 则不会发送信号，但是会在进程不存在时返回一个不为0的状态码。请编写一个 bash 函数 pidwait ，它接受一个 pid 作为输入参数，然后一直等待直到该进程结束。您需要使用 sleep 来避免浪费 CPU 性能。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sleep 60 &amp;</span><br><span class="line">pgrep sleep | wait; </span><br><span class="line">ls</span><br></pre></td></tr></table></figure>
+          <h1 id="bzoj3032-七夕祭"><a href="#bzoj3032-七夕祭" class="headerlink" title="bzoj3032 七夕祭"></a>bzoj3032 七夕祭</h1><p><a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/107/">题目链接</a><br>解析:</p>
+<ol>
+<li>如果交换左右两边的位置每一行感兴趣的摊位数量不变<br>同理交换上下两边的位置每一列感兴趣的摊位数量不变<br>所以该问题可以分解为两个一维的问题：<ul>
+<li>用最少的步数使每一行的摊位数目相等</li>
+<li>用最少的步数使每一列的摊位数目相等</li>
+<li>前提是总的行数上的感兴趣的数目或总的列数上感兴趣的摊位数目可以被均分</li>
+</ul>
+</li>
+<li>接下来解决两个相似的一维问题即可<br>这和均分纸牌问题相似：M个人拍成一行，每个人手中有C[1]~C[M]张纸牌，每个人都想要拿到相同数量的纸牌，可以让某个人将自己手中的一张牌交给身边的一个人,问最少需要多少次交换。这里假设均分纸牌问题有解：<br>考虑第一个人：<ol>
+<li>若C[1] &gt; avg, 则他需要将C[1] - avg张牌交给第二个人</li>
+<li>若C[1] &lt; avg, 则他需要从第二个人那里拿avg - C[1]张牌<br>接下来以此考虑2~M个人。所需最小步数即为   $\sum_{i=1}^M abs(i<em>avg-G[i])$ ，其中G[i]=$\sum_{i=1}^MC[i]$<br>其含义是每个“前缀“持有者最初共有G[i]张牌，最终会共有i</em>avg张牌，设A[i]=C[i]-avg,即从一开始就减掉avg最终每个人只有0张牌<br>3.但是这个问题可以将头尾互换相当于“环形均分纸牌”，该问题一定有最优解，并且所求的答案可以看作是将环从某一点k断开，其持有的纸牌数，前缀和分别是<br>A[k+1]  S[k+1]-S[k]<br>A[k+2]  S[k+2]-S[k]<br>……      ……<br>A[M]  S[M]-S[k]<br>A[1]  S[1]+S[M]-S[k]<br>……     ……<br>A[k]  S[k]+S[M]-S[k]<br>经推导S[M]一定为0所需最小步数为$\sum_{i=k+1}^M abs(S[k]-S[i])$ S[i]=$\sum_{j=1}^iA[j]$ 步数最小时上述公式又转为货舱选址问题，选择中位数即可</li>
+</ol>
 </li>
 </ol>
-<p>解释：</p>
-<ul>
-<li>sleep 60 &amp; 中&amp;表示后台运行</li>
-<li>wait 接收pgrpe sleep的输出，等待其结束之后再执行ls命令给</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pidwait()&#123;</span><br><span class="line">    while kill -0 $1 do</span><br><span class="line">        sleep 1</span><br><span class="line">    done</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>解释:</p>
-<ul>
-<li>kill -0 $1 判断进程是否存在，存在则返回0，不存在则返回1</li>
-<li><ul>
-<li>$1表示第一个参数</li>
-</ul>
-</li>
-<li><ul>
-<li>kill -0 表示不会发送信号，但是会在进程不存在时返回一个不为0的状态码 </li>
-</ul>
-</li>
-</ul>
-<h4 id="终端多路复用"><a href="#终端多路复用" class="headerlink" title="终端多路复用"></a>终端多路复用</h4><ol>
-<li>请完成这个 tmux 教程 参考这些步骤来学习如何自定义 tmux。<br>当您在使用命令行时，您通常会希望同时执行多个任务。举例来说，您可以想要同时运行您的编辑器，并在终端的另外一侧执行程序。尽管再打开一个新的终端窗口也能达到目的，使用终端多路复用器则是一种更好的办法。<br>像 tmux 这类的终端多路复用器可以允许我们基于面板和标签分割出多个终端窗口，这样您便可以同时与多个 shell 会话进行交互。<br>tmux 的快捷键需要我们掌握，它们都是类似 \<C-b> x 这样的组合，即需要先按下Ctrl+b，松开后再按下 x，但是一般使用CTRL+a重新映射为前缀键。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">常用快捷键：</span><br><span class="line">会话：</span><br><span class="line">tmux 开始新会话</span><br><span class="line">tmux new -s session_name #新建一个会话</span><br><span class="line">tmux ls #查看会话</span><br><span class="line">tmux a -t session_name #进入会话，不加name默认连接最后一个会话</span><br><span class="line">窗口：</span><br><span class="line">&lt;C-b&gt; c 创建一个新的窗口，使用 &lt;C-d&gt;关闭</span><br><span class="line">&lt;C-b&gt; N 跳转到第 N 个窗口，注意每个窗口都是有编号的</span><br><span class="line">&lt;C-b&gt; p 切换到前一个窗口</span><br><span class="line">&lt;C-b&gt; n 切换到下一个窗口</span><br><span class="line">&lt;C-b&gt; , 重命名当前窗口</span><br><span class="line">&lt;C-b&gt; w 列出当前所有窗口</span><br><span class="line">面板：</span><br><span class="line">&lt;C-b&gt; &quot; 水平分割</span><br><span class="line">&lt;C-b&gt; % 垂直分割</span><br><span class="line">&lt;C-b&gt; &lt;方向&gt; 切换到指定方向的面板，&lt;方向&gt; 指的是键盘上的方向键</span><br><span class="line">&lt;C-b&gt; z 切换当前面板的缩放</span><br><span class="line">&lt;C-b&gt; [ 开始往回卷动屏幕。您可以按下空格键来开始选择，回车键复制选中的部分</span><br><span class="line">&lt;C-b&gt; &lt;空格&gt; 在不同的面板排布间切换</span><br></pre></td></tr></table></figure>
-<h4 id="别名"><a href="#别名" class="headerlink" title="别名"></a>别名</h4>输入一长串包含许多选项的命令会非常麻烦。因此，大多数 shell 都支持设置别名。shell 的别名相当于一个长命令的缩写，shell 会自动将其替换成原本的命令。例如，bash 中的别名语法如下：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alias alias_name=&quot;command_to_alias arg1 arg2&quot;</span><br></pre></td></tr></table></figure>
-注意， =两边是没有空格的，因为 alias 是一个 shell 命令，它只接受一个参数。<br>别名有许多很方便的特性:<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"># 创建常用命令的缩写</span><br><span class="line">alias ll=&quot;ls -lh&quot;</span><br><span class="line"></span><br><span class="line"># 能够少输入很多</span><br><span class="line">alias gs=&quot;git status&quot;</span><br><span class="line">alias gc=&quot;git commit&quot;</span><br><span class="line">alias v=&quot;vim&quot;</span><br><span class="line"></span><br><span class="line"># 手误打错命令也没关系</span><br><span class="line">alias sl=ls</span><br><span class="line"></span><br><span class="line"># 重新定义一些命令行的默认行为</span><br><span class="line">alias mv=&quot;mv -i&quot;           # -i prompts before overwrite</span><br><span class="line">alias mkdir=&quot;mkdir -p&quot;     # -p make parent dirs as needed</span><br><span class="line">alias df=&quot;df -h&quot;           # -h prints human readable format</span><br><span class="line"></span><br><span class="line"># 别名可以组合使用</span><br><span class="line">alias la=&quot;ls -A&quot;</span><br><span class="line">alias lla=&quot;la -l&quot;</span><br><span class="line"></span><br><span class="line"># 在忽略某个别名</span><br><span class="line">\ls</span><br><span class="line"># 或者禁用别名</span><br><span class="line">unalias la</span><br><span class="line"></span><br><span class="line"># 获取别名的定义</span><br><span class="line">alias ll</span><br><span class="line"># 会打印 ll=&#x27;ls -lh&#x27;</span><br></pre></td></tr></table></figure>
-值得注意的是，在默认情况下 shell 并不会保存别名。为了让别名持续生效，您需要将配置放进 shell 的启动文件里，像是.bashrc 或 .zshrc，下一节我们就会讲到。<h4 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h4>让我们帮助您进一步学习配置文件：</li>
-<li>为您的配置文件新建一个文件夹，并设置好版本控制</li>
-<li>在其中添加至少一个配置文件，比如说您的 shell，在其中包含一些自定义设置（可以从设置 $PS1 开始）。</li>
-<li>建立一种在新设备进行快速安装配置的方法（无需手动操作）。最简单的方法是写一个 shell 脚本对每个文件使用 ln -s，也可以使用专用工具在新的虚拟机上测试该安装脚本。将您现有的所有配置文件移动到项目仓库里。将项目发布到GitHub。<br>做的时候GitHub报错暂未解决，先不写了。<h4 id="远端设备"><a href="#远端设备" class="headerlink" title="远端设备"></a>远端设备</h4>进行下面的练习需要您先安装一个 Linux 虚拟机（如果已经安装过则可以直接使用），如果您对虚拟机尚不熟悉，可以参考这篇教程 来进行安装。</li>
-<li>前往 ~/.ssh/ 并查看是否已经存在 SSH 密钥对。如果不存在，请使用ssh-keygen -o -a 100 -t ed25519来创建一个。建议为密钥设置密码然后使用ssh-agent 这里；</li>
-<li>在.ssh/config加入下面内容：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Host vm #ssh连接的别名</span><br><span class="line">   User username_goes_here #用户名</span><br><span class="line">   HostName ip_goes_here #ip地址</span><br><span class="line">   IdentityFile ~/.ssh/id_ed25519 #密钥文件</span><br><span class="line">   LocalForward 9999 localhost:8888  #本地端口转发</span><br></pre></td></tr></table></figure></li>
-</ol>
+<p>代码如下：<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">// Problem: 七夕祭</span><br><span class="line">// Contest: AcWing</span><br><span class="line">// URL: https://www.acwing.com/problem/content/107/</span><br><span class="line">// Memory Limit: 64 MB</span><br><span class="line">// Time Limit: 1000 ms</span><br><span class="line">// </span><br><span class="line">// Powered by CP Editor (https://cpeditor.org)</span><br><span class="line"></span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;queue&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#include&lt;cmath&gt;</span><br><span class="line">#include&lt;stack&gt;</span><br><span class="line">#include&lt;vector&gt;</span><br><span class="line">#include&lt;map&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">#define x first</span><br><span class="line">#define y second</span><br><span class="line">typedef pair&lt;int,int&gt; PII;</span><br><span class="line">typedef long long LL;</span><br><span class="line">const int N=1e5+10;</span><br><span class="line">int n,m,t;</span><br><span class="line">LL lx[N],ly[N],f[N];</span><br><span class="line">LL handle(LL arr[],int n)&#123;</span><br><span class="line">	for(int i=1;i&lt;=n;i++) f[i]=f[i-1]+arr[i]-arr[0]/n;</span><br><span class="line">	sort(f+1,f+1+n);</span><br><span class="line">	int loc=(n+1)&gt;&gt;1;</span><br><span class="line">	LL res=0;</span><br><span class="line">	for(int i=1;i&lt;=n;i++)&#123;</span><br><span class="line">		res+=abs(f[i]-f[loc]);</span><br><span class="line">	&#125;</span><br><span class="line">	return res;</span><br><span class="line">&#125;</span><br><span class="line">int main()&#123;</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;m&gt;&gt;t;</span><br><span class="line">	while(t--)&#123;</span><br><span class="line">		int x,y;</span><br><span class="line">		cin&gt;&gt;x&gt;&gt;y;</span><br><span class="line">		lx[x]++,ly[y]++;</span><br><span class="line">	&#125;</span><br><span class="line">	for(int i=1;i&lt;=n;i++) lx[0]+=lx[i];</span><br><span class="line">	for(int i=1;i&lt;=m;i++) ly[0]+=ly[i];</span><br><span class="line">	if(lx[0]%n==0&amp;&amp;ly[0]%m==0) printf(&quot;both %lld\n&quot;,handle(lx,n)+handle(ly,m));</span><br><span class="line">	else if(lx[0]%n==0) printf(&quot;row %lld\n&quot;,handle(lx,n));</span><br><span class="line">	else if(ly[0]%m==0) printf(&quot;column %lld\n&quot;,handle(ly,m));</span><br><span class="line">	else printf(&quot;impossible\n&quot;);</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
 
       
     </div>
