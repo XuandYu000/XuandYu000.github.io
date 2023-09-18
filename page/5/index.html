@@ -186,140 +186,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/Lecture%205%20%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%8E%AF%E5%A2%83/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
-      <meta itemprop="name" content="XuandYu000">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="viewoverlook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/07/02/Lecture%205%20%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%8E%AF%E5%A2%83/" class="post-title-link" itemprop="url">Lecture 5 命令行环境</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:07:26" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/csdiy/" itemprop="url" rel="index"><span itemprop="name">csdiy</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/csdiy/missing-semester/" itemprop="url" rel="index"><span itemprop="name">missing semester</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="lecture-5-命令行环境">Lecture 5 命令行环境</h1>
-<h2 id="课后练习">课后练习</h2>
-<h4 id="任务控制">任务控制</h4>
-<ol type="1">
-<li>我们可以使用类似 ps aux | grep 这样的命令来获取任务的 pid
-，然后您可以基于pid
-来结束这些进程。但我们其实有更好的方法来做这件事。在终端中执行 sleep
-10000 这个任务。然后用 Ctrl-Z 将其切换到后台并使用
-bg来继续允许它。现在，使用 pgrep 来查找 pid 并使用 pkill
-结束进程而不需要手动输入pid。(提示：: 使用 -af 标记)。 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sleep 10000</span><br><span class="line">ctrl+z</span><br><span class="line">bg</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pgrep sleep #列出包含关键字sleep的进程id</span><br></pre></td></tr></table></figure> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pkill -af sleep #杀死包含关键字sleep的进程</span><br></pre></td></tr></table></figure> 解释： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pkill 杀死进程的命令</span><br><span class="line">-a 用于匹配进程名和命令行参数</span><br><span class="line">-f 强制匹配整个命令行参数，而不仅仅是匹配进程名</span><br></pre></td></tr></table></figure></li>
-<li>如果您希望某个进程结束后再开始另外一个进程，
-应该如何实现呢？在这个练习中，我们使用 sleep 60 &amp;
-作为先执行的程序。一种方法是使用 wait
-命令。尝试启动这个休眠命令，然后待其结束后再执行 ls
-命令。但是，如果我们在不同的 bash
-会话中进行操作，则上述方法就不起作用了。因为 wait
-只能对子进程起作用。之前我们没有提过的一个特性是，kill
-命令成功退出时其状态码为 0 ，其他状态则是非0。kill -0
-则不会发送信号，但是会在进程不存在时返回一个不为0的状态码。请编写一个
-bash 函数 pidwait ，它接受一个 pid
-作为输入参数，然后一直等待直到该进程结束。您需要使用 sleep 来避免浪费
-CPU 性能。 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sleep 60 &amp;</span><br><span class="line">pgrep sleep | wait; </span><br><span class="line">ls</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>解释： * sleep 60 &amp; 中&amp;表示后台运行 * wait 接收pgrpe
-sleep的输出，等待其结束之后再执行ls命令给</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pidwait()&#123;</span><br><span class="line">    while kill -0 $1 do</span><br><span class="line">        sleep 1</span><br><span class="line">    done</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>解释: * kill -0 $1 判断进程是否存在，存在则返回0，不存在则返回1 * *
-$1表示第一个参数 * * kill -0
-表示不会发送信号，但是会在进程不存在时返回一个不为0的状态码</p>
-<h4 id="终端多路复用">终端多路复用</h4>
-<ol type="1">
-<li>请完成这个 tmux 教程 参考这些步骤来学习如何自定义 tmux。
-当您在使用命令行时，您通常会希望同时执行多个任务。举例来说，您可以想要同时运行您的编辑器，并在终端的另外一侧执行程序。尽管再打开一个新的终端窗口也能达到目的，使用终端多路复用器则是一种更好的办法。
-像 tmux
-这类的终端多路复用器可以允许我们基于面板和标签分割出多个终端窗口，这样您便可以同时与多个
-shell 会话进行交互。 tmux 的快捷键需要我们掌握，它们都是类似 &lt;C-b&gt;
-x 这样的组合，即需要先按下Ctrl+b，松开后再按下
-x，但是一般使用CTRL+a重新映射为前缀键。 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">常用快捷键：</span><br><span class="line">会话：</span><br><span class="line">tmux 开始新会话</span><br><span class="line">tmux new -s session_name #新建一个会话</span><br><span class="line">tmux ls #查看会话</span><br><span class="line">tmux a -t session_name #进入会话，不加name默认连接最后一个会话</span><br><span class="line">窗口：</span><br><span class="line">&lt;C-b&gt; c 创建一个新的窗口，使用 &lt;C-d&gt;关闭</span><br><span class="line">&lt;C-b&gt; N 跳转到第 N 个窗口，注意每个窗口都是有编号的</span><br><span class="line">&lt;C-b&gt; p 切换到前一个窗口</span><br><span class="line">&lt;C-b&gt; n 切换到下一个窗口</span><br><span class="line">&lt;C-b&gt; , 重命名当前窗口</span><br><span class="line">&lt;C-b&gt; w 列出当前所有窗口</span><br><span class="line">面板：</span><br><span class="line">&lt;C-b&gt; &quot; 水平分割</span><br><span class="line">&lt;C-b&gt; % 垂直分割</span><br><span class="line">&lt;C-b&gt; &lt;方向&gt; 切换到指定方向的面板，&lt;方向&gt; 指的是键盘上的方向键</span><br><span class="line">&lt;C-b&gt; z 切换当前面板的缩放</span><br><span class="line">&lt;C-b&gt; [ 开始往回卷动屏幕。您可以按下空格键来开始选择，回车键复制选中的部分</span><br><span class="line">&lt;C-b&gt; &lt;空格&gt; 在不同的面板排布间切换</span><br></pre></td></tr></table></figure> #### 别名
-输入一长串包含许多选项的命令会非常麻烦。因此，大多数 shell
-都支持设置别名。shell 的别名相当于一个长命令的缩写，shell
-会自动将其替换成原本的命令。例如，bash 中的别名语法如下： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alias alias_name=&quot;command_to_alias arg1 arg2&quot;</span><br></pre></td></tr></table></figure>
-注意， =两边是没有空格的，因为 alias 是一个 shell
-命令，它只接受一个参数。 别名有许多很方便的特性: <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"># 创建常用命令的缩写</span><br><span class="line">alias ll=&quot;ls -lh&quot;</span><br><span class="line"></span><br><span class="line"># 能够少输入很多</span><br><span class="line">alias gs=&quot;git status&quot;</span><br><span class="line">alias gc=&quot;git commit&quot;</span><br><span class="line">alias v=&quot;vim&quot;</span><br><span class="line"></span><br><span class="line"># 手误打错命令也没关系</span><br><span class="line">alias sl=ls</span><br><span class="line"></span><br><span class="line"># 重新定义一些命令行的默认行为</span><br><span class="line">alias mv=&quot;mv -i&quot;           # -i prompts before overwrite</span><br><span class="line">alias mkdir=&quot;mkdir -p&quot;     # -p make parent dirs as needed</span><br><span class="line">alias df=&quot;df -h&quot;           # -h prints human readable format</span><br><span class="line"></span><br><span class="line"># 别名可以组合使用</span><br><span class="line">alias la=&quot;ls -A&quot;</span><br><span class="line">alias lla=&quot;la -l&quot;</span><br><span class="line"></span><br><span class="line"># 在忽略某个别名</span><br><span class="line">\ls</span><br><span class="line"># 或者禁用别名</span><br><span class="line">unalias la</span><br><span class="line"></span><br><span class="line"># 获取别名的定义</span><br><span class="line">alias ll</span><br><span class="line"># 会打印 ll=&#x27;ls -lh&#x27;</span><br></pre></td></tr></table></figure>
-值得注意的是，在默认情况下 shell
-并不会保存别名。为了让别名持续生效，您需要将配置放进 shell
-的启动文件里，像是.bashrc 或 .zshrc，下一节我们就会讲到。 #### 配置文件
-让我们帮助您进一步学习配置文件：</li>
-<li>为您的配置文件新建一个文件夹，并设置好版本控制</li>
-<li>在其中添加至少一个配置文件，比如说您的
-shell，在其中包含一些自定义设置（可以从设置 $PS1 开始）。</li>
-<li>建立一种在新设备进行快速安装配置的方法（无需手动操作）。最简单的方法是写一个
-shell 脚本对每个文件使用 ln
--s，也可以使用专用工具在新的虚拟机上测试该安装脚本。将您现有的所有配置文件移动到项目仓库里。将项目发布到GitHub。
-做的时候GitHub报错暂未解决，先不写了。 #### 远端设备
-进行下面的练习需要您先安装一个 Linux
-虚拟机（如果已经安装过则可以直接使用），如果您对虚拟机尚不熟悉，可以参考这篇教程
-来进行安装。</li>
-<li>前往 ~/.ssh/ 并查看是否已经存在 SSH
-密钥对。如果不存在，请使用ssh-keygen -o -a 100 -t
-ed25519来创建一个。建议为密钥设置密码然后使用ssh-agent 这里；</li>
-<li>在.ssh/config加入下面内容： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Host vm #ssh连接的别名</span><br><span class="line">   User username_goes_here #用户名</span><br><span class="line">   HostName ip_goes_here #ip地址</span><br><span class="line">   IdentityFile ~/.ssh/id_ed25519 #密钥文件</span><br><span class="line">   LocalForward 9999 localhost:8888  #本地端口转发</span><br></pre></td></tr></table></figure></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/lecture3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2464,10 +2330,98 @@ target="_blank" rel="noopener" href="https://vjudge.net/problem/%E6%B4%9B%E8%B0%
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/%E7%89%9B%E5%AE%A2%E7%BB%83%E4%B9%A0%E8%B5%9B100/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
+      <meta itemprop="name" content="XuandYu000">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="viewoverlook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/07/02/%E7%89%9B%E5%AE%A2%E7%BB%83%E4%B9%A0%E8%B5%9B100/" class="post-title-link" itemprop="url">牛客练习赛100</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:26:31" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithms/" itemprop="url" rel="index"><span itemprop="name">algorithms</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="牛客练习赛100">牛客练习赛100</h1>
+<h3 id="b.小红的子序列dp">B.小红的子序列(dp)</h3>
+<p><a
+target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/11251/B">题目链接</a></p>
+<p>子序列问题一般是dp问题，这里结尾dp状态只有四种，蓝偶，红偶，蓝奇，红奇。对于当前物品，所要做的判断就是加与不加入状态完全相反的背包中，例如，当前是蓝色偶数，现在就要判断加不加到当前以红色奇数为结尾的数组中，状态方程：</p>
+<p>f[c[i][a[i]&amp;1]=max(f[c[i]][a[i]&amp;1],f[1-c[i]][1-(a[i]&amp;1)]+(LL)a[i]);</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">// Problem: 小红的子序列</span><br><span class="line">// Contest: NowCoder</span><br><span class="line">// URL: https://ac.nowcoder.com/acm/contest/11251/B</span><br><span class="line">// Memory Limit: 524288 MB</span><br><span class="line">// Time Limit: 2000 ms</span><br><span class="line">// </span><br><span class="line">// Powered by CP Editor (https://cpeditor.org)</span><br><span class="line"></span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;queue&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#include&lt;cmath&gt;</span><br><span class="line">#include&lt;stack&gt;</span><br><span class="line">#include&lt;vector&gt;</span><br><span class="line">#include&lt;map&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">#define x first</span><br><span class="line">#define y second</span><br><span class="line">typedef pair&lt;int,int&gt; PII;</span><br><span class="line">typedef long long LL;</span><br><span class="line">const int N=2e5+10;</span><br><span class="line">int a[N],n;</span><br><span class="line">string col;</span><br><span class="line">int c[N];</span><br><span class="line">LL f[2][2];</span><br><span class="line">int main()&#123;</span><br><span class="line">	scanf(&quot;%d&quot;,&amp;n);</span><br><span class="line">	for(int i=1;i&lt;=n;i++)&#123;</span><br><span class="line">		scanf(&quot;%d&quot;,&amp;a[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	cin&gt;&gt;col;</span><br><span class="line">	for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">		c[i+1]=(col[i]==&#x27;R&#x27;);</span><br><span class="line">	&#125;</span><br><span class="line">	for(int i=1;i&lt;=n;i++)&#123;</span><br><span class="line">		f[c[i]][a[i]&amp;1]=max(f[c[i]][a[i]&amp;1],f[1-c[i]][1-(a[i]&amp;1)]+(LL)a[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	LL ans=0;</span><br><span class="line">	 for(int i=0;i&lt;2;i++)&#123;</span><br><span class="line">		 for(int j=0;j&lt;2;j++)&#123;</span><br><span class="line">			 ans=max(f[i][j],ans);</span><br><span class="line">			 // cout&lt;&lt;f[i][j]&lt;&lt;&quot; &quot;;</span><br><span class="line">			&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	printf(&quot;%lld&quot;,ans);</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="c.小红的删数字">C.小红的删数字</h3>
+<p><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/11251/C">题目链接</a>
+先将 *
+数学题，博弈论，小红先手且要保证删去一个位数后还是3的倍数，假设所有位数之和为s，则必须删除一个sum%3的一位，否则肯定失败。
+*
+接下来就是a[sum%3]--，问题转换为小紫先手了，此时如果a[1]和a[2]相等,且没有a[0]那么小红必胜
+* 否则就是小红必败 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: 小红的删数字</span></span><br><span class="line"><span class="comment">// Contest: NowCoder</span></span><br><span class="line"><span class="comment">// URL: https://ac.nowcoder.com/acm/contest/11251/C</span></span><br><span class="line"><span class="comment">// Memory Limit: 524288 MB</span></span><br><span class="line"><span class="comment">// Time Limit: 2000 ms</span></span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="comment">// Powered by CP Editor (https://cpeditor.org)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> x first</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> y second</span></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>,<span class="type">int</span>&gt; PII;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">2e5</span>+<span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> a[<span class="number">3</span>];</span><br><span class="line"><span class="type">int</span> sum=<span class="number">0</span>;</span><br><span class="line">string s;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	cin&gt;&gt;s;</span><br><span class="line">	<span class="type">int</span> len=s.<span class="built_in">length</span>();</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;len;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(s[i]-<span class="string">&#x27;0&#x27;</span>)&#123;</span><br><span class="line">			a[(s[i]-<span class="string">&#x27;0&#x27;</span>)%<span class="number">3</span>]++;</span><br><span class="line">		&#125;</span><br><span class="line">		sum+=s[i]-<span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(!a[sum%<span class="number">3</span>]) <span class="built_in">puts</span>(<span class="string">&quot;yukari&quot;</span>);</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		a[sum%<span class="number">3</span>]--;</span><br><span class="line">		<span class="keyword">if</span>(a[<span class="number">1</span>]==a[<span class="number">2</span>]&amp;&amp;a[<span class="number">0</span>]) <span class="built_in">puts</span>(<span class="string">&quot;kou&quot;</span>);</span><br><span class="line">		<span class="keyword">else</span> <span class="built_in">puts</span>(<span class="string">&quot;yukari&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<h3 id="d.-小红的构造题">D. 小红的构造题</h3>
+<p><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/11251/D">题目链接</a>
+考虑数列re……re……re……re………… 对于每个在第k个re后添加一个d,那么共添加 <span
+class="math inline">\(\sum_{i=1}^k\)</span>x*i<em>(i+1)/2
+个子序列，将上列式子化简可得k个re总共可有x*k</em>(k+1)*(k+2)个red子序列，其中x为添加几个d
+这样枚举复杂度降到了n<sup>1/3</sup>
+可以枚举(但是有个疑问怎么证明这样可以包含所有整数呢？) <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: 小红的构造题</span></span><br><span class="line"><span class="comment">// Contest: NowCoder</span></span><br><span class="line"><span class="comment">// URL: https://ac.nowcoder.com/acm/contest/11251/D</span></span><br><span class="line"><span class="comment">// Memory Limit: 524288 MB</span></span><br><span class="line"><span class="comment">// Time Limit: 2000 ms</span></span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="comment">// Powered by CP Editor (https://cpeditor.org)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> x first</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> y second</span></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>,<span class="type">int</span>&gt; PII;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">2e5</span>+<span class="number">10</span>;</span><br><span class="line">LL n;</span><br><span class="line">LL ned[N];</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line"><span class="comment">// 	if(!n) &#123;puts(&quot;d&quot;); return 0;&#125;</span></span><br><span class="line">	LL i,j;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i*i*i/<span class="number">6</span>&lt;=n;i++);</span><br><span class="line">	i--;</span><br><span class="line">	<span class="keyword">for</span>(j=i;j&gt;<span class="number">0</span>;j--)&#123;</span><br><span class="line">		ned[j]+=n/(j*(j+<span class="number">1</span>)/<span class="number">2</span>);</span><br><span class="line">		n%=j*(j+<span class="number">1</span>)/<span class="number">2</span>;<span class="comment">//剩余还要构造的字符串数量</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=i;j++)&#123;</span><br><span class="line">		cout&lt;&lt;<span class="string">&quot;re&quot;</span>;</span><br><span class="line">		<span class="keyword">while</span>(ned[j]--)&#123;</span><br><span class="line">			cout&lt;&lt;<span class="string">&quot;d&quot;</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span>
   </nav>
 
 
@@ -2535,7 +2489,7 @@ target="_blank" rel="noopener" href="https://vjudge.net/problem/%E6%B4%9B%E8%B0%
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-count">50</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

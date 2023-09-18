@@ -186,7 +186,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/Lecture%202%20Shell%20Tools%20and%20Scripting/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/Lecture%203%20vim/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
@@ -200,7 +200,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/07/02/Lecture%202%20Shell%20Tools%20and%20Scripting/" class="post-title-link" itemprop="url">Lecture 2 Shell Tools and Scripting</a>
+            <a href="/2023/07/02/Lecture%203%20vim/" class="post-title-link" itemprop="url">Lecture 3 vim</a>
         </h2>
 
         <div class="post-meta">
@@ -211,7 +211,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:10:56" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
+              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:07:09" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -238,206 +238,27 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="lecture-2-shell-tools-and-scripting">Lecture 2 Shell Tools and
-Scripting</h1>
-<p>homework:</p>
-<p>1.Read man ls and write an ls command that lists files in the
-following manner 读取 man ls 并编写按以下方式列出文件的 ls 命令</p>
-<p>Includes all files, including hidden files 包括所有文件，包括隐藏文件
-Sizes are listed in human readable format (e.g. 454M instead of
-454279954) 尺寸以人类可读的格式列出（例如 454M 而不是 454279954） Files
-are ordered by recency 文件按新近度排序 Output is colorized 输出已着色 A
-sample output would look like this 示例输出如下所示 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-rw-r--r--   1 user group 1.1M Jan 14 09:53 baz</span><br><span class="line">drwxr-xr-x   5 user group  160 Jan 14 09:53 .</span><br><span class="line">-rw-r--r--   1 user group  514 Jan 14 06:42 bar</span><br><span class="line">-rw-r--r--   1 user group 106M Jan 13 12:12 foo</span><br><span class="line">drwx------+ 47 user group 1.5K Jan 12 18:08 ..</span><br></pre></td></tr></table></figure> &gt;
-1. 先man ls找具体命令要用 -l -h -t -c &gt; 2. 执行 &gt; <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l -h -t -c</span><br></pre></td></tr></table></figure>
-&gt;
-效果：<img src="https://raw.githubusercontent.com/XuandYu000/picture/main/1.png"/></p>
-<ol start="2" type="1">
-<li>Write bash functions marco and polo that do the following. Whenever
-you execute marco the current working directory should be saved in some
-manner, then when you execute polo, no matter what directory you are in,
-polo should cd you back to the directory where you executed marco. For
-ease of debugging you can write the code in a file marco.sh and (re)load
-the definitions to your shell by executing source marco.sh.
-编写执行以下操作的 bash 函数 marco 和 polo 。每当你执行 marco
-时，当前工作目录应该以某种方式保存，那么当你执行 polo
-时，无论你在哪个目录， polo 都应该 cd 你回到你执行 marco
-的目录。为了便于调试，您可以将代码编写在文件 marco.sh 中，并通过执行
-source marco.sh 将定义（重新）加载到 shell 中。</li>
-</ol>
-<blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">marco()&#123;</span><br><span class="line">       export MARCO=$(pwd)</span><br><span class="line">&#125;</span><br><span class="line">polo()&#123;</span><br><span class="line">       cd &quot;$MARCO&quot;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
-<p>解释： *
-export命令将新增MARCO内的内容到其之后所有创建的子进程中，在相同脚本中相当于定义全局变量，不同的脚本中直接引入即可。
-* source 将脚本内嵌到shell中，这时脚本中的命令可以直接执行 *
-注意"$"的好多用法</p>
-</blockquote>
-<ol start="3" type="1">
-<li><p>Say you have a command that fails rarely. In order to debug it
-you need to capture its output but it can be time consuming to get a
-failure run. Write a bash script that runs the following script until it
-fails and captures its standard output and error streams to files and
-prints everything at the end. Bonus points if you can also report how
-many runs it took for the script to fail.
-假设您有一个很少失败的命令。为了调试它，您需要捕获其输出，但运行失败可能很耗时。编写一个
-bash
-脚本，该脚本运行以下脚本，直到它失败并将其标准输出和错误流捕获到文件并在最后打印所有内容。如果还可以报告脚本失败所花费的运行次数，则为奖励积分。
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env bash</span><br><span class="line"></span><br><span class="line">n=$(( RANDOM % 100 ))</span><br><span class="line"></span><br><span class="line">if [[ n -eq 42 ]]; then</span><br><span class="line">   echo &quot;Something went wrong&quot;</span><br><span class="line">   &gt;&amp;2 echo &quot;The error was using magic numbers&quot;</span><br><span class="line">   exit 1</span><br><span class="line">fi</span><br></pre></td></tr></table></figure> &gt;
-上网查一查shell中for或者while循环的语法即可，若将n改为对我文件进行执行，然后-eq参数改为0，不断循环然后加一个变量记录循环次数即可</p></li>
-<li><p>echo "Everything went according to plan" As we covered in the
-lecture find’s -exec can be very powerful for performing operations over
-the files we are searching for. However, what if we want to do something
-with all the files, like creating a zip file? As you have seen so far
-commands will take input from both arguments and STDIN. When piping
-commands, we are connecting STDOUT to STDIN, but some commands like tar
-take inputs from arguments. To bridge this disconnect there’s the xargs
-command which will execute a command using STDIN as arguments. For
-example ls | xargs rm will delete the files in the current directory.
-正如我们在讲座中介绍的那样 find 的 -exec
-对于对我们正在寻找的文件执行操作非常强大。但是，如果我们想对所有文件执行某些操作，例如创建zip文件，该怎么办？如您所见，命令将从参数和
-STDIN 中获取输入。管道命令时，我们将 STDOUT 连接到 STDIN，但像 tar
-这样的命令从参数中获取输入。为了弥合这种断开连接，有 xargs
-命令，它将使用STDIN作为参数执行命令。例如 ls | xargs rm
-将删除当前目录中的文件。 Your task is to write a command that
-recursively finds all HTML files in the folder and makes a zip with
-them. Note that your command should work even if the files have spaces
-(hint: check -d flag for xargs).
-您的任务是编写一个命令，该命令以递归方式查找文件夹中的所有 HTML
-文件，并用它们制作一个
-zip。请注意，即使文件有空格，您的命令也应该有效（提示：检查 -d 标志的
-xargs ）。 If you’re on macOS, note that the default BSD find is
-different from the one included in GNU coreutils. You can use -print0 on
-find and the -0 flag on xargs. As a macOS user, you should be aware that
-command-line utilities shipped with macOS may differ from the GNU
-counterparts; you can install the GNU versions if you like by using
-brew. 如果您使用的是 macOS，请注意默认的 BSD find 与 GNU coreutils
-中包含的不同。您可以在 find 上使用 -print0 ，在 xargs 上使用 -0
-标志。作为 macOS 用户，您应该知道 macOS 附带的命令行实用程序可能与 GNU
-对应工具不同;如果您愿意，您可以使用 brew 安装 GNU 版本。</p></li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -type f -name &quot;*.html&quot; -print0 | xargs -0 tar -czf html_files.zip</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>解释： 1.
-find命令递归的寻找指定目录下所有符合条件的文件：用'.'代表在当前目录下寻找，
--type f 寻找普通的file文件 -name指定名称 -print0
-将文件名以null字符分隔输出(\0) 2. | xargs -0
-从管道左侧接受以null分隔符的输入流 3. tar -czf html_files.zip
-此时xargs传递的输入符合tar的输入要求链接了tar命令和find &gt; tar:
-压缩、打包命令 &gt; -c: 创建一个新的压缩包 &gt; -z: 使用 gzip
-压缩算法进行压缩 &gt; -f: 指定压缩包的文件名 &gt; html_files.zip:
-压缩包的文件名，可以根据需要修改</p>
-</blockquote>
-<ol start="5" type="1">
-<li>(Advanced) Write a command or script to recursively find the most
-recently modified file in a directory. More generally, can you list all
-files by recency?
-（高级）编写命令或脚本以递归方式查找目录中最近修改的文件。更一般地说，您可以按新近度列出所有文件吗？
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -type f -printf &#x27;%T+ %p\n&#x27; | sort -r | head -n 1 | cut -d&#x27; &#x27; -f2-</span><br></pre></td></tr></table></figure> &gt;查找最近修改过的文件，解释: &gt;-printf '%T+ %p'
-输出以时间在前，之后加上路径 &gt; sort -r
-:即reverse把时间按照倒序进行处理 &gt; head -n 1 :只取第一个 &gt; cut -d'
-' -f2-：从输出中删除修改时间，只保留文件路径</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -type f -printf &#x27;%T+ %p\n&#x27; | sort -r | cut -d&#x27; &#x27; -f2-</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>实现新近度排列只需要不要head的那个命令即可</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/Intro/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
-      <meta itemprop="name" content="XuandYu000">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="viewoverlook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/07/02/Intro/" class="post-title-link" itemprop="url">Intro</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-07-02 00:00:00" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-09-04 20:50:21" itemprop="dateModified" datetime="2023-09-04T20:50:21+08:00">2023-09-04</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/csdiy/" itemprop="url" rel="index"><span itemprop="name">csdiy</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/csdiy/cs61A/" itemprop="url" rel="index"><span itemprop="name">cs61A</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="intro">Intro</h1>
-<p><img src="https://raw.githubusercontent.com/XuandYu000/picture/main/20230627122952.png"/></p>
-<h3 id="这门课关于什么">这门课关于什么？</h3>
+          <h1 id="lecture-3-vim">Lecture 3 vim</h1>
+<ol type="1">
+<li><p>完成 vimtutor。 备注： 它在一个 80x24（80 列，24 行）
+终端窗口看起来最好。 直接执行 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vimtutor</span><br></pre></td></tr></table></figure></p></li>
+<li><p>下载我们的vimrc，然后把它保存到 ~/.vimrc。 通读这个注释详细的文件
+（用 Vim!）， 然后观察 Vim
+在这个新的设置下看起来和使用起来有哪些细微的区别。
+下载后他禁用了上下左右键使用hjkl代替，挺反人类的但是用习惯还可以</p></li>
+<li><p>安装和配置一个插件： ctrlp.vim</p>
 <ul>
-<li>一门关于掌握complexity(复杂性的课程)
-<ul>
-<li>抽象</li>
-<li>编程</li>
-<li>但并完全包括01</li>
-</ul></li>
-<li>python入门
-<ul>
-<li>深入理解语言基础</li>
-<li>程序执行</li>
-<li>计算机对编程语言怎么执行</li>
-</ul></li>
+<li>这里建议使用vim-plug，在.vimrc添加：Plug ‘插件名称’ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">call plug#begin(&#x27;~/.vim/plugged&#x27;)</span><br><span class="line"> Plug &#x27;vim-airline/vim-airline&#x27;</span><br><span class="line"> call plug#end()</span><br></pre></td></tr></table></figure>
+之后重新打开vim，执行 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:PlugInstall</span><br></pre></td></tr></table></figure> *删除插件 删除插件，只需要将写在
+.vimrc 配置文件内的插件删除，重启 vim 并执行命令 :PlugClean</li>
 </ul>
-<h3 id="types-of-expressions">Types of expressions</h3>
-<p>表达式描绘计算过程并且执行得出计算结果
-事实证明在诸多表达式中函数可以表示出其他代数表达式，这是计算机所需要的</p>
-<p>推荐教材: http://www.composingprograms.com/</p>
+<p>练习使用 Vim, 在你自己的机器上重做 演示。</p></li>
+<li><p>下个月用 Vim 完成所有的文件编辑。每当不够高效的时候，或者你感觉
+“一定有一个更好的方式”时，
+尝试求助搜索引擎，很有可能有一个更好的方式。如果你遇到难题，可以来我们的答疑时间或者给我们发邮件。</p></li>
+<li><p>在其他工具中设置 Vim 快捷键 （见上面的操作指南）。</p></li>
+<li><p>进一步自定义你的 ~/.vimrc 和安装更多插件。</p></li>
+</ol>
 
       
     </div>
@@ -540,6 +361,140 @@ input.txt会首先被清空，而且是发生在前的。所以前面一个input
 sed 处理时已经为空了。在使用正则处理文件前最好是首先备份文件。
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i.bak s/REGEX/SUBSTITION/ input.txt</span><br></pre></td></tr></table></figure> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这段命令如果数据没有备份会自动创建.bak备份文件，直接对文件进行修改</span><br></pre></td></tr></table></figure></li>
 </ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/Lecture%205%20%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%8E%AF%E5%A2%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
+      <meta itemprop="name" content="XuandYu000">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="viewoverlook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/07/02/Lecture%205%20%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%8E%AF%E5%A2%83/" class="post-title-link" itemprop="url">Lecture 5 命令行环境</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:07:26" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/csdiy/" itemprop="url" rel="index"><span itemprop="name">csdiy</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/csdiy/missing-semester/" itemprop="url" rel="index"><span itemprop="name">missing semester</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="lecture-5-命令行环境">Lecture 5 命令行环境</h1>
+<h2 id="课后练习">课后练习</h2>
+<h4 id="任务控制">任务控制</h4>
+<ol type="1">
+<li>我们可以使用类似 ps aux | grep 这样的命令来获取任务的 pid
+，然后您可以基于pid
+来结束这些进程。但我们其实有更好的方法来做这件事。在终端中执行 sleep
+10000 这个任务。然后用 Ctrl-Z 将其切换到后台并使用
+bg来继续允许它。现在，使用 pgrep 来查找 pid 并使用 pkill
+结束进程而不需要手动输入pid。(提示：: 使用 -af 标记)。 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sleep 10000</span><br><span class="line">ctrl+z</span><br><span class="line">bg</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pgrep sleep #列出包含关键字sleep的进程id</span><br></pre></td></tr></table></figure> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pkill -af sleep #杀死包含关键字sleep的进程</span><br></pre></td></tr></table></figure> 解释： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pkill 杀死进程的命令</span><br><span class="line">-a 用于匹配进程名和命令行参数</span><br><span class="line">-f 强制匹配整个命令行参数，而不仅仅是匹配进程名</span><br></pre></td></tr></table></figure></li>
+<li>如果您希望某个进程结束后再开始另外一个进程，
+应该如何实现呢？在这个练习中，我们使用 sleep 60 &amp;
+作为先执行的程序。一种方法是使用 wait
+命令。尝试启动这个休眠命令，然后待其结束后再执行 ls
+命令。但是，如果我们在不同的 bash
+会话中进行操作，则上述方法就不起作用了。因为 wait
+只能对子进程起作用。之前我们没有提过的一个特性是，kill
+命令成功退出时其状态码为 0 ，其他状态则是非0。kill -0
+则不会发送信号，但是会在进程不存在时返回一个不为0的状态码。请编写一个
+bash 函数 pidwait ，它接受一个 pid
+作为输入参数，然后一直等待直到该进程结束。您需要使用 sleep 来避免浪费
+CPU 性能。 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sleep 60 &amp;</span><br><span class="line">pgrep sleep | wait; </span><br><span class="line">ls</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>解释： * sleep 60 &amp; 中&amp;表示后台运行 * wait 接收pgrpe
+sleep的输出，等待其结束之后再执行ls命令给</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pidwait()&#123;</span><br><span class="line">    while kill -0 $1 do</span><br><span class="line">        sleep 1</span><br><span class="line">    done</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>解释: * kill -0 $1 判断进程是否存在，存在则返回0，不存在则返回1 * *
+$1表示第一个参数 * * kill -0
+表示不会发送信号，但是会在进程不存在时返回一个不为0的状态码</p>
+<h4 id="终端多路复用">终端多路复用</h4>
+<ol type="1">
+<li>请完成这个 tmux 教程 参考这些步骤来学习如何自定义 tmux。
+当您在使用命令行时，您通常会希望同时执行多个任务。举例来说，您可以想要同时运行您的编辑器，并在终端的另外一侧执行程序。尽管再打开一个新的终端窗口也能达到目的，使用终端多路复用器则是一种更好的办法。
+像 tmux
+这类的终端多路复用器可以允许我们基于面板和标签分割出多个终端窗口，这样您便可以同时与多个
+shell 会话进行交互。 tmux 的快捷键需要我们掌握，它们都是类似 &lt;C-b&gt;
+x 这样的组合，即需要先按下Ctrl+b，松开后再按下
+x，但是一般使用CTRL+a重新映射为前缀键。 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">常用快捷键：</span><br><span class="line">会话：</span><br><span class="line">tmux 开始新会话</span><br><span class="line">tmux new -s session_name #新建一个会话</span><br><span class="line">tmux ls #查看会话</span><br><span class="line">tmux a -t session_name #进入会话，不加name默认连接最后一个会话</span><br><span class="line">窗口：</span><br><span class="line">&lt;C-b&gt; c 创建一个新的窗口，使用 &lt;C-d&gt;关闭</span><br><span class="line">&lt;C-b&gt; N 跳转到第 N 个窗口，注意每个窗口都是有编号的</span><br><span class="line">&lt;C-b&gt; p 切换到前一个窗口</span><br><span class="line">&lt;C-b&gt; n 切换到下一个窗口</span><br><span class="line">&lt;C-b&gt; , 重命名当前窗口</span><br><span class="line">&lt;C-b&gt; w 列出当前所有窗口</span><br><span class="line">面板：</span><br><span class="line">&lt;C-b&gt; &quot; 水平分割</span><br><span class="line">&lt;C-b&gt; % 垂直分割</span><br><span class="line">&lt;C-b&gt; &lt;方向&gt; 切换到指定方向的面板，&lt;方向&gt; 指的是键盘上的方向键</span><br><span class="line">&lt;C-b&gt; z 切换当前面板的缩放</span><br><span class="line">&lt;C-b&gt; [ 开始往回卷动屏幕。您可以按下空格键来开始选择，回车键复制选中的部分</span><br><span class="line">&lt;C-b&gt; &lt;空格&gt; 在不同的面板排布间切换</span><br></pre></td></tr></table></figure> #### 别名
+输入一长串包含许多选项的命令会非常麻烦。因此，大多数 shell
+都支持设置别名。shell 的别名相当于一个长命令的缩写，shell
+会自动将其替换成原本的命令。例如，bash 中的别名语法如下： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alias alias_name=&quot;command_to_alias arg1 arg2&quot;</span><br></pre></td></tr></table></figure>
+注意， =两边是没有空格的，因为 alias 是一个 shell
+命令，它只接受一个参数。 别名有许多很方便的特性: <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"># 创建常用命令的缩写</span><br><span class="line">alias ll=&quot;ls -lh&quot;</span><br><span class="line"></span><br><span class="line"># 能够少输入很多</span><br><span class="line">alias gs=&quot;git status&quot;</span><br><span class="line">alias gc=&quot;git commit&quot;</span><br><span class="line">alias v=&quot;vim&quot;</span><br><span class="line"></span><br><span class="line"># 手误打错命令也没关系</span><br><span class="line">alias sl=ls</span><br><span class="line"></span><br><span class="line"># 重新定义一些命令行的默认行为</span><br><span class="line">alias mv=&quot;mv -i&quot;           # -i prompts before overwrite</span><br><span class="line">alias mkdir=&quot;mkdir -p&quot;     # -p make parent dirs as needed</span><br><span class="line">alias df=&quot;df -h&quot;           # -h prints human readable format</span><br><span class="line"></span><br><span class="line"># 别名可以组合使用</span><br><span class="line">alias la=&quot;ls -A&quot;</span><br><span class="line">alias lla=&quot;la -l&quot;</span><br><span class="line"></span><br><span class="line"># 在忽略某个别名</span><br><span class="line">\ls</span><br><span class="line"># 或者禁用别名</span><br><span class="line">unalias la</span><br><span class="line"></span><br><span class="line"># 获取别名的定义</span><br><span class="line">alias ll</span><br><span class="line"># 会打印 ll=&#x27;ls -lh&#x27;</span><br></pre></td></tr></table></figure>
+值得注意的是，在默认情况下 shell
+并不会保存别名。为了让别名持续生效，您需要将配置放进 shell
+的启动文件里，像是.bashrc 或 .zshrc，下一节我们就会讲到。 #### 配置文件
+让我们帮助您进一步学习配置文件：</li>
+<li>为您的配置文件新建一个文件夹，并设置好版本控制</li>
+<li>在其中添加至少一个配置文件，比如说您的
+shell，在其中包含一些自定义设置（可以从设置 $PS1 开始）。</li>
+<li>建立一种在新设备进行快速安装配置的方法（无需手动操作）。最简单的方法是写一个
+shell 脚本对每个文件使用 ln
+-s，也可以使用专用工具在新的虚拟机上测试该安装脚本。将您现有的所有配置文件移动到项目仓库里。将项目发布到GitHub。
+做的时候GitHub报错暂未解决，先不写了。 #### 远端设备
+进行下面的练习需要您先安装一个 Linux
+虚拟机（如果已经安装过则可以直接使用），如果您对虚拟机尚不熟悉，可以参考这篇教程
+来进行安装。</li>
+<li>前往 ~/.ssh/ 并查看是否已经存在 SSH
+密钥对。如果不存在，请使用ssh-keygen -o -a 100 -t
+ed25519来创建一个。建议为密钥设置密码然后使用ssh-agent 这里；</li>
+<li>在.ssh/config加入下面内容： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Host vm #ssh连接的别名</span><br><span class="line">   User username_goes_here #用户名</span><br><span class="line">   HostName ip_goes_here #ip地址</span><br><span class="line">   IdentityFile ~/.ssh/id_ed25519 #密钥文件</span><br><span class="line">   LocalForward 9999 localhost:8888  #本地端口转发</span><br></pre></td></tr></table></figure></li>
+</ol>
 
       
     </div>
@@ -896,6 +851,122 @@ class="math inline">\(e_5=d_5-d_4=a_1+a_2+a_3+a_4\)</span></p>
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/cf1834/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
+      <meta itemprop="name" content="XuandYu000">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="viewoverlook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/07/02/cf1834/" class="post-title-link" itemprop="url">cf1834</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:27:08" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithms/" itemprop="url" rel="index"><span itemprop="name">algorithms</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="cf1834">cf1834</h1>
+<h4 id="a.-unit-array">A. Unit Array</h4>
+<p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1834/problem/A">题目链接</a>
+题目大意： 对一个只含有-1和1的序列，每次可将第i个数<span
+class="math inline">\(a_i\)</span>改变符号，求至少要多少步使得序列所有数之和大于等于0，之积等于1
+思路
+之和大于0就是整数个数大于等于序列长度的一半(上取整)，之积等于1负数为偶数个
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: A. Unit Array</span></span><br><span class="line"><span class="comment">// Contest: Codeforces - Codeforces Round 879 (Div. 2)</span></span><br><span class="line"><span class="comment">// URL: https://codeforces.com/contest/1834/problem/A</span></span><br><span class="line"><span class="comment">// Memory Limit: 256 MB</span></span><br><span class="line"><span class="comment">// Time Limit: 1000 ms</span></span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="comment">// Powered by CP Editor (https://cpeditor.org)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> x first</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> y second</span></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; PII;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">	<span class="type">int</span> T; cin&gt;&gt;T;</span><br><span class="line">	<span class="keyword">while</span>(T--)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> n; cin&gt;&gt;n;</span><br><span class="line">		<span class="type">int</span> pos=<span class="number">0</span>,neg=<span class="number">0</span>;</span><br><span class="line">		<span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">q</span><span class="params">(n)</span></span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			cin&gt;&gt;q[i];</span><br><span class="line">			<span class="keyword">if</span>(~q[i]) pos++;</span><br><span class="line">			<span class="keyword">else</span> neg++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// cout&lt;&lt;&quot;pos:&quot;&lt;&lt;pos&lt;&lt;&quot;neg:&quot;&lt;&lt;neg&lt;&lt;endl;</span></span><br><span class="line">		<span class="type">int</span> cnt=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">if</span>(pos&lt;(n+<span class="number">1</span>)/<span class="number">2</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			cnt+=(n+<span class="number">1</span>)/<span class="number">2</span>-pos;</span><br><span class="line">			pos=(n+<span class="number">1</span>)/<span class="number">2</span>;</span><br><span class="line">			neg=n-pos;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(neg%<span class="number">2</span>!=<span class="number">0</span>) cnt++;</span><br><span class="line">		cout&lt;&lt;cnt&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<h4 id="b.-maximum-strength">B. Maximum Strength</h4>
+<p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1834/problem/B">题目链接</a>
+题目大意： 给定区间L,R,从这两个区间中选取两个数<span
+class="math inline">\(X=\overline{x_1x_2{\dots}x_n}\)</span>和<span
+class="math inline">\(Y=\overline{y_1y_2{\dots}y_n}\)</span> 定义<span
+class="math inline">\(sum=|x_1-y_1|+|x_2-y_2|+\dots+|x_n+y_n|\)</span>
+位数不够用前导0补足求sum最大值<br />
+思路
+两个区间从左到右找第一个不相等的位数，该位可取的最大值减去最小值，再往右边位数之差必然可以取到9
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: B. Maximum Strength</span></span><br><span class="line"><span class="comment">// Contest: Codeforces - Codeforces Round 879 (Div. 2)</span></span><br><span class="line"><span class="comment">// URL: https://codeforces.com/contest/1834/problem/B</span></span><br><span class="line"><span class="comment">// Memory Limit: 256 MB</span></span><br><span class="line"><span class="comment">// Time Limit: 1000 ms</span></span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="comment">// Powered by CP Editor (https://cpeditor.org)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> x first</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> y second</span></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; PII;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line">string l,r;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">	<span class="type">int</span> T; cin&gt;&gt;T;</span><br><span class="line">	<span class="keyword">while</span>(T--)</span><br><span class="line">	&#123;</span><br><span class="line">		string l,r;</span><br><span class="line">		cin&gt;&gt;l&gt;&gt;r;</span><br><span class="line">		l=<span class="built_in">string</span>(r.<span class="built_in">length</span>()-l.<span class="built_in">length</span>(),<span class="string">&#x27;0&#x27;</span>)+l;</span><br><span class="line">		<span class="type">int</span> p=<span class="number">-1</span>;</span><br><span class="line">		<span class="type">int</span> res=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>,len=l.<span class="built_in">length</span>();i&lt;len;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(l[i]!=r[i])</span><br><span class="line">			&#123;</span><br><span class="line">				res+=r[i]-l[i];</span><br><span class="line">				p=i;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(p==<span class="number">-1</span>) cout&lt;&lt;<span class="number">0</span>&lt;&lt;endl;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">// cout&lt;&lt;p&lt;&lt;&quot;opop&quot;&lt;&lt;endl;</span></span><br><span class="line">			res+=(l.<span class="built_in">length</span>()-p<span class="number">-1</span>)*<span class="number">9</span>;</span><br><span class="line">			cout&lt;&lt;res&lt;&lt;endl;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<h4 id="c.-game-with-reversing">C. Game with Reversing</h4>
+<p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1834/problem/C">题目链接</a>
+题目大意： 有两个字母序列S，T A可以将数列中任意一个字母为自己想要的
+B可以将S或T中的一个翻转
+若每个人都采取最优策略，那么当两个序列完全相等时,最少要用几步？ A先走
+思路 博弈，先简化题意，A,B对两个序列的操作可以看作只在一个序列上
+在此固定序列T,只对S操作。 固定答案看从顺序变化和倒序变化过去的最小步骤
+有两种情况，一种是正序比较看需要更改多少个字母，如果是偶数个的话则需要将操作数乘二，偶数个操作翻转了奇数次，需要再翻转一次。奇数次则反转了偶数次，此时序列顺序不变
+先翻转一次情况类似 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: C. Game with Reversing</span></span><br><span class="line"><span class="comment">// Contest: Codeforces - Codeforces Round 879 (Div. 2)</span></span><br><span class="line"><span class="comment">// URL: https://codeforces.com/contest/1834/problem/C</span></span><br><span class="line"><span class="comment">// Memory Limit: 256 MB</span></span><br><span class="line"><span class="comment">// Time Limit: 1000 ms</span></span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="comment">// Powered by CP Editor (https://cpeditor.org)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> x first</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> y second</span></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; PII;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"><span class="function">string <span class="title">rev</span><span class="params">(string s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">reverse</span>(s.<span class="built_in">begin</span>(),s.<span class="built_in">end</span>());</span><br><span class="line">	<span class="keyword">return</span> s;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">count</span><span class="params">(string a,string b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> cnt=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>,len=a.<span class="built_in">length</span>();i&lt;len;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(a[i]!=b[i]) cnt++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> cnt;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">	<span class="type">int</span> T; cin&gt;&gt;T;</span><br><span class="line">	<span class="keyword">while</span>(T--)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> n; cin&gt;&gt;n;</span><br><span class="line">		string a,b; cin&gt;&gt;a&gt;&gt;b;</span><br><span class="line">		string c=<span class="built_in">rev</span>(a);</span><br><span class="line">		<span class="type">int</span> x=<span class="built_in">count</span>(a,b),y=<span class="built_in">count</span>(b,c);</span><br><span class="line">		<span class="comment">//正序情况直接计算，倒序情况虽然情况类似，但是还要加特判，因为倒序答案最小为2，而且倒序可以看作是先操作一轮的正序</span></span><br><span class="line">		cout&lt;&lt;<span class="built_in">min</span>(<span class="number">2</span>*x-x%<span class="number">2</span>,y?(y*<span class="number">2</span>-(y+<span class="number">1</span>)%<span class="number">2</span>):<span class="number">2</span>)&lt;&lt;endl;	</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<h4 id="d.-survey-in-class">D. Survey in Class</h4>
+<p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1834/problem/D">题目链接</a>
+题目大意： 给定n个闭区间，需要选择一些整数，作为集合S。
+将区间得分定义为：对于S中每个数，如果在区间内，得分加以，否则得分减一。
+现在按照规则计算每个区间的得分。 问：最大得分和最小得分的差的最大值 思路
+这种两个区间的有时可以先假设一个固定，再取另一个
+<img src="https://raw.githubusercontent.com/XuandYu000/picture/main/20230630214156.png"/>
+假设已知差最大时对应的最大区间那么对于一个其余区间，答案就是找到使阴影部分面积最大的那个情况，对此有三种情况
+<img src="https://raw.githubusercontent.com/XuandYu000/picture/main/20230630214521.png"/>
+1. 找最左端最大 2. 最右端最小 3. 在中间 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">注意可能会考虑如果没有交集的情况，这种情况被归结在1或2中,而且还要注意是左开右闭的区间</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: D. Survey in Class</span></span><br><span class="line"><span class="comment">// Contest: Codeforces - Codeforces Round 879 (Div. 2)</span></span><br><span class="line"><span class="comment">// URL: https://codeforces.com/contest/1834/problem/D</span></span><br><span class="line"><span class="comment">// Memory Limit: 256 MB</span></span><br><span class="line"><span class="comment">// Time Limit: 2000 ms</span></span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="comment">// Powered by CP Editor (https://cpeditor.org)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> x first</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> y second</span></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; PII;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">	<span class="type">int</span> T; cin&gt;&gt;T;</span><br><span class="line">	<span class="keyword">while</span>(T--)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> n,m; cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">		<span class="function">vector&lt;PII&gt; <span class="title">seg</span><span class="params">(n)</span></span>;</span><br><span class="line">		<span class="type">int</span> minr=<span class="number">0x3f3f3f3f</span>,maxl=<span class="number">-1</span>,minlen=<span class="number">0x3f3f3f3f</span>;</span><br><span class="line">		<span class="type">int</span> res=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			cin&gt;&gt;seg[i].x&gt;&gt;seg[i].y;</span><br><span class="line">			minr=<span class="built_in">min</span>(minr,seg[i].y);</span><br><span class="line">			maxl=<span class="built_in">max</span>(maxl,seg[i].x);</span><br><span class="line">			minlen=<span class="built_in">min</span>(minlen,seg[i].y-seg[i].x+<span class="number">1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			res=<span class="built_in">max</span>(&#123;res,seg[i].y-<span class="built_in">max</span>(seg[i].x<span class="number">-1</span>,minr),<span class="built_in">min</span>(seg[i].y,maxl<span class="number">-1</span>)-seg[i].x+<span class="number">1</span>,seg[i].y-seg[i].x+<span class="number">1</span>-minlen&#125;);</span><br><span class="line">		&#125;</span><br><span class="line">		cout&lt;&lt;(res&lt;&lt;<span class="number">1</span>)&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="e.-mex-of-lcm">E. MEX of LCM</h4>
+<p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1834/problem/E">题目链接</a>
+题目大意： 给定一串序列a，找到最小的数A，使得其满足在a的子序列中<span
+class="math inline">\(a_l,a_{l+1},\dots,a_r\)</span> <span
+class="math inline">\(1&lt;=l&lt;=r&lt;=n\)</span> 的最小lcm不与之相等
+思路</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#### </span><br><span class="line">[题目链接]()</span><br><span class="line">题目大意：</span><br><span class="line"></span><br><span class="line">思路</span><br><span class="line"></span><br><span class="line">```c++</span><br></pre></td></tr></table></figure>
+<h4 id="section"></h4>
+<p><a href="">题目链接</a> 题目大意：</p>
+<p>思路</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/cf1843/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -999,122 +1070,6 @@ class="math inline">\(2^i\)</span>步的段的最大最小子段和，最大最�
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">最大最小子段和由三种情况</span><br><span class="line">1. 来自最左端</span><br><span class="line">2. 来自最右端</span><br><span class="line">3. 两者合并后中间</span><br><span class="line">对于第三种情况要维护最大和最小前后缀，以便合并后使用</span><br></pre></td></tr></table></figure>
 <p>在最后合并时记得将u反向。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: F2. Omsk Metro (hard version)</span></span><br><span class="line"><span class="comment">// Contest: Codeforces - Codeforces Round 881 (Div. 3)</span></span><br><span class="line"><span class="comment">// URL: https://codeforces.com/contest/1843/problem/F2</span></span><br><span class="line"><span class="comment">// Memory Limit: 512 MB</span></span><br><span class="line"><span class="comment">// Time Limit: 2000 ms</span></span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="comment">// Powered by CP Editor (https://cpeditor.org)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> x first</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> y second</span></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; PII;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">2e5</span>+<span class="number">10</span>,M=<span class="number">19</span>;</span><br><span class="line"><span class="type">int</span> dep[N],fa[N][M],a[N];</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">info</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> sum,maxpref,maxsuff,maxsegsum,minpref,minsuff,minsegsum;</span><br><span class="line">&#125;lifts[N][M];</span><br><span class="line"><span class="function">info <span class="title">make</span><span class="params">(<span class="type">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> a=<span class="built_in">max</span>(x,<span class="number">0</span>);</span><br><span class="line">	<span class="type">int</span> b=<span class="built_in">min</span>(x,<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">return</span> info&#123;x,a,a,a,b,b,b&#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">info <span class="title">rev</span><span class="params">(<span class="type">const</span> info&amp; a)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> info&#123;a.sum, a.maxsuff, a.maxpref, a.maxsegsum, a.minsuff, a.minpref, a.minsegsum&#125;;</span><br><span class="line">&#125;</span><br><span class="line">info <span class="keyword">operator</span> + (<span class="type">const</span> info&amp; a, <span class="type">const</span> info&amp; b)<span class="comment">//重载加法运算符</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> info&#123;</span><br><span class="line">		a.sum+b.sum,</span><br><span class="line">		<span class="built_in">max</span>(a.maxpref,a.sum+b.maxpref),</span><br><span class="line">		<span class="built_in">max</span>(b.maxsuff,a.maxsuff+b.sum),</span><br><span class="line">		<span class="built_in">max</span>(&#123;a.maxsegsum,b.maxsegsum,a.maxsuff+b.maxpref&#125;),</span><br><span class="line">		<span class="built_in">min</span>(a.minpref,a.sum+b.minpref),</span><br><span class="line">		<span class="built_in">min</span>(b.minsuff,a.minsuff+b.sum),</span><br><span class="line">		<span class="built_in">min</span>(&#123;a.minsegsum,b.minsegsum,a.minsuff+b.minpref&#125;),</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">output</span><span class="params">(<span class="type">int</span> cnt)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;cnt;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>;j&lt;=<span class="number">2</span>;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			cout&lt;&lt;fa[i][j];</span><br><span class="line">		&#125;</span><br><span class="line">		cout&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// for(int i=0;i&lt;cnt;i++)</span></span><br><span class="line">	<span class="comment">// &#123;</span></span><br><span class="line">		<span class="comment">// cout&lt;&lt;a[i]&lt;&lt;&quot; &quot;;</span></span><br><span class="line">	<span class="comment">// &#125;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">	<span class="type">int</span> T;cin&gt;&gt;T;</span><br><span class="line">	<span class="keyword">while</span>(T--)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> q; cin&gt;&gt;q;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;M;i++) lifts[<span class="number">0</span>][i]=<span class="built_in">make</span>(<span class="number">0</span>);</span><br><span class="line">		a[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">		dep[<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">		<span class="type">int</span> cnt=<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">while</span>(q--)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="type">char</span> op[<span class="number">2</span>]; cin&gt;&gt;op;</span><br><span class="line">			<span class="keyword">if</span>(op[<span class="number">0</span>]==<span class="string">&#x27;+&#x27;</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="type">int</span> v,x; cin&gt;&gt;v&gt;&gt;x;</span><br><span class="line">				v--;</span><br><span class="line">				a[cnt]=x;</span><br><span class="line">				fa[cnt][<span class="number">0</span>]=v;</span><br><span class="line">				dep[cnt]=dep[v]+<span class="number">1</span>;</span><br><span class="line">				lifts[cnt][<span class="number">0</span>]=<span class="built_in">make</span>(x);</span><br><span class="line">				<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;M;i++)<span class="comment">//这里倍增时顺带维护从该节点出发往上2^i步的结点的最大最小子段</span></span><br><span class="line">				&#123;</span><br><span class="line">					fa[cnt][i]=fa[fa[cnt][i<span class="number">-1</span>]][i<span class="number">-1</span>];</span><br><span class="line">					lifts[cnt][i]=lifts[fa[cnt][i<span class="number">-1</span>]][i<span class="number">-1</span>]+lifts[cnt][i<span class="number">-1</span>];</span><br><span class="line">				&#125;</span><br><span class="line">				cnt++;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				<span class="type">int</span> u,v,k; cin&gt;&gt;u&gt;&gt;v&gt;&gt;k;</span><br><span class="line">				u--,v--;</span><br><span class="line">				info L=<span class="built_in">make</span>(<span class="number">0</span>);</span><br><span class="line">				info R=<span class="built_in">make</span>(<span class="number">0</span>);</span><br><span class="line">				<span class="keyword">if</span>(dep[u]&gt;dep[v]) <span class="built_in">swap</span>(u,v);<span class="comment">//寻找LCA过程</span></span><br><span class="line">				<span class="keyword">for</span>(<span class="type">int</span> i=M<span class="number">-1</span>;i&gt;=<span class="number">0</span>;i--)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="keyword">if</span>(dep[v]-dep[u]&gt;=(<span class="number">1</span>&lt;&lt;i))</span><br><span class="line">					&#123;</span><br><span class="line">						R=lifts[v][i]+R;</span><br><span class="line">						v=fa[v][i];</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">for</span>(<span class="type">int</span> i=M<span class="number">-1</span>;i&gt;=<span class="number">0</span>;i--)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="keyword">if</span>(fa[u][i]!=fa[v][i])</span><br><span class="line">					&#123;</span><br><span class="line">						L=lifts[u][i]+L;</span><br><span class="line">						R=lifts[v][i]+R;</span><br><span class="line">						u=fa[u][i];</span><br><span class="line">						v=fa[v][i];</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">if</span>(u!=v)</span><br><span class="line">				&#123;</span><br><span class="line">					L=lifts[u][<span class="number">0</span>]+L;</span><br><span class="line">					R=lifts[v][<span class="number">0</span>]+R;</span><br><span class="line">					u=fa[u][<span class="number">0</span>];</span><br><span class="line">					v=fa[v][<span class="number">0</span>];</span><br><span class="line">				&#125;</span><br><span class="line">				info tot=<span class="built_in">rev</span>(L)+<span class="built_in">make</span>(a[u])+R;<span class="comment">//这里将左半侧的路径方向反转，加上祖先的权值再加上右半侧即为答案</span></span><br><span class="line">				cout&lt;&lt;(k&gt;=tot.minsegsum&amp;&amp;k&lt;=tot.maxsegsum ? <span class="string">&quot;YES&quot;</span>:<span class="string">&quot;NO&quot;</span>)&lt;&lt;endl;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// cout&lt;&lt;cnt&lt;&lt;endl;</span></span><br><span class="line">		<span class="comment">// output(cnt);</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/cf1834/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
-      <meta itemprop="name" content="XuandYu000">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="viewoverlook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/07/02/cf1834/" class="post-title-link" itemprop="url">cf1834</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:27:08" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithms/" itemprop="url" rel="index"><span itemprop="name">algorithms</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="cf1834">cf1834</h1>
-<h4 id="a.-unit-array">A. Unit Array</h4>
-<p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1834/problem/A">题目链接</a>
-题目大意： 对一个只含有-1和1的序列，每次可将第i个数<span
-class="math inline">\(a_i\)</span>改变符号，求至少要多少步使得序列所有数之和大于等于0，之积等于1
-思路
-之和大于0就是整数个数大于等于序列长度的一半(上取整)，之积等于1负数为偶数个
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: A. Unit Array</span></span><br><span class="line"><span class="comment">// Contest: Codeforces - Codeforces Round 879 (Div. 2)</span></span><br><span class="line"><span class="comment">// URL: https://codeforces.com/contest/1834/problem/A</span></span><br><span class="line"><span class="comment">// Memory Limit: 256 MB</span></span><br><span class="line"><span class="comment">// Time Limit: 1000 ms</span></span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="comment">// Powered by CP Editor (https://cpeditor.org)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> x first</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> y second</span></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; PII;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">	<span class="type">int</span> T; cin&gt;&gt;T;</span><br><span class="line">	<span class="keyword">while</span>(T--)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> n; cin&gt;&gt;n;</span><br><span class="line">		<span class="type">int</span> pos=<span class="number">0</span>,neg=<span class="number">0</span>;</span><br><span class="line">		<span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">q</span><span class="params">(n)</span></span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			cin&gt;&gt;q[i];</span><br><span class="line">			<span class="keyword">if</span>(~q[i]) pos++;</span><br><span class="line">			<span class="keyword">else</span> neg++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// cout&lt;&lt;&quot;pos:&quot;&lt;&lt;pos&lt;&lt;&quot;neg:&quot;&lt;&lt;neg&lt;&lt;endl;</span></span><br><span class="line">		<span class="type">int</span> cnt=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">if</span>(pos&lt;(n+<span class="number">1</span>)/<span class="number">2</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			cnt+=(n+<span class="number">1</span>)/<span class="number">2</span>-pos;</span><br><span class="line">			pos=(n+<span class="number">1</span>)/<span class="number">2</span>;</span><br><span class="line">			neg=n-pos;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(neg%<span class="number">2</span>!=<span class="number">0</span>) cnt++;</span><br><span class="line">		cout&lt;&lt;cnt&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-<h4 id="b.-maximum-strength">B. Maximum Strength</h4>
-<p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1834/problem/B">题目链接</a>
-题目大意： 给定区间L,R,从这两个区间中选取两个数<span
-class="math inline">\(X=\overline{x_1x_2{\dots}x_n}\)</span>和<span
-class="math inline">\(Y=\overline{y_1y_2{\dots}y_n}\)</span> 定义<span
-class="math inline">\(sum=|x_1-y_1|+|x_2-y_2|+\dots+|x_n+y_n|\)</span>
-位数不够用前导0补足求sum最大值<br />
-思路
-两个区间从左到右找第一个不相等的位数，该位可取的最大值减去最小值，再往右边位数之差必然可以取到9
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: B. Maximum Strength</span></span><br><span class="line"><span class="comment">// Contest: Codeforces - Codeforces Round 879 (Div. 2)</span></span><br><span class="line"><span class="comment">// URL: https://codeforces.com/contest/1834/problem/B</span></span><br><span class="line"><span class="comment">// Memory Limit: 256 MB</span></span><br><span class="line"><span class="comment">// Time Limit: 1000 ms</span></span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="comment">// Powered by CP Editor (https://cpeditor.org)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> x first</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> y second</span></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; PII;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line">string l,r;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">	<span class="type">int</span> T; cin&gt;&gt;T;</span><br><span class="line">	<span class="keyword">while</span>(T--)</span><br><span class="line">	&#123;</span><br><span class="line">		string l,r;</span><br><span class="line">		cin&gt;&gt;l&gt;&gt;r;</span><br><span class="line">		l=<span class="built_in">string</span>(r.<span class="built_in">length</span>()-l.<span class="built_in">length</span>(),<span class="string">&#x27;0&#x27;</span>)+l;</span><br><span class="line">		<span class="type">int</span> p=<span class="number">-1</span>;</span><br><span class="line">		<span class="type">int</span> res=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>,len=l.<span class="built_in">length</span>();i&lt;len;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(l[i]!=r[i])</span><br><span class="line">			&#123;</span><br><span class="line">				res+=r[i]-l[i];</span><br><span class="line">				p=i;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(p==<span class="number">-1</span>) cout&lt;&lt;<span class="number">0</span>&lt;&lt;endl;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">// cout&lt;&lt;p&lt;&lt;&quot;opop&quot;&lt;&lt;endl;</span></span><br><span class="line">			res+=(l.<span class="built_in">length</span>()-p<span class="number">-1</span>)*<span class="number">9</span>;</span><br><span class="line">			cout&lt;&lt;res&lt;&lt;endl;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-<h4 id="c.-game-with-reversing">C. Game with Reversing</h4>
-<p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1834/problem/C">题目链接</a>
-题目大意： 有两个字母序列S，T A可以将数列中任意一个字母为自己想要的
-B可以将S或T中的一个翻转
-若每个人都采取最优策略，那么当两个序列完全相等时,最少要用几步？ A先走
-思路 博弈，先简化题意，A,B对两个序列的操作可以看作只在一个序列上
-在此固定序列T,只对S操作。 固定答案看从顺序变化和倒序变化过去的最小步骤
-有两种情况，一种是正序比较看需要更改多少个字母，如果是偶数个的话则需要将操作数乘二，偶数个操作翻转了奇数次，需要再翻转一次。奇数次则反转了偶数次，此时序列顺序不变
-先翻转一次情况类似 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: C. Game with Reversing</span></span><br><span class="line"><span class="comment">// Contest: Codeforces - Codeforces Round 879 (Div. 2)</span></span><br><span class="line"><span class="comment">// URL: https://codeforces.com/contest/1834/problem/C</span></span><br><span class="line"><span class="comment">// Memory Limit: 256 MB</span></span><br><span class="line"><span class="comment">// Time Limit: 1000 ms</span></span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="comment">// Powered by CP Editor (https://cpeditor.org)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> x first</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> y second</span></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; PII;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"><span class="function">string <span class="title">rev</span><span class="params">(string s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">reverse</span>(s.<span class="built_in">begin</span>(),s.<span class="built_in">end</span>());</span><br><span class="line">	<span class="keyword">return</span> s;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">count</span><span class="params">(string a,string b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> cnt=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>,len=a.<span class="built_in">length</span>();i&lt;len;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(a[i]!=b[i]) cnt++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> cnt;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">	<span class="type">int</span> T; cin&gt;&gt;T;</span><br><span class="line">	<span class="keyword">while</span>(T--)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> n; cin&gt;&gt;n;</span><br><span class="line">		string a,b; cin&gt;&gt;a&gt;&gt;b;</span><br><span class="line">		string c=<span class="built_in">rev</span>(a);</span><br><span class="line">		<span class="type">int</span> x=<span class="built_in">count</span>(a,b),y=<span class="built_in">count</span>(b,c);</span><br><span class="line">		<span class="comment">//正序情况直接计算，倒序情况虽然情况类似，但是还要加特判，因为倒序答案最小为2，而且倒序可以看作是先操作一轮的正序</span></span><br><span class="line">		cout&lt;&lt;<span class="built_in">min</span>(<span class="number">2</span>*x-x%<span class="number">2</span>,y?(y*<span class="number">2</span>-(y+<span class="number">1</span>)%<span class="number">2</span>):<span class="number">2</span>)&lt;&lt;endl;	</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-<h4 id="d.-survey-in-class">D. Survey in Class</h4>
-<p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1834/problem/D">题目链接</a>
-题目大意： 给定n个闭区间，需要选择一些整数，作为集合S。
-将区间得分定义为：对于S中每个数，如果在区间内，得分加以，否则得分减一。
-现在按照规则计算每个区间的得分。 问：最大得分和最小得分的差的最大值 思路
-这种两个区间的有时可以先假设一个固定，再取另一个
-<img src="https://raw.githubusercontent.com/XuandYu000/picture/main/20230630214156.png"/>
-假设已知差最大时对应的最大区间那么对于一个其余区间，答案就是找到使阴影部分面积最大的那个情况，对此有三种情况
-<img src="https://raw.githubusercontent.com/XuandYu000/picture/main/20230630214521.png"/>
-1. 找最左端最大 2. 最右端最小 3. 在中间 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">注意可能会考虑如果没有交集的情况，这种情况被归结在1或2中,而且还要注意是左开右闭的区间</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: D. Survey in Class</span></span><br><span class="line"><span class="comment">// Contest: Codeforces - Codeforces Round 879 (Div. 2)</span></span><br><span class="line"><span class="comment">// URL: https://codeforces.com/contest/1834/problem/D</span></span><br><span class="line"><span class="comment">// Memory Limit: 256 MB</span></span><br><span class="line"><span class="comment">// Time Limit: 2000 ms</span></span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="comment">// Powered by CP Editor (https://cpeditor.org)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> x first</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> y second</span></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; PII;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">	<span class="type">int</span> T; cin&gt;&gt;T;</span><br><span class="line">	<span class="keyword">while</span>(T--)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> n,m; cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">		<span class="function">vector&lt;PII&gt; <span class="title">seg</span><span class="params">(n)</span></span>;</span><br><span class="line">		<span class="type">int</span> minr=<span class="number">0x3f3f3f3f</span>,maxl=<span class="number">-1</span>,minlen=<span class="number">0x3f3f3f3f</span>;</span><br><span class="line">		<span class="type">int</span> res=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			cin&gt;&gt;seg[i].x&gt;&gt;seg[i].y;</span><br><span class="line">			minr=<span class="built_in">min</span>(minr,seg[i].y);</span><br><span class="line">			maxl=<span class="built_in">max</span>(maxl,seg[i].x);</span><br><span class="line">			minlen=<span class="built_in">min</span>(minlen,seg[i].y-seg[i].x+<span class="number">1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			res=<span class="built_in">max</span>(&#123;res,seg[i].y-<span class="built_in">max</span>(seg[i].x<span class="number">-1</span>,minr),<span class="built_in">min</span>(seg[i].y,maxl<span class="number">-1</span>)-seg[i].x+<span class="number">1</span>,seg[i].y-seg[i].x+<span class="number">1</span>-minlen&#125;);</span><br><span class="line">		&#125;</span><br><span class="line">		cout&lt;&lt;(res&lt;&lt;<span class="number">1</span>)&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h4 id="e.-mex-of-lcm">E. MEX of LCM</h4>
-<p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1834/problem/E">题目链接</a>
-题目大意： 给定一串序列a，找到最小的数A，使得其满足在a的子序列中<span
-class="math inline">\(a_l,a_{l+1},\dots,a_r\)</span> <span
-class="math inline">\(1&lt;=l&lt;=r&lt;=n\)</span> 的最小lcm不与之相等
-思路</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#### </span><br><span class="line">[题目链接]()</span><br><span class="line">题目大意：</span><br><span class="line"></span><br><span class="line">思路</span><br><span class="line"></span><br><span class="line">```c++</span><br></pre></td></tr></table></figure>
-<h4 id="section"></h4>
-<p><a href="">题目链接</a> 题目大意：</p>
-<p>思路</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -1327,7 +1282,7 @@ class="math inline">\(k*\sum{y_i}\)</span>即可</p>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1395,7 +1350,7 @@ class="math inline">\(k*\sum{y_i}\)</span>即可</p>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-count">50</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
