@@ -186,6 +186,356 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/Lecture%205%20%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%8E%AF%E5%A2%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
+      <meta itemprop="name" content="XuandYu000">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="viewoverlook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/07/02/Lecture%205%20%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%8E%AF%E5%A2%83/" class="post-title-link" itemprop="url">Lecture 5 命令行环境</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:07:26" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/csdiy/" itemprop="url" rel="index"><span itemprop="name">csdiy</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/csdiy/missing-semester/" itemprop="url" rel="index"><span itemprop="name">missing semester</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="lecture-5-命令行环境">Lecture 5 命令行环境</h1>
+<h2 id="课后练习">课后练习</h2>
+<h4 id="任务控制">任务控制</h4>
+<ol type="1">
+<li>我们可以使用类似 ps aux | grep 这样的命令来获取任务的 pid
+，然后您可以基于pid
+来结束这些进程。但我们其实有更好的方法来做这件事。在终端中执行 sleep
+10000 这个任务。然后用 Ctrl-Z 将其切换到后台并使用
+bg来继续允许它。现在，使用 pgrep 来查找 pid 并使用 pkill
+结束进程而不需要手动输入pid。(提示：: 使用 -af 标记)。 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sleep 10000</span><br><span class="line">ctrl+z</span><br><span class="line">bg</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pgrep sleep #列出包含关键字sleep的进程id</span><br></pre></td></tr></table></figure> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pkill -af sleep #杀死包含关键字sleep的进程</span><br></pre></td></tr></table></figure> 解释： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pkill 杀死进程的命令</span><br><span class="line">-a 用于匹配进程名和命令行参数</span><br><span class="line">-f 强制匹配整个命令行参数，而不仅仅是匹配进程名</span><br></pre></td></tr></table></figure></li>
+<li>如果您希望某个进程结束后再开始另外一个进程，
+应该如何实现呢？在这个练习中，我们使用 sleep 60 &amp;
+作为先执行的程序。一种方法是使用 wait
+命令。尝试启动这个休眠命令，然后待其结束后再执行 ls
+命令。但是，如果我们在不同的 bash
+会话中进行操作，则上述方法就不起作用了。因为 wait
+只能对子进程起作用。之前我们没有提过的一个特性是，kill
+命令成功退出时其状态码为 0 ，其他状态则是非0。kill -0
+则不会发送信号，但是会在进程不存在时返回一个不为0的状态码。请编写一个
+bash 函数 pidwait ，它接受一个 pid
+作为输入参数，然后一直等待直到该进程结束。您需要使用 sleep 来避免浪费
+CPU 性能。 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sleep 60 &amp;</span><br><span class="line">pgrep sleep | wait; </span><br><span class="line">ls</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>解释： * sleep 60 &amp; 中&amp;表示后台运行 * wait 接收pgrpe
+sleep的输出，等待其结束之后再执行ls命令给</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pidwait()&#123;</span><br><span class="line">    while kill -0 $1 do</span><br><span class="line">        sleep 1</span><br><span class="line">    done</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>解释: * kill -0 $1 判断进程是否存在，存在则返回0，不存在则返回1 * *
+$1表示第一个参数 * * kill -0
+表示不会发送信号，但是会在进程不存在时返回一个不为0的状态码</p>
+<h4 id="终端多路复用">终端多路复用</h4>
+<ol type="1">
+<li>请完成这个 tmux 教程 参考这些步骤来学习如何自定义 tmux。
+当您在使用命令行时，您通常会希望同时执行多个任务。举例来说，您可以想要同时运行您的编辑器，并在终端的另外一侧执行程序。尽管再打开一个新的终端窗口也能达到目的，使用终端多路复用器则是一种更好的办法。
+像 tmux
+这类的终端多路复用器可以允许我们基于面板和标签分割出多个终端窗口，这样您便可以同时与多个
+shell 会话进行交互。 tmux 的快捷键需要我们掌握，它们都是类似 &lt;C-b&gt;
+x 这样的组合，即需要先按下Ctrl+b，松开后再按下
+x，但是一般使用CTRL+a重新映射为前缀键。 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">常用快捷键：</span><br><span class="line">会话：</span><br><span class="line">tmux 开始新会话</span><br><span class="line">tmux new -s session_name #新建一个会话</span><br><span class="line">tmux ls #查看会话</span><br><span class="line">tmux a -t session_name #进入会话，不加name默认连接最后一个会话</span><br><span class="line">窗口：</span><br><span class="line">&lt;C-b&gt; c 创建一个新的窗口，使用 &lt;C-d&gt;关闭</span><br><span class="line">&lt;C-b&gt; N 跳转到第 N 个窗口，注意每个窗口都是有编号的</span><br><span class="line">&lt;C-b&gt; p 切换到前一个窗口</span><br><span class="line">&lt;C-b&gt; n 切换到下一个窗口</span><br><span class="line">&lt;C-b&gt; , 重命名当前窗口</span><br><span class="line">&lt;C-b&gt; w 列出当前所有窗口</span><br><span class="line">面板：</span><br><span class="line">&lt;C-b&gt; &quot; 水平分割</span><br><span class="line">&lt;C-b&gt; % 垂直分割</span><br><span class="line">&lt;C-b&gt; &lt;方向&gt; 切换到指定方向的面板，&lt;方向&gt; 指的是键盘上的方向键</span><br><span class="line">&lt;C-b&gt; z 切换当前面板的缩放</span><br><span class="line">&lt;C-b&gt; [ 开始往回卷动屏幕。您可以按下空格键来开始选择，回车键复制选中的部分</span><br><span class="line">&lt;C-b&gt; &lt;空格&gt; 在不同的面板排布间切换</span><br></pre></td></tr></table></figure> #### 别名
+输入一长串包含许多选项的命令会非常麻烦。因此，大多数 shell
+都支持设置别名。shell 的别名相当于一个长命令的缩写，shell
+会自动将其替换成原本的命令。例如，bash 中的别名语法如下： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alias alias_name=&quot;command_to_alias arg1 arg2&quot;</span><br></pre></td></tr></table></figure>
+注意， =两边是没有空格的，因为 alias 是一个 shell
+命令，它只接受一个参数。 别名有许多很方便的特性: <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"># 创建常用命令的缩写</span><br><span class="line">alias ll=&quot;ls -lh&quot;</span><br><span class="line"></span><br><span class="line"># 能够少输入很多</span><br><span class="line">alias gs=&quot;git status&quot;</span><br><span class="line">alias gc=&quot;git commit&quot;</span><br><span class="line">alias v=&quot;vim&quot;</span><br><span class="line"></span><br><span class="line"># 手误打错命令也没关系</span><br><span class="line">alias sl=ls</span><br><span class="line"></span><br><span class="line"># 重新定义一些命令行的默认行为</span><br><span class="line">alias mv=&quot;mv -i&quot;           # -i prompts before overwrite</span><br><span class="line">alias mkdir=&quot;mkdir -p&quot;     # -p make parent dirs as needed</span><br><span class="line">alias df=&quot;df -h&quot;           # -h prints human readable format</span><br><span class="line"></span><br><span class="line"># 别名可以组合使用</span><br><span class="line">alias la=&quot;ls -A&quot;</span><br><span class="line">alias lla=&quot;la -l&quot;</span><br><span class="line"></span><br><span class="line"># 在忽略某个别名</span><br><span class="line">\ls</span><br><span class="line"># 或者禁用别名</span><br><span class="line">unalias la</span><br><span class="line"></span><br><span class="line"># 获取别名的定义</span><br><span class="line">alias ll</span><br><span class="line"># 会打印 ll=&#x27;ls -lh&#x27;</span><br></pre></td></tr></table></figure>
+值得注意的是，在默认情况下 shell
+并不会保存别名。为了让别名持续生效，您需要将配置放进 shell
+的启动文件里，像是.bashrc 或 .zshrc，下一节我们就会讲到。 #### 配置文件
+让我们帮助您进一步学习配置文件：</li>
+<li>为您的配置文件新建一个文件夹，并设置好版本控制</li>
+<li>在其中添加至少一个配置文件，比如说您的
+shell，在其中包含一些自定义设置（可以从设置 $PS1 开始）。</li>
+<li>建立一种在新设备进行快速安装配置的方法（无需手动操作）。最简单的方法是写一个
+shell 脚本对每个文件使用 ln
+-s，也可以使用专用工具在新的虚拟机上测试该安装脚本。将您现有的所有配置文件移动到项目仓库里。将项目发布到GitHub。
+做的时候GitHub报错暂未解决，先不写了。 #### 远端设备
+进行下面的练习需要您先安装一个 Linux
+虚拟机（如果已经安装过则可以直接使用），如果您对虚拟机尚不熟悉，可以参考这篇教程
+来进行安装。</li>
+<li>前往 ~/.ssh/ 并查看是否已经存在 SSH
+密钥对。如果不存在，请使用ssh-keygen -o -a 100 -t
+ed25519来创建一个。建议为密钥设置密码然后使用ssh-agent 这里；</li>
+<li>在.ssh/config加入下面内容： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Host vm #ssh连接的别名</span><br><span class="line">   User username_goes_here #用户名</span><br><span class="line">   HostName ip_goes_here #ip地址</span><br><span class="line">   IdentityFile ~/.ssh/id_ed25519 #密钥文件</span><br><span class="line">   LocalForward 9999 localhost:8888  #本地端口转发</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/lecture3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
+      <meta itemprop="name" content="XuandYu000">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="viewoverlook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/07/02/lecture3/" class="post-title-link" itemprop="url">lecture3</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:14:53" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/csdiy/" itemprop="url" rel="index"><span itemprop="name">csdiy</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/csdiy/cs50x/" itemprop="url" rel="index"><span itemprop="name">cs50x</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="lecture3">lecture3</h1>
+<h4 id="running-time">Running time</h4>
+<p>符号： - O：大O符号，表示上限 - <span
+class="math inline">\(\Omega\)</span>：大Omega符号，表示下限 - <span
+class="math inline">\(\Theta\)</span>：大Theta符号，表示上下限</p>
+<h4 id="seach.c">seach.c</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;cs50.h&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">int main(void)&#123;</span><br><span class="line">    string strings[] = &#123;&quot;Bill&quot;, &quot;Charlie&quot;, &quot;Fred&quot;, &quot;George&quot;, &quot;Ginny&quot;, &quot;Percy&quot;, &quot;Ron&quot;&#125;;</span><br><span class="line">    string s=get_string(&quot;String: &quot;);</span><br><span class="line">    for (int i=0; i&lt;7; i++)&#123;</span><br><span class="line">        if (strings[i]==s)&#123;</span><br><span class="line">            printf(&quot;Found\n&quot;);</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意strings[i]==s这个比较是不对的，因为这是比较两个指针的地址，而不是比较两个字符串的内容，应该使用strcmp函数</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/lecture4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
+      <meta itemprop="name" content="XuandYu000">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="viewoverlook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/07/02/lecture4/" class="post-title-link" itemprop="url">lecture4</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:20:26" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/csdiy/" itemprop="url" rel="index"><span itemprop="name">csdiy</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/csdiy/cs50x/" itemprop="url" rel="index"><span itemprop="name">cs50x</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="lecture4">lecture4</h1>
+<h4 id="addressres">Addressres</h4>
+<p>C语言提供了了两种关于内存的强大操作</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&amp; <span class="comment">// 提供在内存中所存事物的地址</span></span><br><span class="line">* <span class="comment">// 指示编译器去往内存中某个位置</span></span><br></pre></td></tr></table></figure>
+<p>example:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> n = <span class="number">50</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%p\n&quot;</span>, &amp;n);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>%p</code>是一个格式化字符串，用来打印地址,<code>&amp;n</code>是一个地址.</p>
+<h4 id="pointers">Pointers</h4>
+<p>指针式包含某个值的地址的变量，更简洁的说，指针式你计算机内存中的地址。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> n = <span class="number">50</span>;</span><br><span class="line">    <span class="type">int</span> *p = &amp;n;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%p\n&quot;</span>, p);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>指针p包含了变量n的地址。</p>
+<p>指针可视化如下:
+<img src="https://raw.githubusercontent.com/XuandYu000/picture/main/pointer.png"/></p>
+<p>简化如下:
+<img src="https://raw.githubusercontent.com/XuandYu000/picture/main/pointer2.png"/></p>
+<h4 id="strings">Strings</h4>
+<p>我们已经有了指针的思维模型，现在我们剥开在课堂早期对<code>string</code>提供的封装，这在c标准库中并不存在。</p>
+<p>对于一个简单的字符串，例如<code>string s = "HI!"</code>可以被表示如下：</p>
+<p><img src="https://raw.githubusercontent.com/XuandYu000/picture/main/HI.png"/></p>
+<p><code>s</code>指针告诉编译器字符串的第一个字符的地址</p>
+<h4 id="字符串比较">字符串比较</h4>
+<p>一个字符串仅仅是字符数组由其第一个字节标识</p>
+<p>在上一周的课程中，我们指出不能'=='直接比较字符串，因为这样比较的是地址，而不是字符串的内容。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cs50.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// Get two strings</span></span><br><span class="line">    <span class="type">char</span> *s = get_string(<span class="string">&quot;s: &quot;</span>);</span><br><span class="line">    <span class="type">char</span> *t = get_string(<span class="string">&quot;t: &quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Compare strings&#x27; addresses</span></span><br><span class="line">    <span class="keyword">if</span> (s == t)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Same\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Different\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在这里会发现输入同样的'HI!'，但是输出的结果是不同的
+不同的原因借助图表示如下
+<img src="https://raw.githubusercontent.com/XuandYu000/picture/main/two%20strings.png"/></p>
+<p>因此字符串比较应该使用<code>strcmp</code>函数</p>
+<h4 id="copying">copying</h4>
+<p>字符串常用操作是将一个字符串复制到另一个字符串中</p>
+<p>先看一段程序</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cs50.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;ctype.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// Get a string</span></span><br><span class="line">    <span class="built_in">string</span> s = get_string(<span class="string">&quot;s: &quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Copy string&#x27;s address</span></span><br><span class="line">    <span class="built_in">string</span> t = s;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Capitalize first letter in string</span></span><br><span class="line">    t[<span class="number">0</span>] = <span class="built_in">toupper</span>(t[<span class="number">0</span>]);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Print string twice</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;s: %s\n&quot;</span>, s);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;t: %s\n&quot;</span>, t);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里的<code>string t = s</code>并不是将字符串s复制到t中，而是将t指向s的地址，因此t和s指向同一个地址，因此t[0]改变了s[0]的值。</p>
+<p><img src="https://raw.githubusercontent.com/XuandYu000/picture/main/two%20strings2.png"/></p>
+<p>这并不是我们所期望的，我们期望的是将s复制到t中，这样t和s指向不同的地址，改变t[0]不会影响s[0]的值。</p>
+<p>为了可以实现这个副本，我们会介绍两个新的构建块。 1.
+<code>malloc</code>函数，用来分配内存 2.
+<code>free</code>函数，用来释放内存</p>
+<p>将上段代码修改如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cs50.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;ctype.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// Get a string</span></span><br><span class="line">    <span class="type">char</span> *s = get_string(<span class="string">&quot;s: &quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Allocate memory for another string</span></span><br><span class="line">    <span class="type">char</span> *t = <span class="built_in">malloc</span>(<span class="built_in">strlen</span>(s) + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Copy string into memory, including &#x27;\0&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt;= <span class="built_in">strlen</span>(s); i++)</span><br><span class="line">    &#123;</span><br><span class="line">        t[i] = s[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Capitalize copy</span></span><br><span class="line">    t[<span class="number">0</span>] = <span class="built_in">toupper</span>(t[<span class="number">0</span>]);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Print strings</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;s: %s\n&quot;</span>, s);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;t: %s\n&quot;</span>, t);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>malloc(strlen(s)+1)</code>
+为字符串s分配了内存，<code>strlen(s)</code>是字符串s的长度，<code>+1</code>是为了存储字符串结束符<code>\0</code>。
+之后对于字符串的复制，我们需要一个循环，因为字符串是一个字符数组，我们需要一个一个的复制。</p>
+<p>C语言之中也有一个内置函数<code>strcpy</code>，可以实现字符串的复制，但是这个函数需要我们提供目标字符串的地址，因此我们需要使用<code>malloc</code>函数。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cs50.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;ctype.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// Get a string</span></span><br><span class="line">    <span class="type">char</span> *s = get_string(<span class="string">&quot;s: &quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Allocate memory for another string</span></span><br><span class="line">    <span class="type">char</span> *t = <span class="built_in">malloc</span>(<span class="built_in">strlen</span>(s) + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Copy string into memory</span></span><br><span class="line">    <span class="built_in">strcpy</span>(t, s);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Capitalize copy</span></span><br><span class="line">    t[<span class="number">0</span>] = <span class="built_in">toupper</span>(t[<span class="number">0</span>]);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Print strings</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;s: %s\n&quot;</span>, s);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;t: %s\n&quot;</span>, t);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在
+<code>get_string</code>,<code>malloc</code>都会返回NULL，如果我们不检查这个返回值，会导致程序崩溃。验证程序分配内存成功如下</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cs50.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;ctype.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// Get a string</span></span><br><span class="line">    <span class="type">char</span> *s = get_string(<span class="string">&quot;s: &quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (s == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Allocate memory for another string</span></span><br><span class="line">    <span class="type">char</span> *t = <span class="built_in">malloc</span>(<span class="built_in">strlen</span>(s) + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span> (t == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Copy string into memory</span></span><br><span class="line">    <span class="built_in">strcpy</span>(t, s);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Capitalize copy</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">strlen</span>(t) &gt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        t[<span class="number">0</span>] = <span class="built_in">toupper</span>(t[<span class="number">0</span>]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Print strings</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;s: %s\n&quot;</span>, s);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;t: %s\n&quot;</span>, t);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Free memory</span></span><br><span class="line">    <span class="built_in">free</span>(t);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="valgrind">valgrind</h4>
+<p>valgrind 是一个检查内存是否及时释放的工具 使用方法：
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">valgrind ./test</span><br></pre></td></tr></table></figure></p>
+<h4 id="garbage-values">Garbage Values</h4>
+<p>在C语言中，如果我们没有初始化一个变量，那么这个变量的值是不确定的，这个值可能是之前这个内存地址的值，也可能是其他的值，这个值称为垃圾值。</p>
+<h4 id="swap">swap</h4>
+<p>很难在不借助中间值的情况下，交换两个变量的值，但是可以借助指针来实现。</p>
+<p>先来看一段错误程序</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">swap</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> x = <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> y = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;x is %i, y is %i\n&quot;</span>, x, y);</span><br><span class="line">    swap(x, y);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;x is %i, y is %i\n&quot;</span>, x, y);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">swap</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> tmp = a;</span><br><span class="line">    a = b;</span><br><span class="line">    b = tmp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这段程序并不能实现目的，在普通的函数中，参数是值传递，是将参数副本传到函数中，因此在函数中修改参数的值，并不会影响到函数外的变量。</p>
+<p>修正代码如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">swap</span><span class="params">(<span class="type">int</span> *a, <span class="type">int</span> *b)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> x = <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> y = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;x is %i, y is %i\n&quot;</span>, x, y);</span><br><span class="line">    swap(&amp;x, &amp;y);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;x is %i, y is %i\n&quot;</span>, x, y);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">swap</span><span class="params">(<span class="type">int</span> *a, <span class="type">int</span> *b)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> tmp = *a;</span><br><span class="line">    *a = *b;</span><br><span class="line">    *b = tmp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="overflow">overflow</h4>
+<ul>
+<li>堆溢出：当我们分配的内存超过了我们内存大小，就会发生堆溢出</li>
+<li>栈溢出：当我们的函数调用层次太深，超过了栈的大小，就会发生栈溢出
+上述所有的溢出都统称为缓冲区溢出</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/lecture5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -537,6 +887,204 @@ increasing search time.</p></li>
 </ul>
 <p>In this lesson, you learned about using pointers to build new data
 structures. Specifically, we delved into…</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/lecture7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
+      <meta itemprop="name" content="XuandYu000">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="viewoverlook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/07/02/lecture7/" class="post-title-link" itemprop="url">lecture7</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:15:26" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/csdiy/" itemprop="url" rel="index"><span itemprop="name">csdiy</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/csdiy/cs50x/" itemprop="url" rel="index"><span itemprop="name">cs50x</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="lecture7">lecture7</h1>
+<h4 id="flat-file-database">Flat-File Database</h4>
+<ul>
+<li><p>数据常常可以视作表格，每一行是一个记录，每一列是一个属性</p></li>
+<li><p>电子表格例如Excel，Google
+Spreadsheet可以导出为csv格式文件。csv文件是纯文本文件，每一行是一个记录，每一列用逗号分隔，可以看作是最简单的数据库</p></li>
+<li><p>csv文件被称为flat-file
+database，因为它没有任何结构，只是一堆数据，所有的数据被存在一个表中</p></li>
+<li><p>python 原生支持csv文件的读写，可以用csv模块读写csv文件</p></li>
+<li><p>```python # Prints all favorites in CSV using csv.reader</p>
+<pre><code>  import csv</code></pre>
+<p># Open CSV file with open("favorites.csv", "r") as file:</p>
+<pre><code>  # Create reader
+  reader = csv.reader(file)
+
+  # Skip header row
+  next(reader)
+
+  # Iterate over CSV file, printing each favorite</code></pre>
+<p>for row in reader: print(row[1]) <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">- - 在这里我们导入了csv模块，然后用open函数打开csv文件，然后用csv.reader函数创建一个reader对象，csv.reader函数从文件中读取每一行。</span><br><span class="line">- 但是这样的方式有一个问题，在数据中我们会发现csv还会将每一列标题打印可以像这样改进</span><br><span class="line">- ```python</span><br><span class="line">    # Stores favorite in a variable</span><br><span class="line">    </span><br><span class="line">    import csv</span><br><span class="line">    </span><br><span class="line">    # Open CSV file</span><br><span class="line">    with open(&quot;favorites.csv&quot;, &quot;r&quot;) as file:</span><br><span class="line">    </span><br><span class="line">        # Create reader</span><br><span class="line">        reader = csv.reader(file)</span><br><span class="line">    </span><br><span class="line">        # Skip header row</span><br><span class="line">        next(reader)</span><br><span class="line">    </span><br><span class="line">        # Iterate over CSV file, printing each favorite</span><br><span class="line">        for row in reader:</span><br><span class="line">        favorite = row[1]</span><br><span class="line">        print(favorite)</span><br></pre></td></tr></table></figure></p></li>
+<li><ul>
+<li>使用next函数跳过第一行</li>
+</ul></li>
+<li><ul>
+<li>还有一种改进</li>
+</ul></li>
+<li><ul>
+<li><p>```python # Prints all favorites in CSV using csv.DictReader</p>
+<p>import csv</p>
+<h1 id="open-csv-file">Open CSV file</h1>
+<p>with open("favorites.csv", "r") as file:</p>
+<pre><code># Create DictReader
+reader = csv.DictReader(file)
+
+# Iterate over CSV file, printing each favorite
+for row in reader:
+print(row[&quot;language&quot;])</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- - 这里我们使用了csv.DictReader函数，它会将每一行转换为一个字典，字典的键是列标题，字典的值是每一行的值</span><br><span class="line">- 当对字典的值排排序时，若不想按值排序时单独创立函数，lambda函数可以很方便的解决这个问题</span><br><span class="line">- - ```python</span><br><span class="line">    # Sorts favorites by value using lambda function</span><br><span class="line">    </span><br><span class="line">    import csv</span><br><span class="line">    </span><br><span class="line">    # Open CSV file</span><br><span class="line">    with open(&quot;favorites.csv&quot;, &quot;r&quot;) as file:</span><br><span class="line">    </span><br><span class="line">        # Create DictReader</span><br><span class="line">        reader = csv.DictReader(file)</span><br><span class="line">    </span><br><span class="line">        # Counts</span><br><span class="line">        counts = &#123;&#125;</span><br><span class="line">    </span><br><span class="line">        # Iterate over CSV file, counting favorites</span><br><span class="line">        for row in reader:</span><br><span class="line">            favorite = row[&quot;language&quot;]</span><br><span class="line">            if favorite in counts:</span><br><span class="line">            counts[favorite] += 1</span><br><span class="line">            else:</span><br><span class="line">            counts[favorite] = 1</span><br><span class="line">    </span><br><span class="line">        # Print counts</span><br><span class="line">        for favorite in sorted(counts, key=lambda language: counts[language], reverse=True):</span><br><span class="line">        print(f&quot;&#123;favorite&#125;: &#123;counts[favorite]&#125;&quot;)</span><br></pre></td></tr></table></figure></li>
+</ul></li>
+<li><ul>
+<li>Notice that the get_value function has been removed. Instead,
+<code>lambda language: counts[language]</code> does in one line what our
+previous two-line function did.</li>
+</ul></li>
+</ul>
+<h4 id="realational-database">Realational Database</h4>
+<p>关系型数据库是一种流行的存储大量数据的方式 Relational
+databases借助表的数据结构以行和列存储数据</p>
+<p>SQL支持四种操作，被简记为CRUD - Create：创建表 - Read：读取表中的数据
+- Update：更新表中的数据 - Delete：删除表中的数据</p>
+<p>创建一个新的数据库<code>sqlite3 favorites.db</code></p>
+<p>可以使用<code>.mode csv</code>命令将sqlite3的模式设置为csv模式，这样就可以使用csv文件来创建表了<code>.import favorites.csv favorites</code>
+第一个参数是导入文件名字，第二个则为创建表的名称 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">```SELECT columns FROM table```从表中读取一个元素</span><br><span class="line"></span><br><span class="line">SQL支持一些基本函数</span><br><span class="line">- ```COUNT```：计算表中的行数</span><br><span class="line"></span><br><span class="line">- ```SUM```：计算表中某一列的和</span><br><span class="line"></span><br><span class="line">- ```AVG```：计算表中某一列的平均值</span><br><span class="line"></span><br><span class="line">- ```MIN```：计算表中某一列的最小值</span><br><span class="line">  </span><br><span class="line">  $\cdots$</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">使用方法为```SELECT function(column) FROM table```</span><br><span class="line"></span><br><span class="line">SQL的额外功能函数</span><br><span class="line">- ```WHERE```：过滤表中的数据</span><br><span class="line">- ```GROUP BY```：将表中的数据分组</span><br><span class="line">- ```ORDER BY```：将表中的数</span><br><span class="line">- ```LIMIT```：限制表中的数据</span><br><span class="line">- ```LIKE```：模糊匹配表中的数据</span><br><span class="line">- $\cdots $</span><br><span class="line">- 例如```SELECT language，COUNT(*) FROM favorites GROUP BY language```</span><br><span class="line"></span><br><span class="line">#### IMDB</span><br><span class="line">IMDB是一个电影数据库，可以从[这里](https://www.imdb.com/interfaces/)下载数据集</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">执行```.schema```不仅可以看到每一张表，还可以看到每一张表的结构</span><br><span class="line"></span><br><span class="line">#### Indexes</span><br><span class="line">索引是一种数据结构，可以加快数据库的查询速度，但是会降低数据库的写入速度</span><br><span class="line"></span><br><span class="line">我们可以跟踪查询的时间，使用```.timer on```命令，然后使用```.timer off```命令关闭</span><br><span class="line"></span><br><span class="line">之后我们可以创建表的索引，使用```CREATE INDEX index_name ON table(column)```命令，这将会创建一个B-tree索引</span><br><span class="line"></span><br><span class="line">#### Using SQL in Python</span><br><span class="line">```python</span><br><span class="line"># Searches database popularity of a problem</span><br><span class="line"></span><br><span class="line">import csv</span><br><span class="line"></span><br><span class="line">from cs50 import SQL</span><br><span class="line"></span><br><span class="line"># Open database</span><br><span class="line">db = SQL(&quot;sqlite:///favorites.db&quot;)</span><br><span class="line"></span><br><span class="line"># Prompt user for favorite</span><br><span class="line">favorite = input(&quot;Favorite: &quot;)</span><br><span class="line"></span><br><span class="line"># Search for title</span><br><span class="line">rows = db.execute(&quot;SELECT COUNT(*) FROM favorites WHERE problem LIKE ?&quot;, &quot;%&quot; + favorite + &quot;%&quot;)</span><br><span class="line"></span><br><span class="line"># Get first (and only) row</span><br><span class="line">row = rows[0]</span><br><span class="line"></span><br><span class="line"># Print popularity</span><br><span class="line">print(row[&quot;COUNT(*)&quot;])</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><code>db=SQL("sqlite:///favorites.db")</code>创建一个数据库对象，这个对象有一个execute方法，可以执行SQL语句</li>
+<li>在execute方法中，我们可以使用问号来代替变量，然后在execute方法的第二个参数中传入变量的值</li>
+<li>注意execute使用<code>?</code>作为占位符</li>
+</ul>
+<h4 id="race-conditions">Race Conditions</h4>
+<p>当两个进程同时访问数据库时，可能会发生race
+conditions，例如两个进程同时读取数据库，然后同时写入数据库，这样就会导致数据的不一致性</p>
+<p>SQL锁可以解决这个问题，当一个进程正在读取数据库时，其他进程无法读取数据库，当一个进程正在写入数据库时，其他进程无法读取和写入数据库</p>
+<h4 id="sql-injection-attacks">SQL Injection Attacks</h4>
+<p>在python中执行SQL语句时，我们可以使用问号来代替变量，然后在execute方法的第二个参数中传入变量的值，这样可以防止SQL注入攻击。</p>
+<p>但是为什么呢？</p>
+<p>假设我们有一个表，其中有两列，一列是用户名，一列是密码，我们想要查询某个用户的密码，我们可以使用<code>SELECT password FROM users WHERE username = 'username'</code>，但是如果我们的username是<code>' OR 1=1 --</code>，那么这个SQL语句就会变成<code>SELECT password FROM users WHERE username = '' OR 1=1 --'</code>，这样就会返回所有的密码，因为<code>OR 1=1</code>永远为真，<code>--</code>是注释，所以后面的语句都会被注释掉</p>
+<p>但是使用<code>?</code>占位符就可以防止这种攻击，因为<code>' OR 1=1 --</code>会被当作一个字符串，而不是SQL语句的一部分</p>
+<h4 id="homework">homeWork</h4>
+<h5 id="favorite">Favorite</h5>
+<p><code>SELECT * FROM shows ORDER BY title;</code>数据表杂乱无章使用以上命令排序</p>
+<p><code>UPDATE shows SET title="How I Met Your Mother" WHERE title LIKE "How i met your mother";</code>
+UPDATE修改表中数据使用LIKE模糊匹配提高效率</p>
+<h5 id="prophecy">prophecy</h5>
+<p>要求建三张表将原来只有一张表的数据库分开使用SQL in python</p>
+<p>三步总共：</p>
+<ul>
+<li>从已给出的csv文件将student，house，relationships三张表的数据提取出来放到分别放到三个字典中</li>
+<li>在schema.sql加入重新建立三张表的命令</li>
+<li>在students.py中加入将三个字典中的数据导入到三张表中的命令</li>
+</ul>
+<h5 id="lab-songs">Lab songs</h5>
+<ul>
+<li><p>In 1.sql, write a SQL query to list the names of all songs in the
+database. Your query should output a table with a single column for the
+name of each song. <code>SELECT name FROM songs;</code></p></li>
+<li><p>In 2.sql, write a SQL query to list the names of all songs in
+increasing order of tempo. Your query should output a table with a
+single column for the name of each song.
+<code>SELECT name from songs ORDER BY tempo;</code></p></li>
+<li><p>In 3.sql, write a SQL query to list the names of the top 5
+longest songs, in descending order of length. Your query should output a
+table with a single column for the name of each song.
+<code>SELECT name from songs ORDER BY duration_ms DESC LIMIT 5;</code></p></li>
+<li><ul>
+<li>DESC降序排列,LIMIT限制输出数量</li>
+</ul></li>
+<li><p>In 4.sql, write a SQL query that lists the names of any songs
+that have danceability, energy, and valence greater than 0.75. Your
+query should output a table with a single column for the name of each
+song.
+<code>SELECT name FROM songs WHERE (danceability&gt;0.75 and energy&gt;0.75 and valence&gt;0.75);</code></p></li>
+<li><p>In 5.sql, write a SQL query that returns the average energy of
+all the songs. Your query should output a table with a single column and
+a single row containing the average energy.
+<code>SELECT AVG(energy) FROM songs;</code></p></li>
+<li><p>In 6.sql, write a SQL query that lists the names of songs that
+are by Post Malone. Your query should output a table with a single
+column for the name of each song. You should not make any assumptions
+about what Post Malone’s artist_id is.
+<code>SELECT name FROM songs WHERE artist_id=(SELECT id FROM artists WHERE name='Post Malone');</code></p></li>
+<li><ul>
+<li>在一个表中查询可以使用子查询，子查询的结果作为外层查询的条件就像这里的artist_id，这里的artist_id是一个外键，它指向artists表中的id，所以我们可以使用artists表中的id来查询songs表中的数据</li>
+</ul></li>
+<li><p>In 7.sql, write a SQL query that returns the average energy of
+songs that are by Drake. Your query should output a table with a single
+column and a single row containing the average energy. You should not
+make any assumptions about what Drake’s artist_id is.
+<code>SELECT AVG(energy) FROM songs WHERE artist_id=(SELECT id FROM artists WHERE name='Drake');</code></p></li>
+<li><p>In 8.sql, write a SQL query that lists the names of the songs
+that feature other artists. Songs that feature other artists will
+include “feat.” in the name of the song. Your query should output a
+table with a single column for the name of each song.
+<code>SELECT name FROM songs WHERE name LIKE '%feat.%';</code></p></li>
+<li><ul>
+<li>注意占位符即可</li>
+</ul></li>
+</ul>
 
       
     </div>
@@ -1107,204 +1655,6 @@ we discussed…</p>
 <li>Regular expressions</li>
 </ul>
 <p>See you next time!</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/lecture7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
-      <meta itemprop="name" content="XuandYu000">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="viewoverlook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/07/02/lecture7/" class="post-title-link" itemprop="url">lecture7</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:15:26" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/csdiy/" itemprop="url" rel="index"><span itemprop="name">csdiy</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/csdiy/cs50x/" itemprop="url" rel="index"><span itemprop="name">cs50x</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="lecture7">lecture7</h1>
-<h4 id="flat-file-database">Flat-File Database</h4>
-<ul>
-<li><p>数据常常可以视作表格，每一行是一个记录，每一列是一个属性</p></li>
-<li><p>电子表格例如Excel，Google
-Spreadsheet可以导出为csv格式文件。csv文件是纯文本文件，每一行是一个记录，每一列用逗号分隔，可以看作是最简单的数据库</p></li>
-<li><p>csv文件被称为flat-file
-database，因为它没有任何结构，只是一堆数据，所有的数据被存在一个表中</p></li>
-<li><p>python 原生支持csv文件的读写，可以用csv模块读写csv文件</p></li>
-<li><p>```python # Prints all favorites in CSV using csv.reader</p>
-<pre><code>  import csv</code></pre>
-<p># Open CSV file with open("favorites.csv", "r") as file:</p>
-<pre><code>  # Create reader
-  reader = csv.reader(file)
-
-  # Skip header row
-  next(reader)
-
-  # Iterate over CSV file, printing each favorite</code></pre>
-<p>for row in reader: print(row[1]) <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">- - 在这里我们导入了csv模块，然后用open函数打开csv文件，然后用csv.reader函数创建一个reader对象，csv.reader函数从文件中读取每一行。</span><br><span class="line">- 但是这样的方式有一个问题，在数据中我们会发现csv还会将每一列标题打印可以像这样改进</span><br><span class="line">- ```python</span><br><span class="line">    # Stores favorite in a variable</span><br><span class="line">    </span><br><span class="line">    import csv</span><br><span class="line">    </span><br><span class="line">    # Open CSV file</span><br><span class="line">    with open(&quot;favorites.csv&quot;, &quot;r&quot;) as file:</span><br><span class="line">    </span><br><span class="line">        # Create reader</span><br><span class="line">        reader = csv.reader(file)</span><br><span class="line">    </span><br><span class="line">        # Skip header row</span><br><span class="line">        next(reader)</span><br><span class="line">    </span><br><span class="line">        # Iterate over CSV file, printing each favorite</span><br><span class="line">        for row in reader:</span><br><span class="line">        favorite = row[1]</span><br><span class="line">        print(favorite)</span><br></pre></td></tr></table></figure></p></li>
-<li><ul>
-<li>使用next函数跳过第一行</li>
-</ul></li>
-<li><ul>
-<li>还有一种改进</li>
-</ul></li>
-<li><ul>
-<li><p>```python # Prints all favorites in CSV using csv.DictReader</p>
-<p>import csv</p>
-<h1 id="open-csv-file">Open CSV file</h1>
-<p>with open("favorites.csv", "r") as file:</p>
-<pre><code># Create DictReader
-reader = csv.DictReader(file)
-
-# Iterate over CSV file, printing each favorite
-for row in reader:
-print(row[&quot;language&quot;])</code></pre>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- - 这里我们使用了csv.DictReader函数，它会将每一行转换为一个字典，字典的键是列标题，字典的值是每一行的值</span><br><span class="line">- 当对字典的值排排序时，若不想按值排序时单独创立函数，lambda函数可以很方便的解决这个问题</span><br><span class="line">- - ```python</span><br><span class="line">    # Sorts favorites by value using lambda function</span><br><span class="line">    </span><br><span class="line">    import csv</span><br><span class="line">    </span><br><span class="line">    # Open CSV file</span><br><span class="line">    with open(&quot;favorites.csv&quot;, &quot;r&quot;) as file:</span><br><span class="line">    </span><br><span class="line">        # Create DictReader</span><br><span class="line">        reader = csv.DictReader(file)</span><br><span class="line">    </span><br><span class="line">        # Counts</span><br><span class="line">        counts = &#123;&#125;</span><br><span class="line">    </span><br><span class="line">        # Iterate over CSV file, counting favorites</span><br><span class="line">        for row in reader:</span><br><span class="line">            favorite = row[&quot;language&quot;]</span><br><span class="line">            if favorite in counts:</span><br><span class="line">            counts[favorite] += 1</span><br><span class="line">            else:</span><br><span class="line">            counts[favorite] = 1</span><br><span class="line">    </span><br><span class="line">        # Print counts</span><br><span class="line">        for favorite in sorted(counts, key=lambda language: counts[language], reverse=True):</span><br><span class="line">        print(f&quot;&#123;favorite&#125;: &#123;counts[favorite]&#125;&quot;)</span><br></pre></td></tr></table></figure></li>
-</ul></li>
-<li><ul>
-<li>Notice that the get_value function has been removed. Instead,
-<code>lambda language: counts[language]</code> does in one line what our
-previous two-line function did.</li>
-</ul></li>
-</ul>
-<h4 id="realational-database">Realational Database</h4>
-<p>关系型数据库是一种流行的存储大量数据的方式 Relational
-databases借助表的数据结构以行和列存储数据</p>
-<p>SQL支持四种操作，被简记为CRUD - Create：创建表 - Read：读取表中的数据
-- Update：更新表中的数据 - Delete：删除表中的数据</p>
-<p>创建一个新的数据库<code>sqlite3 favorites.db</code></p>
-<p>可以使用<code>.mode csv</code>命令将sqlite3的模式设置为csv模式，这样就可以使用csv文件来创建表了<code>.import favorites.csv favorites</code>
-第一个参数是导入文件名字，第二个则为创建表的名称 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">```SELECT columns FROM table```从表中读取一个元素</span><br><span class="line"></span><br><span class="line">SQL支持一些基本函数</span><br><span class="line">- ```COUNT```：计算表中的行数</span><br><span class="line"></span><br><span class="line">- ```SUM```：计算表中某一列的和</span><br><span class="line"></span><br><span class="line">- ```AVG```：计算表中某一列的平均值</span><br><span class="line"></span><br><span class="line">- ```MIN```：计算表中某一列的最小值</span><br><span class="line">  </span><br><span class="line">  $\cdots$</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">使用方法为```SELECT function(column) FROM table```</span><br><span class="line"></span><br><span class="line">SQL的额外功能函数</span><br><span class="line">- ```WHERE```：过滤表中的数据</span><br><span class="line">- ```GROUP BY```：将表中的数据分组</span><br><span class="line">- ```ORDER BY```：将表中的数</span><br><span class="line">- ```LIMIT```：限制表中的数据</span><br><span class="line">- ```LIKE```：模糊匹配表中的数据</span><br><span class="line">- $\cdots $</span><br><span class="line">- 例如```SELECT language，COUNT(*) FROM favorites GROUP BY language```</span><br><span class="line"></span><br><span class="line">#### IMDB</span><br><span class="line">IMDB是一个电影数据库，可以从[这里](https://www.imdb.com/interfaces/)下载数据集</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">执行```.schema```不仅可以看到每一张表，还可以看到每一张表的结构</span><br><span class="line"></span><br><span class="line">#### Indexes</span><br><span class="line">索引是一种数据结构，可以加快数据库的查询速度，但是会降低数据库的写入速度</span><br><span class="line"></span><br><span class="line">我们可以跟踪查询的时间，使用```.timer on```命令，然后使用```.timer off```命令关闭</span><br><span class="line"></span><br><span class="line">之后我们可以创建表的索引，使用```CREATE INDEX index_name ON table(column)```命令，这将会创建一个B-tree索引</span><br><span class="line"></span><br><span class="line">#### Using SQL in Python</span><br><span class="line">```python</span><br><span class="line"># Searches database popularity of a problem</span><br><span class="line"></span><br><span class="line">import csv</span><br><span class="line"></span><br><span class="line">from cs50 import SQL</span><br><span class="line"></span><br><span class="line"># Open database</span><br><span class="line">db = SQL(&quot;sqlite:///favorites.db&quot;)</span><br><span class="line"></span><br><span class="line"># Prompt user for favorite</span><br><span class="line">favorite = input(&quot;Favorite: &quot;)</span><br><span class="line"></span><br><span class="line"># Search for title</span><br><span class="line">rows = db.execute(&quot;SELECT COUNT(*) FROM favorites WHERE problem LIKE ?&quot;, &quot;%&quot; + favorite + &quot;%&quot;)</span><br><span class="line"></span><br><span class="line"># Get first (and only) row</span><br><span class="line">row = rows[0]</span><br><span class="line"></span><br><span class="line"># Print popularity</span><br><span class="line">print(row[&quot;COUNT(*)&quot;])</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li><code>db=SQL("sqlite:///favorites.db")</code>创建一个数据库对象，这个对象有一个execute方法，可以执行SQL语句</li>
-<li>在execute方法中，我们可以使用问号来代替变量，然后在execute方法的第二个参数中传入变量的值</li>
-<li>注意execute使用<code>?</code>作为占位符</li>
-</ul>
-<h4 id="race-conditions">Race Conditions</h4>
-<p>当两个进程同时访问数据库时，可能会发生race
-conditions，例如两个进程同时读取数据库，然后同时写入数据库，这样就会导致数据的不一致性</p>
-<p>SQL锁可以解决这个问题，当一个进程正在读取数据库时，其他进程无法读取数据库，当一个进程正在写入数据库时，其他进程无法读取和写入数据库</p>
-<h4 id="sql-injection-attacks">SQL Injection Attacks</h4>
-<p>在python中执行SQL语句时，我们可以使用问号来代替变量，然后在execute方法的第二个参数中传入变量的值，这样可以防止SQL注入攻击。</p>
-<p>但是为什么呢？</p>
-<p>假设我们有一个表，其中有两列，一列是用户名，一列是密码，我们想要查询某个用户的密码，我们可以使用<code>SELECT password FROM users WHERE username = 'username'</code>，但是如果我们的username是<code>' OR 1=1 --</code>，那么这个SQL语句就会变成<code>SELECT password FROM users WHERE username = '' OR 1=1 --'</code>，这样就会返回所有的密码，因为<code>OR 1=1</code>永远为真，<code>--</code>是注释，所以后面的语句都会被注释掉</p>
-<p>但是使用<code>?</code>占位符就可以防止这种攻击，因为<code>' OR 1=1 --</code>会被当作一个字符串，而不是SQL语句的一部分</p>
-<h4 id="homework">homeWork</h4>
-<h5 id="favorite">Favorite</h5>
-<p><code>SELECT * FROM shows ORDER BY title;</code>数据表杂乱无章使用以上命令排序</p>
-<p><code>UPDATE shows SET title="How I Met Your Mother" WHERE title LIKE "How i met your mother";</code>
-UPDATE修改表中数据使用LIKE模糊匹配提高效率</p>
-<h5 id="prophecy">prophecy</h5>
-<p>要求建三张表将原来只有一张表的数据库分开使用SQL in python</p>
-<p>三步总共：</p>
-<ul>
-<li>从已给出的csv文件将student，house，relationships三张表的数据提取出来放到分别放到三个字典中</li>
-<li>在schema.sql加入重新建立三张表的命令</li>
-<li>在students.py中加入将三个字典中的数据导入到三张表中的命令</li>
-</ul>
-<h5 id="lab-songs">Lab songs</h5>
-<ul>
-<li><p>In 1.sql, write a SQL query to list the names of all songs in the
-database. Your query should output a table with a single column for the
-name of each song. <code>SELECT name FROM songs;</code></p></li>
-<li><p>In 2.sql, write a SQL query to list the names of all songs in
-increasing order of tempo. Your query should output a table with a
-single column for the name of each song.
-<code>SELECT name from songs ORDER BY tempo;</code></p></li>
-<li><p>In 3.sql, write a SQL query to list the names of the top 5
-longest songs, in descending order of length. Your query should output a
-table with a single column for the name of each song.
-<code>SELECT name from songs ORDER BY duration_ms DESC LIMIT 5;</code></p></li>
-<li><ul>
-<li>DESC降序排列,LIMIT限制输出数量</li>
-</ul></li>
-<li><p>In 4.sql, write a SQL query that lists the names of any songs
-that have danceability, energy, and valence greater than 0.75. Your
-query should output a table with a single column for the name of each
-song.
-<code>SELECT name FROM songs WHERE (danceability&gt;0.75 and energy&gt;0.75 and valence&gt;0.75);</code></p></li>
-<li><p>In 5.sql, write a SQL query that returns the average energy of
-all the songs. Your query should output a table with a single column and
-a single row containing the average energy.
-<code>SELECT AVG(energy) FROM songs;</code></p></li>
-<li><p>In 6.sql, write a SQL query that lists the names of songs that
-are by Post Malone. Your query should output a table with a single
-column for the name of each song. You should not make any assumptions
-about what Post Malone’s artist_id is.
-<code>SELECT name FROM songs WHERE artist_id=(SELECT id FROM artists WHERE name='Post Malone');</code></p></li>
-<li><ul>
-<li>在一个表中查询可以使用子查询，子查询的结果作为外层查询的条件就像这里的artist_id，这里的artist_id是一个外键，它指向artists表中的id，所以我们可以使用artists表中的id来查询songs表中的数据</li>
-</ul></li>
-<li><p>In 7.sql, write a SQL query that returns the average energy of
-songs that are by Drake. Your query should output a table with a single
-column and a single row containing the average energy. You should not
-make any assumptions about what Drake’s artist_id is.
-<code>SELECT AVG(energy) FROM songs WHERE artist_id=(SELECT id FROM artists WHERE name='Drake');</code></p></li>
-<li><p>In 8.sql, write a SQL query that lists the names of the songs
-that feature other artists. Songs that feature other artists will
-include “feat.” in the name of the song. Your query should output a
-table with a single column for the name of each song.
-<code>SELECT name FROM songs WHERE name LIKE '%feat.%';</code></p></li>
-<li><ul>
-<li>注意占位符即可</li>
-</ul></li>
-</ul>
 
       
     </div>
@@ -2114,98 +2464,10 @@ target="_blank" rel="noopener" href="https://vjudge.net/problem/%E6%B4%9B%E8%B0%
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/%E7%89%9B%E5%AE%A2%E7%BB%83%E4%B9%A0%E8%B5%9B100/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
-      <meta itemprop="name" content="XuandYu000">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="viewoverlook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/07/02/%E7%89%9B%E5%AE%A2%E7%BB%83%E4%B9%A0%E8%B5%9B100/" class="post-title-link" itemprop="url">牛客练习赛100</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:26:31" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithms/" itemprop="url" rel="index"><span itemprop="name">algorithms</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="牛客练习赛100">牛客练习赛100</h1>
-<h3 id="b.小红的子序列dp">B.小红的子序列(dp)</h3>
-<p><a
-target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/11251/B">题目链接</a></p>
-<p>子序列问题一般是dp问题，这里结尾dp状态只有四种，蓝偶，红偶，蓝奇，红奇。对于当前物品，所要做的判断就是加与不加入状态完全相反的背包中，例如，当前是蓝色偶数，现在就要判断加不加到当前以红色奇数为结尾的数组中，状态方程：</p>
-<p>f[c[i][a[i]&amp;1]=max(f[c[i]][a[i]&amp;1],f[1-c[i]][1-(a[i]&amp;1)]+(LL)a[i]);</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">// Problem: 小红的子序列</span><br><span class="line">// Contest: NowCoder</span><br><span class="line">// URL: https://ac.nowcoder.com/acm/contest/11251/B</span><br><span class="line">// Memory Limit: 524288 MB</span><br><span class="line">// Time Limit: 2000 ms</span><br><span class="line">// </span><br><span class="line">// Powered by CP Editor (https://cpeditor.org)</span><br><span class="line"></span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;queue&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#include&lt;cmath&gt;</span><br><span class="line">#include&lt;stack&gt;</span><br><span class="line">#include&lt;vector&gt;</span><br><span class="line">#include&lt;map&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">#define x first</span><br><span class="line">#define y second</span><br><span class="line">typedef pair&lt;int,int&gt; PII;</span><br><span class="line">typedef long long LL;</span><br><span class="line">const int N=2e5+10;</span><br><span class="line">int a[N],n;</span><br><span class="line">string col;</span><br><span class="line">int c[N];</span><br><span class="line">LL f[2][2];</span><br><span class="line">int main()&#123;</span><br><span class="line">	scanf(&quot;%d&quot;,&amp;n);</span><br><span class="line">	for(int i=1;i&lt;=n;i++)&#123;</span><br><span class="line">		scanf(&quot;%d&quot;,&amp;a[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	cin&gt;&gt;col;</span><br><span class="line">	for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">		c[i+1]=(col[i]==&#x27;R&#x27;);</span><br><span class="line">	&#125;</span><br><span class="line">	for(int i=1;i&lt;=n;i++)&#123;</span><br><span class="line">		f[c[i]][a[i]&amp;1]=max(f[c[i]][a[i]&amp;1],f[1-c[i]][1-(a[i]&amp;1)]+(LL)a[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	LL ans=0;</span><br><span class="line">	 for(int i=0;i&lt;2;i++)&#123;</span><br><span class="line">		 for(int j=0;j&lt;2;j++)&#123;</span><br><span class="line">			 ans=max(f[i][j],ans);</span><br><span class="line">			 // cout&lt;&lt;f[i][j]&lt;&lt;&quot; &quot;;</span><br><span class="line">			&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	printf(&quot;%lld&quot;,ans);</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h3 id="c.小红的删数字">C.小红的删数字</h3>
-<p><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/11251/C">题目链接</a>
-先将 *
-数学题，博弈论，小红先手且要保证删去一个位数后还是3的倍数，假设所有位数之和为s，则必须删除一个sum%3的一位，否则肯定失败。
-*
-接下来就是a[sum%3]--，问题转换为小紫先手了，此时如果a[1]和a[2]相等,且没有a[0]那么小红必胜
-* 否则就是小红必败 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: 小红的删数字</span></span><br><span class="line"><span class="comment">// Contest: NowCoder</span></span><br><span class="line"><span class="comment">// URL: https://ac.nowcoder.com/acm/contest/11251/C</span></span><br><span class="line"><span class="comment">// Memory Limit: 524288 MB</span></span><br><span class="line"><span class="comment">// Time Limit: 2000 ms</span></span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="comment">// Powered by CP Editor (https://cpeditor.org)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> x first</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> y second</span></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>,<span class="type">int</span>&gt; PII;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">2e5</span>+<span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> a[<span class="number">3</span>];</span><br><span class="line"><span class="type">int</span> sum=<span class="number">0</span>;</span><br><span class="line">string s;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	cin&gt;&gt;s;</span><br><span class="line">	<span class="type">int</span> len=s.<span class="built_in">length</span>();</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;len;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(s[i]-<span class="string">&#x27;0&#x27;</span>)&#123;</span><br><span class="line">			a[(s[i]-<span class="string">&#x27;0&#x27;</span>)%<span class="number">3</span>]++;</span><br><span class="line">		&#125;</span><br><span class="line">		sum+=s[i]-<span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(!a[sum%<span class="number">3</span>]) <span class="built_in">puts</span>(<span class="string">&quot;yukari&quot;</span>);</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		a[sum%<span class="number">3</span>]--;</span><br><span class="line">		<span class="keyword">if</span>(a[<span class="number">1</span>]==a[<span class="number">2</span>]&amp;&amp;a[<span class="number">0</span>]) <span class="built_in">puts</span>(<span class="string">&quot;kou&quot;</span>);</span><br><span class="line">		<span class="keyword">else</span> <span class="built_in">puts</span>(<span class="string">&quot;yukari&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-<h3 id="d.-小红的构造题">D. 小红的构造题</h3>
-<p><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/11251/D">题目链接</a>
-考虑数列re……re……re……re………… 对于每个在第k个re后添加一个d,那么共添加 <span
-class="math inline">\(\sum_{i=1}^k\)</span>x*i<em>(i+1)/2
-个子序列，将上列式子化简可得k个re总共可有x*k</em>(k+1)*(k+2)个red子序列，其中x为添加几个d
-这样枚举复杂度降到了n<sup>1/3</sup>
-可以枚举(但是有个疑问怎么证明这样可以包含所有整数呢？) <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: 小红的构造题</span></span><br><span class="line"><span class="comment">// Contest: NowCoder</span></span><br><span class="line"><span class="comment">// URL: https://ac.nowcoder.com/acm/contest/11251/D</span></span><br><span class="line"><span class="comment">// Memory Limit: 524288 MB</span></span><br><span class="line"><span class="comment">// Time Limit: 2000 ms</span></span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="comment">// Powered by CP Editor (https://cpeditor.org)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> x first</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> y second</span></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>,<span class="type">int</span>&gt; PII;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">2e5</span>+<span class="number">10</span>;</span><br><span class="line">LL n;</span><br><span class="line">LL ned[N];</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line"><span class="comment">// 	if(!n) &#123;puts(&quot;d&quot;); return 0;&#125;</span></span><br><span class="line">	LL i,j;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i*i*i/<span class="number">6</span>&lt;=n;i++);</span><br><span class="line">	i--;</span><br><span class="line">	<span class="keyword">for</span>(j=i;j&gt;<span class="number">0</span>;j--)&#123;</span><br><span class="line">		ned[j]+=n/(j*(j+<span class="number">1</span>)/<span class="number">2</span>);</span><br><span class="line">		n%=j*(j+<span class="number">1</span>)/<span class="number">2</span>;<span class="comment">//剩余还要构造的字符串数量</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=i;j++)&#123;</span><br><span class="line">		cout&lt;&lt;<span class="string">&quot;re&quot;</span>;</span><br><span class="line">		<span class="keyword">while</span>(ned[j]--)&#123;</span><br><span class="line">			cout&lt;&lt;<span class="string">&quot;d&quot;</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2273,7 +2535,7 @@ class="math inline">\(\sum_{i=1}^k\)</span>x*i<em>(i+1)/2
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-count">51</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
