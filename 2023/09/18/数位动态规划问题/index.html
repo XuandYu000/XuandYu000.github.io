@@ -23,12 +23,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="数位动态规划问题今天，我们要给大家介绍的是数位动态规划。数位动态规划一般用来回答类似这样的问题： 请问区间 [l, r] 中有多少个满足某个条件的数。其中 l 和 r 的范围一般很大。 比如说我们有这样一个题： 数位和请问 0 到 9 这些数字在 $l, r$ 的数位中分别出现了多少次。 当 l &#x3D; 112，r &#x3D; 115 时，每个数里面都有两个 1，所以 1 一共出现了 2 * 4 &#x3D; 8 次；">
+  <meta name="description" content="数位动态规划问题 今天，我们要给大家介绍的是数位动态规划。数位动态规划一般用来回答类似这样的问题： 请问区间 [l, r] 中有多少个满足某个条件的数。其中 l 和 r 的范围一般很大。 比如说我们有这样一个题： 数位和 请问 0 到 9 这些数字在 \([l, r](1≤l≤r≤10^{16})\) 的数位中分别出现了多少次。 当 l &#x3D; 112，r &#x3D; 115 时，每个数里面都">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数位动态规划问题">
 <meta property="og:url" content="http://example.com/2023/09/18/%E6%95%B0%E4%BD%8D%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="viewoverlook">
-<meta property="og:description" content="数位动态规划问题今天，我们要给大家介绍的是数位动态规划。数位动态规划一般用来回答类似这样的问题： 请问区间 [l, r] 中有多少个满足某个条件的数。其中 l 和 r 的范围一般很大。 比如说我们有这样一个题： 数位和请问 0 到 9 这些数字在 $l, r$ 的数位中分别出现了多少次。 当 l &#x3D; 112，r &#x3D; 115 时，每个数里面都有两个 1，所以 1 一共出现了 2 * 4 &#x3D; 8 次；">
+<meta property="og:description" content="数位动态规划问题 今天，我们要给大家介绍的是数位动态规划。数位动态规划一般用来回答类似这样的问题： 请问区间 [l, r] 中有多少个满足某个条件的数。其中 l 和 r 的范围一般很大。 比如说我们有这样一个题： 数位和 请问 0 到 9 这些数字在 \([l, r](1≤l≤r≤10^{16})\) 的数位中分别出现了多少次。 当 l &#x3D; 112，r &#x3D; 115 时，每个数里面都">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-09-18T14:49:39.289Z">
 <meta property="article:modified_time" content="2023-09-17T12:37:14.869Z">
@@ -247,45 +247,115 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="数位动态规划问题"><a href="#数位动态规划问题" class="headerlink" title="数位动态规划问题"></a>数位动态规划问题</h1><p>今天，我们要给大家介绍的是数位动态规划。数位动态规划一般用来回答类似这样的问题：</p>
-<p><strong>请问区间 [l, r] 中有多少个满足某个条件的数。其中 l 和 r 的范围一般很大。</strong></p>
+        <h1 id="数位动态规划问题">数位动态规划问题</h1>
+<p>今天，我们要给大家介绍的是数位动态规划。数位动态规划一般用来回答类似这样的问题：</p>
+<p><strong>请问区间 [l, r] 中有多少个满足某个条件的数。其中 l 和 r
+的范围一般很大。</strong></p>
 <p>比如说我们有这样一个题：</p>
-<h2 id="数位和"><a href="#数位和" class="headerlink" title="数位和"></a>数位和</h2><p>请问 0 到 9 这些数字在 $<a href="1≤l≤r≤10^{16}">l, r</a>$ 的数位中分别出现了多少次。</p>
-<p>当 l = 112，r = 115 时，每个数里面都有两个 1，所以 1 一共出现了 2 * 4 = 8 次；2、3、4、5 分别出现在其中的一个数里，所以它们都出现了 1 次。</p>
-<p>我们来分析下这个问题，借用前缀和的思想，我们可以知道，某个 x (0 ≤ x ≤ 9) 在区间 [l, r] 中出现了多少次，等价于 x 在区间 [1, r] 中出现了多少次 - x 在区间 [1, l - 1] 中出现了多少次。</p>
-<p>现在问题变成了对于某个 n，我们要统计 0 到 9 在区间 [1, n] 中分别出现了多少次（在考虑区间 [l, r] 时，我们要考虑区间 [1, r] 和 [1, l - 1]）。</p>
-<p>为了计算 0 到 9 在区间 [1, n] 中分别出现了多少次，我们把小于 n 的数字 s 按照以下方法进行分类：如果 s 从左到右数第一个小于 n 对应位置的数位是第 i 位，那么 s 就会被分到第 i 类。</p>
+<h2 id="数位和">数位和</h2>
+<p>请问 0 到 9 这些数字在 <span class="math inline">\([l,
+r](1≤l≤r≤10^{16})\)</span> 的数位中分别出现了多少次。</p>
+<p>当 l = 112，r = 115 时，每个数里面都有两个 1，所以 1 一共出现了 2 * 4
+= 8 次；2、3、4、5 分别出现在其中的一个数里，所以它们都出现了 1 次。</p>
+<p>我们来分析下这个问题，借用前缀和的思想，我们可以知道，某个 x (0 ≤ x ≤
+9) 在区间 [l, r] 中出现了多少次，等价于 x 在区间 [1, r] 中出现了多少次 -
+x 在区间 [1, l - 1] 中出现了多少次。</p>
+<p>现在问题变成了对于某个 n，我们要统计 0 到 9 在区间 [1, n]
+中分别出现了多少次（在考虑区间 [l, r] 时，我们要考虑区间 [1, r] 和 [1, l
+- 1]）。</p>
+<p>为了计算 0 到 9 在区间 [1, n] 中分别出现了多少次，我们把小于 n 的数字
+s 按照以下方法进行分类：如果 s 从左到右数第一个小于 n 对应位置的数位是第
+i 位，那么 s 就会被分到第 i 类。</p>
 <span id="more"></span>
 <p>当 n = 12345 时，小于 n 的数字会被分成 5 类：</p>
 <ul>
-<li>第 1 类（第 1 位不同）：[1, 9999] （如果 s 的位数比 n 少，那么我们会在前面补 0，在这个例子中，1 会被补全成 00001）</li>
+<li>第 1 类（第 1 位不同）：[1, 9999] （如果 s 的位数比 n
+少，那么我们会在前面补 0，在这个例子中，1 会被补全成 00001）</li>
 <li>第 2 类（第 2 位不同）：[10000, 11999]</li>
 <li>第 3 类（第 3 位不同）：[12000, 12299]</li>
 <li>第 4 类（第 4 位不同）：[12300, 12339]</li>
 <li>第 5 类（第 5 位不同）：[12340, 12344]</li>
 </ul>
-<p>对于第 i 类数，数字 s 的前 i - 1 位和 n 是一样的，s 的第 i 位要小于 n 的第 i 位，后面那些位置想是几就是几（在上面的例子中，对于第 3 类数，前两位 12 是固定的，第 3 位可以是 0、1、2（比 3 小），第 4 位第 5 位都可以是 0 到 9 中任意的值）。</p>
-<p>如果我们能够统计出 0 到 9 在每一类中分别出现了几次，把它们加起来我们就知道了 0 到 9 在区间 [1, n) 中出现了几次。统计 0 到 9 在 n 中出现的次数是简单的，于是我们也就知道了 0 到 9 在区间 [1, n] 中出现了几次啦！</p>
-<p>我们继续往后思考，某个 x(0 ≤ x ≤ 9) 在一段区间中出现了多少次怎么算呢？x 是不是有可能出现在个位，也有可能出现在十位，也有可能出现在其他任何一个位置。我们把 x 在每个位置出现的次数加起来，是不是就是 x 出现的总次数呀？x 在某一个位置出现了多少次，是不是等价于这一个位置等于 x 的数字有多少个呀？于是问题变成了计算区间内每个位置等于 x 的数字的个数的和。</p>
-<p>我们继续看上面例子中的第 3 类（[12000, 12299]），我们来看看每个位置的情况：</p>
+<p>对于第 i 类数，数字 s 的前 i - 1 位和 n 是一样的，s 的第 i 位要小于 n
+的第 i 位，后面那些位置想是几就是几（在上面的例子中，对于第 3
+类数，前两位 12 是固定的，第 3 位可以是 0、1、2（比 3 小），第 4 位第 5
+位都可以是 0 到 9 中任意的值）。</p>
+<p>如果我们能够统计出 0 到 9
+在每一类中分别出现了几次，把它们加起来我们就知道了 0 到 9 在区间 [1, n)
+中出现了几次。统计 0 到 9 在 n 中出现的次数是简单的，于是我们也就知道了
+0 到 9 在区间 [1, n] 中出现了几次啦！</p>
+<p>我们继续往后思考，某个 x(0 ≤ x ≤ 9)
+在一段区间中出现了多少次怎么算呢？x
+是不是有可能出现在个位，也有可能出现在十位，也有可能出现在其他任何一个位置。我们把
+x 在每个位置出现的次数加起来，是不是就是 x 出现的总次数呀？x
+在某一个位置出现了多少次，是不是等价于这一个位置等于 x
+的数字有多少个呀？于是问题变成了计算区间内每个位置等于 x
+的数字的个数的和。</p>
+<p>我们继续看上面例子中的第 3 类（[12000,
+12299]），我们来看看每个位置的情况：</p>
 <ul>
-<li>第 1 位和第 2 位：这两位是固定的，这一类中所有数字（共 300 个）的第 1 位都是 1，第 2 位都是 2，所以 1 和 2 出现的次数都要加上 300；</li>
-<li>第 3 位：第 3 位要比 12345 的第 3 位小，所以可以是 0、1、2，分别有 100 个数字第 3 位是 0 ([12000, 12099])、1 ([12100, 12199])、2 ([12200, 12299])；</li>
-<li>第 4 位和第 5 位：对于后面两个位置，每个位置上都可以是 0 到 9 之间任意的数字；对于 x(0 ≤ x ≤ 9)，第 4 位上是 x 的数字有 30 个（12zxy，第 3 位 z 可以是 0、1、2，第 5 位 y 可以是 0 到 9 之间任意的数字），同理第 5 位上是 x 的数字也有 30 个。</li>
+<li>第 1 位和第 2 位：这两位是固定的，这一类中所有数字（共 300 个）的第
+1 位都是 1，第 2 位都是 2，所以 1 和 2 出现的次数都要加上 300；</li>
+<li>第 3 位：第 3 位要比 12345 的第 3 位小，所以可以是 0、1、2，分别有
+100 个数字第 3 位是 0 ([12000, 12099])、1 ([12100, 12199])、2 ([12200,
+12299])；</li>
+<li>第 4 位和第 5 位：对于后面两个位置，每个位置上都可以是 0 到 9
+之间任意的数字；对于 x(0 ≤ x ≤ 9)，第 4 位上是 x 的数字有 30
+个（12zxy，第 3 位 z 可以是 0、1、2，第 5 位 y 可以是 0 到 9
+之间任意的数字），同理第 5 位上是 x 的数字也有 30 个。</li>
 </ul>
 <p>接下来我们来看更一般的情况。</p>
-<p>当 $n = a_1a_2…a_m$n = a_1a_2…a_m 时（ $a_i$a_i 表示 n 从左到右第 i 个数位上的值，其中 m 表示 n 是一个 m 位数），考虑第 i 类数，我们来看看每个位置的情况：</p>
+<p>当 <span class="math inline">\(n = a_1a_2...a_m\)</span>n =
+a_1a_2...a_m 时（ <span class="math inline">\(a_i\)</span>a_i 表示 n
+从左到右第 i 个数位上的值，其中 m 表示 n 是一个 m 位数），考虑第 i
+类数，我们来看看每个位置的情况：</p>
 <ul>
-<li>对于满足 j &lt; i 的位置 j（i 左边的位置），有 $a_i <em> 10^{m-i}$a_i </em> 10^{m-i} ($[a_1a_2…a_{i-1} \times 10^{m-i+1},a_1a_2…a_i \times 10^{m-i}-1]$ [a_1a_2…a_{i-1} \times 10^{m-i+1},a_1a_2…a_i \times 10^{m-i}-1] ，第 i 个位置可以是 0 到 $a_i-1$a_i-1 ，后面每个位置都可以是 0 到 9，后面一共有 m - i 个位置，所以一共有这么多个数字）个数字第 j 位是 $a_j$a_j ；</li>
-<li>对于位置 i，可以是 0 到 $a_i-1$a_i-1，对于 $x(0\le x\le a_i-1)$x(0\le x\le a_i-1) ，第 i 位是 x 的数字有 $10^{m-i}$10^{m-i} 个（ $[a_1a_2…a_{i-1}x \times 10^{m-i},a_1a_2…(x+1) \times 10^{m-i}-1]$ [a_1a_2…a_{i-1}x \times 10^{m-i},a_1a_2…(x+1) \times 10^{m-i}-1] ；</li>
-<li>对于满足 j &gt; i 的位置 j（i 右边的位置），对于 x(0 ≤ x ≤ 9) ，有 $a_i <em> 10^{m-i-1}$a_i </em> 10^{m-i-1} 个数字第 j 位是 x（第 i 个位置可以是 0 到 $a_i-1$a_i-1，i 右边除了 j 还有 m - i - 1 个位置，每个位置都可以是 0 到 9）；满足 j &gt; i 的位置 j 一共有 m - i 个（每个位置是 x 的数字个数都是一样的），所以 x 出现的次数要加上 $a_i <em> 10^{m-i-1}</em>(m-i)$a_i <em> 10^{m-i-1}</em>(m-i)。</li>
+<li>对于满足 j &lt; i 的位置 j（i 左边的位置），有 <span
+class="math inline">\(a_i * 10^{m-i}\)</span>a_i * 10^{m-i} (<span
+class="math inline">\([a_1a_2...a_{i-1} \times 10^{m-i+1},a_1a_2...a_i
+\times 10^{m-i}-1]\)</span> [a_1a_2...a_{i-1} ^{m-i+1},a_1a_2...a_i
+^{m-i}-1] ，第 i 个位置可以是 0 到 <span
+class="math inline">\(a_i-1\)</span>a_i-1 ，后面每个位置都可以是 0 到
+9，后面一共有 m - i 个位置，所以一共有这么多个数字）个数字第 j 位是
+<span class="math inline">\(a_j\)</span>a_j ；</li>
+<li>对于位置 i，可以是 0 到 <span
+class="math inline">\(a_i-1\)</span>a_i-1，对于 <span
+class="math inline">\(x(0\le x\le a_i-1)\)</span>x(0xa_i-1) ，第 i 位是
+x 的数字有 $10<sup>{m-i}$10</sup>{m-i} 个（ <span
+class="math inline">\([a_1a_2...a_{i-1}x \times 10^{m-i},a_1a_2...(x+1)
+\times 10^{m-i}-1]\)</span> [a_1a_2...a_{i-1}x ^{m-i},a_1a_2...(x+1)
+^{m-i}-1] ；</li>
+<li>对于满足 j &gt; i 的位置 j（i 右边的位置），对于 x(0 ≤ x ≤ 9) ，有
+<span class="math inline">\(a_i * 10^{m-i-1}\)</span>a_i * 10^{m-i-1}
+个数字第 j 位是 x（第 i 个位置可以是 0 到 <span
+class="math inline">\(a_i-1\)</span>a_i-1，i 右边除了 j 还有 m - i - 1
+个位置，每个位置都可以是 0 到 9）；满足 j &gt; i 的位置 j 一共有 m - i
+个（每个位置是 x 的数字个数都是一样的），所以 x 出现的次数要加上 <span
+class="math inline">\(a_i * 10^{m-i-1}*(m-i)\)</span>a_i *
+10^{m-i-1}*(m-i)。</li>
 </ul>
-<p>于是，我们只要依次枚举每一类，统计下 0 到 9 出现的次数就可以啦！这算法还有没有问题呢？</p>
-<p>我们仔细想想，按照刚刚的分类方法，第 1 类（例子中的区间是 [1, 9999]）是特殊的，按刚才的算法会把前导 0 算进去。如果一个数字的位数不足 m，刚才的算法会在前面补 0，这些 0 是不能被统计的。这怎么解决呢？</p>
-<p>第 1 类中 0 出现的次数需要被单独统计。我们可以枚举第一个非零位在哪里，在第一个非零位后面的 0 就都要被考虑啦！有两种情况：</p>
+<p>于是，我们只要依次枚举每一类，统计下 0 到 9
+出现的次数就可以啦！这算法还有没有问题呢？</p>
+<p>我们仔细想想，按照刚刚的分类方法，第 1 类（例子中的区间是 [1,
+9999]）是特殊的，按刚才的算法会把前导 0 算进去。如果一个数字的位数不足
+m，刚才的算法会在前面补 0，这些 0 是不能被统计的。这怎么解决呢？</p>
+<p>第 1 类中 0
+出现的次数需要被单独统计。我们可以枚举第一个非零位在哪里，在第一个非零位后面的
+0 就都要被考虑啦！有两种情况：</p>
 <ul>
-<li>假如第一个非零位是第 1 位，满足 j &gt; 1 的位置 j 是 0 的数字有 $(a_1 - 1) <em> 10^{m-2}$(a_1 - 1) </em> 10^{m-2} 个（第 1 位可以是 1 到 $a_1 - 1$a_1 - 1，后面除了 j 还有 m - 2 个位置，每个位置上都可以是 0 到 9）；在第 1 位后面共有 m - 1 个位置，所以 0 的出现次数要加上 $(a_1 - 1) <em> 10^{m-2}</em>(m-1)$(a_1 - 1) <em> 10^{m-2}</em>(m-1)；</li>
-<li>假如第一个非零位是第 i (i&gt; 1) 位，满足 j &gt; i 的位置 j 是 0 的数字有 $9 <em> 10^{m-i-1}$9 </em> 10^{m-i-1} 个（由于第 1 位是 0，无论后面的数字是多少，整个数字都会比 n 小。第 i 位可以是 1 到 9，后面除了 j 还有 m - i - 1 个位置，每个位置上都可以是 0 到 9）；在第 i 位后面共有 m - i 个位置，所以 0 的出现次数要加上 $9 <em> 10^{m-i-1}</em>(m-i)$9 <em> 10^{m-i-1}</em>(m-i)。</li>
+<li>假如第一个非零位是第 1 位，满足 j &gt; 1 的位置 j 是 0 的数字有
+<span class="math inline">\((a_1 - 1) * 10^{m-2}\)</span>(a_1 - 1) *
+10^{m-2} 个（第 1 位可以是 1 到 <span class="math inline">\(a_1 -
+1\)</span>a_1 - 1，后面除了 j 还有 m - 2 个位置，每个位置上都可以是 0 到
+9）；在第 1 位后面共有 m - 1 个位置，所以 0 的出现次数要加上 <span
+class="math inline">\((a_1 - 1) * 10^{m-2}*(m-1)\)</span>(a_1 - 1) *
+10^{m-2}*(m-1)；</li>
+<li>假如第一个非零位是第 i (i&gt; 1) 位，满足 j &gt; i 的位置 j 是 0
+的数字有 $9 * 10^{m-i-1}$9 * 10^{m-i-1} 个（由于第 1 位是
+0，无论后面的数字是多少，整个数字都会比 n 小。第 i 位可以是 1 到
+9，后面除了 j 还有 m - i - 1 个位置，每个位置上都可以是 0 到 9）；在第 i
+位后面共有 m - i 个位置，所以 0 的出现次数要加上 $9 *
+10^{m-i-1}<em>(m-i)$9 </em> 10^{m-i-1}*(m-i)。</li>
 </ul>
 <p>至此，我们就把所有情况都考虑完啦！</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> a[<span class="number">21</span>];</span><br><span class="line"><span class="type">long</span> <span class="type">long</span> l, r, ans[<span class="number">10</span>], f[<span class="number">17</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">calc</span><span class="params">(<span class="type">long</span> <span class="type">long</span> n, <span class="type">int</span> xs)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> m = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (; n; n /= <span class="number">10</span>)</span><br><span class="line">        a[++m] = n % <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>, j = m; i &lt; j; i++, j--)</span><br><span class="line">        <span class="built_in">swap</span>(a[i], a[j]);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= m; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt; i; j++)</span><br><span class="line">            ans[a[j]] += xs * a[i] * f[m - i];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt; a[i]; j++)</span><br><span class="line">            ans[j] += xs * f[m - i];</span><br><span class="line">        <span class="keyword">if</span> (i != <span class="number">1</span> &amp;&amp; a[i])</span><br><span class="line">            ans[<span class="number">0</span>] += xs * f[m - i];</span><br><span class="line">        <span class="keyword">if</span> (m != i) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt; <span class="number">10</span>; j++)</span><br><span class="line">                ans[j] += xs * f[m - i - <span class="number">1</span>] * (m - i) * a[i];</span><br><span class="line">            <span class="keyword">if</span> (i != <span class="number">1</span>)</span><br><span class="line">                ans[<span class="number">0</span>] += xs * f[m - i - <span class="number">1</span>] * (m - i) * a[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (i == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (m &gt;= <span class="number">2</span>)    </span><br><span class="line">                ans[<span class="number">0</span>] += xs * (a[<span class="number">1</span>] - <span class="number">1</span>) * (m - <span class="number">1</span>) * f[m - <span class="number">2</span>];</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">2</span>; j &lt; m; j++)</span><br><span class="line">                ans[<span class="number">0</span>] += xs * <span class="number">9</span> * (m - j) * f[m - j - <span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= m; i++)</span><br><span class="line">        ans[a[i]] += xs;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    f[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">16</span>; i++)</span><br><span class="line">        f[i] = f[i - <span class="number">1</span>] * <span class="number">10</span>;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%lld%lld&quot;</span>, &amp;l, &amp;r);</span><br><span class="line">    <span class="built_in">calc</span>(r, <span class="number">1</span>);</span><br><span class="line">    <span class="built_in">calc</span>(l - <span class="number">1</span>, <span class="number">-1</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%lld &quot;</span>, ans[i]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -293,52 +363,122 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">f[0] = 1;</span><br><span class="line">    for (int i = 1; i &lt;= 16; i++)</span><br><span class="line">        f[i] = f[i - 1] * 10;</span><br></pre></td></tr></table></figure>
 <p>f 数组用来记录 10 的幂次等于几，f[i] 等于 10 的 i 次方。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">inline void calc(long long n, int xs) &#123;</span><br></pre></td></tr></table></figure>
-<p>calc 函数用来计算 0 到 9 在区间 [1, n] 中出现的次数，xs = 1 表示这些出现次数是要加的，xs = -1 表示这些出现次数是要减的，后面的计算中我们只要乘上系数就可以处理加减的情况了。</p>
+<p>calc 函数用来计算 0 到 9 在区间 [1, n] 中出现的次数，xs = 1
+表示这些出现次数是要加的，xs = -1
+表示这些出现次数是要减的，后面的计算中我们只要乘上系数就可以处理加减的情况了。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">int m = 0;</span><br><span class="line">    for (; n; n /= 10)</span><br><span class="line">        a[++m] = n % 10;</span><br><span class="line">    for (int i = 1, j = m; i &lt; j; i++, j--)</span><br><span class="line">        swap(a[i], a[j]);</span><br></pre></td></tr></table></figure>
-<p>这段代码用来把 n 从左到右的数位一个个放入 a 数组中，由于一开始 n 在 a 数组中是从右往左记的，所以我们要把它前后翻转一下。</p>
+<p>这段代码用来把 n 从左到右的数位一个个放入 a 数组中，由于一开始 n 在 a
+数组中是从右往左记的，所以我们要把它前后翻转一下。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for (int i = 1; i &lt;= m; i++) &#123;</span><br></pre></td></tr></table></figure>
 <p>从 1 到 m 枚举我们要处理的是哪一类数。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">for (int j = 1; j &lt; i; j++)</span><br><span class="line">            ans[a[j]] += xs * a[i] * f[m - i];</span><br></pre></td></tr></table></figure>
 <p>计算满足 j &lt; i 的位置 j（i 左边的位置）对答案的贡献。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for (int j = 1; j &lt; a[i]; j++)</span><br><span class="line">            ans[j] += xs * f[m - i];</span><br><span class="line">        if (i != 1 &amp;&amp; a[i])</span><br><span class="line">            ans[0] += xs * f[m - i];</span><br></pre></td></tr></table></figure>
-<p>计算位置 i 对答案的贡献。如果现在考虑的是第 1 类，我们到后面去算 0 出现的次数。</p>
+<p>计算位置 i 对答案的贡献。如果现在考虑的是第 1 类，我们到后面去算 0
+出现的次数。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if (m != i) &#123;</span><br><span class="line">            for (int j = 1; j &lt; 10; j++)</span><br><span class="line">                ans[j] += xs * f[m - i - 1] * (m - i) * a[i];</span><br><span class="line">            if (i != 1)</span><br><span class="line">                ans[0] += xs * f[m - i - 1] * (m - i) * a[i];</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
-<p>计算满足 j &gt; i 的位置 j（i 右边的位置）对答案的贡献。和计算位置 i 对答案的贡献时一样，如果现在考虑的是第 1 类，我们到后面去算 0 出现的次数。</p>
+<p>计算满足 j &gt; i 的位置 j（i 右边的位置）对答案的贡献。和计算位置 i
+对答案的贡献时一样，如果现在考虑的是第 1 类，我们到后面去算 0
+出现的次数。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if (i == 1) &#123;</span><br><span class="line">            if (m &gt;= 2)    </span><br><span class="line">                ans[0] += xs * (a[1] - 1) * (m - 1) * f[m - 2];</span><br><span class="line">            for (int j = 2; j &lt; m; j++)</span><br><span class="line">                ans[0] += xs * 9 * (m - j) * f[m - j - 1];</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
-<p>计算第 1 类中 0 出现的次数，我们的做法是枚举第一个非零位在哪里，分第一个非零位是不是第 1 位两种情况讨论。</p>
+<p>计算第 1 类中 0
+出现的次数，我们的做法是枚举第一个非零位在哪里，分第一个非零位是不是第 1
+位两种情况讨论。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">for (int i = 1; i &lt;= m; i++)</span><br><span class="line">        ans[a[i]] += xs;</span><br></pre></td></tr></table></figure>
-<p>前面的代码统计了 0 到 9 在区间 [1, n) 中出现的次数，我们再把 n 考虑进去（数组 a 记录了 n 的每个数位），就知道了 0 到 9 在区间 [1, n] 中出现的次数啦！</p>
+<p>前面的代码统计了 0 到 9 在区间 [1, n) 中出现的次数，我们再把 n
+考虑进去（数组 a 记录了 n 的每个数位），就知道了 0 到 9 在区间 [1, n]
+中出现的次数啦！</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">scanf(&quot;%lld%lld&quot;, &amp;l, &amp;r);</span><br><span class="line">    calc(r, 1);</span><br><span class="line">    calc(l - 1, -1);</span><br></pre></td></tr></table></figure>
-<p>读入 l，r 后，我们调用 calc 函数，我们拿 0 到 9 在区间 [1, r] 中出现的次数减去在区间 [1, l - 1] 中出现的次数即为在区间 [l, r] 中出现的次数。</p>
+<p>读入 l，r 后，我们调用 calc 函数，我们拿 0 到 9 在区间 [1, r]
+中出现的次数减去在区间 [1, l - 1] 中出现的次数即为在区间 [l, r]
+中出现的次数。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for (int i = 0; i &lt; 10; i++)</span><br><span class="line">        printf(&quot;%lld &quot;, ans[i]);</span><br><span class="line">    printf(&quot;\n&quot;);</span><br></pre></td></tr></table></figure>
 <p>最后输出答案就可以啦！</p>
 <p>我们再来看一个题！</p>
-<h2 id="数数"><a href="#数数" class="headerlink" title="数数"></a>数数</h2><p>请问 $<a href="1≤l≤r≤10^{16}">l, r</a>$<a href="1≤l≤r≤10^{16}">l, r</a> 中有多少个数字满足数字中任意相邻两个数位的差的绝对值不超过 2。</p>
-<p>比如说，124 满足上述条件，125 却不满足，因为 2 和 5 的差的绝对值等于 3，超过了 2。</p>
-<p>解决这个题目的核心思想和 “数位和” 是一样的，首先我们也要做一次前缀和，区间 [l, r] 中有多少满足条件的数字等于区间 [1, r] 中有多少满足条件的数字 - 区间 [1, l - 1] 中有多少满足条件的数字。</p>
+<h2 id="数数">数数</h2>
+<p>请问 <span class="math inline">\([l, r](1≤l≤r≤10^{16})\)</span><a
+href="1≤l≤r≤10%5E%7B16%7D">l, r</a>
+中有多少个数字满足数字中任意相邻两个数位的差的绝对值不超过 2。</p>
+<p>比如说，124 满足上述条件，125 却不满足，因为 2 和 5 的差的绝对值等于
+3，超过了 2。</p>
+<p>解决这个题目的核心思想和 “数位和”
+是一样的，首先我们也要做一次前缀和，区间 [l, r]
+中有多少满足条件的数字等于区间 [1, r] 中有多少满足条件的数字 - 区间 [1,
+l - 1] 中有多少满足条件的数字。</p>
 <p>对于某个 n，我们想知道区间 [1, n] 中有多少满足条件的数字。</p>
-<p>对于区间 [1, n) 中的数字 s， 我们把它们按照以下方法进行分类：如果 s 从左到右数第一个小于 n 对应位置的数位是第 i 位，那么 s 就会被分到第 i 类。</p>
-<p>只要我们能求出每一类中有多少满足条件的数字，把它们加起来就是区间 [1, n) 中有多少满足条件的数字。然后再判断下 n 满不满足条件，我们就顺利求出了区间 [1, n] 中有多少满足条件的数字。</p>
-<p>现在我们来看如何求每一类中有多少满足条件的数字。当 $n = a_1a_2…a_m$ 时，考虑第 i 类的数，这些数字的前 i - 1 位和 n 的前 i - 1 位是一样的。紧接着，我们可以枚举第 i 位是几（第 i 位可以是 0 到 $a_{i-1}$ 中的数字），后面那些位置（满足 j &gt; i 的位置 j）想放什么就可以放什么。</p>
+<p>对于区间 [1, n) 中的数字 s， 我们把它们按照以下方法进行分类：如果 s
+从左到右数第一个小于 n 对应位置的数位是第 i 位，那么 s 就会被分到第 i
+类。</p>
+<p>只要我们能求出每一类中有多少满足条件的数字，把它们加起来就是区间 [1,
+n) 中有多少满足条件的数字。然后再判断下 n
+满不满足条件，我们就顺利求出了区间 [1, n] 中有多少满足条件的数字。</p>
+<p>现在我们来看如何求每一类中有多少满足条件的数字。当 <span
+class="math inline">\(n = a_1a_2...a_m\)</span> 时，考虑第 i
+类的数，这些数字的前 i - 1 位和 n 的前 i - 1
+位是一样的。紧接着，我们可以枚举第 i 位是几（第 i 位可以是 0 到 <span
+class="math inline">\(a_{i-1}\)</span> 中的数字），后面那些位置（满足 j
+&gt; i 的位置 j）想放什么就可以放什么。</p>
 <p>于是我们就可以用动态规划解决这个问题啦！</p>
 <p>在具体介绍如何解决这个问题前，我们先讨论下在动态规划中两种不同的转移策略：</p>
 <ul>
-<li>第一种策略是枚举状态 y，为了计算状态 y 的值 f[y]，我们需要枚举从哪些状态 x 可以转移到 y，然后用这些 x 的值更新 f[y]。比如说，如果一个状态的值等于所有能转移到它的状态的值的和，有 $f(y)=\sum_{x\in pre(y)}f(x)$ ，pre(y) 表示所有能转移到状态 y 的状态的集合。这也是在之前的文章中我们采用的写法；</li>
-<li>第二种策略是枚举状态 x，这时我们已经算完了状态 x 的值 f[x]（能转移到状态 x 的状态都需要在 x 之前被枚举到），我们需要枚举 x 能转移到哪些状态 y，然后用 x 的值更新 y 的值。在上面的例子中，对于所有 x 能转移到的状态 y，执行 f[y] += f[x] (状态 y 的值在原来的基础上加上状态 x 的值）。</li>
+<li>第一种策略是枚举状态 y，为了计算状态 y 的值
+f[y]，我们需要枚举从哪些状态 x 可以转移到 y，然后用这些 x 的值更新
+f[y]。比如说，如果一个状态的值等于所有能转移到它的状态的值的和，有 <span
+class="math inline">\(f(y)=\sum_{x\in pre(y)}f(x)\)</span> ，pre(y)
+表示所有能转移到状态 y
+的状态的集合。这也是在之前的文章中我们采用的写法；</li>
+<li>第二种策略是枚举状态 x，这时我们已经算完了状态 x 的值
+f[x]（能转移到状态 x 的状态都需要在 x 之前被枚举到），我们需要枚举 x
+能转移到哪些状态 y，然后用 x 的值更新 y 的值。在上面的例子中，对于所有 x
+能转移到的状态 y，执行 f[y] += f[x] (状态 y 的值在原来的基础上加上状态 x
+的值）。</li>
 </ul>
 <p>大家可以仔细思索一番，这两种策略本质上是一样的，在实际操作过程中，第二种策略往往比第一种策略容易实现，原因是<strong>很多时候要想清楚一个状态可以转移到哪些状态是简单的，反过来要想清楚一个状态可以从哪些状态转移过来可能会很难。</strong></p>
 <p>现在我们运用第二种策略来解决这个问题。</p>
-<p>为了统计有多少满足条件的数字，我们从左到右一位位考虑每个位置上的数字是几，在考虑第 i 位的时候（假设第 i 位后面的位置都不存在），这个位置上可以放几只和第 i - 1 位上是几有关（它们的差的绝对值需要小于等于 2），所以我们只要记当前考虑的最后一个位置上是几就可以啦，前面的位置上是几都不用记！在第 i - 1 位是 0 的时候还有一种特殊情况，有可能前 i - 1 位全是 0，那么第 i 位是几都是可以的（前面的前导 0 其实都不存在）！所以在设计状态的时候，我们还需要把前面的位置是不是全是 0 记下来。</p>
-<p>于是，我们用 $f[i][j][0…1]$ 表示考虑了前 i 个位置，第 i 位上是 j，前 i 位是否全是 0（0 表示全是 0，1 表示不全是）的情况下有多少满足条件的数字（这些数字都只有 i 位，假设第 i 位后面的位置都不存在）。</p>
-<p>假设我们考虑的是第 l 类的数，由于前 l - 1 位上的数字是固定的，第 l 位上的数我们也枚举了，所以我们只需要用动态规划处理后面 m - l 位放几的问题。</p>
-<p>让我们来看看怎么从考虑了前 i 位的状态转移到考虑了前 i + 1 位的状态，按照上面的分析，分为最后一维是 0 是 1 两种情况。</p>
-<p>如果最后一维是 1，也就是 $f[i][j][1]$ 的情况，意味着前 i 位不全是 0，那么第 i 位的数字是需要被考虑的，我们可以枚举第 i + 1 位的值 k，如果满足 |j - k| ≤ 2，那么 $f[i][j][1]$ 可以转移到 $f[i + 1][k][1]$，我们执行 $f[i + 1][k][1] += f[i][j][1]$。</p>
-<p>如果最后一维是 0，也就是 $f[i][0][0]$ 的情况，意味着前 i 位全是 0（第 i 位也必须是 0），我们有两种选择：</p>
+<p>为了统计有多少满足条件的数字，我们从左到右一位位考虑每个位置上的数字是几，在考虑第
+i 位的时候（假设第 i 位后面的位置都不存在），这个位置上可以放几只和第 i
+- 1 位上是几有关（它们的差的绝对值需要小于等于
+2），所以我们只要记当前考虑的最后一个位置上是几就可以啦，前面的位置上是几都不用记！在第
+i - 1 位是 0 的时候还有一种特殊情况，有可能前 i - 1 位全是 0，那么第 i
+位是几都是可以的（前面的前导 0
+其实都不存在）！所以在设计状态的时候，我们还需要把前面的位置是不是全是 0
+记下来。</p>
+<p>于是，我们用 <span class="math inline">\(f[i][j][0...1]\)</span>
+表示考虑了前 i 个位置，第 i 位上是 j，前 i 位是否全是 0（0 表示全是 0，1
+表示不全是）的情况下有多少满足条件的数字（这些数字都只有 i 位，假设第 i
+位后面的位置都不存在）。</p>
+<p>假设我们考虑的是第 l 类的数，由于前 l - 1 位上的数字是固定的，第 l
+位上的数我们也枚举了，所以我们只需要用动态规划处理后面 m - l
+位放几的问题。</p>
+<p>让我们来看看怎么从考虑了前 i 位的状态转移到考虑了前 i + 1
+位的状态，按照上面的分析，分为最后一维是 0 是 1 两种情况。</p>
+<p>如果最后一维是 1，也就是 <span
+class="math inline">\(f[i][j][1]\)</span> 的情况，意味着前 i 位不全是
+0，那么第 i 位的数字是需要被考虑的，我们可以枚举第 i + 1 位的值
+k，如果满足 |j - k| ≤ 2，那么 <span
+class="math inline">\(f[i][j][1]\)</span> 可以转移到 <span
+class="math inline">\(f[i + 1][k][1]\)</span>，我们执行 <span
+class="math inline">\(f[i + 1][k][1] += f[i][j][1]\)</span>。</p>
+<p>如果最后一维是 0，也就是 <span
+class="math inline">\(f[i][0][0]\)</span> 的情况，意味着前 i 位全是
+0（第 i 位也必须是 0），我们有两种选择：</p>
 <ul>
-<li>在第 i + 1 位上放 0，现在前 i + 1 位全是 0，所以状态的最后一维仍然是 0，这时 $f[i][0][0]$ 可以转移到 $f[i + 1][0][0]$，我们执行 $f[i + 1][0][0] += f[i][0][0]$；</li>
-<li>第 i + 1 位不是 0，由于前 i 位都是 0，所以这一位想放几就可以放几，于是我们可以从 1 到 9 枚举 k，这时 $f[i][0][0]$ 可以转移到 $f[i + 1][k][1]$，我们执行 $f[i + 1][k][1] += f[i][0][0]$。</li>
+<li>在第 i + 1 位上放 0，现在前 i + 1 位全是 0，所以状态的最后一维仍然是
+0，这时 <span class="math inline">\(f[i][0][0]\)</span> 可以转移到 <span
+class="math inline">\(f[i + 1][0][0]\)</span>，我们执行 <span
+class="math inline">\(f[i + 1][0][0] += f[i][0][0]\)</span>；</li>
+<li>第 i + 1 位不是 0，由于前 i 位都是
+0，所以这一位想放几就可以放几，于是我们可以从 1 到 9 枚举 k，这时 <span
+class="math inline">\(f[i][0][0]\)</span> 可以转移到 <span
+class="math inline">\(f[i + 1][k][1]\)</span>，我们执行 <span
+class="math inline">\(f[i + 1][k][1] += f[i][0][0]\)</span>。</li>
 </ul>
-<p>最后，我们考虑完了所有 m 个位置，当前这类数中满足条件的数字个数为 $\sum_{x=0}^9f[m][x][1]$ 。由于最后一位可以是 0 到 9 之间的任意数字，所以我们需要枚举最后一位是几。由于我们要统计的是大于等于 1 的满足条件的数字，所以状态的最后一维是 1（如果最后一维是 0，意味着数字的每一位都是 0，于是数字就等于 0 啦）。</p>
+<p>最后，我们考虑完了所有 m 个位置，当前这类数中满足条件的数字个数为
+<span class="math inline">\(\sum_{x=0}^9f[m][x][1]\)</span>
+。由于最后一位可以是 0 到 9
+之间的任意数字，所以我们需要枚举最后一位是几。由于我们要统计的是大于等于
+1 的满足条件的数字，所以状态的最后一维是 1（如果最后一维是
+0，意味着数字的每一位都是 0，于是数字就等于 0 啦）。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> a[<span class="number">21</span>];</span><br><span class="line"><span class="type">long</span> <span class="type">long</span> l, r, f[<span class="number">21</span>][<span class="number">10</span>][<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">long</span> <span class="type">long</span> <span class="title">calc</span><span class="params">(<span class="type">long</span> <span class="type">long</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!n)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> m = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (; n; n /= <span class="number">10</span>)</span><br><span class="line">        a[++m] = n % <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>, j = m; i &lt; j; i++, j--)</span><br><span class="line">        <span class="built_in">swap</span>(a[i], a[j]);</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> res = <span class="number">0</span>;</span><br><span class="line">    <span class="type">bool</span> ok = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= m &amp;&amp; ok; i++) &#123; </span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; a[i]; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i != <span class="number">1</span> &amp;&amp; <span class="built_in">abs</span>(j - a[i - <span class="number">1</span>]) &gt; <span class="number">2</span>)</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            <span class="built_in">memset</span>(f, <span class="number">0</span>, <span class="built_in">sizeof</span>(f));</span><br><span class="line">            <span class="keyword">if</span> (i == <span class="number">1</span> &amp;&amp; !j)</span><br><span class="line">                f[i][j][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                f[i][j][<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> k = i + <span class="number">1</span>; k &lt;= m; k++)</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> l = <span class="number">0</span>; l &lt; <span class="number">10</span>; l++)</span><br><span class="line">                    <span class="keyword">for</span> (<span class="type">int</span> r = <span class="number">0</span>; r &lt; <span class="number">2</span>; r++)</span><br><span class="line">                        <span class="keyword">if</span> (f[k - <span class="number">1</span>][l][r])</span><br><span class="line">                            <span class="keyword">for</span> (<span class="type">int</span> x = <span class="number">0</span>; x &lt; <span class="number">10</span>; x++) &#123;</span><br><span class="line">                                <span class="keyword">if</span> (r &amp;&amp; <span class="built_in">abs</span>(l - x) &lt;= <span class="number">2</span>)</span><br><span class="line">                                    f[k][x][r] += f[k - <span class="number">1</span>][l][r];</span><br><span class="line">                                <span class="keyword">if</span> (!r)</span><br><span class="line">                                    <span class="keyword">if</span> (!x)</span><br><span class="line">                                        f[k][<span class="number">0</span>][<span class="number">0</span>] += f[k - <span class="number">1</span>][<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line">                                    <span class="keyword">else</span></span><br><span class="line">                                        f[k][x][<span class="number">1</span>] += f[k - <span class="number">1</span>][<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line">                            &#125;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; <span class="number">10</span>; j++)</span><br><span class="line">                res += f[m][j][<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (i != <span class="number">1</span> &amp;&amp; <span class="built_in">abs</span>(a[i] - a[i - <span class="number">1</span>]) &gt; <span class="number">2</span>)</span><br><span class="line">            ok = <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (ok)</span><br><span class="line">        ++res;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%lld%lld&quot;</span>, &amp;l, &amp;r);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, <span class="built_in">calc</span>(r) - <span class="built_in">calc</span>(l - <span class="number">1</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>我们来看看代码！</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">long long calc(long long n) &#123;</span><br></pre></td></tr></table></figure>
@@ -348,78 +488,172 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">int m = 0;</span><br><span class="line">    for (; n; n /= 10)</span><br><span class="line">        a[++m] = n % 10;</span><br><span class="line">    for (int i = 1, j = m; i &lt; j; i++, j--)</span><br><span class="line">        swap(a[i], a[j]);</span><br></pre></td></tr></table></figure>
 <p>a 数组中记录的是 n 的每一个位置上是几。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">long long res = 0;</span><br><span class="line">    bool ok = true;</span><br></pre></td></tr></table></figure>
-<p>res 用来统计满足条件的数字个数，ok 记录的是考虑到第 i 类数的时候，前 i - 1 个固定的位置是不是满足条件（任意相邻两个数位的差的绝对值不超过 2）。</p>
+<p>res 用来统计满足条件的数字个数，ok 记录的是考虑到第 i 类数的时候，前
+i - 1 个固定的位置是不是满足条件（任意相邻两个数位的差的绝对值不超过
+2）。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for (int i = 1; i &lt;= m &amp;&amp; ok; i++) &#123; </span><br><span class="line">        for (int j = 0; j &lt; a[i]; j++) &#123;</span><br><span class="line">            if (i != 1 &amp;&amp; abs(j - a[i - 1]) &gt; 2)</span><br><span class="line">                continue;</span><br></pre></td></tr></table></figure>
-<p>我们枚举每一个类，在处理第 i 类的时候，我们枚举第 i 位上是几，并且也要判断第 i - 1 位上的数字和这个枚举到的数字的差的绝对值是不是小于等于 2。</p>
+<p>我们枚举每一个类，在处理第 i 类的时候，我们枚举第 i
+位上是几，并且也要判断第 i - 1
+位上的数字和这个枚举到的数字的差的绝对值是不是小于等于 2。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">memset(f, 0, sizeof(f));</span><br><span class="line">            if (i == 1 &amp;&amp; !j)</span><br><span class="line">                f[i][j][0] = 1;</span><br><span class="line">            else</span><br><span class="line">                f[i][j][1] = 1;</span><br></pre></td></tr></table></figure>
-<p>设置动态规划的初始状态，如果现在考虑的是第 1 类并且第 1 个位置上的数字是 0，则状态的最后一维等于 0，否则最后一维等于 1。</p>
+<p>设置动态规划的初始状态，如果现在考虑的是第 1 类并且第 1
+个位置上的数字是 0，则状态的最后一维等于 0，否则最后一维等于 1。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">for (int k = i + 1; k &lt;= m; k++)</span><br><span class="line">                for (int l = 0; l &lt; 10; l++)</span><br><span class="line">                    for (int r = 0; r &lt; 2; r++)</span><br><span class="line">                        if (f[k - 1][l][r])</span><br><span class="line">                            for (int x = 0; x &lt; 10; x++) &#123;</span><br><span class="line">                                if (r &amp;&amp; abs(l - x) &lt;= 2)</span><br><span class="line">                                    f[k][x][r] += f[k - 1][l][r];</span><br><span class="line">                                if (!r)</span><br><span class="line">                                    if (!x)</span><br><span class="line">                                        f[k][0][0] += f[k - 1][0][0];</span><br><span class="line">                                    else</span><br><span class="line">                                        f[k][x][1] += f[k - 1][0][0];</span><br><span class="line">                            &#125;</span><br></pre></td></tr></table></figure>
-<p>现在我们要用考虑了前 k - 1 个位置的状态推出考虑了前 k 个位置的状态，这时我们要枚举第 k 位上的数是几，对应的进行转移。</p>
+<p>现在我们要用考虑了前 k - 1 个位置的状态推出考虑了前 k
+个位置的状态，这时我们要枚举第 k 位上的数是几，对应的进行转移。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">for (int j = 0; j &lt; 10; j++)</span><br><span class="line">                res += f[m][j][1];</span><br></pre></td></tr></table></figure>
 <p>紧接着，我们把第 i 类中满足条件的数字的个数加入 res 中。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">if (i != 1 &amp;&amp; abs(a[i] - a[i - 1]) &gt; 2)</span><br><span class="line">            ok = false;</span><br></pre></td></tr></table></figure>
-<p>考虑完第 i 类后，第 i 位上是几就被固定了，我们需要检查第 i - 1 位和第 i 位上的数字是否满足条件，如果不满足的话，后面的类就都不用考虑啦！</p>
+<p>考虑完第 i 类后，第 i 位上是几就被固定了，我们需要检查第 i - 1 位和第
+i 位上的数字是否满足条件，如果不满足的话，后面的类就都不用考虑啦！</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">if (ok)</span><br><span class="line">        ++res;</span><br></pre></td></tr></table></figure>
-<p>之前统计了区间 [1, n) 中的数，如果 n 满足条件，则 res 还要加 1。当考虑完所有的类之后，ok 其实就记录了 n 满不满足条件。</p>
+<p>之前统计了区间 [1, n) 中的数，如果 n 满足条件，则 res 还要加
+1。当考虑完所有的类之后，ok 其实就记录了 n 满不满足条件。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scanf(&quot;%lld%lld&quot;, &amp;l, &amp;r);</span><br><span class="line">    printf(&quot;%lld\n&quot;, calc(r) - calc(l - 1));</span><br></pre></td></tr></table></figure>
-<p>区间 [l, r] 的答案等于区间 [1, r] 的答案 - 区间 [1, l - 1] 的答案。</p>
-<p>在这个做法中，我们需要从 1 到 m 枚举每一类数。对于每一类，我们需要枚举后面的每个位置，它的时间复杂度是 $O(m^2)$ 的。</p>
+<p>区间 [l, r] 的答案等于区间 [1, r] 的答案 - 区间 [1, l - 1]
+的答案。</p>
+<p>在这个做法中，我们需要从 1 到 m
+枚举每一类数。对于每一类，我们需要枚举后面的每个位置，它的时间复杂度是
+<span class="math inline">\(O(m^2)\)</span> 的。</p>
 <p>这就是区间动态规划啦！</p>
 <p>我们总结下区间动态规划的通用做法。</p>
-<p>**首先我们要做一次前缀和，区间 [l, r] 的答案等于区间 [1, r] 的答案 - 区间 [1, l - 1] 的答案。对于某个 n，现在我们想知道区间 [1, n] 的答案。然后我们要对区间 [1, n) 分类，对于区间 [1, n) 中的数字 s， 我们把它们按照以下方法进行分类：如果 s 从左到右数第一个小于 n 对应位置的数位是第 i 位，那么 s 就会被分到第 i 类。接着我们要计算每一类的答案是多少，把它们加起来就是区间 [1, n) 的答案。然后再加入 n 对于答案的贡献，我们就顺利求出了区间 [1, n] 的答案。为了算出第 i 类的答案，一般我们会枚举第 i 位上是几，由于前 i - 1 位上的数字是固定的，而 i 后面的位置上想放几就可以放几，对于后面的位置，我们用动态规划处理就行啦</p>
+<p>**首先我们要做一次前缀和，区间 [l, r] 的答案等于区间 [1, r] 的答案 -
+区间 [1, l - 1] 的答案。对于某个 n，现在我们想知道区间 [1, n]
+的答案。然后我们要对区间 [1, n) 分类，对于区间 [1, n) 中的数字 s，
+我们把它们按照以下方法进行分类：如果 s 从左到右数第一个小于 n
+对应位置的数位是第 i 位，那么 s 就会被分到第 i
+类。接着我们要计算每一类的答案是多少，把它们加起来就是区间 [1, n)
+的答案。然后再加入 n 对于答案的贡献，我们就顺利求出了区间 [1, n]
+的答案。为了算出第 i 类的答案，一般我们会枚举第 i 位上是几，由于前 i - 1
+位上的数字是固定的，而 i
+后面的位置上想放几就可以放几，对于后面的位置，我们用动态规划处理就行啦</p>
 <p>再回到题目，我们有没有更快的做法呢？</p>
-<p>答案是肯定的，考虑上面这个做法，在针对每一类进行动态规划的时候，有些计算其实是重复的（如果 n = 12345 ，第 2 类中考虑了前 3 个位置时的 111 和 第 3 类中考虑了前 3 个位置时的 121 对于后面的位置是一样的，因为它们的最后一位都是 1）。</p>
-<p>我们该怎么做，才能不进行这些重复计算呢？考虑完前 i 个位置以后，第 i + 1 个位置上可以放几除了和第 i 位是几有关，还有另一件事情能够影响它——当前考虑的数字的前 i 位和 n 的前 i 位是否相等，如果相等的话，第 i + 1 位上只可以放 0 到 $a_{i+1}$ 中的数（否则整个数就比 n 大了，注意我们想求的是区间 [1, n] 的答案）。如果不相等，也就是说当前考虑的数字的前 i 位比 n 的前 i 位小，第 i + 1 位上想放几就可以放几。于是我们就可以动态规划啦！</p>
-<p>现在我们要在动态规划的状态中多加一维。我们用 $f[i][j][0…1][0…1]$ 表示考虑了前 i 个位置，第 i 位上是 j，前 i 位是否全是 0（0 表示全是 0，1 表示不全是），这个数字的前 i 位和 n 的前 i 位是否相等（0 表示不相等，1 表示相等）的情况下有多少满足条件的数字。</p>
-<p>让我们来看看怎么从考虑了前 i 位的状态转移到考虑了前 i + 1 位的状态，状态的前三维如何处理前面已经介绍过了，让我们来看看最后一维的情况：</p>
+<p>答案是肯定的，考虑上面这个做法，在针对每一类进行动态规划的时候，有些计算其实是重复的（如果
+n = 12345 ，第 2 类中考虑了前 3 个位置时的 111 和 第 3 类中考虑了前 3
+个位置时的 121 对于后面的位置是一样的，因为它们的最后一位都是 1）。</p>
+<p>我们该怎么做，才能不进行这些重复计算呢？考虑完前 i 个位置以后，第 i +
+1 个位置上可以放几除了和第 i
+位是几有关，还有另一件事情能够影响它——当前考虑的数字的前 i 位和 n 的前 i
+位是否相等，如果相等的话，第 i + 1 位上只可以放 0 到 <span
+class="math inline">\(a_{i+1}\)</span> 中的数（否则整个数就比 n
+大了，注意我们想求的是区间 [1, n]
+的答案）。如果不相等，也就是说当前考虑的数字的前 i 位比 n 的前 i
+位小，第 i + 1 位上想放几就可以放几。于是我们就可以动态规划啦！</p>
+<p>现在我们要在动态规划的状态中多加一维。我们用 <span
+class="math inline">\(f[i][j][0...1][0...1]\)</span> 表示考虑了前 i
+个位置，第 i 位上是 j，前 i 位是否全是 0（0 表示全是 0，1
+表示不全是），这个数字的前 i 位和 n 的前 i 位是否相等（0 表示不相等，1
+表示相等）的情况下有多少满足条件的数字。</p>
+<p>让我们来看看怎么从考虑了前 i 位的状态转移到考虑了前 i + 1
+位的状态，状态的前三维如何处理前面已经介绍过了，让我们来看看最后一维的情况：</p>
 <ul>
-<li>如果当前状态的最后一维是 0，第 i + 1 位想放几就放几；</li>
-<li><p>如果当前状态的最后一维是 1，我们有两种选择：</p>
-</li>
-<li><p>第 i + 1 位上放 0 到 $a_{i+1} - 1$中的数，最后一维变成了 0；</p>
-</li>
-<li>第 i + 1 位上放 $a_{i+1}$，最后一维仍然是 1；</li>
+<li><p>如果当前状态的最后一维是 0，第 i + 1 位想放几就放几；</p></li>
+<li><p>如果当前状态的最后一维是 1，我们有两种选择：</p></li>
+<li><p>第 i + 1 位上放 0 到 <span class="math inline">\(a_{i+1} -
+1\)</span>中的数，最后一维变成了 0；</p></li>
+<li><p>第 i + 1 位上放 <span
+class="math inline">\(a_{i+1}\)</span>，最后一维仍然是 1；</p></li>
 </ul>
-<p>最后答案等于 $\sum_{x=0}^9(f[m][x][1][0]+f[m][x][1][1])$。最后一维等于 0，表示的是考虑的数字比 n 小的情况（考虑的数字的前 m 位比 n 的前 m 位小，由于数字一共只有 m 位，意味着考虑的数字比 n 小）；最后一维等于 1，表示的是考虑的数字等于 n 情况。于是，我们就算出了区间 [1, n] 中有多少满足条件的数字。</p>
-<p>有了这最后一维，我们从左到右做一遍动态规划就可以搞定啦！现在为什么不用枚举每一类了呢？是因为在之前枚举每一类分别进行动态规划的做法中，其实我们想保证的是在动态规划的过程里，考虑的所有数字都要比 n 小，于是后面每个位置都可以想放几就放几而不用考虑其他的限制。现在通过最后一维，我们也实现了考虑的所有数字都要小于等于 n 的目的！</p>
+<p>最后答案等于 <span
+class="math inline">\(\sum_{x=0}^9(f[m][x][1][0]+f[m][x][1][1])\)</span>。最后一维等于
+0，表示的是考虑的数字比 n 小的情况（考虑的数字的前 m 位比 n 的前 m
+位小，由于数字一共只有 m 位，意味着考虑的数字比 n 小）；最后一维等于
+1，表示的是考虑的数字等于 n 情况。于是，我们就算出了区间 [1, n]
+中有多少满足条件的数字。</p>
+<p>有了这最后一维，我们从左到右做一遍动态规划就可以搞定啦！现在为什么不用枚举每一类了呢？是因为在之前枚举每一类分别进行动态规划的做法中，其实我们想保证的是在动态规划的过程里，考虑的所有数字都要比
+n
+小，于是后面每个位置都可以想放几就放几而不用考虑其他的限制。现在通过最后一维，我们也实现了考虑的所有数字都要小于等于
+n 的目的！</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> a[<span class="number">21</span>];</span><br><span class="line"><span class="type">long</span> <span class="type">long</span> l, r, f[<span class="number">21</span>][<span class="number">10</span>][<span class="number">2</span>][<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">long</span> <span class="type">long</span> <span class="title">calc</span><span class="params">(<span class="type">long</span> <span class="type">long</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!n)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> m = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (; n; n /= <span class="number">10</span>)</span><br><span class="line">        a[++m] = n % <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>, j = m; i &lt; j; i++, j--)</span><br><span class="line">        <span class="built_in">swap</span>(a[i], a[j]);</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> res = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">memset</span>(f, <span class="number">0</span>, <span class="built_in">sizeof</span>(f));</span><br><span class="line">    f[<span class="number">0</span>][<span class="number">0</span>][<span class="number">0</span>][<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= m; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; <span class="number">10</span>; j++)</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">0</span>; k &lt; <span class="number">2</span>; k++)</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> l = <span class="number">0</span>; l &lt; <span class="number">2</span>; l++)</span><br><span class="line">                    <span class="keyword">if</span> (f[i - <span class="number">1</span>][j][k][l]) </span><br><span class="line">                        <span class="keyword">for</span> (<span class="type">int</span> x = <span class="number">0</span>; x &lt; <span class="number">10</span>; x++) &#123;</span><br><span class="line">                            <span class="keyword">if</span> (l &amp;&amp; x &gt; a[i])</span><br><span class="line">                                <span class="keyword">continue</span>;</span><br><span class="line">                            <span class="keyword">if</span> (l) &#123;</span><br><span class="line">                                <span class="keyword">if</span> (x &lt; a[i])</span><br><span class="line">                                    <span class="keyword">if</span> (!k) &#123;</span><br><span class="line">                                        <span class="keyword">if</span> (!x)</span><br><span class="line">                                            f[i][<span class="number">0</span>][<span class="number">0</span>][<span class="number">0</span>] += f[i - <span class="number">1</span>][j][k][l];</span><br><span class="line">                                        <span class="keyword">else</span></span><br><span class="line">                                            f[i][x][<span class="number">1</span>][<span class="number">0</span>] += f[i - <span class="number">1</span>][j][k][l];</span><br><span class="line">                                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                                        <span class="keyword">if</span> (<span class="built_in">abs</span>(j - x) &lt;= <span class="number">2</span>)</span><br><span class="line">                                            f[i][x][<span class="number">1</span>][<span class="number">0</span>] += f[i - <span class="number">1</span>][j][k][l];</span><br><span class="line">                                    &#125;</span><br><span class="line">                                <span class="keyword">else</span></span><br><span class="line">                                    <span class="keyword">if</span> (!k)</span><br><span class="line">                                        f[i][x][<span class="number">1</span>][<span class="number">1</span>] += f[i - <span class="number">1</span>][j][k][l];</span><br><span class="line">                                    <span class="keyword">else</span></span><br><span class="line">                                        <span class="keyword">if</span> (<span class="built_in">abs</span>(j - x) &lt;= <span class="number">2</span>)</span><br><span class="line">                                            f[i][x][<span class="number">1</span>][<span class="number">1</span>] += f[i - <span class="number">1</span>][j][k][l];</span><br><span class="line">                            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                                <span class="keyword">if</span> (!k) &#123;</span><br><span class="line">                                    <span class="keyword">if</span> (!x)</span><br><span class="line">                                        f[i][<span class="number">0</span>][<span class="number">0</span>][<span class="number">0</span>] += f[i - <span class="number">1</span>][j][k][l];</span><br><span class="line">                                    <span class="keyword">else</span></span><br><span class="line">                                        f[i][x][<span class="number">1</span>][<span class="number">0</span>] += f[i - <span class="number">1</span>][j][k][l];</span><br><span class="line">                                &#125; <span class="keyword">else</span></span><br><span class="line">                                    <span class="keyword">if</span> (<span class="built_in">abs</span>(j - x) &lt;= <span class="number">2</span>)</span><br><span class="line">                                        f[i][x][<span class="number">1</span>][<span class="number">0</span>] += f[i - <span class="number">1</span>][j][k][l];</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">        res += f[m][i][<span class="number">1</span>][<span class="number">0</span>] + f[m][i][<span class="number">1</span>][<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%lld%lld&quot;</span>, &amp;l, &amp;r);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, <span class="built_in">calc</span>(r) - <span class="built_in">calc</span>(l - <span class="number">1</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>代码的核心部分和之前是类似的，大家可以研究下转移中和之前不一样的地方，在此我们就不展开啦！</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">memset(f, 0, sizeof(f));</span><br><span class="line">    f[0][0][0][1] = 1;</span><br></pre></td></tr></table></figure>
-<p>需要注意下初始状态，一开始我们一个位置都没有考虑（考虑了前 0 个位置），这其实等价于我们把位置变多（增大 m）以后前面全是前导 0 的情况，所以第 2 维和第 3 维我们都可以设置成 0。由于现在一个位置都没有考虑，所有数字都是一样的，所以最后一维为 1。</p>
-<p>现在我们只需要用 i 从左到右枚举每一个位置就可以啦，时间复杂度降到了 O(m)。</p>
-<p><strong>基本所有的区间动态规划问题都可以用这个方法优化掉一个 m 的时间复杂度，具体的做法是在状态中加入一维表示考虑了前 i 位以后，这个数字的前 i 位和 n 的前 i 位是否相等，然后我们就知道了第 i + 1 位可以放什么数字。</strong></p>
+<p>需要注意下初始状态，一开始我们一个位置都没有考虑（考虑了前 0
+个位置），这其实等价于我们把位置变多（增大 m）以后前面全是前导 0
+的情况，所以第 2 维和第 3 维我们都可以设置成
+0。由于现在一个位置都没有考虑，所有数字都是一样的，所以最后一维为
+1。</p>
+<p>现在我们只需要用 i 从左到右枚举每一个位置就可以啦，时间复杂度降到了
+O(m)。</p>
+<p><strong>基本所有的区间动态规划问题都可以用这个方法优化掉一个 m
+的时间复杂度，具体的做法是在状态中加入一维表示考虑了前 i
+位以后，这个数字的前 i 位和 n 的前 i 位是否相等，然后我们就知道了第 i +
+1 位可以放什么数字。</strong></p>
 <p>让我们再来看一个题。</p>
-<h2 id="数数-2"><a href="#数数-2" class="headerlink" title="数数 2"></a>数数 2</h2><p>请问 $<a href="1≤l≤r≤10^{16}">l, r</a>$ <a href="1≤l≤r≤10^{16}">l, r</a> 中有多少个数字满足数字的各个数位的和是质数。</p>
-<p>例如，124 是一个满足条件的数字，因为它的各个数位的和等于 7，而 7 是质数。125 不是一个满足条件的数字，因为它的各个数位的和等于 8，而 8 不是质数。</p>
+<h2 id="数数-2">数数 2</h2>
+<p>请问 <span class="math inline">\([l, r](1≤l≤r≤10^{16})\)</span> <a
+href="1≤l≤r≤10%5E%7B16%7D">l, r</a>
+中有多少个数字满足数字的各个数位的和是质数。</p>
+<p>例如，124 是一个满足条件的数字，因为它的各个数位的和等于 7，而 7
+是质数。125 不是一个满足条件的数字，因为它的各个数位的和等于 8，而 8
+不是质数。</p>
 <p>我们用刚刚学到的解决数位动态规划问题的一般方法来解决这个问题。</p>
-<p>前缀和以及分类的思路跟之前是一模一样的，由于篇幅原因，在这里就省略了。当 $n = a_1a_2…a_m$n = a_1a_2…a_m 时，区间 [1, n) 的数被分为了 m 类。</p>
-<p>对于第 l 类数，前 l - 1 个位置的值都是固定的，我们从 0 到 $a_l-1$a_l-1 枚举第 l 个位置上的数字是几，l 以后的位置上想放几就可以放几，于是我们可以用动态规划解决后面的位置的情况。</p>
-<p>我们用 f[i][j] 表示考虑了前 i 个位置，前 i 位上的数的和是 j 的数字有多少个。考虑 f[i][j] 可以转移到哪些状态，我们只要从 0 到 9 枚举第 i + 1 位上的数字 k，就可以转移到状态 f[i + 1][j + k] 啦！于是我们执行 f[i + 1][j + k] += f[i][j]。</p>
-<p>最后统计答案的时候，只要判断下所有数位的和是不是质数就好啦！我们把满足 j 是质数的 f[m][j] 加起来，就是当前考虑的这一类的答案！</p>
+<p>前缀和以及分类的思路跟之前是一模一样的，由于篇幅原因，在这里就省略了。当
+<span class="math inline">\(n = a_1a_2...a_m\)</span>n = a_1a_2...a_m
+时，区间 [1, n) 的数被分为了 m 类。</p>
+<p>对于第 l 类数，前 l - 1 个位置的值都是固定的，我们从 0 到 <span
+class="math inline">\(a_l-1\)</span>a_l-1 枚举第 l 个位置上的数字是几，l
+以后的位置上想放几就可以放几，于是我们可以用动态规划解决后面的位置的情况。</p>
+<p>我们用 f[i][j] 表示考虑了前 i 个位置，前 i 位上的数的和是 j
+的数字有多少个。考虑 f[i][j] 可以转移到哪些状态，我们只要从 0 到 9
+枚举第 i + 1 位上的数字 k，就可以转移到状态 f[i + 1][j + k]
+啦！于是我们执行 f[i + 1][j + k] += f[i][j]。</p>
+<p>最后统计答案的时候，只要判断下所有数位的和是不是质数就好啦！我们把满足
+j 是质数的 f[m][j] 加起来，就是当前考虑的这一类的答案！</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.h&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">long long l, r, f[18][201];</span><br><span class="line">bool b[201];</span><br><span class="line">int a[21];</span><br><span class="line"></span><br><span class="line">long long calc(long long n) &#123;</span><br><span class="line">    if (!n)</span><br><span class="line">        return 0;</span><br><span class="line">    int m = 0;</span><br><span class="line">    for (; n; n /= 10)</span><br><span class="line">        a[++m] = n % 10;</span><br><span class="line">    for (int i = 1, j = m; i &lt; j; i++, j--)</span><br><span class="line">        swap(a[i], a[j]);</span><br><span class="line">    long long res = 0;</span><br><span class="line">    int sum = 0;</span><br><span class="line">    for (int i = 1; i &lt;= m; i++) &#123;</span><br><span class="line">        for (int j = 0; j &lt; a[i]; j++) &#123;</span><br><span class="line">            memset(f, 0, sizeof(f));</span><br><span class="line">            f[i][sum + j] = 1;</span><br><span class="line">            for (int k = i + 1; k &lt;= m; k++)</span><br><span class="line">                for (int l = 0; l &lt;= (k - 1) * 9; l++)</span><br><span class="line">                    if (f[k - 1][l])</span><br><span class="line">                        for (int x = 0; x &lt; 10; x++)</span><br><span class="line">                            f[k][x + l] += f[k - 1][l];</span><br><span class="line">            for (int j = 2; j &lt;= 9 * m; j++)</span><br><span class="line">                if (!b[j])</span><br><span class="line">                    res += f[m][j];</span><br><span class="line">        &#125;</span><br><span class="line">        sum += a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    if (!b[sum])</span><br><span class="line">        ++res;</span><br><span class="line">    return res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    memset(b, false, sizeof(b));</span><br><span class="line">    b[1] = true;</span><br><span class="line">    for (int i = 2; i &lt;= 200; i++)</span><br><span class="line">        if (!b[i])</span><br><span class="line">            for (int j = i + i; j &lt;= 200; j += i)</span><br><span class="line">                b[j] = true;</span><br><span class="line">    scanf(&quot;%lld%lld&quot;, &amp;l, &amp;r);</span><br><span class="line">    printf(&quot;%lld\n&quot;, calc(r) - calc(l - 1));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>让我们来看看代码！</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">memset(b, false, sizeof(b));</span><br><span class="line">    b[1] = true;</span><br><span class="line">    for (int i = 2; i &lt;= 200; i++)</span><br><span class="line">        if (!b[i])</span><br><span class="line">            for (int j = i + i; j &lt;= 200; j += i)</span><br><span class="line">                b[j] = true;</span><br></pre></td></tr></table></figure>
-<p>b 数组用来记录每个数字是不是质数，b[i] = false 表示 i 是质数，b[i] = true 表示 i 是合数。预处理 b 数组用的是一种时间复杂度为 O(nlogn) 的方法，我们从小到大枚举 i，如果 i 是质数（不存在比它小的除 1 以外的因数），那么我们就把不等于 i 的 i 的倍数都标记为合数。至于这种方法的时间复杂度为什么是 O(nlogn) 的，大家可以学习一下调和级数的概念。这里我们记录 200 以内的数是不是质数就够了，原因是 l, r 的最大值是 10 的 16 次方，这是一个 17 位数，每个位置上最大的数字是 9，所以数位和最大也不会超过 200。</p>
+<p>b 数组用来记录每个数字是不是质数，b[i] = false 表示 i 是质数，b[i] =
+true 表示 i 是合数。预处理 b 数组用的是一种时间复杂度为 O(nlogn)
+的方法，我们从小到大枚举 i，如果 i 是质数（不存在比它小的除 1
+以外的因数），那么我们就把不等于 i 的 i
+的倍数都标记为合数。至于这种方法的时间复杂度为什么是 O(nlogn)
+的，大家可以学习一下调和级数的概念。这里我们记录 200
+以内的数是不是质数就够了，原因是 l, r 的最大值是 10 的 16 次方，这是一个
+17 位数，每个位置上最大的数字是 9，所以数位和最大也不会超过 200。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">long long calc(long long n) &#123;</span><br></pre></td></tr></table></figure>
 <p>calc 函数用来计算区间 [1, n] 里有多少满足条件的数字。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">long long res = 0;</span><br><span class="line">    int sum = 0;</span><br></pre></td></tr></table></figure>
-<p>res 记录的是满足条件的数字个数。在我们处理第 i 类数时，sum 中记录的是前 i - 1 个位置上的数位和。</p>
+<p>res 记录的是满足条件的数字个数。在我们处理第 i 类数时，sum
+中记录的是前 i - 1 个位置上的数位和。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for (int i = 1; i &lt;= m; i++) &#123;</span><br><span class="line">        for (int j = 0; j &lt; a[i]; j++) &#123;</span><br><span class="line">            memset(f, 0, sizeof(f));</span><br><span class="line">            f[i][sum + j] = 1;</span><br></pre></td></tr></table></figure>
-<p>我们从 1 到 m 枚举第 i 类数并且从 0 到 $a_i - 1$a_i - 1 枚举第 i 个位置上的数 j。并且设置动态规划的初始状态，这时前 i - 1 位的数位和等于 sum，第 i 个位置上是 j，所以前 i 个位置的数位和等于 sum + j。</p>
+<p>我们从 1 到 m 枚举第 i 类数并且从 0 到 <span
+class="math inline">\(a_i - 1\)</span>a_i - 1 枚举第 i 个位置上的数
+j。并且设置动态规划的初始状态，这时前 i - 1 位的数位和等于 sum，第 i
+个位置上是 j，所以前 i 个位置的数位和等于 sum + j。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for (int k = i + 1; k &lt;= m; k++)</span><br><span class="line">                for (int l = 0; l &lt;= (k - 1) * 9; l++)</span><br><span class="line">                    if (f[k - 1][l])</span><br><span class="line">                        for (int x = 0; x &lt; 10; x++)</span><br><span class="line">                            f[k][x + l] += f[k - 1][l];</span><br></pre></td></tr></table></figure>
-<p>为了从考虑了前 k - 1 位的状态转移到考虑了前 k 位的状态，我们只要从 0 到 9 枚举第 k 位上的值 x 就好啦！</p>
+<p>为了从考虑了前 k - 1 位的状态转移到考虑了前 k 位的状态，我们只要从 0
+到 9 枚举第 k 位上的值 x 就好啦！</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for (int j = 2; j &lt;= 9 * m; j++)</span><br><span class="line">                if (!b[j])</span><br><span class="line">                    res += f[m][j];</span><br></pre></td></tr></table></figure>
-<p>对于所有质数 j，res 要加上 f[m][j]。因为当前考虑的数字一共有 m 个位置，每个位置上最大可以是 9，所以 j 最大可以是 9 * m。</p>
+<p>对于所有质数 j，res 要加上 f[m][j]。因为当前考虑的数字一共有 m
+个位置，每个位置上最大可以是 9，所以 j 最大可以是 9 * m。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">if (!b[sum])</span><br><span class="line">        ++res;</span><br></pre></td></tr></table></figure>
 <p>如果 n 的数位和是质数，res 还要再加 1。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printf(&quot;%lld\n&quot;, calc(r) - calc(l - 1));</span><br></pre></td></tr></table></figure>
 <p>最后答案等于 calc(r) - calc(l - 1)。</p>
-<p>对于第 i 类数，状态中的第二维是 O(m) 的，我们要枚举 i 后面的每一位，这部分的时间复杂度也是 O(m) 的，所以处理第 i 类数的时间复杂度为 $O(m^2)$O(m^2)。由于我们一共要处理 m 类数，所以这个做法的时间复杂度是 $O(m^3)$O(m^3) 的。</p>
-<p>有同学可能要问了，前两个题我们花了好大的力气处理前导 0，这题为什么就不用处理了呢？原因是这样的，在这个题目中，前导 0 不会对数位和的值产生影响，所以也就不用处理了。</p>
-<p>我们也可以用 “ 数数 “中优化复杂度的方法优化掉一个 m，有兴趣的读者可以尝试尝试。</p>
+<p>对于第 i 类数，状态中的第二维是 O(m) 的，我们要枚举 i
+后面的每一位，这部分的时间复杂度也是 O(m) 的，所以处理第 i
+类数的时间复杂度为 <span
+class="math inline">\(O(m^2)\)</span>O(m^2)。由于我们一共要处理 m
+类数，所以这个做法的时间复杂度是 <span
+class="math inline">\(O(m^3)\)</span>O(m^3) 的。</p>
+<p>有同学可能要问了，前两个题我们花了好大的力气处理前导
+0，这题为什么就不用处理了呢？原因是这样的，在这个题目中，前导 0
+不会对数位和的值产生影响，所以也就不用处理了。</p>
+<p>我们也可以用 " 数数 “中优化复杂度的方法优化掉一个
+m，有兴趣的读者可以尝试尝试。</p>
 <p>最后还有一个题留给大家思考。</p>
-<h2 id="数数-3"><a href="#数数-3" class="headerlink" title="数数 3"></a>数数 3</h2><p>请问 $<a href="1≤l≤r≤10^{16}">l, r</a>$<a href="1≤l≤r≤10^{16}">l, r</a> 中有多少个数字 a 满足数字中存在 3 个连续的数位 $a_i, a_{i+1}, a_{i+2}$a_i, a_{i+1}, a_{i+2} 使得 $a_i &lt; a_{i+1} &lt; a_{i+2}$a_i &lt;a_{i+1} &lt; a_{i+2} ，其中 $a_i$a_i 表示 a 从左到右数第 i 位上的值。</p>
-<p><a href="https://link.zhihu.com/?target=http%3A//oj.daimayuan.top/problem/248">Daimayuan Online Judge</a></p>
+<h2 id="数数-3">数数 3</h2>
+<p>请问 <span class="math inline">\([l, r](1≤l≤r≤10^{16})\)</span><a
+href="1≤l≤r≤10%5E%7B16%7D">l, r</a> 中有多少个数字 a 满足数字中存在 3
+个连续的数位 <span class="math inline">\(a_i, a_{i+1},
+a_{i+2}\)</span>a_i, a_{i+1}, a_{i+2} 使得 <span
+class="math inline">\(a_i &lt; a_{i+1} &lt; a_{i+2}\)</span>a_i
+&lt;a_{i+1} &lt; a_{i+2} ，其中 <span
+class="math inline">\(a_i\)</span>a_i 表示 a 从左到右数第 i
+位上的值。</p>
+<p><a
+href="https://link.zhihu.com/?target=http%3A//oj.daimayuan.top/problem/248">Daimayuan
+Online Judge</a></p>
 <p>数位动态规划问题，完结撒花！</p>
 
     </div>
@@ -777,3 +1011,7 @@ darkmode.showWidget();
   -->
 </body>
 </html>
+<!--动态title-->
+<script type="text/javascript" src="/js/src/activetitle.js"></script>
+
+
