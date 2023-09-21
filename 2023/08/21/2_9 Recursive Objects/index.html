@@ -23,12 +23,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="2_9   Recursive Objects Objects can have other objects as attribute values. When an object of some class has an attribute value of that same class, it is a recursive object. 对象可以i有其他对象作为属性值。当类的对象有">
+  <meta name="description" content="2_9   Recursive ObjectsObjects can have other objects as attribute values. When an object of some class has an attribute value of that same class, it is a recursive object. 对象可以i有其他对象作为属性值。当类的对象有相同类下的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2_9   Recursive Objects">
 <meta property="og:url" content="http://example.com/2023/08/21/2_9%20Recursive%20Objects/index.html">
 <meta property="og:site_name" content="viewoverlook">
-<meta property="og:description" content="2_9   Recursive Objects Objects can have other objects as attribute values. When an object of some class has an attribute value of that same class, it is a recursive object. 对象可以i有其他对象作为属性值。当类的对象有">
+<meta property="og:description" content="2_9   Recursive ObjectsObjects can have other objects as attribute values. When an object of some class has an attribute value of that same class, it is a recursive object. 对象可以i有其他对象作为属性值。当类的对象有相同类下的">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://www.composingprograms.com/img/set_trees.png">
 <meta property="article:published_time" content="2023-08-20T16:00:00.000Z">
@@ -181,6 +181,8 @@
     <span>0%</span>
   </div>
 
+  <a href="https://github.com/XuandYu000" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
 
     <main class="main">
       <div class="main-inner">
@@ -245,327 +247,101 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="recursive-objects">2_9   Recursive Objects</h1>
-<p>Objects can have other objects as attribute values. When an object of
-some class has an attribute value of that same class, it is a recursive
-object.</p>
+        <h1 id="2-9-Recursive-Objects"><a href="#2-9-Recursive-Objects" class="headerlink" title="2_9   Recursive Objects"></a>2_9   Recursive Objects</h1><p>Objects can have other objects as attribute values. When an object of some class has an attribute value of that same class, it is a recursive object.</p>
 <p>对象可以i有其他对象作为属性值。当类的对象有相同类下的属性值，那么它就是个递归对象。</p>
-<h3 id="linked-list-class">2.9.1   Linked List Class</h3>
-<p>A linked list, introduced earlier in this chapter, is composed of a
-first element and the rest of the list. The rest of a linked list is
-itself a linked list — a recursive definition. The empty list is a
-special case of a linked list that has no first element or rest. A
-linked list is a sequence: it has a finite length and supports element
-selection by index.</p>
-<p>We can now implement a class with the same behavior. In this version,
-we will define its behavior using special method names that allow our
-class to work with the built-in len function and element selection
-operator (square brackets or operator.getitem) in Python. These built-in
-functions invoke(调用) special method names of a class: length is
-computed by <strong>len</strong> and element selection is computed by
-<strong>getitem</strong>. The empty linked list is represented by an
-empty tuple, which has length 0 and no elements.</p>
-<p>我们现在要实现一个具有相同行为的类。在此版本中，我们将使用特殊方法名称来定义其行为，使我们的类可以与Python中的内置<code>len</code>功能和元素选择运算符（Square
-Brackets或operator.getItem）一起使用。这些内置函数调用类别的特殊方法名称：长度由<code>len</code>计算，元素选择由<code>getItem</code>计算。空链接列表由一个空元组表示，该元组的长度为0，没有元素。</p>
+<h3 id="2-9-1-Linked-List-Class"><a href="#2-9-1-Linked-List-Class" class="headerlink" title="2.9.1   Linked List Class"></a>2.9.1   Linked List Class</h3><p>A linked list, introduced earlier in this chapter, is composed of a first element and the rest of the list. The rest of a linked list is itself a linked list — a recursive definition. The empty list is a special case of a linked list that has no first element or rest. A linked list is a sequence: it has a finite length and supports element selection by index.</p>
+<p>We can now implement a class with the same behavior. In this version, we will define its behavior using special method names that allow our class to work with the built-in len function and element selection operator (square brackets or operator.getitem) in Python. These built-in functions invoke(调用) special method names of a class: length is computed by <strong>len</strong> and element selection is computed by <strong>getitem</strong>. The empty linked list is represented by an empty tuple, which has length 0 and no elements.</p>
+<p>我们现在要实现一个具有相同行为的类。在此版本中，我们将使用特殊方法名称来定义其行为，使我们的类可以与Python中的内置<code>len</code>功能和元素选择运算符（Square Brackets或operator.getItem）一起使用。这些内置函数调用类别的特殊方法名称：长度由<code>len</code>计算，元素选择由<code>getItem</code>计算。空链接列表由一个空元组表示，该元组的长度为0，没有元素。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; class Link:</span><br><span class="line">        &quot;&quot;&quot;A linked list with a first element and the rest.&quot;&quot;&quot;</span><br><span class="line">        empty = ()</span><br><span class="line">        def __init__(self, first, rest=empty):</span><br><span class="line">            assert rest is Link.empty or isinstance(rest, Link)</span><br><span class="line">            self.first = first</span><br><span class="line">            self.rest = rest</span><br><span class="line">        def __getitem__(self, i):</span><br><span class="line">            if i == 0:</span><br><span class="line">                return self.first</span><br><span class="line">            else:</span><br><span class="line">                return self.rest[i-1]</span><br><span class="line">        def __len__(self):</span><br><span class="line">            return 1 + len(self.rest)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s = Link(3, Link(4, Link(5)))</span><br><span class="line">&gt;&gt;&gt; len(s)</span><br><span class="line">3</span><br><span class="line">&gt;&gt;&gt; s[1]</span><br><span class="line">4</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>The definitions of <strong>len</strong> and <strong>getitem</strong>
-are in fact recursive. The built-in Python function len invokes a method
-called <strong>len</strong> when applied to a user-defined object
-argument. Likewise, the element selection operator invokes a method
-called <strong>getitem</strong>. Thus, bodies of these two methods will
-call themselves indirectly. For <strong>len</strong>, the base case is
-reached when self.rest evaluates to the empty tuple, Link.empty, which
-has a length of 0.</p>
-<p>The built-in isinstance function returns whether the first argument
-has a type that is or inherits from the second argument.
-isinstance(rest, Link) is true if rest is a Link instance or an instance
-of some sub-class of Link.</p>
-<p>Our implementation is complete, but an instance of the Link class is
-currently difficult to inspect. To help with debugging, we can also
-define a function to convert a Link to a string expression.</p>
+<p>The definitions of <strong>len</strong> and <strong>getitem</strong> are in fact recursive. The built-in Python function len invokes a method called <strong>len</strong> when applied to a user-defined object argument. Likewise, the element selection operator invokes a method called <strong>getitem</strong>. Thus, bodies of these two methods will call themselves indirectly. For <strong>len</strong>, the base case is reached when self.rest evaluates to the empty tuple, Link.empty, which has a length of 0.</p>
+<p>The built-in isinstance function returns whether the first argument has a type that is or inherits from the second argument. isinstance(rest, Link) is true if rest is a Link instance or an instance of some sub-class of Link.</p>
+<p>Our implementation is complete, but an instance of the Link class is currently difficult to inspect. To help with debugging, we can also define a function to convert a Link to a string expression.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def link_expression(s):</span><br><span class="line">        &quot;&quot;&quot;Return a string that would evaluate to s.&quot;&quot;&quot;</span><br><span class="line">        if s.rest is Link.empty:</span><br><span class="line">            rest = &#x27;&#x27;</span><br><span class="line">        else:</span><br><span class="line">            rest = &#x27;, &#x27; + link_expression(s.rest)</span><br><span class="line">        return &#x27;Link(&#123;0&#125;&#123;1&#125;)&#x27;.format(s.first, rest)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; link_expression(s)</span><br><span class="line">&#x27;Link(3, Link(4, Link(5)))&#x27;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>This way of displaying an Link is so convenient that we would like to
-use it whenever an Link instance is displayed. We can ensure this
-behavior by setting the link_expression function as the value of the
-special class attribute <strong>repr</strong>. Python displays instances
-of user-defined classes by invoking their <strong>repr</strong>
-method.</p>
+<p>This way of displaying an Link is so convenient that we would like to use it whenever an Link instance is displayed. We can ensure this behavior by setting the link_expression function as the value of the special class attribute <strong>repr</strong>. Python displays instances of user-defined classes by invoking their <strong>repr</strong> method.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; Link.__repr__ = link_expression</span><br><span class="line">&gt;&gt;&gt; s</span><br><span class="line">Link(3, Link(4, Link(5)))</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>The Link class has the closure property. Just as an element of a list
-can itself be a list, a Link can contain a Link as its first
-element.</p>
+<p>The Link class has the closure property. Just as an element of a list can itself be a list, a Link can contain a Link as its first element.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s_first = Link(s, Link(6))</span><br><span class="line">&gt;&gt;&gt; s_first</span><br><span class="line">Link(Link(3, Link(4, Link(5))), Link(6))</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>The s_first linked list has only two elements, but its first element
-is a linked list with three elements.</p>
+<p>The s_first linked list has only two elements, but its first element is a linked list with three elements.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; len(s_first)</span><br><span class="line">2</span><br><span class="line">&gt;&gt;&gt; len(s_first[0])</span><br><span class="line">3</span><br><span class="line">&gt;&gt;&gt; s_first[0][2]</span><br><span class="line">5</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>Recursive functions are particularly well-suited to manipulate linked
-lists. For instance, the recursive extend_link function builds a linked
-list containing the elements of one Link instance s followed by the
-elements of another Link instance t. Installing this function as the
-<strong>add</strong> method of the Link class emulates(模仿) the
-addition behavior of a built-in list.</p>
+<p>Recursive functions are particularly well-suited to manipulate linked lists. For instance, the recursive extend_link function builds a linked list containing the elements of one Link instance s followed by the elements of another Link instance t. Installing this function as the <strong>add</strong> method of the Link class emulates(模仿) the addition behavior of a built-in list.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def extend_link(s, t):</span><br><span class="line">        if s is Link.empty:</span><br><span class="line">            return t</span><br><span class="line">        else:</span><br><span class="line">            return Link(s.first, extend_link(s.rest, t))</span><br><span class="line">&gt;&gt;&gt; extend_link(s, s)</span><br><span class="line">Link(3, Link(4, Link(5, Link(3, Link(4, Link(5))))))</span><br><span class="line">&gt;&gt;&gt; Link.__add__ = extend_link</span><br><span class="line">&gt;&gt;&gt; s + s</span><br><span class="line">Link(3, Link(4, Link(5, Link(3, Link(4, Link(5))))))</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>Rather than list comprehensions, one linked list can be generated
-from another using two higher-order functions: map_link and filter_link.
-The map_link function defined below applies a function f to each element
-of a linked list s and constructs a linked list containing the
-results.</p>
+<p>Rather than list comprehensions, one linked list can be generated from another using two higher-order functions: map_link and filter_link. The map_link function defined below applies a function f to each element of a linked list s and constructs a linked list containing the results.</p>
 <p>可以使用两个高阶函数从另一个链接列表中生成一个链接列表，而不是列出综合列表：map_link和filter_link。下面定义的map_link函数将函数f应用于链接列表s的每个元素，并构造包含结果的链接列表。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def map_link(f, s):</span><br><span class="line">        if s is Link.empty:</span><br><span class="line">            return s</span><br><span class="line">        else:</span><br><span class="line">            return Link(f(s.first), map_link(f, s.rest))</span><br><span class="line">&gt;&gt;&gt; map_link(square, s)</span><br><span class="line">Link(9, Link(16, Link(25)))</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>The filter_link function returns a linked list containing all
-elements of a linked list s for which f returns a true value. The
-combination of map_link and filter_link can express the same logic as a
-list comprehension.</p>
+<p>The filter_link function returns a linked list containing all elements of a linked list s for which f returns a true value. The combination of map_link and filter_link can express the same logic as a list comprehension.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def filter_link(f, s):</span><br><span class="line">        if s is Link.empty:</span><br><span class="line">            return s</span><br><span class="line">        else:</span><br><span class="line">            filtered = filter_link(f, s.rest)</span><br><span class="line">            if f(s.first):</span><br><span class="line">                return Link(s.first, filtered)</span><br><span class="line">            else:</span><br><span class="line">                return filtered</span><br><span class="line">&gt;&gt;&gt; odd = lambda x: x % 2 == 1</span><br><span class="line">&gt;&gt;&gt; map_link(square, filter_link(odd, s))</span><br><span class="line">Link(9, Link(25))</span><br><span class="line">&gt;&gt;&gt; [square(x) for x in [3, 4, 5] if odd(x)]</span><br><span class="line">[9, 25]</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>The join_link function recursively constructs a string that contains
-the elements of a linked list seperated by some separator string. The
-result is much more compact(袖珍的) than the output of
-link_expression.</p>
+<p>The join_link function recursively constructs a string that contains the elements of a linked list seperated by some separator string. The result is much more compact(袖珍的) than the output of link_expression.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def join_link(s, separator):</span><br><span class="line">        if s is Link.empty:</span><br><span class="line">            return &quot;&quot;</span><br><span class="line">        elif s.rest is Link.empty:</span><br><span class="line">            return str(s.first)</span><br><span class="line">        else:</span><br><span class="line">            return str(s.first) + separator + join_link(s.rest, separator)</span><br><span class="line">&gt;&gt;&gt; join_link(s, &quot;, &quot;)</span><br><span class="line">&#x27;3, 4, 5&#x27;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><strong>Recursive Construction.</strong> Linked lists are
-particularly useful when constructing sequences incrementally(逐步的), a
-situation that arises often in recursive computations.</p>
-<p>The count_partitions function from Chapter 1 counted the number of
-ways to partition an integer n using parts up to size m via a
-tree-recursive process. With sequences, we can also enumerate these
-partitions explicitly(明确) using a similar process.</p>
-<p>We follow the same recursive analysis of the problem as we did while
-counting: partitioning n using integers up to m involves either</p>
-<ol type="1">
+<p><strong>Recursive Construction.</strong> Linked lists are particularly useful when constructing sequences incrementally(逐步的), a situation that arises often in recursive computations.</p>
+<p>The count_partitions function from Chapter 1 counted the number of ways to partition an integer n using parts up to size m via a tree-recursive process. With sequences, we can also enumerate these partitions explicitly(明确) using a similar process.</p>
+<p>We follow the same recursive analysis of the problem as we did while counting: partitioning n using integers up to m involves either</p>
+<ol>
 <li>partitioning n-m using integers up to m, or</li>
 <li>partitioning n using integers up to m-1.</li>
 </ol>
-<p>For base cases, we find that 0 has an empty partition, while
-partitioning a negative integer or using parts smaller than 1 is
-impossible.</p>
+<p>For base cases, we find that 0 has an empty partition, while partitioning a negative integer or using parts smaller than 1 is impossible.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def partitions(n, m):</span><br><span class="line">        &quot;&quot;&quot;Return a linked list of partitions of n using parts of up to m.</span><br><span class="line">        Each partition is represented as a linked list.</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        if n == 0:</span><br><span class="line">            return Link(Link.empty) # A list containing the empty partition</span><br><span class="line">        elif n &lt; 0 or m == 0:</span><br><span class="line">            return Link.empty</span><br><span class="line">        else:</span><br><span class="line">            using_m = partitions(n-m, m)</span><br><span class="line">            with_m = map_link(lambda s: Link(m, s), using_m)</span><br><span class="line">            without_m = partitions(n, m-1)</span><br><span class="line">            return with_m + without_m</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>In the recursive case, we construct two sublists of partitions. The
-first uses m, and so we add m to each element of the result using_m to
-form with_m.</p>
-<p>The result of partitions is highly nested: a linked list of linked
-lists. Using join_link with appropriate separators, we can display the
-partitions in a human-readable manner.</p>
+<p>In the recursive case, we construct two sublists of partitions. The first uses m, and so we add m to each element of the result using_m to form with_m.</p>
+<p>The result of partitions is highly nested: a linked list of linked lists. Using join_link with appropriate separators, we can display the partitions in a human-readable manner.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def print_partitions(n, m):</span><br><span class="line">        lists = partitions(n, m)</span><br><span class="line">        strings = map_link(lambda s: join_link(s, &quot; + &quot;), lists)</span><br><span class="line">        print(join_link(strings, &quot;\n&quot;))</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; print_partitions(6, 4)</span><br><span class="line">4 + 2</span><br><span class="line">4 + 1 + 1</span><br><span class="line">3 + 3</span><br><span class="line">3 + 2 + 1</span><br><span class="line">3 + 1 + 1 + 1</span><br><span class="line">2 + 2 + 2</span><br><span class="line">2 + 2 + 1 + 1</span><br><span class="line">2 + 1 + 1 + 1 + 1</span><br><span class="line">1 + 1 + 1 + 1 + 1 + 1</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h3 id="tree-class">2.9.2   Tree Class</h3>
-<p>Trees can also be represented by instances of user-defined classes,
-rather than nested instances of built-in sequence types. A tree is any
-data structure that has as an attribute a sequence of branches that are
-also trees.</p>
-<p><strong>Internal values.</strong> Previously, we defined trees in
-such a way that all values appeared at the leaves of the tree. It is
-also common to define trees that have internal values at the roots of
-each subtree. An internal value is called an label in the tree. The Tree
-class below represents such trees, in which each tree has a sequence of
-branches that are also trees.</p>
+<h3 id="2-9-2-Tree-Class"><a href="#2-9-2-Tree-Class" class="headerlink" title="2.9.2   Tree Class"></a>2.9.2   Tree Class</h3><p>Trees can also be represented by instances of user-defined classes, rather than nested instances of built-in sequence types. A tree is any data structure that has as an attribute a sequence of branches that are also trees.</p>
+<p><strong>Internal values.</strong> Previously, we defined trees in such a way that all values appeared at the leaves of the tree. It is also common to define trees that have internal values at the roots of each subtree. An internal value is called an label in the tree. The Tree class below represents such trees, in which each tree has a sequence of branches that are also trees.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; class Tree:</span><br><span class="line">        def __init__(self, label, branches=()):</span><br><span class="line">            self.label = label</span><br><span class="line">            for branch in branches:</span><br><span class="line">                assert isinstance(branch, Tree)</span><br><span class="line">            self.branches = branches</span><br><span class="line">        def __repr__(self):</span><br><span class="line">            if self.branches:</span><br><span class="line">                return &#x27;Tree(&#123;0&#125;, &#123;1&#125;)&#x27;.format(self.label, repr(self.branches))</span><br><span class="line">            else:</span><br><span class="line">                return &#x27;Tree(&#123;0&#125;)&#x27;.format(repr(self.label))</span><br><span class="line">        def is_leaf(self):</span><br><span class="line">            return not self.branches</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>The Tree class can represent, for instance, the values computed in an
-expression tree for the recursive implementation of fib, the function
-for computing Fibonacci numbers. The function fib_tree(n) below returns
-a Tree that has the nth Fibonacci number as its label and a trace of all
-previously computed Fibonacci numbers within its branches.</p>
+<p>The Tree class can represent, for instance, the values computed in an expression tree for the recursive implementation of fib, the function for computing Fibonacci numbers. The function fib_tree(n) below returns a Tree that has the nth Fibonacci number as its label and a trace of all previously computed Fibonacci numbers within its branches.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def fib_tree(n):</span><br><span class="line">        if n == 1:</span><br><span class="line">            return Tree(0)</span><br><span class="line">        elif n == 2:</span><br><span class="line">            return Tree(1)</span><br><span class="line">        else:</span><br><span class="line">            left = fib_tree(n-2)</span><br><span class="line">            right = fib_tree(n-1)</span><br><span class="line">            return Tree(left.label + right.label, (left, right))</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; fib_tree(5)</span><br><span class="line">Tree(3, (Tree(1, (Tree(0), Tree(1))), Tree(2, (Tree(1), Tree(1, (Tree(0), Tree(1)))))))</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>Trees represented in this way are also processed using recursive
-functions. For example, we can sum the labels of a tree. As a base case,
-we return that an empty branch has no labels.</p>
+<p>Trees represented in this way are also processed using recursive functions. For example, we can sum the labels of a tree. As a base case, we return that an empty branch has no labels.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def sum_labels(t):</span><br><span class="line">        &quot;&quot;&quot;Sum the labels of a Tree instance, which may be None.&quot;&quot;&quot;</span><br><span class="line">        return t.label + sum([sum_labels(b) for b in t.branches])</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; sum_labels(fib_tree(5))</span><br><span class="line">10</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>We can also apply memo to construct a Fibonacci tree, where repeated
-subtrees are only created once by the memoized version of fib_tree, but
-are used multiple times as branches of different larger trees.</p>
+<p>We can also apply memo to construct a Fibonacci tree, where repeated subtrees are only created once by the memoized version of fib_tree, but are used multiple times as branches of different larger trees.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; fib_tree = memo(fib_tree)</span><br><span class="line">&gt;&gt;&gt; big_fib_tree = fib_tree(35)</span><br><span class="line">&gt;&gt;&gt; big_fib_tree.label</span><br><span class="line">5702887</span><br><span class="line">&gt;&gt;&gt; big_fib_tree.branches[0] is big_fib_tree.branches[1].branches[1]</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; sum_labels = memo(sum_labels)</span><br><span class="line">&gt;&gt;&gt; sum_labels(big_fib_tree)</span><br><span class="line">142587180</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>The amount of computation time and memory saved by memoization in
-these cases is substantial. Instead of creating 18,454,929 different
-instances of the Tree class, we now create only 35.</p>
-<h3 id="sets">2.9.3   Sets</h3>
-<p>In addition to the list, tuple, and dictionary, Python has a fourth
-built-in container type called a set. Set literals follow the
-mathematical notation of elements enclosed in braces. Duplicate elements
-are removed upon construction. Sets are unordered collections, and so
-the printed ordering may differ from the element ordering in the set
-literal.</p>
-<p>除了列表，元组和字典外，python还有第四种内置容器类型称为<code>set</code>，Set的内容在花括号包括下的数学符号内。
-在构建过程中重复数据被移除。Set是无序容器，因此按照有序打印可能set内元素的顺序不一致</p>
+<p>The amount of computation time and memory saved by memoization in these cases is substantial. Instead of creating 18,454,929 different instances of the Tree class, we now create only 35.</p>
+<h3 id="2-9-3-Sets"><a href="#2-9-3-Sets" class="headerlink" title="2.9.3   Sets"></a>2.9.3   Sets</h3><p>In addition to the list, tuple, and dictionary, Python has a fourth built-in container type called a set. Set literals follow the mathematical notation of elements enclosed in braces. Duplicate elements are removed upon construction. Sets are unordered collections, and so the printed ordering may differ from the element ordering in the set literal.</p>
+<p>除了列表，元组和字典外，python还有第四种内置容器类型称为<code>set</code>，Set的内容在花括号包括下的数学符号内。 在构建过程中重复数据被移除。Set是无序容器，因此按照有序打印可能set内元素的顺序不一致</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s = &#123;3, 2, 1, 4, 4&#125;</span><br><span class="line">&gt;&gt;&gt; s</span><br><span class="line">&#123;1, 2, 3, 4&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>Python sets support a variety of operations, including membership
-tests, length computation, and the standard set operations of union and
-intersection</p>
+<p>Python sets support a variety of operations, including membership tests, length computation, and the standard set operations of union and intersection</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; 3 in s</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; len(s)</span><br><span class="line">4</span><br><span class="line">&gt;&gt;&gt; s.union(&#123;1, 5&#125;)</span><br><span class="line">&#123;1, 2, 3, 4, 5&#125;</span><br><span class="line">&gt;&gt;&gt; s.intersection(&#123;6, 5, 4, 3&#125;)</span><br><span class="line">&#123;3, 4&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>In addition to union and intersection, Python sets support several
-other methods. The predicates isdisjoint, issubset, and issuperset
-provide set comparison. Sets are mutable, and can be changed one element
-at a time using add, remove, discard, and pop. Additional methods
-provide multi-element mutations, such as clear and update. The Python <a
-target="_blank" rel="noopener" href="http://docs.python.org/py3k/library/stdtypes.html#set">documentation
-for sets</a> should be sufficiently intelligible at this point of the
-course to fill in the details.</p>
-<p><strong>Implementing sets.</strong> Abstractly, a set is a collection
-of distinct objects that supports membership testing, union,
-intersection, and adjunction. Adjoining an element and a set returns a
-new set that contains all of the original set's elements along with the
-new element, if it is distinct. Union and intersection return the set of
-elements that appear in either or both sets, respectively. As with any
-data abstraction, we are free to implement any functions over any
-representation of sets that provides this collection of behaviors.</p>
-<p>In the remainder of this section, we consider three different methods
-of implementing sets that vary in their representation. We will
-characterize the efficiency of these different representations by
-analyzing the order of growth of set operations. We will use our Link
-and Tree classes from earlier in this section, which allow for simple
-and elegant recursive solutions for elementary set operations.</p>
-<p><strong>Sets as unordered sequences.</strong> One way to represent a
-set is as a sequence in which no element appears more than once. The
-empty set is represented by the empty sequence. Membership testing walks
-recursively through the list.</p>
+<p>In addition to union and intersection, Python sets support several other methods. The predicates isdisjoint, issubset, and issuperset provide set comparison. Sets are mutable, and can be changed one element at a time using add, remove, discard, and pop. Additional methods provide multi-element mutations, such as clear and update. The Python <a target="_blank" rel="noopener" href="http://docs.python.org/py3k/library/stdtypes.html#set">documentation for sets</a> should be sufficiently intelligible at this point of the course to fill in the details.</p>
+<p><strong>Implementing sets.</strong> Abstractly, a set is a collection of distinct objects that supports membership testing, union, intersection, and adjunction. Adjoining an element and a set returns a new set that contains all of the original set’s elements along with the new element, if it is distinct. Union and intersection return the set of elements that appear in either or both sets, respectively. As with any data abstraction, we are free to implement any functions over any representation of sets that provides this collection of behaviors.</p>
+<p>In the remainder of this section, we consider three different methods of implementing sets that vary in their representation. We will characterize the efficiency of these different representations by analyzing the order of growth of set operations. We will use our Link and Tree classes from earlier in this section, which allow for simple and elegant recursive solutions for elementary set operations.</p>
+<p><strong>Sets as unordered sequences.</strong> One way to represent a set is as a sequence in which no element appears more than once. The empty set is represented by the empty sequence. Membership testing walks recursively through the list.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def empty(s):</span><br><span class="line">        return s is Link.empty</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def set_contains(s, v):</span><br><span class="line">        &quot;&quot;&quot;Return True if and only if set s contains v.&quot;&quot;&quot;</span><br><span class="line">        if empty(s):</span><br><span class="line">            return False</span><br><span class="line">        elif s.first == v:</span><br><span class="line">            return True</span><br><span class="line">        else:</span><br><span class="line">            return set_contains(s.rest, v)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s = Link(4, Link(1, Link(5)))</span><br><span class="line">&gt;&gt;&gt; set_contains(s, 2)</span><br><span class="line">False</span><br><span class="line">&gt;&gt;&gt; set_contains(s, 5)</span><br><span class="line">True</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>This implementation of set_contains requires <span
-class="math inline">\(\Theta(n)\)</span> time on average to test
-membership of an element, where <span class="math inline">\(n\)</span>
-is the size of the set s. Using this linear-time function for
-membership, we can adjoin an element to a set, also in linear time.</p>
+<p>This implementation of set_contains requires $\Theta(n)$ time on average to test membership of an element, where $n$ is the size of the set s. Using this linear-time function for membership, we can adjoin an element to a set, also in linear time.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def adjoin_set(s, v):</span><br><span class="line">        &quot;&quot;&quot;Return a set containing all elements of s and element v.&quot;&quot;&quot;</span><br><span class="line">        if set_contains(s, v):</span><br><span class="line">            return s</span><br><span class="line">        else:</span><br><span class="line">            return Link(v, s)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; t = adjoin_set(s, 2)</span><br><span class="line">&gt;&gt;&gt; t</span><br><span class="line">Link(2, Link(4, Link(1, Link(5))))</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>In designing a representation, one of the issues with which we should
-be concerned is efficiency. Intersecting two sets set1 and set2 also
-requires membership testing, but this time each element of set1 must be
-tested for membership in set2, leading to a quadratic order of growth in
-the number of steps, <span class="math inline">\(\Theta(n^2)\)</span>,
-for two sets of size <span class="math inline">\(n\)</span>.</p>
+<p>In designing a representation, one of the issues with which we should be concerned is efficiency. Intersecting two sets set1 and set2 also requires membership testing, but this time each element of set1 must be tested for membership in set2, leading to a quadratic order of growth in the number of steps, $\Theta(n^2)$, for two sets of size $n$.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def intersect_set(set1, set2):</span><br><span class="line">        &quot;&quot;&quot;Return a set containing all elements common to set1 and set2.&quot;&quot;&quot;</span><br><span class="line">        return keep_if_link(set1, lambda v: set_contains(set2, v))</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; intersect_set(t, apply_to_all_link(s, square))</span><br><span class="line">Link(4, Link(1))</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>When computing the union of two sets, we must be careful not to
-include any element twice. The union_set function also requires a linear
-number of membership tests, creating a process that also includes <span
-class="math inline">\(\Theta(n^2)\)</span> steps.</p>
+<p>When computing the union of two sets, we must be careful not to include any element twice. The union_set function also requires a linear number of membership tests, creating a process that also includes $\Theta(n^2)$ steps.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def union_set(set1, set2):</span><br><span class="line">        &quot;&quot;&quot;Return a set containing all elements either in set1 or set2.&quot;&quot;&quot;</span><br><span class="line">        set1_not_set2 = keep_if_link(set1, lambda v: not set_contains(set2, v))</span><br><span class="line">        return extend_link(set1_not_set2, set2)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; union_set(t, s)</span><br><span class="line">Link(2, Link(4, Link(1, Link(5))))</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><strong>Sets as ordered sequences.</strong> One way to speed up our
-set operations is to change the representation so that the set elements
-are listed in increasing order. To do this, we need some way to compare
-two objects so that we can say which is bigger. In Python, many
-different types of objects can be compared using &lt; and &gt;
-operators, but we will concentrate on numbers in this example. We will
-represent a set of numbers by listing its elements in increasing
-order.</p>
-<p>One advantage of ordering shows up in set_contains: In checking for
-the presence of an object, we no longer have to scan the entire set. If
-we reach a set element that is larger than the item we are looking for,
-then we know that the item is not in the set:</p>
+<p><strong>Sets as ordered sequences.</strong> One way to speed up our set operations is to change the representation so that the set elements are listed in increasing order. To do this, we need some way to compare two objects so that we can say which is bigger. In Python, many different types of objects can be compared using &lt; and &gt; operators, but we will concentrate on numbers in this example. We will represent a set of numbers by listing its elements in increasing order.</p>
+<p>One advantage of ordering shows up in set_contains: In checking for the presence of an object, we no longer have to scan the entire set. If we reach a set element that is larger than the item we are looking for, then we know that the item is not in the set:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def set_contains(s, v):</span><br><span class="line">        if empty(s) or s.first &gt; v:</span><br><span class="line">            return False</span><br><span class="line">        elif s.first == v:</span><br><span class="line">            return True</span><br><span class="line">        else:</span><br><span class="line">            return set_contains(s.rest, v)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; u = Link(1, Link(4, Link(5)))</span><br><span class="line">&gt;&gt;&gt; set_contains(u, 0)</span><br><span class="line">False</span><br><span class="line">&gt;&gt;&gt; set_contains(u, 4)</span><br><span class="line">True</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>How many steps does this save? In the worst case, the item we are
-looking for may be the largest one in the set, so the number of steps is
-the same as for the unordered representation. On the other hand, if we
-search for items of many different sizes we can expect that sometimes we
-will be able to stop searching at a point near the beginning of the list
-and that other times we will still need to examine most of the list. On
-average we should expect to have to examine about half of the items in
-the set. Thus, the average number of steps required will be about <span
-class="math inline">\(\frac{n}{2}\)</span>. This is still <span
-class="math inline">\(\Theta(n)\)</span> growth, but it does save us
-some time in practice over the previous implementation.</p>
-<p>We can obtain a more impressive speedup by re-implementing
-intersect_set. In the unordered representation, this operation required
-<span class="math inline">\(\Theta(n^2)\)</span> steps because we
-performed a complete scan of set2 for each element of set1. But with the
-ordered representation, we can use a more clever method. We iterate
-through both sets simultaneously, tracking an element e1 in set1 and e2
-in set2. When e1 and e2 are equal, we include that element in the
-intersection.</p>
-<p>Suppose, however, that e1 is less than e2. Since e2 is smaller than
-the remaining elements of set2, we can immediately conclude that e1
-cannot appear anywhere in the remainder of set2 and hence is not in the
-intersection. Thus, we no longer need to consider e1; we discard it and
-proceed to the next element of set1. Similar logic advances through the
-elements of set2 when e2 &lt; e1. Here is the function:</p>
+<p>How many steps does this save? In the worst case, the item we are looking for may be the largest one in the set, so the number of steps is the same as for the unordered representation. On the other hand, if we search for items of many different sizes we can expect that sometimes we will be able to stop searching at a point near the beginning of the list and that other times we will still need to examine most of the list. On average we should expect to have to examine about half of the items in the set. Thus, the average number of steps required will be about $\frac{n}{2}$. This is still $\Theta(n)$ growth, but it does save us some time in practice over the previous implementation.</p>
+<p>We can obtain a more impressive speedup by re-implementing intersect_set. In the unordered representation, this operation required $\Theta(n^2)$ steps because we performed a complete scan of set2 for each element of set1. But with the ordered representation, we can use a more clever method. We iterate through both sets simultaneously, tracking an element e1 in set1 and e2 in set2. When e1 and e2 are equal, we include that element in the intersection.</p>
+<p>Suppose, however, that e1 is less than e2. Since e2 is smaller than the remaining elements of set2, we can immediately conclude that e1 cannot appear anywhere in the remainder of set2 and hence is not in the intersection. Thus, we no longer need to consider e1; we discard it and proceed to the next element of set1. Similar logic advances through the elements of set2 when e2 &lt; e1. Here is the function:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def intersect_set(set1, set2):</span><br><span class="line">        if empty(set1) or empty(set2):</span><br><span class="line">            return Link.empty</span><br><span class="line">        else:</span><br><span class="line">            e1, e2 = set1.first, set2.first</span><br><span class="line">            if e1 == e2:</span><br><span class="line">                return Link(e1, intersect_set(set1.rest, set2.rest))</span><br><span class="line">            elif e1 &lt; e2:</span><br><span class="line">                return intersect_set(set1.rest, set2)</span><br><span class="line">            elif e2 &lt; e1:</span><br><span class="line">                return intersect_set(set1, set2.rest)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; intersect_set(s, s.rest)</span><br><span class="line">Link(4, Link(5))</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>To estimate the number of steps required by this process, observe
-that in each step we shrink the size of at least one of the sets. Thus,
-the number of steps required is at most the sum of the sizes of set1 and
-set2, rather than the product of the sizes, as with the unordered
-representation. This is <span class="math inline">\(\Theta(n)\)</span>
-growth rather than <span class="math inline">\(\Theta(n^2)\)</span> -- a
-considerable speedup, even for sets of moderate size. For example, the
-intersection of two sets of size 100 will take around 200 steps, rather
-than 10,000 for the unordered representation.</p>
-<p>Adjunction and union for sets represented as ordered sequences can
-also be computed in linear time. These implementations are left as an
-exercise.</p>
-<p><strong>Sets as binary search trees.</strong> We can do better than
-the ordered-list representation by arranging the set elements in the
-form of a tree with exactly two branches. The entry of the root of the
-tree holds one element of the set. The entries within the left branch
-include all elements smaller than the one at the root. Entries in the
-right branch include all elements greater than the one at the root. The
-figure below shows some trees that represent the set {1, 3, 5, 7, 9,
-11}. The same set may be represented by a tree in a number of different
-ways. In all binary search trees, all elements in the left branch be
-smaller than the entry at the root, and that all elements in the right
-subtree be larger.</p>
-<p><img src="http://www.composingprograms.com/img/set_trees.png" /></p>
-<p>The advantage of the tree representation is this: Suppose we want to
-check whether a value v is contained in a set. We begin by comparing v
-with entry. If v is less than this, we know that we need only search the
-left subtree; if v is greater, we need only search the right subtree.
-Now, if the tree is "balanced," each of these subtrees will be about
-half the size of the original. Thus, in one step we have reduced the
-problem of searching a tree of size <span
-class="math inline">\(n\)</span> to searching a tree of size <span
-class="math inline">\(\frac{n}{2}\)</span>. Since the size of the tree
-is halved at each step, we should expect that the number of steps needed
-to search a tree grows as <span class="math inline">\(\Theta(\log
-n)\)</span>. For large sets, this will be a significant speedup over the
-previous representations. This set_contains function exploits the
-ordering structure of the tree-structured set.</p>
+<p>To estimate the number of steps required by this process, observe that in each step we shrink the size of at least one of the sets. Thus, the number of steps required is at most the sum of the sizes of set1 and set2, rather than the product of the sizes, as with the unordered representation. This is $\Theta(n)$ growth rather than $\Theta(n^2)$ — a considerable speedup, even for sets of moderate size. For example, the intersection of two sets of size 100 will take around 200 steps, rather than 10,000 for the unordered representation.</p>
+<p>Adjunction and union for sets represented as ordered sequences can also be computed in linear time. These implementations are left as an exercise.</p>
+<p><strong>Sets as binary search trees.</strong> We can do better than the ordered-list representation by arranging the set elements in the form of a tree with exactly two branches. The entry of the root of the tree holds one element of the set. The entries within the left branch include all elements smaller than the one at the root. Entries in the right branch include all elements greater than the one at the root. The figure below shows some trees that represent the set {1, 3, 5, 7, 9, 11}. The same set may be represented by a tree in a number of different ways. In all binary search trees, all elements in the left branch be smaller than the entry at the root, and that all elements in the right subtree be larger.</p>
+<p><img src="http://www.composingprograms.com/img/set_trees.png" alt=""></p>
+<p>The advantage of the tree representation is this: Suppose we want to check whether a value v is contained in a set. We begin by comparing v with entry. If v is less than this, we know that we need only search the left subtree; if v is greater, we need only search the right subtree. Now, if the tree is “balanced,” each of these subtrees will be about half the size of the original. Thus, in one step we have reduced the problem of searching a tree of size $n$ to searching a tree of size $\frac{n}{2}$. Since the size of the tree is halved at each step, we should expect that the number of steps needed to search a tree grows as $\Theta(\log n)$. For large sets, this will be a significant speedup over the previous representations. This set_contains function exploits the ordering structure of the tree-structured set.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def set_contains(s, v):</span><br><span class="line">        if s is None:</span><br><span class="line">            return False</span><br><span class="line">        elif s.entry == v:</span><br><span class="line">            return True</span><br><span class="line">        elif s.entry &lt; v:</span><br><span class="line">            return set_contains(s.right, v)</span><br><span class="line">        elif s.entry &gt; v:</span><br><span class="line">            return set_contains(s.left, v)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>Adjoining an item to a set is implemented similarly and also requires
-<span class="math inline">\(\Theta(\log n)\)</span> steps. To adjoin a
-value v, we compare v with entry to determine whether v should be added
-to the right or to the left branch, and having adjoined v to the
-appropriate branch we piece this newly constructed branch together with
-the original entry and the other branch. If v is equal to the entry, we
-just return the node. If we are asked to adjoin v to an empty tree, we
-generate a Tree that has v as the entry and empty right and left
-branches. Here is the function:</p>
+<p>Adjoining an item to a set is implemented similarly and also requires $\Theta(\log n)$ steps. To adjoin a value v, we compare v with entry to determine whether v should be added to the right or to the left branch, and having adjoined v to the appropriate branch we piece this newly constructed branch together with the original entry and the other branch. If v is equal to the entry, we just return the node. If we are asked to adjoin v to an empty tree, we generate a Tree that has v as the entry and empty right and left branches. Here is the function:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def adjoin_set(s, v):</span><br><span class="line">        if s is None:</span><br><span class="line">            return Tree(v)</span><br><span class="line">        elif s.entry == v:</span><br><span class="line">            return s</span><br><span class="line">        elif s.entry &lt; v:</span><br><span class="line">            return Tree(s.entry, s.left, adjoin_set(s.right, v))</span><br><span class="line">        elif s.entry &gt; v:</span><br><span class="line">            return Tree(s.entry, adjoin_set(s.left, v), s.right)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; adjoin_set(adjoin_set(adjoin_set(None, 2), 3), 1)</span><br><span class="line">Tree(2, Tree(1), Tree(3))</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>Our claim that searching the tree can be performed in a logarithmic
-number of steps rests on the assumption that the tree is "balanced,"
-i.e., that the left and the right subtree of every tree have
-approximately the same number of elements, so that each subtree contains
-about half the elements of its parent. But how can we be certain that
-the trees we construct will be balanced? Even if we start with a
-balanced tree, adding elements with adjoin_set may produce an unbalanced
-result. Since the position of a newly adjoined element depends on how
-the element compares with the items already in the set, we can expect
-that if we add elements "randomly" the tree will tend to be balanced on
-the average.</p>
-<p>But this is not a guarantee. For example, if we start with an empty
-set and adjoin the numbers 1 through 7 in sequence we end up with a
-highly unbalanced tree in which all the left subtrees are empty, so it
-has no advantage over a simple ordered list. One way to solve this
-problem is to define an operation that transforms an arbitrary tree into
-a balanced tree with the same elements. We can perform this
-transformation after every few adjoin_set operations to keep our set in
-balance.</p>
-<p>Intersection and union operations can be performed on tree-structured
-sets in linear time by converting them to ordered lists and back. The
-details are left as an exercise.</p>
-<p><strong>Python set implementation.</strong> The set type that is
-built into Python does not use any of these representations internally.
-Instead, Python uses a representation that gives constant-time
-membership tests and adjoin operations based on a technique called
-<em>hashing</em>, which is a topic for another course. Built-in Python
-sets cannot contain mutable data types, such as lists, dictionaries, or
-other sets. To allow for nested sets, Python also includes a built-in
-immutable frozenset class that shares methods with the set class but
-excludes mutation methods and operators.</p>
+<p>Our claim that searching the tree can be performed in a logarithmic number of steps rests on the assumption that the tree is “balanced,” i.e., that the left and the right subtree of every tree have approximately the same number of elements, so that each subtree contains about half the elements of its parent. But how can we be certain that the trees we construct will be balanced? Even if we start with a balanced tree, adding elements with adjoin_set may produce an unbalanced result. Since the position of a newly adjoined element depends on how the element compares with the items already in the set, we can expect that if we add elements “randomly” the tree will tend to be balanced on the average.</p>
+<p>But this is not a guarantee. For example, if we start with an empty set and adjoin the numbers 1 through 7 in sequence we end up with a highly unbalanced tree in which all the left subtrees are empty, so it has no advantage over a simple ordered list. One way to solve this problem is to define an operation that transforms an arbitrary tree into a balanced tree with the same elements. We can perform this transformation after every few adjoin_set operations to keep our set in balance.</p>
+<p>Intersection and union operations can be performed on tree-structured sets in linear time by converting them to ordered lists and back. The details are left as an exercise.</p>
+<p><strong>Python set implementation.</strong> The set type that is built into Python does not use any of these representations internally. Instead, Python uses a representation that gives constant-time membership tests and adjoin operations based on a technique called _hashing_, which is a topic for another course. Built-in Python sets cannot contain mutable data types, such as lists, dictionaries, or other sets. To allow for nested sets, Python also includes a built-in immutable frozenset class that shares methods with the set class but excludes mutation methods and operators.</p>
 
     </div>
 
@@ -585,12 +361,12 @@ excludes mutation methods and operators.</p>
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2023/08/21/2_7%20Object%20Abstraction/" rel="prev" title="2_7 Object Abstraction">
-      <i class="fa fa-chevron-left"></i> 2_7 Object Abstraction
+    <a href="/2023/08/21/Chapter%202%20Building%20Abstract%20ions%20with%20Data/" rel="prev" title="Chapter 2 Building Abstract ions with Data">
+      <i class="fa fa-chevron-left"></i> Chapter 2 Building Abstract ions with Data
     </a></div>
       <div class="post-nav-item">
-    <a href="/2023/08/21/2_5%20Object-Oriented%20Programming/" rel="next" title="2_5 Object-Oriented Programming">
-      2_5 Object-Oriented Programming <i class="fa fa-chevron-right"></i>
+    <a href="/2023/08/21/2_7%20Object%20Abstraction/" rel="next" title="2_7 Object Abstraction">
+      2_7 Object Abstraction <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -650,7 +426,7 @@ excludes mutation methods and operators.</p>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#recursive-objects"><span class="nav-number">1.</span> <span class="nav-text">2_9   Recursive Objects</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#linked-list-class"><span class="nav-number">1.0.1.</span> <span class="nav-text">2.9.1   Linked List Class</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tree-class"><span class="nav-number">1.0.2.</span> <span class="nav-text">2.9.2   Tree Class</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sets"><span class="nav-number">1.0.3.</span> <span class="nav-text">2.9.3   Sets</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2-9-Recursive-Objects"><span class="nav-number">1.</span> <span class="nav-text">2_9   Recursive Objects</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-9-1-Linked-List-Class"><span class="nav-number">1.0.1.</span> <span class="nav-text">2.9.1   Linked List Class</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-9-2-Tree-Class"><span class="nav-number">1.0.2.</span> <span class="nav-text">2.9.2   Tree Class</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-9-3-Sets"><span class="nav-number">1.0.3.</span> <span class="nav-text">2.9.3   Sets</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -693,6 +469,8 @@ excludes mutation methods and operators.</p>
 
 
       </div>
+
+      
 
     </div>
   </aside>

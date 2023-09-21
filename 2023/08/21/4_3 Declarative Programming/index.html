@@ -23,12 +23,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="4_3 Declarative Programming In addition to streams, data values are often stored in large repositories called databases. A database consists of a data store containing the data values along with an">
+  <meta name="description" content="4_3 Declarative ProgrammingIn addition to streams, data values are often stored in large repositories called databases. A database consists of a data store containing the data values along with an int">
 <meta property="og:type" content="article">
 <meta property="og:title" content="4_3 Declarative Programming">
 <meta property="og:url" content="http://example.com/2023/08/21/4_3%20Declarative%20Programming/index.html">
 <meta property="og:site_name" content="viewoverlook">
-<meta property="og:description" content="4_3 Declarative Programming In addition to streams, data values are often stored in large repositories called databases. A database consists of a data store containing the data values along with an">
+<meta property="og:description" content="4_3 Declarative ProgrammingIn addition to streams, data values are often stored in large repositories called databases. A database consists of a data store containing the data values along with an int">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-20T16:00:00.000Z">
 <meta property="article:modified_time" content="2023-08-21T02:55:20.581Z">
@@ -179,6 +179,8 @@
     <span>0%</span>
   </div>
 
+  <a href="https://github.com/XuandYu000" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
 
     <main class="main">
       <div class="main-inner">
@@ -243,401 +245,113 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="declarative-programming">4_3 Declarative Programming</h1>
-<p>In addition to streams, data values are often stored in large
-repositories called databases. A database consists of a data store
-containing the data values along with an interface for retrieving and
-transforming those values. Each value stored in a database is called a
-<em>record</em>. Records with similar structure are grouped into tables.
-Records are retrieved and transformed using queries, which are
-statements in a query language. By far the most ubiquitous(无处不在的)
-query language in use today is called Structured Query Language or SQL
-(pronounced "sequel").</p>
-<p>SQL is an example of a declarative programming language. Statements
-do not describe computations directly, but instead describe the desired
-result of some computation. It is the role of the <em>query
-interpreter</em> of the database system to design and perform a
-computational process to produce such a result.</p>
+        <h1 id="4-3-Declarative-Programming"><a href="#4-3-Declarative-Programming" class="headerlink" title="4_3 Declarative Programming"></a>4_3 Declarative Programming</h1><p>In addition to streams, data values are often stored in large repositories called databases. A database consists of a data store containing the data values along with an interface for retrieving and transforming those values. Each value stored in a database is called a _record_. Records with similar structure are grouped into tables. Records are retrieved and transformed using queries, which are statements in a query language. By far the most ubiquitous(无处不在的) query language in use today is called Structured Query Language or SQL (pronounced “sequel”).</p>
+<p>SQL is an example of a declarative programming language. Statements do not describe computations directly, but instead describe the desired result of some computation. It is the role of the _query interpreter_ of the database system to design and perform a computational process to produce such a result.</p>
 <p>SQL是声明式函数的例子。语句并不是直接描述计算过程，而是描述计算的期望结果。数据库系统的查询解释器的作用是设计和执行计算过程以产生这样的结果。</p>
-<p>This interaction differs substantially from the procedural
-programming paradigm of Python or Scheme. In Python, computational
-processes are described directly by the programmer. A declarative
-language abstracts away procedural details, instead focusing on the form
-of the result.</p>
-<p>这种交互和<code>python</code>,<code>scheme</code>这样的过程式编程范例有很大的不同。<code>python</code>中计算过程由程序员直接描述。声明性语言抽象了过程细节，而不是关注结果形式。
-### 4.3.1   Tables</p>
-<p>The SQL language is standardized, but most database systems implement
-some custom variant of the language that is endowed with proprietary
-features. In this text, we will describe a small subset of SQL as it is
-implemented in <a target="_blank" rel="noopener" href="http://sqlite.org">Sqlite</a>. You can follow
-along by <a target="_blank" rel="noopener" href="http://sqlite.org/download.html">downloading
-Sqlite</a> or by using this <a
-target="_blank" rel="noopener" href="http://kripken.github.io/sql.js/GUI/">online SQL
-interpreter</a>.</p>
-<p>A table, also called a <em>relation</em>, has a fixed(固定的) number
-of named and typed columns. Each row of a table represents a data record
-and has one value for each column. For example, a table of cities might
-have columns latitude longitude that both hold numeric values, as well
-as a column name that holds a string. Each row would represent a city
-location position by its latitude and longitude values.</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="33%">
-<col width="36%">
-<col width="31%">
-</colgroup>
-<thead valign="bottom">
-<tr>
-<th class="head">
-<strong>Latitude</strong>
-</th>
-<th class="head">
-<strong>Longitude</strong>
-</th>
-<th class="head">
-<strong>Name</strong>
-</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr>
-<td>
-38
-</td>
-<td>
-122
-</td>
-<td>
-Berkeley
-</td>
-</tr>
-<tr>
-<td>
-42
-</td>
-<td>
-71
-</td>
-<td>
-Cambridge
-</td>
-</tr>
-<tr>
-<td>
-45
-</td>
-<td>
-93
-</td>
-<td>
-Minneapolis
-</td>
-</tr>
-</tbody>
-</table>
-<p>A table with a single row can be created in the SQL language using a
-select statement, in which the row values are separated by commas and
-the column names follow the keyword "as". All SQL statements end in a
-semicolon.</p>
+<p>This interaction differs substantially from the procedural programming paradigm of Python or Scheme. In Python, computational processes are described directly by the programmer. A declarative language abstracts away procedural details, instead focusing on the form of the result.</p>
+<p>这种交互和<code>python</code>,<code>scheme</code>这样的过程式编程范例有很大的不同。<code>python</code>中计算过程由程序员直接描述。声明性语言抽象了过程细节，而不是关注结果形式。</p>
+<h3 id="4-3-1-Tables"><a href="#4-3-1-Tables" class="headerlink" title="4.3.1   Tables"></a>4.3.1   Tables</h3><p>The SQL language is standardized, but most database systems implement some custom variant of the language that is endowed with proprietary features. In this text, we will describe a small subset of SQL as it is implemented in <a target="_blank" rel="noopener" href="http://sqlite.org">Sqlite</a>. You can follow along by <a target="_blank" rel="noopener" href="http://sqlite.org/download.html">downloading Sqlite</a> or by using this <a target="_blank" rel="noopener" href="http://kripken.github.io/sql.js/GUI/">online SQL interpreter</a>.</p>
+<p>A table, also called a _relation_, has a fixed(固定的) number of named and typed columns. Each row of a table represents a data record and has one value for each column. For example, a table of cities might have columns latitude longitude that both hold numeric values, as well as a column name that holds a string. Each row would represent a city location position by its latitude and longitude values.</p>
+<table border="1" class="docutils"><colgroup><col width="33%"> <col width="36%"> <col width="31%"> </colgroup><thead valign="bottom"><tr><th class="head"><strong>Latitude</strong></th><th class="head"><strong>Longitude</strong></th><th class="head"><strong>Name</strong></th></tr></thead><tbody valign="top"><tr><td>38</td><td>122</td><td>Berkeley</td></tr><tr><td>42</td><td>71</td><td>Cambridge</td></tr><tr><td>45</td><td>93</td><td>Minneapolis</td></tr></tbody></table>
+
+<p>A table with a single row can be created in the SQL language using a select statement, in which the row values are separated by commas and the column names follow the keyword “as”. All SQL statements end in a semicolon.</p>
 <p>SQL语言中可以使用<code>select</code>语句来创建单行表，行值之间用逗号分割，列名后紧跟<code>as</code>关键字，所有SQL语句都以分号结尾。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; select 38 as latitude, 122 as longitude, &quot;Berkeley&quot; as name;</span><br><span class="line">38|122|Berkeley</span><br></pre></td></tr></table></figure>
-<p>The second line is the output, which includes one line per row with
-columns separated by a vertical bar.</p>
-<p>A multi-line table can be constructed by union, which combines the
-rows of two tables. The column names of the left table are used in the
-constructed table. Spacing within a line does not affect the result.</p>
+<p>The second line is the output, which includes one line per row with columns separated by a vertical bar.</p>
+<p>A multi-line table can be constructed by union, which combines the rows of two tables. The column names of the left table are used in the constructed table. Spacing within a line does not affect the result.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; select 38 as latitude, 122 as longitude, &quot;Berkeley&quot; as name union</span><br><span class="line">   ...&gt; select 42,             71,               &quot;Cambridge&quot;        union</span><br><span class="line">   ...&gt; select 45,             93,               &quot;Minneapolis&quot;;</span><br><span class="line">38|122|Berkeley</span><br><span class="line">42|71|Cambridge</span><br><span class="line">45|93|Minneapolis</span><br></pre></td></tr></table></figure>
-<p>A table can be given a name using a create table statement. While
-this statement can also be used to create empty tables, we will focus on
-the form that gives a name to an existing table defined by a select
-statement.</p>
+<p>A table can be given a name using a create table statement. While this statement can also be used to create empty tables, we will focus on the form that gives a name to an existing table defined by a select statement.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; create table cities as</span><br><span class="line">   ...&gt;    select 38 as latitude, 122 as longitude, &quot;Berkeley&quot; as name union</span><br><span class="line">   ...&gt;    select 42,             71,               &quot;Cambridge&quot;        union</span><br><span class="line">   ...&gt;    select 45,             93,               &quot;Minneapolis&quot;;</span><br></pre></td></tr></table></figure>
-<p>Once a table is named, that name can be used in a from clause within
-a select statement. All columns of a table can be displayed using the
-special select * form.</p>
+<p>Once a table is named, that name can be used in a from clause within a select statement. All columns of a table can be displayed using the special select * form.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; select * from cities;</span><br><span class="line">38|122|Berkeley</span><br><span class="line">42|71|Cambridge</span><br><span class="line">45|93|Minneapolis</span><br></pre></td></tr></table></figure>
-<h3 id="select-statements">4.3.2   Select Statements</h3>
-<p>A select statement defines a new table either by listing the values
-in a single row or, more commonly, by projecting an existing table using
-a from clause:</p>
+<h3 id="4-3-2-Select-Statements"><a href="#4-3-2-Select-Statements" class="headerlink" title="4.3.2   Select Statements"></a>4.3.2   Select Statements</h3><p>A select statement defines a new table either by listing the values in a single row or, more commonly, by projecting an existing table using a from clause:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select [column description] from [existing table name]</span><br></pre></td></tr></table></figure>
-<p>The columns of the resulting table are described by a comma-separated
-list of expressions that are each evaluated for each row of the existing
-input table.</p>
-<p>For example, we can create a two-column table that describes each
-city by how far north or south it is of Berkeley. Each degree of
-latitude measures 60 nautical miles to the north.</p>
+<p>The columns of the resulting table are described by a comma-separated list of expressions that are each evaluated for each row of the existing input table.</p>
+<p>For example, we can create a two-column table that describes each city by how far north or south it is of Berkeley. Each degree of latitude measures 60 nautical miles to the north.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; select name, 60*abs(latitude-38) from cities;</span><br><span class="line">Berkeley|0</span><br><span class="line">Cambridge|240</span><br><span class="line">Minneapolis|420</span><br></pre></td></tr></table></figure>
-<p>Column descriptions are expressions in a language that shares many
-properties with Python: infix operators such as + and %, built-in
-functions such as abs and round, and parentheses that describe
-evaluation order. Names in these expressions, such as latitude above,
-evaluate to the column value in the row being projected.</p>
-<p>Optionally, each expression can be followed by the keyword as and a
-column name. When the entire table is given a name, it is often helpful
-to give each column a name so that it can be referenced in future select
-statements. Columns described by a simple name are named
-automatically.</p>
+<p>Column descriptions are expressions in a language that shares many properties with Python: infix operators such as + and %, built-in functions such as abs and round, and parentheses that describe evaluation order. Names in these expressions, such as latitude above, evaluate to the column value in the row being projected.</p>
+<p>Optionally, each expression can be followed by the keyword as and a column name. When the entire table is given a name, it is often helpful to give each column a name so that it can be referenced in future select statements. Columns described by a simple name are named automatically.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; create table distances as</span><br><span class="line">   ...&gt;   select name, 60*abs(latitude-38) as distance from cities;</span><br><span class="line">sqlite&gt; select distance/5, name from distances;</span><br><span class="line">0|Berkeley</span><br><span class="line">48|Cambridge</span><br><span class="line">84|Minneapolis</span><br></pre></td></tr></table></figure>
-<p><strong>Where Clauses.</strong> A select statement can also include a
-where clause with a filtering expression. This expression filters the
-rows that are projected. Only a row for which the filtering expression
-evaluates to a true value will be used to produce a row in the resulting
-table.</p>
-<p><code>select</code>
-语句还可以包含带有过滤表达式的 where 子句。此表达式过滤投影的行。只有过滤表达式计算结果为真值的行才会用于在结果表中生成行。</p>
+<p><strong>Where Clauses.</strong> A select statement can also include a where clause with a filtering expression. This expression filters the rows that are projected. Only a row for which the filtering expression evaluates to a true value will be used to produce a row in the resulting table.</p>
+<p><code>select</code> 语句还可以包含带有过滤表达式的 where 子句。此表达式过滤投影的行。只有过滤表达式计算结果为真值的行才会用于在结果表中生成行。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; create table cold as</span><br><span class="line">   ...&gt;   select name from cities where latitude &gt; 43;</span><br><span class="line">sqlite&gt; select name, &quot;is cold!&quot; from cold;</span><br><span class="line">Minneapolis|is cold!</span><br></pre></td></tr></table></figure>
-<p><strong>Order Clauses.</strong> A select statement can also express
-an ordering over the resulting table. An order clause contains an
-ordering expression that is evaluated for each unfiltered row. The
-resulting values of this expression are used as a sorting criterion for
-the result table.</p>
+<p><strong>Order Clauses.</strong> A select statement can also express an ordering over the resulting table. An order clause contains an ordering expression that is evaluated for each unfiltered row. The resulting values of this expression are used as a sorting criterion for the result table.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; select distance, name from distances order by -distance;</span><br><span class="line">84|Minneapolis</span><br><span class="line">48|Cambridge</span><br><span class="line">0|Berkeley</span><br></pre></td></tr></table></figure>
-<p>The combination of these features allows a select statement to
-express a wide range of projections of an input table into a related
-output table.</p>
-<h3 id="joins">4.3.3   Joins</h3>
-<p>Databases typically contain multiple tables, and queries can require
-information contained within different tables to compute a desired
-result. For instance, we may have a second table describing the mean
-daily high temperature of different cities.</p>
+<p>The combination of these features allows a select statement to express a wide range of projections of an input table into a related output table.</p>
+<h3 id="4-3-3-Joins"><a href="#4-3-3-Joins" class="headerlink" title="4.3.3   Joins"></a>4.3.3   Joins</h3><p>Databases typically contain multiple tables, and queries can require information contained within different tables to compute a desired result. For instance, we may have a second table describing the mean daily high temperature of different cities.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; create table temps as</span><br><span class="line">   ...&gt;   select &quot;Berkeley&quot; as city, 68 as temp union</span><br><span class="line">   ...&gt;   select &quot;Chicago&quot;         , 59         union</span><br><span class="line">   ...&gt;   select &quot;Minneapolis&quot;     , 55;</span><br></pre></td></tr></table></figure>
-<p>Data are combined by <em>joining</em> multiple tables together into
-one, a fundamental operation in database systems. There are many methods
-of joining, all closely related, but we will focus on just one method in
-this text. When tables are joined, the resulting table contains a new
-row for each combination of rows in the input tables. If two tables are
-joined and the left table has <span class="math inline">\(m\)</span>
-rows and the right table has <span class="math inline">\(n\)</span>
-rows, then the joined table will have <span class="math inline">\(m
-\cdot n\)</span> rows. Joins are expressed in SQL by separating table
-names by commas in the from clause of a select statement.</p>
-<p>通过将多个表连接在一起来组合数据，这是数据库系统中的基本操作。连接方法有很多种，它们都密切相关，但在本文中我们将只关注一种方法。连接表后，结果表会为输入表中的每个行组合包含一个新行。如果两个表已连接，左表有 m� 行，右表有 n� 行，则连接后的表将有 m⋅n 行。连接在
-SQL 中通过在 select 语句的 from 子句中用逗号分隔表名来表达。</p>
+<p>Data are combined by _joining_ multiple tables together into one, a fundamental operation in database systems. There are many methods of joining, all closely related, but we will focus on just one method in this text. When tables are joined, the resulting table contains a new row for each combination of rows in the input tables. If two tables are joined and the left table has $m$ rows and the right table has $n$ rows, then the joined table will have $m \cdot n$ rows. Joins are expressed in SQL by separating table names by commas in the from clause of a select statement.</p>
+<p>通过将多个表连接在一起来组合数据，这是数据库系统中的基本操作。连接方法有很多种，它们都密切相关，但在本文中我们将只关注一种方法。连接表后，结果表会为输入表中的每个行组合包含一个新行。如果两个表已连接，左表有 m� 行，右表有 n� 行，则连接后的表将有 m⋅n 行。连接在 SQL 中通过在 select 语句的 from 子句中用逗号分隔表名来表达。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; select * from cities, temps;</span><br><span class="line">38|122|Berkeley|Berkeley|68</span><br><span class="line">38|122|Berkeley|Chicago|59</span><br><span class="line">38|122|Berkeley|Minneapolis|55</span><br><span class="line">42|71|Cambridge|Berkeley|68</span><br><span class="line">42|71|Cambridge|Chicago|59</span><br><span class="line">42|71|Cambridge|Minneapolis|55</span><br><span class="line">45|93|Minneapolis|Berkeley|68</span><br><span class="line">45|93|Minneapolis|Chicago|59</span><br><span class="line">45|93|Minneapolis|Minneapolis|55</span><br></pre></td></tr></table></figure>
-<p>Joins are typically accompanied by a where clause that expresses a
-relationship between the two tables. For example, if we wanted to
-collect data into a table that would allow us to correlate latitude and
-temperature, we would select rows from the join where the same city is
-mentioned in each. Within the cities table, the city name is stored in a
-column called name. Within the temps table, the city name is stored in a
-column called city. The where clause can select for rows in the joined
-table in which these values are equal. In SQL, numeric equality is
-tested with a single = symbol.</p>
-<p>连接通常伴随有 where 子句，表示两个表之间的关系。例如，如果我们想要将数据收集到一个允许我们关联纬度和温度的表中，我们将从连接中选择行，其中每个行都提到相同的城市。在 cities 表中，城市名称存储在名为 name 的列中。在 temps 表中，城市名称存储在名为 city 的列中。 where 子句可以选择连接表中这些值相等的行。在
-SQL 中，数字相等性通过单个 = 符号进行测试。</p>
+<p>Joins are typically accompanied by a where clause that expresses a relationship between the two tables. For example, if we wanted to collect data into a table that would allow us to correlate latitude and temperature, we would select rows from the join where the same city is mentioned in each. Within the cities table, the city name is stored in a column called name. Within the temps table, the city name is stored in a column called city. The where clause can select for rows in the joined table in which these values are equal. In SQL, numeric equality is tested with a single = symbol.</p>
+<p>连接通常伴随有 where 子句，表示两个表之间的关系。例如，如果我们想要将数据收集到一个允许我们关联纬度和温度的表中，我们将从连接中选择行，其中每个行都提到相同的城市。在 cities 表中，城市名称存储在名为 name 的列中。在 temps 表中，城市名称存储在名为 city 的列中。 where 子句可以选择连接表中这些值相等的行。在 SQL 中，数字相等性通过单个 = 符号进行测试。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; select name, latitude, temp from cities, temps where name = city;</span><br><span class="line">Berkeley|38|68</span><br><span class="line">Minneapolis|45|55</span><br></pre></td></tr></table></figure>
-<p>Tables may have overlapping column names, and so we need a method for
-disambiguating column names by table. A table may also be joined with
-itself, and so we need a method for disambiguating tables. To do so, SQL
-allows us to give aliases to tables within a from clause using the
-keyword as and to refer to a column within a particular table using a
-dot expression. The following select statement computes the temperature
-difference between pairs of unequal cities. The alphabetical ordering
-constraint in the where clause ensures that each pair will only appear
-once in the result.</p>
+<p>Tables may have overlapping column names, and so we need a method for disambiguating column names by table. A table may also be joined with itself, and so we need a method for disambiguating tables. To do so, SQL allows us to give aliases to tables within a from clause using the keyword as and to refer to a column within a particular table using a dot expression. The following select statement computes the temperature difference between pairs of unequal cities. The alphabetical ordering constraint in the where clause ensures that each pair will only appear once in the result.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; select a.city, b.city, a.temp - b.temp</span><br><span class="line">   ...&gt;        from temps as a, temps as b where a.city &lt; b.city;</span><br><span class="line">Berkeley|Chicago|10</span><br><span class="line">Berkeley|Minneapolis|15</span><br><span class="line">Chicago|Minneapolis|5</span><br></pre></td></tr></table></figure>
-<p>Our two means of combining tables in SQL, join and union, allow for a
-great deal of expressive power in the language.</p>
-<h3 id="interpreting-sql">4.3.4   Interpreting SQL</h3>
-<p>In order to create an interpreter for the subset of SQL we have
-introduced so far, we need to create a representation for tables, a
-parser for statements written as text, and an evaluator for parsed
-statements. The <a
-target="_blank" rel="noopener" href="http://composingprograms.com/examples/sql/sql_exec.py">sql</a>
-interpreter example includes all of these components, providing a simple
-but functional demonstration of a declarative language interpreter.</p>
-<p>In this implementation, each table has its own a class, and each row
-in a table is represented by an instance of its table's class. A row has
-one attribute per column in the table, and a table is a sequence of
-rows.</p>
-<p>The class for a table is created using the <a
-target="_blank" rel="noopener" href="https://docs.python.org/3/library/collections.html#collections.namedtuple">namedtuple</a>
-function in the collections package of the Python standard library,
-which returns a new sub-class of tuple that gives names to each element
-in the tuple.</p>
-<p>表的类是使用Python 标准库的 collections 包中的namedtuple
-函数创建的，该函数返回 tuple 的新子类，为元组中的每个元素提供名称。</p>
-<p>Consider the cities table from the previous section, repeated
-below.</p>
+<p>Our two means of combining tables in SQL, join and union, allow for a great deal of expressive power in the language.</p>
+<h3 id="4-3-4-Interpreting-SQL"><a href="#4-3-4-Interpreting-SQL" class="headerlink" title="4.3.4   Interpreting SQL"></a>4.3.4   Interpreting SQL</h3><p>In order to create an interpreter for the subset of SQL we have introduced so far, we need to create a representation for tables, a parser for statements written as text, and an evaluator for parsed statements. The <a target="_blank" rel="noopener" href="http://composingprograms.com/examples/sql/sql_exec.py">sql</a> interpreter example includes all of these components, providing a simple but functional demonstration of a declarative language interpreter.</p>
+<p>In this implementation, each table has its own a class, and each row in a table is represented by an instance of its table’s class. A row has one attribute per column in the table, and a table is a sequence of rows.</p>
+<p>The class for a table is created using the <a target="_blank" rel="noopener" href="https://docs.python.org/3/library/collections.html#collections.namedtuple">namedtuple</a> function in the collections package of the Python standard library, which returns a new sub-class of tuple that gives names to each element in the tuple.</p>
+<p>表的类是使用Python 标准库的 collections 包中的namedtuple 函数创建的，该函数返回 tuple 的新子类，为元组中的每个元素提供名称。</p>
+<p>Consider the cities table from the previous section, repeated below.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; create table cities as</span><br><span class="line">   ...&gt;    select 38 as latitude, 122 as longitude, &quot;Berkeley&quot; as name union</span><br><span class="line">   ...&gt;    select 42,             71,               &quot;Cambridge&quot;        union</span><br><span class="line">   ...&gt;    select 45,             93,               &quot;Minneapolis&quot;;</span><br></pre></td></tr></table></figure>
-<p>The following Python statements construct a representation for this
-table.</p>
+<p>The following Python statements construct a representation for this table.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; from collections import namedtuple</span><br><span class="line">&gt;&gt;&gt; CitiesRow = namedtuple(&quot;Row&quot;, [&quot;latitude&quot;, &quot;longitude&quot;, &quot;name&quot;])</span><br><span class="line">&gt;&gt;&gt; cities = [CitiesRow(38, 122, &quot;Berkeley&quot;),</span><br><span class="line">              CitiesRow(42,  71, &quot;Cambridge&quot;),</span><br><span class="line">              CitiesRow(43,  93, &quot;Minneapolis&quot;)]</span><br></pre></td></tr></table></figure>
-<p>The result of a select statement can be interpreted using sequence
-operations. Consider the distances table from the previous section,
-repeated below.</p>
+<p>The result of a select statement can be interpreted using sequence operations. Consider the distances table from the previous section, repeated below.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; create table distances as</span><br><span class="line">   ...&gt;   select name, 60*abs(latitude-38) as distance from cities;</span><br><span class="line">sqlite&gt; select distance/5, name from distances;</span><br><span class="line">0|Berkeley</span><br><span class="line">48|Cambridge</span><br><span class="line">84|Minneapolis</span><br></pre></td></tr></table></figure>
-<p>This table is generated from the name and latitude columns of the
-cities table. This resulting table can be generated by mapping a
-function over the rows of the input table, a function that returns a
-DistancesRow for each CitiesRow.</p>
+<p>This table is generated from the name and latitude columns of the cities table. This resulting table can be generated by mapping a function over the rows of the input table, a function that returns a DistancesRow for each CitiesRow.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; DistancesRow = namedtuple(&quot;Row&quot;, [&quot;name&quot;, &quot;distance&quot;])</span><br><span class="line">&gt;&gt;&gt; def select(cities_row):</span><br><span class="line">        latitude, longitude, name = cities_row</span><br><span class="line">        return DistancesRow(name, 60*abs(latitude-38))</span><br><span class="line">&gt;&gt;&gt; distances = list(map(select, cities))</span><br><span class="line">&gt;&gt;&gt; for row in distances:</span><br><span class="line">        print(row)</span><br><span class="line">Row(name=&#x27;Berkeley&#x27;, distance=0)</span><br><span class="line">Row(name=&#x27;Cambridge&#x27;, distance=240)</span><br><span class="line">Row(name=&#x27;Minneapolis&#x27;, distance=300)</span><br></pre></td></tr></table></figure>
-<p>The design of our SQL interpreter generalizes this approach. A select
-statement is represented as an instance of a class Select that is
-constructed from the clauses of the select statement.</p>
+<p>The design of our SQL interpreter generalizes this approach. A select statement is represented as an instance of a class Select that is constructed from the clauses of the select statement.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; class Select:</span><br><span class="line">        &quot;&quot;&quot;select [columns] from [tables] where [condition] order by [order].&quot;&quot;&quot;</span><br><span class="line">        def __init__(self, columns, tables, condition, order):</span><br><span class="line">            self.columns = columns</span><br><span class="line">            self.tables = tables</span><br><span class="line">            self.condition = condition</span><br><span class="line">            self.order = order</span><br><span class="line">            self.make_row = create_make_row(self.columns)</span><br><span class="line">        def execute(self, env):</span><br><span class="line">            &quot;&quot;&quot;Join, filter, sort, and map rows from tables to columns.&quot;&quot;&quot;</span><br><span class="line">            from_rows = join(self.tables, env)</span><br><span class="line">            filtered_rows = filter(self.filter, from_rows)</span><br><span class="line">            ordered_rows = self.sort(filtered_rows)</span><br><span class="line">            return map(self.make_row, ordered_rows)</span><br><span class="line">        def filter(self, row):</span><br><span class="line">            if self.condition:</span><br><span class="line">                return eval(self.condition, row)</span><br><span class="line">            else:</span><br><span class="line">                return True</span><br><span class="line">        def sort(self, rows):</span><br><span class="line">            if self.order:</span><br><span class="line">                return sorted(rows, key=lambda r: eval(self.order, r))</span><br><span class="line">            else:</span><br><span class="line">                return rows</span><br></pre></td></tr></table></figure>
-<p>The execute method joins input tables, filters and orders the
-resulting rows, then maps a function called make_row over those
-resulting rows. The make_row function is created in the Select
-constructor by a call to create_make_row, a higher-order function that
-creates a new class for the resulting table and defines how to project
-an input row to an output row. (A version of this function with more
-error handling and special cases appears in <a
-target="_blank" rel="noopener" href="http://composingprograms.com/examples/sql/sql_exec.py">sql</a>.)</p>
+<p>The execute method joins input tables, filters and orders the resulting rows, then maps a function called make_row over those resulting rows. The make_row function is created in the Select constructor by a call to create_make_row, a higher-order function that creates a new class for the resulting table and defines how to project an input row to an output row. (A version of this function with more error handling and special cases appears in <a target="_blank" rel="noopener" href="http://composingprograms.com/examples/sql/sql_exec.py">sql</a>.)</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def create_make_row(description):</span><br><span class="line">        &quot;&quot;&quot;Return a function from an input environment (dict) to an output row.</span><br><span class="line">        description -- a comma-separated list of [expression] as [column name]</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        columns = description.split(&quot;, &quot;)</span><br><span class="line">        expressions, names = [], []</span><br><span class="line">        for column in columns:</span><br><span class="line">            if &quot; as &quot; in column:</span><br><span class="line">                expression, name = column.split(&quot; as &quot;)</span><br><span class="line">            else:</span><br><span class="line">                expression, name = column, column</span><br><span class="line">            expressions.append(expression)</span><br><span class="line">            names.append(name)</span><br><span class="line">        row = namedtuple(&quot;Row&quot;, names)</span><br><span class="line">        return lambda env: row(*[eval(e, env) for e in expressions])</span><br></pre></td></tr></table></figure>
-<p>Finally, we need to define the join function that creates the input
-rows. Given an env dictionary contains existing tables (lists of rows)
-keyed by their name, the join function groups together all combinations
-of rows in the input tables using the <a
-target="_blank" rel="noopener" href="https://docs.python.org/3/library/itertools.html#itertools.product">product</a>
-function in the itertools package. It maps a function called make_env
-over the joined rows, a function that converts each combination of rows
-into a dictionary so that it can be used to evaluate expressions. (A
-version of this function with more error handling and special cases
-appears in <a
-target="_blank" rel="noopener" href="http://composingprograms.com/examples/sql/sql_exec.py">sql</a>.)</p>
+<p>Finally, we need to define the join function that creates the input rows. Given an env dictionary contains existing tables (lists of rows) keyed by their name, the join function groups together all combinations of rows in the input tables using the <a target="_blank" rel="noopener" href="https://docs.python.org/3/library/itertools.html#itertools.product">product</a> function in the itertools package. It maps a function called make_env over the joined rows, a function that converts each combination of rows into a dictionary so that it can be used to evaluate expressions. (A version of this function with more error handling and special cases appears in <a target="_blank" rel="noopener" href="http://composingprograms.com/examples/sql/sql_exec.py">sql</a>.)</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; from itertools import product</span><br><span class="line">&gt;&gt;&gt; def join(tables, env):</span><br><span class="line">        &quot;&quot;&quot;Return an iterator over dictionaries from names to values in a row.</span><br><span class="line">        tables -- a comma-separate sequences of table names</span><br><span class="line">        env    -- a dictionary from global names to tables</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        names = tables.split(&quot;, &quot;)</span><br><span class="line">        joined_rows = product(*[env[name] for name in names])</span><br><span class="line">        return map(lambda rows: make_env(rows, names), joined_rows)</span><br><span class="line">&gt;&gt;&gt; def make_env(rows, names):</span><br><span class="line">        &quot;&quot;&quot;Create an environment of names bound to values.&quot;&quot;&quot;</span><br><span class="line">        env = dict(zip(names, rows))</span><br><span class="line">        for row in rows:</span><br><span class="line">            for name in row._fields:</span><br><span class="line">                env[name] = getattr(row, name)</span><br><span class="line">        return env</span><br></pre></td></tr></table></figure>
-<p>Above, row._fields evaluates to the column names of the table
-containing the row. The _fields attribute exists because the type of row
-is a namedtuple class.</p>
-<p>Our interpreter is complete enough to execute select statements. For
-instance, we can compute the latitude distance from Berkeley for all
-other cities, ordered by their longitude.</p>
+<p>Above, row._fields evaluates to the column names of the table containing the row. The _fields attribute exists because the type of row is a namedtuple class.</p>
+<p>Our interpreter is complete enough to execute select statements. For instance, we can compute the latitude distance from Berkeley for all other cities, ordered by their longitude.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; env = &#123;&quot;cities&quot;: cities&#125;</span><br><span class="line">&gt;&gt;&gt; select = Select(&quot;name, 60*abs(latitude-38) as distance&quot;,</span><br><span class="line">                    &quot;cities&quot;, &quot;name != &#x27;Berkeley&#x27;&quot;, &quot;-longitude&quot;)</span><br><span class="line">&gt;&gt;&gt; for row in select.execute(env):</span><br><span class="line">        print(row)</span><br><span class="line">Row(name=&#x27;Minneapolis&#x27;, distance=300)</span><br><span class="line">Row(name=&#x27;Cambridge&#x27;, distance=240)</span><br></pre></td></tr></table></figure>
 <p>The example above is equivalent to the following SQL statement.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; select name, 60*abs(latitude-38) as distance</span><br><span class="line">   ...&gt;        from cities where name != &quot;Berkeley&quot; order by -longitude;</span><br><span class="line">Minneapolis|420</span><br><span class="line">Cambridge|240</span><br></pre></td></tr></table></figure>
-<p>We can also store this resulting table in the environment and join it
-with the cities table, retrieving the longitude for each city.</p>
+<p>We can also store this resulting table in the environment and join it with the cities table, retrieving the longitude for each city.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; env[&quot;distances&quot;] = list(select.execute(env))</span><br><span class="line">&gt;&gt;&gt; joined = Select(&quot;cities.name as name, distance, longitude&quot;, &quot;cities, distances&quot;,</span><br><span class="line">                    &quot;cities.name == distances.name&quot;, None)</span><br><span class="line">&gt;&gt;&gt; for row in joined.execute(env):</span><br><span class="line">        print(row)</span><br><span class="line">Row(name=&#x27;Cambridge&#x27;, distance=240, longitude=71)</span><br><span class="line">Row(name=&#x27;Minneapolis&#x27;, distance=300, longitude=93)</span><br></pre></td></tr></table></figure>
 <p>The example above is equivalent to the following SQL statement.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; select cities.name as name, distance, longitude</span><br><span class="line">   ...&gt;        from cities, distances where cities.name = distances.name;</span><br><span class="line">Cambridge|240|71</span><br><span class="line">Minneapolis|420|93</span><br></pre></td></tr></table></figure>
-<p>The full <a
-target="_blank" rel="noopener" href="http://composingprograms.com/examples/sql/sql_exec.py">sql</a>
-example program also contains a simple parser for select statements, as
-well as execute methods for create table and union. The interpreter can
-correctly execute all SQL statements included within the text so far.
-While this simple interpreter only implements a small amount of the full
-Structured Query Language, its structure demonstrates the relationship
-between sequence processing operations and query languages.</p>
-<p><strong>Query Plans.</strong> Declarative languages describe the form
-of a result, but do not explicitly describe how that result should be
-computed. This interpreter always joins, filters, orders, and then
-projects the input rows in order to compute the result rows. However,
-more efficient ways to compute the same result may exist, and query
-interpreters are free to choose among them. Choosing efficient
-procedures for computing query results is a core feature of database
-systems.</p>
-<p>For example, consider the final select statement above. Rather than
-computing the join of cities and distances and then filtering the
-result, the same result may be computed by first sorting both tables by
-the name column and then joining only the rows that have the same name
-in a linear pass through the sorted tables. When tables are large,
-efficiency gains from query plan selection can be substantial.</p>
-<h3 id="recursive-select-statements">4.3.5   Recursive Select
-Statements</h3>
-<p>Select statements can optionally include a with clause that generates
-and names additional tables used in computing the final result. The full
-syntax of a select statement, not including unions, has the following
-form:</p>
+<p>The full <a target="_blank" rel="noopener" href="http://composingprograms.com/examples/sql/sql_exec.py">sql</a> example program also contains a simple parser for select statements, as well as execute methods for create table and union. The interpreter can correctly execute all SQL statements included within the text so far. While this simple interpreter only implements a small amount of the full Structured Query Language, its structure demonstrates the relationship between sequence processing operations and query languages.</p>
+<p><strong>Query Plans.</strong> Declarative languages describe the form of a result, but do not explicitly describe how that result should be computed. This interpreter always joins, filters, orders, and then projects the input rows in order to compute the result rows. However, more efficient ways to compute the same result may exist, and query interpreters are free to choose among them. Choosing efficient procedures for computing query results is a core feature of database systems.</p>
+<p>For example, consider the final select statement above. Rather than computing the join of cities and distances and then filtering the result, the same result may be computed by first sorting both tables by the name column and then joining only the rows that have the same name in a linear pass through the sorted tables. When tables are large, efficiency gains from query plan selection can be substantial.</p>
+<h3 id="4-3-5-Recursive-Select-Statements"><a href="#4-3-5-Recursive-Select-Statements" class="headerlink" title="4.3.5   Recursive Select Statements"></a>4.3.5   Recursive Select Statements</h3><p>Select statements can optionally include a with clause that generates and names additional tables used in computing the final result. The full syntax of a select statement, not including unions, has the following form:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">with [tables] select [columns] from [names] where [condition] order by [order]</span><br></pre></td></tr></table></figure>
-<p>We have already demonstrated the allowed values for [columns] and
-[names]. [condition] and [order] are expressions that can be evaluated
-for an input row. The [tables] portion is a comma-separated list of
-table descriptions of the form:</p>
+<p>We have already demonstrated the allowed values for [columns] and [names]. [condition] and [order] are expressions that can be evaluated for an input row. The [tables] portion is a comma-separated list of table descriptions of the form:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[table name]([column names]) as ([select statement])</span><br></pre></td></tr></table></figure>
-<p>Any select statement can be used to describe a table within
-[tables].</p>
-<p>For instance, the with clause below declares a table states
-containing cities and their states. The select statement computes pairs
-of cities within the same state.</p>
+<p>Any select statement can be used to describe a table within [tables].</p>
+<p>For instance, the with clause below declares a table states containing cities and their states. The select statement computes pairs of cities within the same state.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; with</span><br><span class="line">   ...&gt;   states(city, state) as (</span><br><span class="line">   ...&gt;     select &quot;Berkeley&quot;,  &quot;California&quot;    union</span><br><span class="line">   ...&gt;     select &quot;Boston&quot;,    &quot;Massachusetts&quot; union</span><br><span class="line">   ...&gt;     select &quot;Cambridge&quot;, &quot;Massachusetts&quot; union</span><br><span class="line">   ...&gt;     select &quot;Chicago&quot;,   &quot;Illinois&quot;      union</span><br><span class="line">   ...&gt;     select &quot;Pasadena&quot;,  &quot;California&quot;</span><br><span class="line">   ...&gt;   )</span><br><span class="line">   ...&gt; select a.city, b.city, a.state from states as a, states as b</span><br><span class="line">   ...&gt;        where a.state = b.state and a.city &lt; b.city;</span><br><span class="line">Berkeley|Pasadena|California</span><br><span class="line">Boston|Cambridge|Massachusetts</span><br></pre></td></tr></table></figure>
-<p>A table defined within a with clause may have a single recursive case
-that defines output rows in terms of other output rows. For example, the
-with clause below defines a table of integers from 5 to 15, of which the
-odd values are selected and squared.</p>
+<p>A table defined within a with clause may have a single recursive case that defines output rows in terms of other output rows. For example, the with clause below defines a table of integers from 5 to 15, of which the odd values are selected and squared.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; with</span><br><span class="line">   ...&gt;   ints(n) as (</span><br><span class="line">   ...&gt;     select 5 union</span><br><span class="line">   ...&gt;     select n+1 from ints where n &lt; 15</span><br><span class="line">   ...&gt;   )</span><br><span class="line">   ...&gt; select n, n*n from ints where n % 2 = 1;</span><br><span class="line">5|25</span><br><span class="line">7|49</span><br><span class="line">9|81</span><br><span class="line">11|121</span><br><span class="line">13|169</span><br><span class="line">15|225</span><br></pre></td></tr></table></figure>
-<p>Multiple tables can be defined in a with clause, separated by commas.
-The example below computes all Pythagorean triples from a table of
-integers, their squares, and the sums of pairs of squares. A Pythagorean
-triple consists of integers <span class="math inline">\(a\)</span>,
-<span class="math inline">\(b\)</span>, and <span
-class="math inline">\(c\)</span> such that <span
-class="math inline">\(a^2 + b^2 = c^2\)</span>.</p>
+<p>Multiple tables can be defined in a with clause, separated by commas. The example below computes all Pythagorean triples from a table of integers, their squares, and the sums of pairs of squares. A Pythagorean triple consists of integers $a$, $b$, and $c$ such that $a^2 + b^2 = c^2$.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; with</span><br><span class="line">   ...&gt;   ints(n) as (</span><br><span class="line">   ...&gt;     select 1 union select n+1 from ints where n &lt; 20</span><br><span class="line">   ...&gt;   ),</span><br><span class="line">   ...&gt;   squares(x, xx) as (</span><br><span class="line">   ...&gt;     select n, n*n from ints</span><br><span class="line">   ...&gt;   ),</span><br><span class="line">   ...&gt;   sum_of_squares(a, b, sum) as (</span><br><span class="line">   ...&gt;     select a.x, b.x, a.xx + b.xx</span><br><span class="line">   ...&gt;            from squares as a, squares as b where a.x &lt; b.x</span><br><span class="line">   ...&gt;   )</span><br><span class="line">   ...&gt; select a, b, x from squares, sum_of_squares where sum = xx;</span><br><span class="line">3|4|5</span><br><span class="line">6|8|10</span><br><span class="line">5|12|13</span><br><span class="line">9|12|15</span><br><span class="line">8|15|17</span><br><span class="line">12|16|20</span><br></pre></td></tr></table></figure>
-<p>Designing recursive queries involves ensuring that the appropriate
-information is available in each input row to compute a result row. To
-compute Fibonacci numbers, for example, the input row needs not only the
-current but also the previous element in order to compute the next
-element.</p>
+<p>Designing recursive queries involves ensuring that the appropriate information is available in each input row to compute a result row. To compute Fibonacci numbers, for example, the input row needs not only the current but also the previous element in order to compute the next element.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; with</span><br><span class="line">   ...&gt;   fib(previous, current) as (</span><br><span class="line">   ...&gt;     select 0, 1 union</span><br><span class="line">   ...&gt;     select current, previous+current from fib</span><br><span class="line">   ...&gt;     where current &lt;= 100</span><br><span class="line">   ...&gt;   )</span><br><span class="line">   ...&gt; select previous from fib;</span><br></pre></td></tr></table></figure>
-<p>These examples demonstrate that recursion is a powerful means of
-combination, even in declarative languages.</p>
-<p><strong>Building strings</strong>. Two strings can be concatenated
-into a longer string using the || operator in SQL.</p>
+<p>These examples demonstrate that recursion is a powerful means of combination, even in declarative languages.</p>
+<p><strong>Building strings</strong>. Two strings can be concatenated into a longer string using the || operator in SQL.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; with wall(n) as ( ....&gt;   select 99 union select 98 union select 97</span><br><span class="line">  ....&gt; )</span><br><span class="line">  ....&gt; select n || &quot; bottles&quot; from wall;</span><br><span class="line">99 bottles</span><br><span class="line">98 bottles</span><br><span class="line">97 bottles</span><br></pre></td></tr></table></figure>
-<p>This feature can be used to construct sentences by concatenating
-phrases. For example, one way to construct an English sentence is to
-concatenate a subject noun phrase, a verb, and an object noun
-phrase.</p>
+<p>This feature can be used to construct sentences by concatenating phrases. For example, one way to construct an English sentence is to concatenate a subject noun phrase, a verb, and an object noun phrase.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; create table nouns as</span><br><span class="line">  ....&gt;   select &quot;the dog&quot; as phrase union</span><br><span class="line">  ....&gt;   select &quot;the cat&quot;           union</span><br><span class="line">  ....&gt;   select &quot;the bird&quot;;</span><br><span class="line">sqlite&gt; select subject.phrase || &quot; chased &quot; || object.phrase</span><br><span class="line">  ....&gt;        from nouns as subject, nouns as object</span><br><span class="line">  ....&gt;        where subject.phrase != object.phrase;</span><br><span class="line">the bird chased the cat</span><br><span class="line">the bird chased the dog</span><br><span class="line">the cat chased the bird</span><br><span class="line">the cat chased the dog</span><br><span class="line">the dog chased the bird</span><br><span class="line">the dog chased the cat</span><br></pre></td></tr></table></figure>
-<p>As an exercise, use a recursive local table to generate sentences
-such as, "the dog that chased the cat that chased the bird also chased
-the bird."</p>
-<h3 id="aggregation-and-grouping">4.3.6   Aggregation and Grouping</h3>
-<p>The select statements introduced so far can join, project, and
-manipulate individual rows. In addition, a select statement can perform
-aggregation operations over multiple rows. The aggregate functions max,
-min, count, and sum return the maximum, minimum, number, and sum of the
-values in a column. Multiple aggregate functions can be applied to the
-same set of rows by defining more than one column. Only columns that are
-included by the where clause are considered in the aggreagation.</p>
+<p>As an exercise, use a recursive local table to generate sentences such as, “the dog that chased the cat that chased the bird also chased the bird.”</p>
+<h3 id="4-3-6-Aggregation-and-Grouping"><a href="#4-3-6-Aggregation-and-Grouping" class="headerlink" title="4.3.6   Aggregation and Grouping"></a>4.3.6   Aggregation and Grouping</h3><p>The select statements introduced so far can join, project, and manipulate individual rows. In addition, a select statement can perform aggregation operations over multiple rows. The aggregate functions max, min, count, and sum return the maximum, minimum, number, and sum of the values in a column. Multiple aggregate functions can be applied to the same set of rows by defining more than one column. Only columns that are included by the where clause are considered in the aggreagation.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; create table animals as</span><br><span class="line">  ....&gt;   select &quot;dog&quot; as name, 4 as legs, 20 as weight union</span><br><span class="line">  ....&gt;   select &quot;cat&quot;        , 4        , 10           union</span><br><span class="line">  ....&gt;   select &quot;ferret&quot;     , 4        , 10           union</span><br><span class="line">  ....&gt;   select &quot;t-rex&quot;      , 2        , 12000        union</span><br><span class="line">  ....&gt;   select &quot;penguin&quot;    , 2        , 10           union</span><br><span class="line">  ....&gt;   select &quot;bird&quot;       , 2        , 6;</span><br><span class="line">sqlite&gt; select max(legs) from animals;</span><br><span class="line">sqlite&gt; select sum(weight) from animals;</span><br><span class="line">sqlite&gt; select min(legs), max(weight) from animals where name &lt;&gt; &quot;t-rex&quot;;</span><br><span class="line">2|20</span><br></pre></td></tr></table></figure>
-<p>The distinct keyword ensures that no repeated values in a column are
-included in the aggregation. Only two distinct values of legs appear in
-the animals table. The special count(*) syntax counts the number of
-rows.</p>
+<p>The distinct keyword ensures that no repeated values in a column are included in the aggregation. Only two distinct values of legs appear in the animals table. The special count(*) syntax counts the number of rows.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; select count(legs) from animals;</span><br><span class="line">sqlite&gt; select count(*) from animals;</span><br><span class="line">sqlite&gt; select count(distinct legs) from animals;</span><br></pre></td></tr></table></figure>
-<p>Each of these select statements has produced a table with a single
-row. The group by and having clauses of a select statement are used to
-partition rows into groups and select only a subset of the groups. Any
-aggregate functions in the having clause or column description will
-apply to each group independently, rather than the entire set of rows in
-the table.</p>
-<p>For example, to compute the maximum weight of both a four-legged and
-a two-legged animal from this table, the first statement below groups
-together dogs and cats as one group and birds as a separate group. The
-result indicates that the maximum weight for a two-legged animal is 3
-(the bird) and for a four-legged animal is 20 (the dog). The second
-query lists the values in the legs column for which there are at least
-two distinct names.</p>
+<p>Each of these select statements has produced a table with a single row. The group by and having clauses of a select statement are used to partition rows into groups and select only a subset of the groups. Any aggregate functions in the having clause or column description will apply to each group independently, rather than the entire set of rows in the table.</p>
+<p>For example, to compute the maximum weight of both a four-legged and a two-legged animal from this table, the first statement below groups together dogs and cats as one group and birds as a separate group. The result indicates that the maximum weight for a two-legged animal is 3 (the bird) and for a four-legged animal is 20 (the dog). The second query lists the values in the legs column for which there are at least two distinct names.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; select legs, max(weight) from animals group by legs;</span><br><span class="line">2|12000</span><br><span class="line">4|20</span><br><span class="line">sqlite&gt; select weight from animals group by weight having count(*)&gt;1;</span><br></pre></td></tr></table></figure>
-<p>Multiple columns and full expressions can appear in the group by
-clause, and groups will be formed for every unique combination of values
-that result. Typically, the expression used for grouping also appears in
-the column description, so that it is easy to identify which result row
-resulted from each group.</p>
+<p>Multiple columns and full expressions can appear in the group by clause, and groups will be formed for every unique combination of values that result. Typically, the expression used for grouping also appears in the column description, so that it is easy to identify which result row resulted from each group.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; select max(name) from animals group by legs, weight order by name;</span><br><span class="line">bird</span><br><span class="line">dog</span><br><span class="line">ferret</span><br><span class="line">penguin</span><br><span class="line">t-rex</span><br><span class="line">sqlite&gt; select max(name), legs, weight from animals group by legs, weight</span><br><span class="line">  ....&gt;   having max(weight) &lt; 100;</span><br><span class="line">bird|2|6</span><br><span class="line">penguin|2|10</span><br><span class="line">ferret|4|10</span><br><span class="line">dog|4|20</span><br><span class="line">sqlite&gt; select count(*), weight/legs from animals group by weight/legs;</span><br><span class="line">2|2</span><br><span class="line">1|3</span><br><span class="line">2|5</span><br><span class="line">1|6000</span><br></pre></td></tr></table></figure>
-<p>A having clause can contain the same filtering as a where clause, but
-can also include calls to aggregate functions. For the fastest execution
-and clearest use of the language, a condition that filters individual
-rows based on their contents should appear in a where clause, while a
-having clause should be used only when aggregation is required in the
-condition (such as specifying a minimum count for a group).</p>
-<p>When using a group by clause, column descriptions can contain
-expressions that do not aggregate. In some cases, the SQL interpreter
-will choose the value from a row that corresponds to another column that
-includes aggregation. For example, the following statement gives the
-name of an animal with maximal weight.</p>
+<p>A having clause can contain the same filtering as a where clause, but can also include calls to aggregate functions. For the fastest execution and clearest use of the language, a condition that filters individual rows based on their contents should appear in a where clause, while a having clause should be used only when aggregation is required in the condition (such as specifying a minimum count for a group).</p>
+<p>When using a group by clause, column descriptions can contain expressions that do not aggregate. In some cases, the SQL interpreter will choose the value from a row that corresponds to another column that includes aggregation. For example, the following statement gives the name of an animal with maximal weight.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sqlite&gt; select name, max(weight) from animals;</span><br><span class="line">t-rex|12000</span><br><span class="line">sqlite&gt; select name, legs, max(weight) from animals group by legs;</span><br><span class="line">t-rex|2|12000</span><br><span class="line">dog|4|20</span><br></pre></td></tr></table></figure>
-<p>However, whenever the row that corresponds to aggregation is unclear
-(for instance, when aggregating with count instead of max), the value
-chosen may be arbitrary. For the clearest and most predictable use of
-the language, a select statement that includes a group by clause should
-include at least one aggregate column and only include non-aggregate
-columns if their contents is predictable from the aggregation.</p>
-<p><em>Continue</em>: <a href="../pages/44-logic-programming.html">4.4
-Logic Programming</a></p>
+<p>However, whenever the row that corresponds to aggregation is unclear (for instance, when aggregating with count instead of max), the value chosen may be arbitrary. For the clearest and most predictable use of the language, a select statement that includes a group by clause should include at least one aggregate column and only include non-aggregate columns if their contents is predictable from the aggregation.</p>
+<p>_Continue_: <a href="../pages/44-logic-programming.html">4.4 Logic Programming</a></p>
 
     </div>
 
@@ -722,8 +436,7 @@ Logic Programming</a></p>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#declarative-programming"><span class="nav-number">1.</span> <span class="nav-text">4_3 Declarative Programming</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#select-statements"><span class="nav-number">1.0.1.</span> <span class="nav-text">4.3.2   Select Statements</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#joins"><span class="nav-number">1.0.2.</span> <span class="nav-text">4.3.3   Joins</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#interpreting-sql"><span class="nav-number">1.0.3.</span> <span class="nav-text">4.3.4   Interpreting SQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#recursive-select-statements"><span class="nav-number">1.0.4.</span> <span class="nav-text">4.3.5   Recursive Select
-Statements</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#aggregation-and-grouping"><span class="nav-number">1.0.5.</span> <span class="nav-text">4.3.6   Aggregation and Grouping</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#4-3-Declarative-Programming"><span class="nav-number">1.</span> <span class="nav-text">4_3 Declarative Programming</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-1-Tables"><span class="nav-number">1.0.1.</span> <span class="nav-text">4.3.1   Tables</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-2-Select-Statements"><span class="nav-number">1.0.2.</span> <span class="nav-text">4.3.2   Select Statements</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-3-Joins"><span class="nav-number">1.0.3.</span> <span class="nav-text">4.3.3   Joins</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-4-Interpreting-SQL"><span class="nav-number">1.0.4.</span> <span class="nav-text">4.3.4   Interpreting SQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-5-Recursive-Select-Statements"><span class="nav-number">1.0.5.</span> <span class="nav-text">4.3.5   Recursive Select Statements</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-6-Aggregation-and-Grouping"><span class="nav-number">1.0.6.</span> <span class="nav-text">4.3.6   Aggregation and Grouping</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -766,6 +479,8 @@ Statements</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" h
 
 
       </div>
+
+      
 
     </div>
   </aside>
