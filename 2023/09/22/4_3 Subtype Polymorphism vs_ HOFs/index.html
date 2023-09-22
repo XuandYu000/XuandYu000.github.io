@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <script src="/live2d-widget/autoload.js"></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/sailboat.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/sailboat.png">
+  <link rel="mask-icon" href="/images/sailboat.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="4_3 Subtype Polymorphism vs_ HOFs Subtype Polymorphism(多态) We&#39;ve seen how inheritance lets us reuse existing code in a superclass while implementing small modifications by overriding a superclass">
+<meta property="og:type" content="article">
+<meta property="og:title" content="4_3 Subtype Polymorphism vs_ HOFs">
+<meta property="og:url" content="http://example.com/2023/09/22/4_3%20Subtype%20Polymorphism%20vs_%20HOFs/index.html">
+<meta property="og:site_name" content="viewoverlook">
+<meta property="og:description" content="4_3 Subtype Polymorphism vs_ HOFs Subtype Polymorphism(多态) We&#39;ve seen how inheritance lets us reuse existing code in a superclass while implementing small modifications by overriding a superclass">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-22T11:37:52.130Z">
+<meta property="article:modified_time" content="2023-09-22T08:41:59.778Z">
+<meta property="article:author" content="XuandYu000">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2023/09/22/4_3%20Subtype%20Polymorphism%20vs_%20HOFs/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>4_3 Subtype Polymorphism vs_ HOFs | viewoverlook</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">viewoverlook</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/XuandYu000" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/22/4_3%20Subtype%20Polymorphism%20vs_%20HOFs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
+      <meta itemprop="name" content="XuandYu000">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="viewoverlook">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          4_3 Subtype Polymorphism vs_ HOFs
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-09-22 19:37:52 / 修改时间：16:41:59" itemprop="dateCreated datePublished" datetime="2023-09-22T19:37:52+08:00">2023-09-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/cs61b/" itemprop="url" rel="index"><span itemprop="name">cs61b</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/cs61b/csdiy/" itemprop="url" rel="index"><span itemprop="name">csdiy</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="subtype-polymorphism-vs_-hofs">4_3 Subtype Polymorphism vs_
+HOFs</h1>
+<h2 id="subtype-polymorphism多态">Subtype Polymorphism(多态)</h2>
+<p>We've seen how inheritance lets us reuse existing code in a
+superclass while implementing small modifications by overriding a
+superclass's methods or writing brand new methods in the subclass.
+Inheritance also makes it possible to design general data structures and
+methods using <em>polymorphism</em>.</p>
+<p>Polymorphism, at its core, means 'many forms'. In Java, polymorphism
+refers to how objects can have many forms or types. In object-oriented
+programming, polymorphism relates to how an object can be regarded as an
+instance of its own class, an instance of its superclass, an instance of
+its superclass's superclass, and so on.
+多态性的核心是“多种形式”。在Java中，多态性是指对象如何具有多种形式或类型。在面向对象的编程中，多态性与如何将对象视为其自身类的实例，其超类的实例，其超类超类的实例等有关。</p>
+<span id="more"></span>
+<p>Consider a variable <code>deque</code> of static type Deque. A call
+to <code>deque.addFirst()</code> will be determined at the time of
+execution, depending on the run-time type, or dynamic type, of
+<code>deque</code> when <code>addFirst</code> is called. As we saw in
+the last chapter, Java picks which method to call using dynamic method
+selection.</p>
+<p>Suppose we want to write a python program that prints a string
+representation of the larger of two objects. There are two approaches to
+this.</p>
+<ol type="1">
+<li>Explicit HoF Approach</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">def print_larger(x, y, compare, stringify):</span><br><span class="line">    if compare(x, y):</span><br><span class="line">        return stringify(x)</span><br><span class="line">    return stringify(y)</span><br></pre></td></tr></table></figure>
+<ol type="1">
+<li>Subtype Polymorphism Approach</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">def print_larger(x, y):</span><br><span class="line">    if x.largerThan(y):</span><br><span class="line">        return x.str()</span><br><span class="line">    return y.str()</span><br></pre></td></tr></table></figure>
+<p>Using the explicit higher order function approach, you have a common
+way to print out the larger of two objects. In contrast, in the subtype
+polymorphism approach, the object <em>itself</em> makes the choices. The
+<code>largerFunction</code> that is called is dependent on what x and y
+actually are.</p>
+<h3 id="max-function">Max Function</h3>
+<p>Say we want to write a <code>max</code> function which takes in any
+array - regardless of type - and returns the maximum item in the
+array.</p>
+<p><strong>Exercise 4.3.1.</strong> Your task is to determine how many
+compilation errors there are in the code below.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public static Object max(Object[] items) &#123;</span><br><span class="line">    int maxDex = 0;</span><br><span class="line">    for (int i = 0; i &lt; items.length; i += 1) &#123;</span><br><span class="line">        if (items[i] &gt; items[maxDex]) &#123;</span><br><span class="line">            maxDex = i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return items[maxDex];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    Dog[] dogs = &#123;new Dog(&quot;Elyse&quot;, 3), new Dog(&quot;Sture&quot;, 9), new Dog(&quot;Benjamin&quot;, 15)&#125;;</span><br><span class="line">    Dog maxDog = (Dog) max(dogs);</span><br><span class="line">    maxDog.bark();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>In the code above, there was only 1 error, found at this line:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if (items[i] &gt; items[maxDex]) &#123;</span><br></pre></td></tr></table></figure>
+<p>The reason why this results in a compilation error is because this
+line assumes that the <code>&gt;</code> operator works with arbitrary
+Object types, when in fact it does not.</p>
+<p>Instead, one thing we could is define a <code>maxDog</code> function
+in the Dog class, and give up on writing a "one true max function" that
+could take in an array of any arbitrary type. We might define something
+like this:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public static Dog maxDog(Dog[] dogs) &#123;</span><br><span class="line">    if (dogs == null || dogs.length == 0) &#123;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">    Dog maxDog = dogs[0];</span><br><span class="line">    for (Dog d : dogs) &#123;</span><br><span class="line">        if (d.size &gt; maxDog.size) &#123;</span><br><span class="line">            maxDog = d;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return maxDog;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>While this would work for now, if we give up on our dream of making a
+generalized <code>max</code> function and let the Dog class define its
+own <code>max</code> function, then we'd have to do the same for any
+class we define later. We'd need to write a <code>maxCat</code>
+function, a <code>maxPenguin</code> function, a <code>maxWhale</code>
+function, etc., resulting in unnecessary repeated work and a lot of
+redundant code.</p>
+<p>The fundamental issue that gives rise to this is that Objects cannot
+be compared with <code>&gt;</code>. This makes sense, as how could Java
+know whether it should use the String representation of the object, or
+the size, or another metric, to make the comparison? In Python or C++,
+the way that the <code>&gt;</code> operator works could be redefined to
+work in different ways when applied to different types. Unfortunately,
+Java does not have this capability. Instead, we turn to interface
+inheritance to help us out.</p>
+<p>We can create an interface that guarantees that any implementing
+class, like Dog, contains a comparison method, which we'll call
+<code>compareTo</code>.</p>
+<p><img
+src="https://joshhug.gitbooks.io/hug61b/content/assets/dog_comparable.png" /></p>
+<p>Let's write our interface. We'll specify one method
+<code>compareTo</code>.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public interface OurComparable &#123;</span><br><span class="line">    public int compareTo(Object o);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>We will define its behavior like so:</p>
+<ul>
+<li>Return -1 if <code>this</code> &lt; o.</li>
+<li>Return 0 if <code>this</code> equals o.</li>
+<li>Return 1 if <code>this</code> &gt; o.</li>
+</ul>
+<p>Now that we've created the <code>OurComparable</code> interface, we
+can require that our Dog class implements the <code>compareTo</code>
+method. First, we change Dog's class header to include
+<code>implements OurComparable</code>, and then we write the
+<code>compareTo</code> method according to its defined behavior
+above.</p>
+<p><strong>Exercise 4.3.2.</strong> Implement the <code>compareTo</code>
+method for the Dog class.</p>
+<p>We use the instance variable <code>size</code> to make our
+comparison.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public class Dog implements OurComparable &#123;</span><br><span class="line">    private String name;</span><br><span class="line">    private int size;</span><br><span class="line"></span><br><span class="line">    public Dog(String n, int s) &#123;</span><br><span class="line">        name = n;</span><br><span class="line">        size = s;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void bark() &#123;</span><br><span class="line">        System.out.println(name + &quot; says: bark&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int compareTo(Object o) &#123;</span><br><span class="line">        Dog uddaDog = (Dog) o;</span><br><span class="line">        if (this.size &lt; uddaDog.size) &#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125; else if (this.size == uddaDog.size) &#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>Notice that since <code>compareTo</code> takes in any
+arbitrary Object o, we have to <em>cast</em> the input to a Dog to make
+our comparison using the <code>size</code> instance
+variable.</strong></p>
+<p>Now we can generalize the <code>max</code> function we defined in
+exercise 4.3.1 to, instead of taking in any arbitrary array of objects,
+takes in <code>OurComparable</code> objects - which we know for certain
+all have the <code>compareTo</code> method implemented.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public static OurComparable max(OurComparable[] items) &#123;</span><br><span class="line">    int maxDex = 0;</span><br><span class="line">    for (int i = 0; i &lt; items.length; i += 1) &#123;</span><br><span class="line">        int cmp = items[i].compareTo(items[maxDex]);</span><br><span class="line">        if (cmp &gt; 0) &#123;</span><br><span class="line">            maxDex = i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return items[maxDex];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Great! Now our <code>max</code> function can take in an array of any
+<code>OurComparable</code> type objects and return the maximum object in
+the array. Now, this code is admittedly quite long, so we can make it
+much more succinct by modifying our <code>compareTo</code> method's
+behavior:</p>
+<ul>
+<li>Return negative number if <code>this</code> &lt; o.</li>
+<li>Return 0 if <code>this</code> equals o.</li>
+<li>Return positive number if <code>this</code> &gt; o.</li>
+</ul>
+<p>Now, we can just return the difference between the sizes. If my size
+is 2, and uddaDog's size is 5, <code>compareTo</code> would return -3, a
+negative number indicating that I am smaller.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public int compareTo(Object o) &#123;</span><br><span class="line">    Dog uddaDog = (Dog) o;</span><br><span class="line">    return this.size - uddaDog.size;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Using inheritance, we were able to generalize our maximization
+function. What are the benefits to this approach?</p>
+<ul>
+<li>No need for maximization code in every class(i.e. no
+<code>Dog.maxDog(Dog[])</code> function required</li>
+<li>We have code that operates on multiple types (mostly)
+gracefully</li>
+</ul>
+<h3 id="interfaces-quiz">Interfaces Quiz</h3>
+<p><strong>Exercise 4.3.3.</strong> Given the <code>Dog</code> class,
+<code>DogLauncher</code> class, <code>OurComparable</code> interface,
+and the <code>Maximizer</code> class, if we omit the compareTo() method
+from the Dog class, which file will fail to compile?</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">public class DogLauncher &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        ...</span><br><span class="line">        Dog[] dogs = new Dog[]&#123;d1, d2, d3&#125;;</span><br><span class="line">        System.out.println(Maximizer.max(dogs));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class Dog implements OurComparable &#123;</span><br><span class="line">    ...</span><br><span class="line">    public int compareTo(Object o) &#123;</span><br><span class="line">        Dog uddaDog = (Dog) o;</span><br><span class="line">        if (this.size &lt; uddaDog.size) &#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125; else if (this.size == uddaDog.size) &#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class Maximizer &#123;</span><br><span class="line">    public static OurComparable max(OurComparable[] items) &#123;</span><br><span class="line">        ...</span><br><span class="line">        int cmp = items[i].compareTo(items[maxDex]);</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>In this case, the <code>Dog</code> class fails to compile. By
+declaring that it <code>implements OurComparable</code>, the Dog class
+makes a claim that it "is-an" OurComparable. As a result, the compiler
+checks that this claim is actually true, but sees that Dog doesn't
+implement <code>compareTo</code>.</p>
+<p>What if we were to omit <code>implements OurComparable</code> from
+the Dog class header? This would cause a compile error in DogLauncher
+due to this line:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(Maximizer.max(dogs));</span><br></pre></td></tr></table></figure>
+<p>If Dog does not implement the OurComparable interface, then trying to
+pass in an array of Dogs to Maximizer's <code>max</code> function
+wouldn't be approved by the compiler. <code>max</code> only accepts an
+array of OurComparable objects.</p>
+<h2 id="comparables">Comparables</h2>
+<p>The <code>OurComparable</code> interface that we just built works,
+but it's not perfect. Here are some issues with it:</p>
+<ul>
+<li>Awkward casting to/from Objects</li>
+<li>We made it up.
+<ul>
+<li>No existing classes implement OurComparable (e.g. String, etc.)</li>
+<li>No existing classes use OurComparable (e.g. no built-in max function
+that uses OurComparable)</li>
+</ul></li>
+</ul>
+<p>The solution? We'll take advantage of an interface that already
+exists called <code>Comparable</code>. <code>Comparable</code> is
+already defined by Java and is used by countless libraries.</p>
+<p><code>Comparable</code> looks very similar to the OurComparable
+interface we made, but with one main difference. Can you spot it?</p>
+<p><img
+src="https://joshhug.gitbooks.io/hug61b/content/assets/comparable_interface.png" /></p>
+<p>Notice that <code>Comparable&lt;T&gt;</code> means that it takes a
+generic type. This will help us avoid having to cast an object to a
+specific type! Now, we will rewrite the Dog class to implement the
+Comparable interface, being sure to update the generic type
+<code>T</code> to Dog:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class Dog implements Comparable&lt;Dog&gt; &#123;</span><br><span class="line">    ...</span><br><span class="line">    public int compareTo(Dog uddaDog) &#123;</span><br><span class="line">        return this.size - uddaDog.size;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Now all that's left is to change each instance of OurComparable in
+the Maximizer class to Comparable. Watch as the largest Dog says
+bark:</p>
+<p>Instead of using our personally created interface
+<code>OurComparable</code>, we now use the real, built-in interface,
+<code>Comparable</code>. As a result, we can take advantage of all the
+libraries that already exist and use <code>Comparable</code>.</p>
+<p><img
+src="https://joshhug.gitbooks.io/hug61b/content/assets/comparable.png" /></p>
+<h2 id="comparator">Comparator</h2>
+<p>We've just learned about the comparable interface, which imbeds into
+each Dog the ability to compare itself to another Dog. Now, we will
+introduce a new interface that looks very similar called
+<code>Comparator</code>.</p>
+<p>Let's start off by defining some terminology.</p>
+<ul>
+<li>Natural order - used to refer to the ordering implied in the
+<code>compareTo</code> method of a particular class.</li>
+</ul>
+<p>As an example, the natural ordering of Dogs, as we stated previously,
+is defined according to the value of size. What if we'd like to sort
+Dogs in a different way than their natural ordering, such as by
+alphabetical order of their name?</p>
+<p>Java's way of doing this is by using <code>Comparator</code>'s. Since
+a comparator is an object, the way we'll use <code>Comparator</code> is
+by writing a nested class inside Dog that implements the
+<code>Comparator</code> interface.</p>
+<p>But first, what's inside this interface?</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public interface Comparator&lt;T&gt; &#123;</span><br><span class="line">    int compare(T o1, T o2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>This shows that the <code>Comparator</code> interface requires that
+any implementing class implements the <code>compare</code> method. The
+rule for <code>compare</code> is just like <code>compareTo</code>:</p>
+<ul>
+<li>Return negative number if o1 &lt; o2.</li>
+<li>Return 0 if o1 equals o2.</li>
+<li>Return positive number if o1 &gt; o2.</li>
+</ul>
+<p>Let's give Dog a NameComparator. To do this, we can simply defer to
+<code>String</code>'s already defined <code>compareTo</code> method.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">import java.util.Comparator;</span><br><span class="line"></span><br><span class="line">public class Dog implements Comparable&lt;Dog&gt; &#123;</span><br><span class="line">    ...</span><br><span class="line">    public int compareTo(Dog uddaDog) &#123;</span><br><span class="line">        return this.size - uddaDog.size;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static class NameComparator implements Comparator&lt;Dog&gt; &#123;</span><br><span class="line">        public int compare(Dog a, Dog b) &#123;</span><br><span class="line">            return a.name.compareTo(b.name);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static Comparator&lt;Dog&gt; getNameComparator() &#123;</span><br><span class="line">        return new NameComparator();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Note that we've declared NameComparator to be a static class. A minor
+difference, but we do so because we do not need to instantiate a Dog to
+get a NameComparator. Let's see how this Comparator works in action.</p>
+<p>As you've seen, we can retrieve our NameComparator like so:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Comparator&lt;Dog&gt; nc = Dog.getNameComparator();</span><br></pre></td></tr></table></figure>
+<p>All in all, we have a Dog class that has a private NameComparator
+class and a method that returns a NameComparator we can use to compare
+dogs alphabetically by name.</p>
+<p>Let's see how everything works in the inheritance hierarchy - we have
+a Comparator interface that's built-in to Java, which we can implement
+to define our own Comparators (<code>NameComparator</code>,
+<code>SizeComparator</code>, etc.) within Dog.</p>
+<p><img
+src="https://joshhug.gitbooks.io/hug61b/content/assets/comparator.png" /></p>
+<p>To summarize, interfaces in Java provide us with the ability to make
+<strong>callbacks</strong>. Sometimes, a function needs the help of
+another function that might not have been written yet (e.g.
+<code>max</code> needs <code>compareTo</code>). A callback function is
+the helping function (in the scenario, <code>compareTo</code>). In some
+languages, this is accomplished using explicit function passing; in
+Java, we wrap the needed function in an interface.</p>
+<p>A Comparable says, "I want to compare myself to another object". It
+is imbedded within the object itself, and it defines the <strong>natural
+ordering</strong> of a type. A Comparator, on the other hand, is more
+like a third party machine that compares two objects to each other.
+Since there's only room for one <code>compareTo</code> method, if we
+want multiple ways to compare, we must turn to Comparator.</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+            <!-- -->
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"><i class="fa fa-tag"></i> java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/09/22/4_2%20Extends_%20Casting_%20Higher%20Order%20Functions/" rel="prev" title="4_2 Extends_ Casting_ Higher Order Functions">
+      <i class="fa fa-chevron-left"></i> 4_2 Extends_ Casting_ Higher Order Functions
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/09/22/4_4%20Java%20libraries%20and%20packages/" rel="next" title="4_4 Java libraries and packages">
+      4_4 Java libraries and packages <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#subtype-polymorphism-vs_-hofs"><span class="nav-number">1.</span> <span class="nav-text">4_3 Subtype Polymorphism vs_
+HOFs</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#subtype-polymorphism%E5%A4%9A%E6%80%81"><span class="nav-number">1.1.</span> <span class="nav-text">Subtype Polymorphism(多态)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#max-function"><span class="nav-number">1.1.1.</span> <span class="nav-text">Max Function</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#interfaces-quiz"><span class="nav-number">1.1.2.</span> <span class="nav-text">Interfaces Quiz</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#comparables"><span class="nav-number">1.2.</span> <span class="nav-text">Comparables</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#comparator"><span class="nav-number">1.3.</span> <span class="nav-text">Comparator</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="XuandYu000"
+      src="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
+  <p class="site-author-name" itemprop="name">XuandYu000</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">64</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/XuandYu000" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;XuandYu000" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+     
+    <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+    <div class="widget-wrap">
+        <h3 class="widget-title">Tag Cloud</h3>
+        <div id="myCanvasContainer" class="widget tagcloud">
+            <canvas width="250" height="250" id="resCanvas" style="width:100%">
+                <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manacher/" rel="tag">Manacher</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bits/" rel="tag">bits</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/contest/" rel="tag">contest</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dp/" rel="tag">dp</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/exkmp/" rel="tag">exkmp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kmp/" rel="tag">kmp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/programming/" rel="tag">programming</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/py/" rel="tag">py</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sort/" rel="tag">sort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%89%E5%88%86/" rel="tag">三分</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%8C%E5%88%86/" rel="tag">二分</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%80%8D%E5%A2%9E/" rel="tag">倍增</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E6%B2%BB/" rel="tag">分治</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA/" rel="tag">博弈论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B3%E9%9D%A2%E4%B8%B4%E8%BF%91%E7%82%B9%E5%AF%B9/" rel="tag">平面临近点对</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E9%80%9F%E4%B9%98/" rel="tag">快速乘</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E9%80%9F%E5%B9%82/" rel="tag">快速幂</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/" rel="tag">滑动窗口</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A9%E9%98%B5%E4%B9%98/" rel="tag">矩阵乘</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A6%BB%E6%95%A3%E5%8C%96-%E5%89%8D%E7%BC%80%E5%92%8C-%E5%B7%AE%E5%88%86/" rel="tag">离散化,前缀和,差分</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag">线段树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/" rel="tag">组合数学</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E6%96%AF%E6%B6%88%E5%85%83/" rel="tag">高斯消元</a><span class="tag-list-count">1</span></li></ul>
+            </canvas>
+        </div>
+    </div>
+     
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XuandYu000</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+-->
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: '55px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+    </div>
+  <!--
+  
+  -->
+</body>
+</html>
+<!--动态title-->
+<script type="text/javascript" src="/js/src/activetitle.js"></script>
+
+

@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <script src="/live2d-widget/autoload.js"></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/sailboat.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/sailboat.png">
+  <link rel="mask-icon" href="/images/sailboat.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="SLLists In Chapter 2.1, we built the IntList class, a list data structure that can technically do all the things a list can do. However, in practice, the IntList suffers from the fact that it is f">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Improvement #1: Caching">
+<meta property="og:url" content="http://example.com/2023/09/07/2_2%20The%20SLList%20%20%20%20Improvement%205%EF%BC%9A%20Caching%20results%20matching%20No%20results%20matching/index.html">
+<meta property="og:site_name" content="viewoverlook">
+<meta property="og:description" content="SLLists In Chapter 2.1, we built the IntList class, a list data structure that can technically do all the things a list can do. However, in practice, the IntList suffers from the fact that it is f">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-06T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-09-17T02:10:27.719Z">
+<meta property="article:author" content="XuandYu000">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2023/09/07/2_2%20The%20SLList%20%20%20%20Improvement%205%EF%BC%9A%20Caching%20results%20matching%20No%20results%20matching/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Improvement #1: Caching | viewoverlook</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">viewoverlook</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/XuandYu000" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/07/2_2%20The%20SLList%20%20%20%20Improvement%205%EF%BC%9A%20Caching%20results%20matching%20No%20results%20matching/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
+      <meta itemprop="name" content="XuandYu000">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="viewoverlook">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Improvement #1: Caching
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-09-07 00:00:00" itemprop="dateCreated datePublished" datetime="2023-09-07T00:00:00+08:00">2023-09-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-17 10:10:27" itemprop="dateModified" datetime="2023-09-17T10:10:27+08:00">2023-09-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/csdiy/" itemprop="url" rel="index"><span itemprop="name">csdiy</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/csdiy/cs61b/" itemprop="url" rel="index"><span itemprop="name">cs61b</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="sllists">SLLists</h2>
+<p>In Chapter 2.1, we built the <code>IntList</code> class, a list data
+structure that can technically do all the things a list can do. However,
+in practice, the <code>IntList</code> suffers from the fact that it is
+fairly awkward to use, resulting in code that is hard to read and
+maintain.</p>
+<p>Fundamentally, the issue is that the <code>IntList</code> is what I
+call a <strong>naked recursive</strong> data structure. In order to use
+an <code>IntList</code> correctly, the programmer must understand and
+utilize recursion even for simple list related tasks. This limits its
+usefulness to novice programmers, and potentially introduces a whole new
+class of tricky errors that programmers might run into, depending on
+what sort of helper methods are provided by the <code>IntList</code>
+class.</p>
+<p>Inspired by our experience with the <code>IntList</code>, we'll now
+build a new class <code>SLList</code>, which much more closely resembles
+the list implementations that programmers use in modern languages. We'll
+do so by iteratively adding a sequence of improvements.</p>
+<span id="more"></span>
+<h3 id="improvement-1-rebranding">Improvement #1: Rebranding</h3>
+<p>Our <code>IntList</code> class from last time was as follows, with
+helper methods omitted:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class IntList &#123;</span><br><span class="line">    public int first;</span><br><span class="line">    public IntList rest;</span><br><span class="line"></span><br><span class="line">    public IntList(int f, IntList r) &#123;</span><br><span class="line">        first = f;</span><br><span class="line">        rest = r;</span><br><span class="line">    &#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>Our first step will be to simply rename everything and throw away the
+helper methods. This probably doesn't seem like progress, but trust me,
+I'm a professional.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class IntNode &#123;</span><br><span class="line">    public int item;</span><br><span class="line">    public IntNode next;</span><br><span class="line"></span><br><span class="line">    public IntNode(int i, IntNode n) &#123;</span><br><span class="line">        item = i;</span><br><span class="line">        next = n;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="improvement-2-bureaucracy">Improvement #2: Bureaucracy</h3>
+<p>Knowing that <code>IntNodes</code> are hard to work with, we're going
+to create a separate class called <code>SLList</code> that the user will
+interact with. The basic class is simply:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class SLList &#123;</span><br><span class="line">    public IntNode first;</span><br><span class="line"></span><br><span class="line">    public SLList(int x) &#123;</span><br><span class="line">        first = new IntNode(x, null);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Already, we can get a vague(模糊的) sense of why a
+<code>SLList</code> is better. Compare the creation of an
+<code>IntList</code> of one item to the creation of a
+<code>SLList</code> of one item.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">IntList L1 = new IntList(5, null);</span><br><span class="line">SLList L2  = new SLList(5);</span><br></pre></td></tr></table></figure>
+<p>The <code>SLList</code> hides the detail that there exists a null
+link from the user. The <code>SLList</code> class isn't very useful yet,
+so let's add an <code>addFirst</code> and <code>getFirst</code> method
+as simple warmup methods. Consider trying to write them yourself before
+reading on.</p>
+<h3 id="addfirst-and-getfirst">addFirst and getFirst</h3>
+<p><code>addFirst</code> is relatively straightforward if you understood
+chapter 2.1. With <code>IntLists</code>, we added to the front with the
+line of code <code>L = new IntList(5, L)</code>. Thus, we end up
+with:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class SLList &#123;</span><br><span class="line">    public IntNode first;</span><br><span class="line"></span><br><span class="line">    public SLList(int x) &#123;</span><br><span class="line">        first = new IntNode(x, null);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /** Adds an item to the front of the list. */</span><br><span class="line">    public void addFirst(int x) &#123;</span><br><span class="line">        first = new IntNode(x, first);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>getFirst</code> is even easier. We simply return
+<code>first.item</code>:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/** Retrieves the front item from the list. */</span><br><span class="line">public int getFirst() &#123;</span><br><span class="line">    return first.item;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The resulting <code>SLList</code> class is much easier to use.
+Compare:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SLList L = new SLList(15);</span><br><span class="line">L.addFirst(10);</span><br><span class="line">L.addFirst(5);</span><br><span class="line">int x = L.getFirst();</span><br></pre></td></tr></table></figure>
+<p>to the <code>IntList</code> equivalent:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">IntList L = new IntList(15, null);</span><br><span class="line">L = new IntList(10, L);</span><br><span class="line">L = new IntList(5, L);</span><br><span class="line">int x = L.first;</span><br></pre></td></tr></table></figure>
+<p>Comparing the two data structures visually, we have: (with the
+<code>IntList</code> version on top and <code>SLList</code> version
+below it)</p>
+<p><img
+src="https://joshhug.gitbooks.io/hug61b/content/chap2/fig22/IntList_vs_SLList.png" /></p>
+<p>Essentially, the <code>SLList</code> class acts as a middleman
+between the list user and the naked recursive data structure. As
+suggested above in the <code>IntList</code> version, there is a
+potentially undesireable possibility for the <code>IntList</code> user
+to have variables that point to the middle of the <code>IntList</code>.
+As Ovid said: <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Semele">Mortals
+cannot look upon a god without dying</a>, so perhaps it is best that the
+<code>SLList</code> is there to act as our intermediary.</p>
+<p><code>SLList</code>类作为列表使用者和裸递归数据结构的中间人.如上所述，在Intlist版本中，Intlist用户具有将变量指向Intlist的中间的可能性是不可取的。</p>
+<p><strong>Exercise 2.2.1</strong>: The curious reader might object and
+say that the <code>IntList</code> would be just as easy to use if we
+simply wrote an <code>addFirst</code> method. Try to write an
+<code>addFirst</code> method to the <code>IntList</code> class. You'll
+find that the resulting method is tricky as well as inefficient.</p>
+<h3 id="improvement-3-public-vs.-private">Improvement #3: Public vs.
+Private</h3>
+<p>Unfortunately, our <code>SLList</code> can be bypassed and the raw
+power of our naked data structure (with all its dangers) can be
+accessed. A programmer can easily modify the list directly, without
+going through the kid-tested, mother-approved <code>addFirst</code>
+method, for example:</p>
+<p>不幸的是,我们的<code>SLList</code>可以被绕过并且可以以原始的裸数据结构的使用方式使用(及其所有危险).</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SLList L = new SLList(15);</span><br><span class="line">L.addFirst(10);</span><br><span class="line">L.first.next.next = L.first.next;</span><br></pre></td></tr></table></figure>
+<p><img
+src="https://joshhug.gitbooks.io/hug61b/content/chap2/fig22/bad_SLList.png" /></p>
+<p>This results in a malformed list with an infinite loop. To deal with
+this problem, we can modify the <code>SLList</code> class so that the
+<code>first</code> variable is declared with the <code>private</code>
+keyword.</p>
+<p>这导致了一个有无限循环的畸形列表.为了解决这个问题,我们可以修改<code>SLList</code>类将<code>first</code>的声明设为<code>private</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public class SLList &#123;</span><br><span class="line">    private IntNode first;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>Private variables and methods can only be accessed by code inside the
+same <code>.java</code> file, e.g. in this case
+<code>SLList.java</code>. That means that a class like
+<code>SLLTroubleMaker</code> below will fail to compile, yielding a
+<code>first has private access in SLList</code> error.</p>
+<p>私有变量和方法仅仅可以在<code>.java</code>文件内部被访问.在这里意味着下面的<code>SLLTroubleMaker</code>会编译失败.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class SLLTroubleMaker &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SLList L = new SLList(15);</span><br><span class="line">        L.addFirst(10);</span><br><span class="line">        L.first.next.next = L.first.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>By contrast, any code inside the <code>SLList.java</code> file will
+be able to access the <code>first</code> variable.</p>
+<p>相反,任何在<code>SLList.java</code>文件中的代码可以访问变量<code>first</code>.</p>
+<p>It may seem a little silly to restrict access. After all, the only
+thing that the <code>private</code> keyword does is break programs that
+otherwise compile. However, in large software engineering projects, the
+<code>private</code> keyword is an invaluable signal that certain pieces
+of code should be ignored (and thus need not be understood) by the end
+user. Likewise, the <code>public</code> keyword should be thought of as
+a declaration that a method is available and will work
+<strong>forever</strong> exactly as it does now.</p>
+<p>As an analogy, a car has certain <code>public</code> features, e.g.
+the accelerator and brake pedals. Under the hood, there are
+<code>private</code> details about how these operate. In a gas powered
+car, the accelerator pedal might control some sort of fuel injection
+system, and in a battery powered car, it may adjust the amount of
+battery power being delivered to the motor. While the private details
+may vary from car to car, we expect the same behavior from all
+accelerator pedals. Changing these would cause great consternation from
+users, and quite possibly terrible accidents.</p>
+<p><strong>When you create a <code>public</code> member (i.e. method or
+variable), be careful, because you're effectively committing to
+supporting that member's behavior exactly as it is now,
+forever.</strong></p>
+<p>当您创建一个公共成员（即方法或变量）时，请小心，因为你这样会支持这个公共成员的所有行为包括当前和以后</p>
+<h3 id="improvement-4-nested-classes">Improvement #4: Nested
+Classes</h3>
+<p>At the moment, we have two <code>.java</code> files:
+<code>IntNode</code> and <code>SLList</code>. However, the
+<code>IntNode</code> is really just a supporting character in the story
+of <code>SLList</code>.</p>
+<p>Java provides us with the ability to embed a class declaration inside
+of another for just this situation. The syntax is straightforward and
+intuitive:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public class SLList &#123;</span><br><span class="line">       public class IntNode &#123;</span><br><span class="line">            public int item;</span><br><span class="line">            public IntNode next;</span><br><span class="line">            public IntNode(int i, IntNode n) &#123;</span><br><span class="line">                item = i;</span><br><span class="line">                next = n;</span><br><span class="line">            &#125;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       private IntNode first; </span><br><span class="line"></span><br><span class="line">       public SLList(int x) &#123;</span><br><span class="line">           first = new IntNode(x, null);</span><br><span class="line">       &#125; </span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>Having a nested class has no meaningful effect on code performance,
+and is simply a tool for keeping code organized. For more on nested
+classes, see <a
+target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/java/javaOO/nested.html">Oracle's
+official documentation</a>.</p>
+<p>If the nested class has no need to use any of the instance methods or
+variables of <code>SLList</code>, you may declare the nested class
+<code>static</code>, as follows. Declaring a nested class as
+<code>static</code> means that methods inside the static class can not
+access any of the members of the enclosing class. In this case, it means
+that no method in <code>IntNode</code> would be able to access
+<code>first</code>, <code>addFirst</code>, or <code>getFirst</code>.</p>
+<p>如果嵌套类不需要使用<code>SLList</code>方法或变量你可以将其声明为<code>static</code>嵌套类.这意味着静态类中的方法不能访问封闭类中的任何成员.在这里意味着<code>IntNode</code>中的方法不能去访问<code>first</code>,<code>addFirst</code>,<code>getFirst</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class SLList &#123;</span><br><span class="line">       public static class IntNode &#123;</span><br><span class="line">            public int item;</span><br><span class="line">            public IntNode next;</span><br><span class="line">            public IntNode(int i, IntNode n) &#123;</span><br><span class="line">                item = i;</span><br><span class="line">                next = n;</span><br><span class="line">            &#125;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       private IntNode first;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>This saves a bit of memory, because each <code>IntNode</code> no
+longer needs to keep track of how to access its enclosing
+<code>SLList</code>.</p>
+<p>Put another way, if you examine the code above, you'll see that the
+<code>IntNode</code> class never uses the <code>first</code> variable of
+<code>SLList</code>, nor any of <code>SLList</code>'s methods. As a
+result, we can use the static keyword, which means the
+<code>IntNode</code> class doesn't get a reference to its boss, saving
+us a small amount of memory.</p>
+<p>If this seems a bit technical and hard to follow, try Exercise 2.2.2.
+A simple rule of thumb is that <em>if you don't use any instance members
+of the outer class, make the nested class static</em>.</p>
+<p><strong>Exercise 2.2.2</strong> Delete the word <code>static</code>
+as few times as possible so that <a
+href="exercises/Government.java">this program</a> compiles (Refresh the
+page after clicking the link and making sure the url changed). Make sure
+to read the comments at the top before doing the exercise.</p>
+<h3 id="addlast-and-size">addLast() and size()</h3>
+<p>To motivate our remaining improvements and also demonstrate some
+common patterns in data structure implementation, we'll add
+<code>addLast(int x)</code> and <code>size()</code> methods. You're
+encouraged to take the <a
+target="_blank" rel="noopener" href="https://github.com/Berkeley-CS61B/lectureCode/blob/master/lists2/DIY/addLastAndSize/SLList.java">starter
+code</a> and try it yourself before reading on. I especially encourage
+you to try to write a recursive implementation of <code>size</code>,
+which will yield an interesting challenge.</p>
+<p>I'll implement the <code>addLast</code> method iteratively, though
+you could also do it recursively. The idea is fairly straightforward, we
+create a pointer variable <code>p</code> and have it iterate through the
+list to the end.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/** Adds an item to the end of the list. */</span><br><span class="line">public void addLast(int x) &#123;</span><br><span class="line">    IntNode p = first;</span><br><span class="line"></span><br><span class="line">    /* Advance p to the end of the list. */</span><br><span class="line">    while (p.next != null) &#123;</span><br><span class="line">        p = p.next;</span><br><span class="line">    &#125;</span><br><span class="line">    p.next = new IntNode(x, null);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>By contrast, I'll implement <code>size</code> recursively. This
+method will be somewhat similar to the <code>size</code> method we
+implemented in section <a
+target="_blank" rel="noopener" href="https://joshhug.gitbooks.io/hug61b/content/chap2/chap21.html">2.1</a>
+for <code>IntList</code>.</p>
+<p>The recursive call for <code>size</code> in <code>IntList</code> was
+straightforward: <code>return 1 + this.rest.size()</code>. For a
+<code>SLList</code>, this approach does not make sense. A
+<code>SLList</code> has no <code>rest</code> variable. Instead, we'll
+use a common pattern that is used with middleman classes like
+<code>SLList</code> -- we'll create a private helper method that
+interacts with the underlying naked recursive data structure.</p>
+<p>This yields a method like the following:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">/** Returns the size of the list starting at IntNode p. */</span><br><span class="line">private static int size(IntNode p) &#123;</span><br><span class="line">    if (p.next == null) &#123;</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return 1 + size(p.next);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Using this method, we can easily compute the size of the entire
+list:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public int size() &#123;</span><br><span class="line">    return size(first);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Here, we have two methods, both named <code>size</code>. This is
+allowed in Java, since they have different parameters. We say that two
+methods with the same name but different signatures are
+<strong>overloaded</strong>. For more on overloaded methods, see Java's
+<a
+target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/java/javaOO/methods.html">official
+documentation</a>.</p>
+<p>我们有两个同名的方法.这在java中是允许的,因为他们有不同的参数.我们称两个同名方法但有不同参数的方法叫做重载.</p>
+<p>An alternate approach is to create a non-static helper method in the
+<code>IntNode</code> class itself. Either approach is fine, though I
+personally prefer not having any methods in the <code>IntNode</code>
+class.</p>
+<h1 id="improvement-5-caching">Improvement #5: Caching</h1>
+<p>Consider the <code>size</code> method we wrote above. Suppose
+<code>size</code> takes 2 seconds on a list of size 1,000. We expect
+that on a list of size 1,000,000, the <code>size</code> method will take
+2,000 seconds, since the computer has to step through 1,000 times as
+many items in the list to reach the end. Having a <code>size</code>
+method that is very slow for large lists is unacceptable, since we can
+do better.</p>
+<p>It is possible to rewrite <code>size</code> so that it takes the same
+amount of time, no matter how large the list.</p>
+<p>To do so, we can simply add a <code>size</code> variable to the
+<code>SLList</code> class that tracks the current size, yielding the
+code below. This practice of saving important data to speed up retrieval
+is sometimes known as <strong>caching</strong>.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public class SLList &#123;</span><br><span class="line">    ... /* IntNode declaration omitted. */</span><br><span class="line">    private IntNode first;</span><br><span class="line">    private int size;</span><br><span class="line"></span><br><span class="line">    public SLList(int x) &#123;</span><br><span class="line">        first = new IntNode(x, null);</span><br><span class="line">        size = 1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void addFirst(int x) &#123;</span><br><span class="line">        first = new IntNode(x, first);</span><br><span class="line">        size += 1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int size() &#123;</span><br><span class="line">        return size;</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>This modification makes our <code>size</code> method incredibly fast,
+no matter how large the list. Of course, it will also slow down our
+<code>addFirst</code> and <code>addLast</code> methods, and also
+increase the memory of usage of our class, but only by a trivial amount.
+In this case, the tradeoff is clearly in favor of creating a cache for
+size.</p>
+<h3 id="improvement-6-the-empty-list">Improvement #6: The Empty
+List</h3>
+<p>Our <code>SLList</code> has a number of benefits over the simple
+<code>IntList</code> from chapter 2.1:</p>
+<ul>
+<li>Users of a <code>SLList</code> never see the <code>IntList</code>
+class.
+<ul>
+<li>Simpler to use.</li>
+<li>More efficient <code>addFirst</code> method (exercise 2.2.1).</li>
+<li>Avoids errors or malfeasance by <code>IntList</code> users.</li>
+</ul></li>
+<li>Faster <code>size</code> method than possible with
+<code>IntList</code>.</li>
+</ul>
+<p>Another natural advantage is that we will be able to easily implement
+a constructor that creates an empty list. The most natural way is to set
+<code>first</code> to <code>null</code> if the list is empty. This
+yields the constructor below:</p>
+<p>另外一种好处就是我们可以很容易实现一个容器来创建一个空列表.最自然的方式是设置<code>first</code>为<code>null</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public SLList() &#123;</span><br><span class="line">    first = null;</span><br><span class="line">    size = 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Unfortunately, this causes our <code>addLast</code> method to crash
+if we insert into an empty list. Since <code>first</code> is
+<code>null</code>, the attempt to access <code>p.next</code> in
+<code>while (p.next != null)</code> below causes a null pointer
+exception.</p>
+<p>不幸的是,如果我们向空列表插入元素会导致<code>addLast</code>方法崩溃.由于<code>first</code>为<code>null</code>,在<code>while(p.next != null)</code>的访问会导致空指针异常</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public void addLast(int x) &#123;</span><br><span class="line">    size += 1;</span><br><span class="line">    IntNode p = first;</span><br><span class="line">    while (p.next != null) &#123;</span><br><span class="line">        p = p.next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    p.next = new IntNode(x, null);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>Exercise 2.2.3</strong> Fix the <code>addLast</code> method.
+Starter code <a
+target="_blank" rel="noopener" href="https://github.com/Berkeley-CS61B/lectureCode/blob/master/lists2/DIY/fixAddLast/SLList.java">here</a>.</p>
+<h3 id="improvement-6b-sentinel-nodes">Improvement #6b: Sentinel
+Nodes</h3>
+<p>One solution to fix <code>addLast</code> is to create a special case
+for the empty list, as shown below:</p>
+<p>一个纠正这个异常的方法时特判一个空列表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public void addLast(int x) &#123;</span><br><span class="line">    size += 1;</span><br><span class="line"></span><br><span class="line">    if (first == null) &#123;</span><br><span class="line">        first = new IntNode(x, null);</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    IntNode p = first;</span><br><span class="line">    while (p.next != null) &#123;</span><br><span class="line">        p = p.next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    p.next = new IntNode(x, null);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>This solution works, but special case code like that shown above
+should be avoided when necessary. Human beings only have so much working
+memory, and thus we want to keep complexity under control wherever
+possible. For a simple data structure like the <code>SLList</code>, the
+number of special cases is small. More complicated data structures like
+trees can get much, much uglier.</p>
+<p>这种方法有效但是特判应该尽力避免.人类只有太多的工作记忆，因此我们希望尽可能控制复杂性.在一个简单的像<code>SLList</code>的数据结构中特判情况较少.但是更复杂的数据结构像树会有更多的特判同时会更丑陋</p>
+<p>A cleaner, though less obvious solution, is to make it so that all
+<code>SLLists</code> are the "same", even if they are empty. We can do
+this by creating a special node that is always there, which we will call
+a <strong>sentinel node</strong>. The sentinel node will hold a value,
+which we won't care about.</p>
+<p>一个更清楚,但是比较不容易看出的方法,是设置<code>SLList</code>都一样,尽管他们是空的.我们可以创建一个特殊的始终存在的node,我们称其为哨兵节点.哨兵会有一个值但是我们并不关心.</p>
+<p>For example, the empty list created by
+<code>SLList L = new SLList()</code> would be as shown below:</p>
+<p><img
+src="https://joshhug.gitbooks.io/hug61b/content/chap2/fig22/empty_sentinelized_SLList.png" /></p>
+<p>And a <code>SLList</code> with the items 5, 10, and 15 would look
+like:</p>
+<p><img
+src="https://joshhug.gitbooks.io/hug61b/content/chap2/fig22/three_item_sentenlized_SLList.png" /></p>
+<p>In the figures above, the lavender ?? value indicates that we don't
+care what value is there. Since Java does not allow us to fill in an
+integer with question marks, we just pick some abitrary value like
+-518273 or 63 or anything else.</p>
+<p>Since a <code>SLList</code> without a sentinel has no special cases,
+we can simply delete the special case from our <code>addLast</code>
+method, yielding:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public void addLast(int x) &#123;</span><br><span class="line">    size += 1;</span><br><span class="line">    IntNode p = sentinel;</span><br><span class="line">    while (p.next != null) &#123;</span><br><span class="line">        p = p.next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    p.next = new IntNode(x, null);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>As you can see, this code is much much cleaner!</p>
+<h3 id="invariants">Invariants</h3>
+<p>An invariant is a fact about a data structure that is guaranteed to
+be true (assuming there are no bugs in your code).</p>
+<p>A <code>SLList</code> with a sentinel node has at least the following
+invariants:</p>
+<ul>
+<li>The <code>sentinel</code> reference always points to a sentinel
+node.</li>
+<li>The front item (if it exists), is always at
+<code>sentinel.next.item</code>.</li>
+<li>The <code>size</code> variable is always the total number of items
+that have been added.</li>
+</ul>
+<p>Invariants make it easier to reason about code, and also give you
+specific goals to strive for in making sure your code works.</p>
+<p>A true understanding of how convenient sentinels are will require you
+to really dig in and do some implementation of your own. You'll get
+plenty of practice in project 1. However, I recommend that you wait
+until after you've finished the next section of this book before
+beginning project 1.</p>
+<h4 id="what-next">What Next</h4>
+<p>Nothing for this chapter. However, if you're taking the Berkeley
+course, you're welcome to now begin Lab 2.</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+            <!-- -->
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"><i class="fa fa-tag"></i> java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/09/07/2_3%20The%20DLList%20%20%20%20%20results%20matching%20No%20results%20matching/" rel="prev" title="23">
+      <i class="fa fa-chevron-left"></i> 23
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/09/07/2_1%20Mystery%20of%20the%20Walrus%20%20%20%20%20results%20matching%20No%20results%20matching/" rel="next" title="results matching """>
+      results matching "" <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#sllists"><span class="nav-number">1.</span> <span class="nav-text">SLLists</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#improvement-1-rebranding"><span class="nav-number">1.1.</span> <span class="nav-text">Improvement #1: Rebranding</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#improvement-2-bureaucracy"><span class="nav-number">1.2.</span> <span class="nav-text">Improvement #2: Bureaucracy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#addfirst-and-getfirst"><span class="nav-number">1.3.</span> <span class="nav-text">addFirst and getFirst</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#improvement-3-public-vs.-private"><span class="nav-number">1.4.</span> <span class="nav-text">Improvement #3: Public vs.
+Private</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#improvement-4-nested-classes"><span class="nav-number">1.5.</span> <span class="nav-text">Improvement #4: Nested
+Classes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#addlast-and-size"><span class="nav-number">1.6.</span> <span class="nav-text">addLast() and size()</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#improvement-5-caching"><span class="nav-number"></span> <span class="nav-text">Improvement #5: Caching</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#improvement-6-the-empty-list"><span class="nav-number">0.1.</span> <span class="nav-text">Improvement #6: The Empty
+List</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#improvement-6b-sentinel-nodes"><span class="nav-number">0.2.</span> <span class="nav-text">Improvement #6b: Sentinel
+Nodes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#invariants"><span class="nav-number">0.3.</span> <span class="nav-text">Invariants</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#what-next"><span class="nav-number">0.3.1.</span> <span class="nav-text">What Next</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="XuandYu000"
+      src="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
+  <p class="site-author-name" itemprop="name">XuandYu000</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">64</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/XuandYu000" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;XuandYu000" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+     
+    <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+    <div class="widget-wrap">
+        <h3 class="widget-title">Tag Cloud</h3>
+        <div id="myCanvasContainer" class="widget tagcloud">
+            <canvas width="250" height="250" id="resCanvas" style="width:100%">
+                <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manacher/" rel="tag">Manacher</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bits/" rel="tag">bits</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/contest/" rel="tag">contest</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dp/" rel="tag">dp</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/exkmp/" rel="tag">exkmp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kmp/" rel="tag">kmp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/programming/" rel="tag">programming</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/py/" rel="tag">py</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sort/" rel="tag">sort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%89%E5%88%86/" rel="tag">三分</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%8C%E5%88%86/" rel="tag">二分</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%80%8D%E5%A2%9E/" rel="tag">倍增</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E6%B2%BB/" rel="tag">分治</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA/" rel="tag">博弈论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B3%E9%9D%A2%E4%B8%B4%E8%BF%91%E7%82%B9%E5%AF%B9/" rel="tag">平面临近点对</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E9%80%9F%E4%B9%98/" rel="tag">快速乘</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E9%80%9F%E5%B9%82/" rel="tag">快速幂</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/" rel="tag">滑动窗口</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A9%E9%98%B5%E4%B9%98/" rel="tag">矩阵乘</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A6%BB%E6%95%A3%E5%8C%96-%E5%89%8D%E7%BC%80%E5%92%8C-%E5%B7%AE%E5%88%86/" rel="tag">离散化,前缀和,差分</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag">线段树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/" rel="tag">组合数学</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E6%96%AF%E6%B6%88%E5%85%83/" rel="tag">高斯消元</a><span class="tag-list-count">1</span></li></ul>
+            </canvas>
+        </div>
+    </div>
+     
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XuandYu000</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+-->
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: '55px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+    </div>
+  <!--
+  
+  -->
+</body>
+</html>
+<!--动态title-->
+<script type="text/javascript" src="/js/src/activetitle.js"></script>
+
+

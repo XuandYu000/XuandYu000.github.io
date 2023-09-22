@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <script src="/live2d-widget/autoload.js"></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/sailboat.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/sailboat.png">
+  <link rel="mask-icon" href="/images/sailboat.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="4_2 Extends_ Casting_ Higher Order Functions Extends Now you&#39;ve seen how we can use the implements keyword to define a hierarchical relationship with interfaces. What if we wanted to define a hie">
+<meta property="og:type" content="article">
+<meta property="og:title" content="4_2 Extends_ Casting_ Higher Order Functions">
+<meta property="og:url" content="http://example.com/2023/09/22/4_2%20Extends_%20Casting_%20Higher%20Order%20Functions/index.html">
+<meta property="og:site_name" content="viewoverlook">
+<meta property="og:description" content="4_2 Extends_ Casting_ Higher Order Functions Extends Now you&#39;ve seen how we can use the implements keyword to define a hierarchical relationship with interfaces. What if we wanted to define a hie">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-22T11:37:52.126Z">
+<meta property="article:modified_time" content="2023-09-21T15:24:34.360Z">
+<meta property="article:author" content="XuandYu000">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2023/09/22/4_2%20Extends_%20Casting_%20Higher%20Order%20Functions/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>4_2 Extends_ Casting_ Higher Order Functions | viewoverlook</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">viewoverlook</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/XuandYu000" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/22/4_2%20Extends_%20Casting_%20Higher%20Order%20Functions/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
+      <meta itemprop="name" content="XuandYu000">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="viewoverlook">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          4_2 Extends_ Casting_ Higher Order Functions
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-09-22 19:37:52" itemprop="dateCreated datePublished" datetime="2023-09-22T19:37:52+08:00">2023-09-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-21 23:24:34" itemprop="dateModified" datetime="2023-09-21T23:24:34+08:00">2023-09-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/cs61b/" itemprop="url" rel="index"><span itemprop="name">cs61b</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/cs61b/csdiy/" itemprop="url" rel="index"><span itemprop="name">csdiy</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="extends_-casting_-higher-order-functions">4_2 Extends_ Casting_
+Higher Order Functions</h1>
+<h2 id="extends">Extends</h2>
+<p>Now you've seen how we can use the <code>implements</code> keyword to
+define a hierarchical relationship with interfaces. What if we wanted to
+define a hierarchical relationship between classes?
+现在我们已经可以使用<code>implement</code>关键字来定义接口间的层次关系.
+但如果我们想定义类之间的层次关系该怎么办呢？</p>
+<p>Suppose we want to build a RotatingSLList that has the same
+functionality as the SLList like <code>addFirst</code>,
+<code>size</code>, etc., but with an additional <code>rotateRight</code>
+operation to bring the last item to the front of the list.
+假设我们想要构建一个RotatingSLList类, 它和有SLList中所有函数,
+但是多了一个<code>rotateRight</code>函数来把最后一个元素带到list最前面</p>
+<p>One way you could do this would be to copy and paste all the methods
+from SLList and write <code>rotateRight</code> on top of it all - but
+then we wouldn't be taking advantage of the power of inheritance!
+Remember that inheritance allows subclasses to <em>reuse</em> code from
+an already defined class. So let's define our RotatingSLList class to
+inherit from SLList.
+一种实现方法是把SLList中所有方法都复制到<code>rorateRight</code>中,
+这样的话我们就无法体会到继承的好处了.
+一定记得继承的特性允许子类重用已定义类的代码.
+所以让我们定义继承自SLList类的Rotating类</p>
+<span id="more"></span>
+<p>We can set up this inheritance relationship in the class header,
+using the <code>extends</code> keyword like so:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public class RotatingSLList&lt;Item&gt; extends SLList&lt;Item&gt;</span><br></pre></td></tr></table></figure>
+<p>In the same way that AList shares an "is-a" relationship with
+List61B, RotatingSLList shares an "is-a" relationship SLList. The
+<code>extends</code> keyword lets us keep the original functionality of
+SLList, while enabling us to make modifications and add additional
+functionality.</p>
+<p><img
+src="https://joshhug.gitbooks.io/hug61b/content/assets/list_subclasses.png" /></p>
+<p>Now that we've defined our RotatingSLList to extend from SLList,
+let's give it its unique ability to rotate.</p>
+<p><strong>Exercise 4.2.1.</strong> Define the <code>rotateRight</code>
+method, which takes in an existing list, and rotates every element one
+spot to the right, moving the last item to the front of the list.</p>
+<p>For example, calling <code>rotateRight</code> on [5, 9, 15, 22]
+should return [22, 5, 9, 15].</p>
+<p><em>Tip: are there any inherited methods that might be helpful in
+doing this?</em></p>
+<p>Here's what we came up with.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public void rotateRight() &#123;</span><br><span class="line">    Item x = removeLast();</span><br><span class="line">    addFirst(x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>You might have noticed that we were able to use methods defined
+outside of RotatingSLList, because we used the <code>extends</code>
+keyword to inherit them from SLList. That gives rise to the question:
+What exactly do we inherit?</p>
+<p>By using the <code>extends</code> keyword, subclasses inherit all
+<strong>members</strong> of the parent class. "Members" includes:
+使用<code>extends</code>关键字, 子类继承了父类的所有成员, 成员包括:</p>
+<ul>
+<li>All instance and static variables 所有的实例和静态变量</li>
+<li>All methods 所有的方法</li>
+<li>All nested classes 所有的嵌套类</li>
+</ul>
+<p>Note that constructors are not inherited, and private members cannot
+be directly accessed by subclasses. 构造函数不被继承,
+并且私有成员不能被子类直接访问</p>
+<h3 id="vengefulsllist">VengefulSLList</h3>
+<p>Notice that when someone calls <code>removeLast</code> on an SLList,
+it throws that value away - never to be seen again. But what if those
+removed values left and started a massive rebellion against us? In this
+case, we need to remember what those removed (or rather defected&gt;:()
+values were so we can hunt them down and terminate them later.</p>
+<p>We create a new class, VengefulSLList, that remembers all items that
+have been banished by <code>removeLast</code>.</p>
+<p>Like before, we specify in VengefulSLList's class header that it
+should inherit from SLList.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public class VengefulSLList&lt;Item&gt; extends SLList&lt;Item&gt;</span><br></pre></td></tr></table></figure>
+<p>Now, let's give VengefulSLList a method to print out all of the items
+that have been removed by a call to the <code>removeLast</code> method,
+<code>printLostItems()</code>. We can do this by adding an instance
+variable that can keep track of all the deleted items. If we use an
+SLList to keep track of our items, then we can simply make a call to the
+<code>print()</code> method to print out all the items.</p>
+<p>So far this is what we have:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class VengefulSLList&lt;Item&gt; extends SLList&lt;Item&gt; &#123;</span><br><span class="line">    SLList&lt;Item&gt; deletedItems;</span><br><span class="line"></span><br><span class="line">    public void printLostItems() &#123;</span><br><span class="line">        deletedItems.print();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>VengefulSLList's <code>removeLast</code> should do exactly the same
+thing that SLList's does, except with one additional operation - adding
+the removed item to the <code>deletedItems</code> list. In an effort to
+<em>reuse</em> code, we can <strong>override</strong> the
+<code>removeLast</code> method to modify it to fit our needs, and call
+the <code>removeLast</code> method defined in the parent class, SLList,
+using the <code>super</code> keyword.</p>
+<p><strong>Exercise 4.2.2.</strong> Override the <code>removeLast</code>
+method to remove the last item, add that item to the
+<code>deletedItems</code> list, then return it.</p>
+<p>Finally, VengefulSLList remembers all items deleted from it, as
+intended.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public class VengefulSLList&lt;Item&gt; extends SLList&lt;Item&gt; &#123;</span><br><span class="line">    SLList&lt;Item&gt; deletedItems;</span><br><span class="line"></span><br><span class="line">    public VengefulSLList() &#123;</span><br><span class="line">        deletedItems = new SLList&lt;Item&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public Item removeLast() &#123;</span><br><span class="line">        Item x = super.removeLast();</span><br><span class="line">        deletedItems.addLast(x);</span><br><span class="line">        return x;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /** Prints deleted items. */</span><br><span class="line">    public void printLostItems() &#123;</span><br><span class="line">        deletedItems.print();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="constructors-are-not-inherited">Constructors Are Not
+Inherited</h3>
+<p>As we mentioned earlier, subclasses inherit all members of the parent
+class, which includes instance and static variables, methods, and nested
+classes, but does <em>not</em> include constructors.</p>
+<p>While constructors are not inherited, Java requires that all
+constructors <strong>must start with a call to one of its superclass's
+constructors</strong>. 尽管构造函数未继承,
+但java要求所有的构造函数都必须从调用父类的构造函数开始.</p>
+<p>To gain some intuition on why that it is, recall that the
+<code>extends</code> keywords defines an "is-a" relationship between a
+subclass and a parent class. If a VengefulSLList "is-an" SLList, then it
+follows that every VengefulSLList must be set up like an SLList.
+为了了解为什么这样这样做,
+回想一下<code>extend</code>关键字定义了子类和父类之间的<code>is-a</code>关系.
+如果一个VengefulSLList <code>is-an</code> SLList,
+那就必须像<code>SLList</code>一样定义</p>
+<p>Here's a more in-depth explanation. Let's say we have two
+classes:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public class Human &#123;...&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public class TA extends Human &#123;...&#125;</span><br></pre></td></tr></table></figure>
+<p>It is logical for TA to extend Human, because all TA's are Human.
+Thus, we want TA's to inherit the attributes and behaviors of
+Humans.</p>
+<p>If we run the code below:</p>
+<p><code>TA Christine = new TA();</code></p>
+<p>Then first, a Human must be created. Then, that Human can be given
+the qualities of a TA. It doesn't make sense for a TA to be constructed
+without first creating a Human first.</p>
+<p>Thus, we can either explicitly make a call to the superclass's
+constructor, using the <code>super</code> keyword:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public VengefulSLList() &#123;</span><br><span class="line">    super();</span><br><span class="line">    deletedItems = new SLList&lt;Item&gt;();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Or, if we choose not to, Java will automatically make a call to the
+superclass's <em>no-argument</em> constructor for us.</p>
+<p>In this case, adding <code>super()</code> has no difference from the
+constructor we wrote before. It just makes explicit what was done
+implicitly by Java before. However, if we were to define another
+constructor in VengefulSLList, Java's implicit call may not be what we
+intend to call. 在此情况下,
+加入<code>super()</code>和我们之前写的构造函数没有什么不同. 然而,
+如果我们要去在<code>VengefulSLList</code>定义另一个构造函数,
+那么java的默认调用可能不会是我们想要的.</p>
+<p>Suppose we had a one-argument constructor that took in an item. If we
+had relied on an implicit call to the superclass's <em>no-argument</em>
+constructor, <code>super()</code>, the item passed in as an argument
+wouldn't be placed anywhere!</p>
+<p>So, we must make an explicit call to the correct constructor by
+passing in the item as a parameter to super.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public VengefulSLList(Item x) &#123;</span><br><span class="line">    super(x);</span><br><span class="line">    deletedItems = new SLList&lt;Item&gt;();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="the-object-class">The Object Class</h3>
+<p>Every class in Java is a descendant of the Object class, or
+<code>extends</code> the Object class. Even classes that do not have an
+explicit <code>extends</code> in their class still <em>implicitly</em>
+extend the Object class. 每一个Java类都是Object类的子类,
+或者说都是<code>extends</code>自Object类. 即使这些类在定义中并没有指明,
+仍然会隐式说明来自Object类</p>
+<p>For example,</p>
+<ul>
+<li><p>VengefulSLList <code>extends</code> SLList explicitly in its
+class declaration VengefulSLList显式指明继承自SLList</p></li>
+<li><p>SLList <code>extends</code> Object implicitly
+SLList隐式继承自Object</p></li>
+</ul>
+<p>This means that since SLList inherits all members of Object,
+VengefulSLList inherits all members of SLList <em>and</em> Object,
+transitively. So, what is to be inherited from Object?</p>
+<p>As seen in the <a
+target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html">documentation
+for the Object class</a>, the Object class provides operations that
+every Object should be able to do - like
+<code>.equals(Object obj)</code>, <code>.hashCode()</code>, and
+<code>toString()</code>.</p>
+<h3 id="is-a-vs.-has-a">Is-a vs. Has-a</h3>
+<p><em>Important Note:</em> The <code>extends</code> keyword defines
+"is-a", or hypernymic relationships. A common mistake is to instead use
+it for "has-a", or meronymic relationships. 说明:
+<code>extends</code>关键字定义了<code>is-a</code>的关系或者层次关系.
+一个常见的错误是错把其认为<code>has-a</code>或者<code>meronymic</code>关系</p>
+<p>When extending a class, a wise thing to do would be to ask yourself
+if the "is-a" relationship makes sense.
+当需要<code>extends</code>一个类时,
+比较明智的事情是问问自己<code>is-a</code>关系是否合理</p>
+<ul>
+<li><code>Shower</code> is a <code>Bathroom</code>? No!</li>
+<li><code>VengefulSLList</code> is a <code>SLList</code>? Yes!</li>
+</ul>
+<h2 id="encapsulation封装">Encapsulation(封装)</h2>
+<p>Encapsulation is one of the fundamental principles of object oriented
+programming, and is one of the approaches that we take as programmers to
+resist our biggest enemy: <em>complexity</em>. Managing complexity is
+one of the major challenges we must face when writing large programs.
+封装是面向对象编程语言的基本法则,
+并且是我们程序员对抗我们的最大敌人<code>复杂性</code>的武器.
+当编写大型程序项目时, 控制复杂性是我们所要面对的主要挑战.</p>
+<p>Some of the tools we can use to fight complexity include hierarchical
+abstraction (abstraction barriers!) and a concept known as "Design for
+change". This revolves around the idea that programs should be built
+into modular, interchangeable pieces that can be swapped around without
+breaking the system. Additionally, <strong>hiding information</strong>
+that others don't need is another fundamental approach when managing a
+large system.
+我们可以用来对抗<code>复杂性</code>的工具包括分层抽象(抽象屏障)和<code>Design for change</code>的概念.
+围绕着这样的想法: 程序应该模块化, 可以互换零件而不破坏系统. 另外,
+隐藏别人不需要的信息是管理大型系统的另一种基本方法.</p>
+<p>The root of encapsulation lies in this notion of hiding information
+from the outside. One way to look at it is to see how encapsulation is
+analogous to a Human cell. The internals of a cell may be extremely
+complex, consisting of chromosomes, mitochondria, ribosomes etc., but
+yet it is fully encapsulated into a single <em>module</em> - abstracting
+away the complexity inside. 封装的根源在于, 从外部隐藏信息的概念.
+看待它就类似于看待人体细胞, 细胞内部极为复杂, 由染色体, 线粒体,
+核糖体组成, 但是它已经完全封装在了一个模块中--从内部复杂性中抽离</p>
+<p><img
+src="https://joshhug.gitbooks.io/hug61b/content/assets/cell_encapsulated.png" /></p>
+<p>In computer science terms, a module can be defined as a set of
+methods that work together as a whole to perform a task or set of
+related tasks. This could be something like a class that represents a
+list. Now, if the implementation details of a module are kept internally
+hidden and the only way to interact with it is through a documented
+interface, then that module is said to be encapsulated. 在计算机概念中,
+一个模块定义为一系列方法作为一个成体合作完成一个或一系列工作.
+这可能像是list. 如果一个模块的内部实现细节被隐藏,
+和它交互的方法是通过接口调用, 就说这个模块是被封装了.</p>
+<p>Take the <code>ArrayDeque</code> class, for example. The outside
+world is able to utilize and interact with an <code>ArrayDeque</code>
+through its defined methods, like <code>addLast</code> and
+<code>removeLast</code>. However, they need not understand the complex
+details of how the data structure was implemented in order to be able to
+use it effectively. 以<code>ArrayDeque</code>类为例,
+外界对于<code>ArrayDeque</code>可以使用的和交互的是它自定的方法,
+就像<code>addLast</code>和<code>removeLast</code>.
+他们不需要理解数据结构内部实现的复杂细节, 这是为了更有效地使用它.</p>
+<h3 id="abstraction-barriers">Abstraction Barriers</h3>
+<p>Ideally, a user should not be able to observe the internal workings
+of, say, a data structure they are using. Fortunately, Java makes it
+easy to enforce abstraction barriers. Using the <code>private</code>
+keyword in Java, it becomes virtually impossible to look inside an
+object - ensuring that the underlying complexity isn't exposed to the
+outside world.</p>
+<h3 id="how-inheritance-breaks-encapsulation继承破坏了封装">How
+Inheritance Breaks Encapsulation(继承破坏了封装)</h3>
+<p>Suppose we had the following two methods in a Dog class. We could
+have implemented <code>bark</code> and <code>barkMany</code> like so:
+假设我们<code>Dog</code>类中有两个方法.
+我们可以实现<code>bark</code>和<code>barkMany</code>如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public void bark() &#123;</span><br><span class="line">    System.out.println(&quot;bark&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public void barkMany(int N) &#123;</span><br><span class="line">    for (int i = 0; i &lt; N; i += 1) &#123;</span><br><span class="line">        bark();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Or, alternatively, we could have implemented it like so:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public void bark() &#123;</span><br><span class="line">    barkMany(1);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public void barkMany(int N) &#123;</span><br><span class="line">    for (int i = 0; i &lt; N; i += 1) &#123;</span><br><span class="line">        System.out.println(&quot;bark&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>From a user's perspective, the functionality of either of these
+implementations is exactly the same. However, observe the effect if we
+were to define a a subclass of <code>Dog</code> called
+<code>VerboseDog</code>, and override its <code>barkMany</code> method
+as such: 从使用者的角度看两种实现的功能并无二致.
+然而观察我们下面定义的<code>Dog</code>子类<code>VerboseDog</code>,
+并且覆盖了<code>barkmany</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public void barkMany(int N) &#123;</span><br><span class="line">    System.out.println(&quot;As a dog, I say: &quot;);</span><br><span class="line">    for (int i = 0; i &lt; N; i += 1) &#123;</span><br><span class="line">        bark();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>Exercise 4.2.3.</strong> Given a VerboseDog <code>vd</code>,
+what would <code>vd.barkMany(3)</code> output, given the first
+implementation above? The second implementation?</p>
+<ul>
+<li>a: As a dog, I say: bark bark bark</li>
+<li>b: bark bark bark</li>
+<li>c: Something else</li>
+</ul>
+<p>As you have seen, using the first implementation, the output is A,
+while using the second implementation, the program gets caught in an
+infinite loop. The call to <code>bark()</code> will call
+<code>barkMany(1)</code>, which makes a call to <code>bark()</code>,
+repeating the process infinitely many times. 可以发现, 使用第一种实现,
+输出是A, 然而使用第二种实现时, 程序陷入死循环.
+对<code>bark()</code>的调用会调用<code>barkMany(1)</code>,
+但这又会再次调用<code>bark()</code>就这样陷入死循环</p>
+<h2 id="type-checking-and-casting类型检查和类型检测">Type Checking and
+Casting(类型检查和类型检测)</h2>
+<p>Before we go into types and casting, let's review dynamic method
+selection. Recall that dynamic method lookup is the process of
+determining the method that is executed at runtime based on the dynamic
+type of the object. Specifically, if a method in SLList is overridden by
+the VengefulSLList class, then the method that is called at runtime is
+determined by the run-time type, or dynamic type, of that variable.
+在进入<code>类型检查和类型检测</code>前, 我们来回忆一下动态方法选择.
+回想一下，动态方法查找是根据对象的动态类型确定在运行时执行的方法的过程。具体而言，如果SLLIST中的方法被VengefulSLList的列表类覆盖，则该变量的运行时类型或动态类型确定了在运行时调用的方法。</p>
+<p><strong>Exercise 4.2.4.</strong> For each line of code below, decide
+the following:</p>
+<ul>
+<li>Does that line cause a compilation error?</li>
+<li>Which method uses dynamic selection?</li>
+</ul>
+<p><img
+src="https://joshhug.gitbooks.io/hug61b/content/assets/dynamic_selection.png" /></p>
+<p>Let's go through this program line by line.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">VengefulSLList&lt;Integer&gt; vsl = new VengefulSLList&lt;Integer&gt;(9);</span><br><span class="line">SLList&lt;Integer&gt; sl = vsl;</span><br></pre></td></tr></table></figure>
+<p>These two lines above compile just fine. Since
+<code>VengefulSLList</code> "is-an" SLList, it's valid to put an
+instance of the <code>VengefulSLList</code> class inside an
+<code>SLList</code> "container". 这两行会正确编译.
+由于<code>VengefulSLList</code>是一个SLList,
+把<code>VengefulSLListl</code>类型放入<code>SLList</code>容器中是合理的.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sl.addLast(50);</span><br><span class="line">sl.removeLast();</span><br></pre></td></tr></table></figure>
+<p>These lines above also compile. The call to <code>addLast</code> is
+unambiguous, as VengefulSLList did not override or implement it, so the
+method executed is in SLList. The <code>removeLast</code> method is
+overridden by VengefulSLList, however, so we take a look at the dynamic
+type of <code>sl</code>. Its dynamic type is VengefulSLList, and so
+dynamic method selection chooses the overridden method in the
+VengefulSLList class. 这两行也会编译通过.
+对于<code>addLast</code>的调用是明确的.
+然而<code>removeLast</code>方法在VengefulSLList被重写了,
+当我们看一下<code>sl</code>的动态类型时.
+其动态类型是<code>VengefulSLList</code>,
+动态类型选择也会选择在<code>VengefulSLList</code>类型中被覆盖的的方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sl.printLostItems();</span><br></pre></td></tr></table></figure>
+<p>This line above results in a compile-time error. Remember that the
+compiler determines whether or not something is valid based on the
+static type of the object. Since <code>sl</code> is of static type
+SLList, and <code>printLostItems</code> is not defined in the SLList
+class, the code will not be allowed to run, <em>even though</em>
+<code>sl</code>'s runtime type is VengefulSLList.
+上面这一行会导致编译错误.
+切记编译器决定某些东西是否合法是基于对象的静态对象.
+由于<code>sl</code>的静态类型是SLList,
+而且<code>printLostItem</code>在SLList类中并没有被定义,
+代码并不会被允许执行, 即使<code>sl</code>的动态类型是VengefulSLList</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">VengefulSLList&lt;Integer&gt; vsl2 = sl;</span><br></pre></td></tr></table></figure>
+<p>This line above also results in a compile-time error, for a similar
+reason. In general, the compiler only allows method calls and
+assignments based on compile-time types. Since the compiler only sees
+that the static type of <code>sl</code> is SLList, it will not allow a
+VengefulSLList "container" to hold it.
+上面这一行也会因为类似的原因导致运行错误. 总之,
+编译器只允许基于编译过程中的类型的方法或赋值.
+由于编译器在<code>sl</code>中发现<code>sl</code>的静态类型是SLList,
+它不会允许VengefulSLList容器容纳它.</p>
+<h3 id="expressions">Expressions</h3>
+<p>Like variables as seen above, expressions using the <code>new</code>
+keyword also have compile-time types. 就像前文中的变量,
+使用<code>new</code>关键字的表达式也有进行编译时的类型</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SLList&lt;Integer&gt; sl = new VengefulSLList&lt;Integer&gt;();</span><br></pre></td></tr></table></figure>
+<p>Above, the compile-time type of the right-hand side of the expression
+is VengefulSLList. The compiler checks to make sure that VengefulSLList
+"is-a" SLList, and allows this assignment, 上面一行,
+表达式右侧的式子编译时是VengefulSLList. 编译器会检查来确保VengefulSLList
+<code>is-a</code> SLList， 之后会允许赋值.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">VengefulSLList&lt;Integer&gt; vsl = new SLList&lt;Integer&gt;();</span><br></pre></td></tr></table></figure>
+<p>Above, the compile-time type of the right-hand side of the expression
+is SLList. The compiler checks if SLList "is-a" VengefulSLList, which it
+is not in all cases, and thus a compilation error results. 上面一行,
+右侧表达式编译时类型是SLList. 编译器检查 SLList <code>is-a</code>
+VengefulSLList, 这显然不可能, 编译器此时会报编译错误.</p>
+<p>Further, method calls have compile-time types equal to their declared
+type. Suppose we have this method: 更进一步, 方法调用也有编译时类型,
+那等价于他们声明类型. 假设我们有这个方法:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public static Dog maxDog(Dog d1, Dog d2) &#123; ... &#125;</span><br></pre></td></tr></table></figure>
+<p>Since the return type of <code>maxDog</code> is Dog, any call to
+<code>maxDog</code> will have compile-time type Dog.
+由于<code>maxDog</code>返回类型是Dog，
+任何对<code>maxDog</code>会有编译时类型Dog.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Poodle frank = new Poodle(&quot;Frank&quot;, 5);</span><br><span class="line">Poodle frankJr = new Poodle(&quot;Frank Jr.&quot;, 15);</span><br><span class="line"></span><br><span class="line">Dog largerDog = maxDog(frank, frankJr);</span><br><span class="line">Poodle largerPoodle = maxDog(frank, frankJr); //does not compile! RHS has compile-time type Dog</span><br></pre></td></tr></table></figure>
+<p>Assigning a Dog object to a Poodle variable, like in the SLList case,
+results in a compilation error. A Poodle "is-a" Dog, but a more general
+Dog object may not always be a Poodle, even if it clearly is to you and
+me (we know that <code>frank</code> and <code>frankJr</code> are both
+Poodles!). Is there any way around this, when we know for certain that
+assignment would work? 将一个Dog对象赋值给一个Poodle类型变量,
+就像SLList的例子, 会导致编译错误. Poodle <code>is-a</code> Dog,
+但是更普适的Dog类型不会一直是Poodle(不能将父类赋值给子类),
+即使这对于我们来说是显而易见的. 围绕这一点,
+在什么情况时赋值语句会成功?</p>
+<h3 id="casting">Casting</h3>
+<p>Java has a special syntax where you can tell the compiler that a
+specific expression has a specific compile-time type. This is called
+"casting". With casting, we can tell the compiler to view an expression
+as a different compile-time type.
+Java有一类特殊的语法可以让你指明一个表达式的编译时类型这被称为"casting".
+有了<code>casting</code>语法,
+我们就告诉了编译器把一个表达式的类型看作被我们指明的类型</p>
+<p>Looking back at the code that failed above, since we know that
+<code>frank</code> and <code>frankJr</code> are both Poodles, we can
+cast:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Poodle largerPoodle = (Poodle) maxDog(frank, frankJr); // compiles! Right hand side has compile-time type Poodle after casting</span><br></pre></td></tr></table></figure>
+<p><em>Caution</em>: Casting is a powerful but dangerous tool.
+Essentially, casting is telling the compiler not to do its type-checking
+duties - telling it to trust you and act the way you want it to. Here's
+a possible issue that could arise: <em>注意</em>:
+类型检测是极有效但却极其危险的工具. 本质上来说,
+类型检测高速编译器不要履行类型检查的责任,
+告诉它要相信你并且让它按照你想要的方式进行. 这里有个可能的出现的问题</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Poodle frank = new Poodle(&quot;Frank&quot;, 5);</span><br><span class="line">Malamute frankSr = new Malamute(&quot;Frank Sr.&quot;, 100);</span><br><span class="line"></span><br><span class="line">Poodle largerPoodle = (Poodle) maxDog(frank, frankSr); // runtime exception!</span><br></pre></td></tr></table></figure>
+<p>In this case, we compare a Poodle and a Malamute. Without casting,
+the compiler would normally not allow the call to <code>maxDog</code> to
+compile, as the right hand side compile-time type would be Dog, not
+Poodle. However, casting allows this code to pass, and when
+<code>maxDog</code> returns the Malamute at runtime, and we try casting
+a Malamute as a Poodle, we run into a runtime exception - a
+<code>ClassCastException</code>. 在这个例子中,
+我们比较了一个Poodle和一个Malamute. 没有casting, 编译器会像往常一样,
+不允许编译, 因为右侧的公式在编译的类型是Dog, 不是Poodle. 然而,
+casting允许这样的代码通过, 当<code>maxDog</code>在运行时返回Malamute时,
+我们尝试对编译器说把返回额度Malamute当作poodle, 我们得到一个运行时错误 -
+<code>ClassCastException</code></p>
+<h2 id="higher-order-functions">Higher Order Functions</h2>
+<p>Taking a little bit of a detour, we are going to introduce higher
+order functions. A higher order function is a function that treats other
+functions as data. For example, take this Python program
+<code>do_twice</code> that takes in another function as input, and
+applies it to the input <code>x</code> twice. 让我们稍稍转向,
+接下来介绍高阶函数. 一个高阶函数把其他函数看作数据.
+比如这个python程序<code>do_twice</code>接收另一个函数作为输入,
+并且把其应用到输入<code>x</code>上两次.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def tenX(x):</span><br><span class="line">    return 10*x</span><br><span class="line"></span><br><span class="line">def do_twice(f, x):</span><br><span class="line">    return f(f(x))</span><br></pre></td></tr></table></figure>
+<p>A call to <code>print(do_twice(tenX, 2))</code> would apply tenX to
+2, and apply tenX again to its result, 20, resulting in 200. How would
+we do something like this in Java?
+对于<code>print(do_twice(tenX, 2))</code>会把tenX应用到2上,
+并且再次应用到上次应用的结果20上, 结果是200.
+我们怎么在Java上做到类似的事呢?</p>
+<p>In old school Java (Java 7 and earlier), memory boxes (variables)
+could not contain pointers to functions. What that means is that we
+could not write a function that has a "Function" type, as there was
+simply no type for functions. 在老版本的Java中,
+变量不允许是指向函数的指针.
+意味着我们不能写一个函数其参数类型为<code>Function</code>类型,
+因为没有适用于函数的数据类型.</p>
+<p>To get around this we can take advantage of interface inheritance.
+Let's write an interface that defines any function that takes in an
+integer and returns an integer - an <code>IntUnaryFunction</code>.
+为了解决这个我们可以借助于接口继承.
+写一个定义任意函数的接口<code>InUnaryFunction</code>接受整数数据类型并且返回<code>integer</code>类型</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public interface IntUnaryFunction &#123;</span><br><span class="line">    int apply(int x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Now we can write a class which
+<code>implements IntUnaryFunction</code> to represent a concrete
+function. Let's make a function that takes in an integer and returns 10
+times that integer.
+现在我们可以写一个实现接口的类<code>implements IntUnaryFunction</code>来代表一个具体的函数.
+我们的函数应该接收一个整数并且返回这个整数的10倍.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class TenX implements IntUnaryFunction &#123;</span><br><span class="line">    /* Returns ten times the argument. */</span><br><span class="line">    public int apply(int x) &#123;</span><br><span class="line">        return 10 * x;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>At this point, we've written in Java the Python equivalent of the
+<code>tenX</code> function. Let's write <code>do_twice</code> now.
+在这时, 我们已经在Java中实现了等价于<code>tenX</code>函数的函数.
+让我们现在写<code>do_twice</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public static int do_twice(IntUnaryFunction f, int x) &#123;</span><br><span class="line">    return f.apply(f.apply(x));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>A call to <code>print(do_twice(tenX, 2))</code> in Java would look
+like this:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(do_twice(new TenX(), 2));</span><br></pre></td></tr></table></figure>
+<h3 id="inheritance-cheatsheet">Inheritance Cheatsheet</h3>
+<p><code>VengefulSLList extends SLList</code> means VengefulSLList
+"is-an" SLList, and inherits all of SLList's members:</p>
+<ul>
+<li>Variables, methods nested classes</li>
+<li>Not constructors Subclass constructors must invoke superclass
+constructor first. The <code>super</code> keyword can be used to invoke
+overridden superclass methods and constructors.</li>
+</ul>
+<p>Invocation of overridden methods follows two simple rules:</p>
+<ul>
+<li>Compiler plays it safe and only allows us to do things according to
+the static type.</li>
+<li>For overridden methods (<em>not overloaded methods</em>), the actual
+method invoked is based on the dynamic type of the invoking
+expression</li>
+<li>Can use casting to overrule compiler type checking.</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+            <!-- -->
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"><i class="fa fa-tag"></i> java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/09/22/4_1%20Intro%20and%20interfaces%20%20%20%20GRoE/" rel="prev" title="4_1 Intro and interfaces    GRoE">
+      <i class="fa fa-chevron-left"></i> 4_1 Intro and interfaces    GRoE
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/09/22/4_3%20Subtype%20Polymorphism%20vs_%20HOFs/" rel="next" title="4_3 Subtype Polymorphism vs_ HOFs">
+      4_3 Subtype Polymorphism vs_ HOFs <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#extends_-casting_-higher-order-functions"><span class="nav-number">1.</span> <span class="nav-text">4_2 Extends_ Casting_
+Higher Order Functions</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#extends"><span class="nav-number">1.1.</span> <span class="nav-text">Extends</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#vengefulsllist"><span class="nav-number">1.1.1.</span> <span class="nav-text">VengefulSLList</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#constructors-are-not-inherited"><span class="nav-number">1.1.2.</span> <span class="nav-text">Constructors Are Not
+Inherited</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#the-object-class"><span class="nav-number">1.1.3.</span> <span class="nav-text">The Object Class</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#is-a-vs.-has-a"><span class="nav-number">1.1.4.</span> <span class="nav-text">Is-a vs. Has-a</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#encapsulation%E5%B0%81%E8%A3%85"><span class="nav-number">1.2.</span> <span class="nav-text">Encapsulation(封装)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#abstraction-barriers"><span class="nav-number">1.2.1.</span> <span class="nav-text">Abstraction Barriers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#how-inheritance-breaks-encapsulation%E7%BB%A7%E6%89%BF%E7%A0%B4%E5%9D%8F%E4%BA%86%E5%B0%81%E8%A3%85"><span class="nav-number">1.2.2.</span> <span class="nav-text">How
+Inheritance Breaks Encapsulation(继承破坏了封装)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#type-checking-and-casting%E7%B1%BB%E5%9E%8B%E6%A3%80%E6%9F%A5%E5%92%8C%E7%B1%BB%E5%9E%8B%E6%A3%80%E6%B5%8B"><span class="nav-number">1.3.</span> <span class="nav-text">Type Checking and
+Casting(类型检查和类型检测)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#expressions"><span class="nav-number">1.3.1.</span> <span class="nav-text">Expressions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#casting"><span class="nav-number">1.3.2.</span> <span class="nav-text">Casting</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#higher-order-functions"><span class="nav-number">1.4.</span> <span class="nav-text">Higher Order Functions</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#inheritance-cheatsheet"><span class="nav-number">1.4.1.</span> <span class="nav-text">Inheritance Cheatsheet</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="XuandYu000"
+      src="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
+  <p class="site-author-name" itemprop="name">XuandYu000</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">64</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/XuandYu000" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;XuandYu000" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+     
+    <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+    <div class="widget-wrap">
+        <h3 class="widget-title">Tag Cloud</h3>
+        <div id="myCanvasContainer" class="widget tagcloud">
+            <canvas width="250" height="250" id="resCanvas" style="width:100%">
+                <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manacher/" rel="tag">Manacher</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bits/" rel="tag">bits</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/contest/" rel="tag">contest</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dp/" rel="tag">dp</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/exkmp/" rel="tag">exkmp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kmp/" rel="tag">kmp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/programming/" rel="tag">programming</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/py/" rel="tag">py</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sort/" rel="tag">sort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%89%E5%88%86/" rel="tag">三分</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%8C%E5%88%86/" rel="tag">二分</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%80%8D%E5%A2%9E/" rel="tag">倍增</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E6%B2%BB/" rel="tag">分治</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA/" rel="tag">博弈论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B3%E9%9D%A2%E4%B8%B4%E8%BF%91%E7%82%B9%E5%AF%B9/" rel="tag">平面临近点对</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E9%80%9F%E4%B9%98/" rel="tag">快速乘</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E9%80%9F%E5%B9%82/" rel="tag">快速幂</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/" rel="tag">滑动窗口</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A9%E9%98%B5%E4%B9%98/" rel="tag">矩阵乘</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A6%BB%E6%95%A3%E5%8C%96-%E5%89%8D%E7%BC%80%E5%92%8C-%E5%B7%AE%E5%88%86/" rel="tag">离散化,前缀和,差分</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag">线段树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/" rel="tag">组合数学</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E6%96%AF%E6%B6%88%E5%85%83/" rel="tag">高斯消元</a><span class="tag-list-count">1</span></li></ul>
+            </canvas>
+        </div>
+    </div>
+     
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XuandYu000</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+-->
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: '55px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+    </div>
+  <!--
+  
+  -->
+</body>
+</html>
+<!--动态title-->
+<script type="text/javascript" src="/js/src/activetitle.js"></script>
+
+

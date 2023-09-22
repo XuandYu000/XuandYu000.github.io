@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <script src="/live2d-widget/autoload.js"></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/sailboat.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/sailboat.png">
+  <link rel="mask-icon" href="/images/sailboat.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Defining and Using Classes If you do not have prior Java experience, we recommend that you work through the exercises in HW0 before reading this chapter. It will cover various syntax issues that we">
+<meta property="og:type" content="article">
+<meta property="og:title" content="results matching &quot;&quot;">
+<meta property="og:url" content="http://example.com/2023/09/05/1_2%20Objects%20%20%20%20%20results%20matching%20No%20results%20matching/index.html">
+<meta property="og:site_name" content="viewoverlook">
+<meta property="og:description" content="Defining and Using Classes If you do not have prior Java experience, we recommend that you work through the exercises in HW0 before reading this chapter. It will cover various syntax issues that we">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-04T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-09-08T13:47:41.209Z">
+<meta property="article:author" content="XuandYu000">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2023/09/05/1_2%20Objects%20%20%20%20%20results%20matching%20No%20results%20matching/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>results matching "" | viewoverlook</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">viewoverlook</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/XuandYu000" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/05/1_2%20Objects%20%20%20%20%20results%20matching%20No%20results%20matching/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
+      <meta itemprop="name" content="XuandYu000">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="viewoverlook">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          results matching ""
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-09-05 00:00:00" itemprop="dateCreated datePublished" datetime="2023-09-05T00:00:00+08:00">2023-09-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-08 21:47:41" itemprop="dateModified" datetime="2023-09-08T21:47:41+08:00">2023-09-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/csdiy/" itemprop="url" rel="index"><span itemprop="name">csdiy</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/csdiy/cs61B/" itemprop="url" rel="index"><span itemprop="name">cs61B</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="defining-and-using-classes">Defining and Using Classes</h2>
+<p>If you do not have prior Java experience, we recommend that you work
+through the exercises in <a
+target="_blank" rel="noopener" href="http://sp19.datastructur.es/materials/hw/hw0/hw0.html">HW0</a>
+before reading this chapter. It will cover various syntax issues that we
+will not discuss in the book.</p>
+<h3 id="static-vs.-non-static-methods">Static vs. Non-Static
+Methods</h3>
+<h4 id="static-methods">Static Methods</h4>
+<p>All code in Java must be part of a class (or something similar to a
+class, which we'll learn about later). Most code is written inside of
+methods. Let's consider an example:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public class Dog &#123;</span><br><span class="line">    public static void makeNoise() &#123;</span><br><span class="line">        System.out.println(&quot;Bark!&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>If we try running the <code>Dog</code> class, we'll simply get an
+error message:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ java Dog</span><br><span class="line">Error: Main method not found in class Dog, please define the main method as:</span><br><span class="line">       public static void main(String[] args)</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<p>The <code>Dog</code> class we've defined doesn't do anything. We've
+simply defined something that <code>Dog</code> <strong>can</strong> do,
+namely make noise. To actually run the class, we'd either need to add a
+main method to the <code>Dog</code> class, as we saw in chapter 1.1. Or
+we could create a separate <a
+target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Q-LE-jJQLTM"><code>DogLauncher</code></a>
+class that runs methods from the <code>Dog</code> class. For example,
+consider the program below:
+我们定义的<code>Dog</code>类什么都没做。我们只是定义了<code>Dog</code>能做什么,就像是可以吠叫。为了实际运行这个类,我们要么在<code>Dog</code>类中加入主方法,要么单独创建<code>DogLauncher</code>类来运行<code>Dog</code>中的函数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public class DogLauncher &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Dog.makeNoise();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ java DogLauncher</span><br><span class="line">Bark!</span><br></pre></td></tr></table></figure>
+<p>A class that uses another class is sometimes called a "client" of
+that class, i.e. <code>DogLauncher</code> is a client of
+<code>Dog</code>. Neither of the two techniques is better: Adding a main
+method to <code>Dog</code> may be better in some situations, and
+creating a client class like <code>DogLauncher</code> may be better in
+others. The relative advantages of each approach will become clear as we
+gain additional practice throughout the course.</p>
+<h4 id="instance-variables-and-object-instantiation">Instance Variables
+and Object Instantiation</h4>
+<p>Not all dogs are alike. Some dogs like to yap incessantly, while
+others bellow sonorously(善良的), bringing joy to all who hear their
+glorious call. Often, we write programs to mimic(模仿) features of the
+universe we inhabit, and Java's syntax was crafted(制作) to easily allow
+such mimicry.</p>
+<p>One approach to allowing us to represent the spectrum of Dogdom would
+be to create separate classes for each type of Dog.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class TinyDog &#123;</span><br><span class="line">    public static void makeNoise() &#123;</span><br><span class="line">        System.out.println(&quot;yip yip yip yip&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class MalamuteDog &#123;</span><br><span class="line">    public static void makeNoise() &#123;</span><br><span class="line">        System.out.println(&quot;arooooooooooooooo!&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>As you should have seen in the past, classes can be
+instantiated(实例化), and instances can hold data. This leads to a more
+natural approach, where we create instances of the <code>Dog</code>
+class and make the behavior of the <code>Dog</code> methods contingent
+upon(取决于) the properties of the specific <code>Dog</code>. To make
+this more concrete, consider the class below:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public class Dog &#123;</span><br><span class="line">    public int weightInPounds;</span><br><span class="line"></span><br><span class="line">    public void makeNoise() &#123;</span><br><span class="line">        if (weightInPounds &lt; 10) &#123;</span><br><span class="line">            System.out.println(&quot;yipyipyip!&quot;);</span><br><span class="line">        &#125; else if (weightInPounds &lt; 30) &#123;</span><br><span class="line">            System.out.println(&quot;bark. bark.&quot;);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            System.out.println(&quot;woof!&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>As an example of using such a Dog, consider:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public class DogLauncher &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Dog d;</span><br><span class="line">        d = new Dog();</span><br><span class="line">        d.weightInPounds = 20;</span><br><span class="line">        d.makeNoise();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>When run, this program will create a <code>Dog</code> with weight 20,
+and that <code>Dog</code> will soon let out a nice "bark. bark.".</p>
+<p>Some key observations and terminology:</p>
+<ul>
+<li>An <code>Object</code> in Java is an instance of any class.
+Java中的一个对象<code>object</code>是其中一个类的实例</li>
+<li>The <code>Dog</code> class has its own variables, also known as
+<em>instance variables</em> or <em>non-static variables</em>. These must
+be declared inside the class, unlike languages like Python or Matlab,
+where new variables can be added at runtime.
+<code>Dog</code>类有自己的变量也被称作实例变量或者非静态变量.这些必须在类中被声明不像python或Matlab中新的变量可以在运行时被加入</li>
+<li>The method that we created in the <code>Dog</code> class did not
+have the <code>static</code> keyword. We call such methods <em>instance
+methods</em> or <em>non-static methods</em>.
+创建<code>Dog</code>类并没有加入<code>static</code>关键字。我们称这样的方法为实例方法或非静态方法</li>
+<li>To call the <code>makeNoise</code> method, we had to first
+<em>instantiate</em> a <code>Dog</code> using the <code>new</code>
+keyword, and then make a specific <code>Dog</code> bark. In other words,
+we called <code>d.makeNoise()</code> instead of
+<code>Dog.makeNoise()</code>.
+为了调用<code>makeNoise</code>方法我们必须通过<code>new</code>关键字实例化他,之后会创建一个具体的<code>Dog</code>bark。换句话说,我们调用<code>d.makeNoise()</code>而不是<code>Dog.makeNoise()</code></li>
+<li>Once an object has been instantiated, it can be <em>assigned</em> to
+a <em>declared</em> variable of the appropriate type, e.g.
+<code>d = new Dog();</code>
+一旦对象被实例化,它可以被分配一个相同种类的变量名</li>
+<li>Variables and methods of a class are also called <em>members</em> of
+a class. 一个类中的变量和方法也被称作类中的成员</li>
+<li>Members of a class are accessed using <em>dot notation</em>.
+类成员可被使用<code>.</code>调用</li>
+</ul>
+<h4 id="constructors-in-java">Constructors in Java</h4>
+<p>As you've hopefully seen before, we usually construct objects in
+object oriented languages using a <em>constructor</em>:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class DogLauncher &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Dog d = new Dog(20);</span><br><span class="line">        d.makeNoise();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Here, the instantiation is parameterized, saving us the time and
+messiness of manually typing out potentially many instance variable
+assignments. To enable such syntax, we need only add a "constructor" to
+our Dog class, as shown below:
+这里,实例化已被参数化,从而节省了我们手动输入许多实例变量分配的时间和混乱</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class Dog &#123;</span><br><span class="line">    public int weightInPounds;</span><br><span class="line"></span><br><span class="line">    public Dog(int w) &#123;</span><br><span class="line">        weightInPounds = w;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void makeNoise() &#123;</span><br><span class="line">        if (weightInPounds &lt; 10) &#123;</span><br><span class="line">            System.out.println(&quot;yipyipyip!&quot;);</span><br><span class="line">        &#125; else if (weightInPounds &lt; 30) &#123;</span><br><span class="line">            System.out.println(&quot;bark. bark.&quot;);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            System.out.println(&quot;woof!&quot;);</span><br><span class="line">        &#125;    </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The constructor with signature <code>public Dog(int w)</code> will be
+invoked anytime that we try to create a <code>Dog</code> using the
+<code>new</code> keyword and a single integer parameter. For those of
+you coming from Python, the constructor is very similar to the
+<code>__init__</code> method.</p>
+<h4 id="terminology-summary">Terminology Summary</h4>
+<h4 id="array-instantiation-arrays-of-objects">Array Instantiation,
+Arrays of Objects</h4>
+<p>As we saw in HW0, arrays are also instantiated in Java using the new
+keyword. For example:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public class ArrayDemo &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        /* Create an array of five integers. */</span><br><span class="line">        int[] someArray = new int[5];</span><br><span class="line">        someArray[0] = 3;</span><br><span class="line">        someArray[1] = 4;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Similarly, we can create arrays of instantiated objects in Java,
+e.g.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class DogArrayDemo &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        /* Create an array of two dogs. */</span><br><span class="line">        Dog[] dogs = new Dog[2];</span><br><span class="line">        dogs[0] = new Dog(8);</span><br><span class="line">        dogs[1] = new Dog(20);</span><br><span class="line"></span><br><span class="line">        /* Yipping will result, since dogs[0] has weight 8. */</span><br><span class="line">        dogs[0].makeNoise();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Observe that new is used in two different ways: Once to create an
+array that can hold two <code>Dog</code> objects, and twice to create
+each actual <code>Dog</code>.
+可以发现<code>new</code>以两种不同的方式被使用:一种是创建一个新的可以容纳两个<code>Dog</code>对象的数组,一种是创建实际的<code>Dog</code>
+### Class Methods vs. Instance Methods</p>
+<p>Java allows us to define two types of methods:</p>
+<ul>
+<li>Class methods, a.k.a. static methods. 类方法或者静态方法</li>
+<li>Instance methods, a.k.a. non-static methods.
+实例方法或者非静态方法</li>
+</ul>
+<p>Instance methods are actions that can be taken only by a specific
+instance of a class. Static methods are actions that are taken by the
+class itself. Both are useful in different circumstances. As an example
+of a static method, the <code>Math</code> class provides a
+<code>sqrt</code> method. Because it is static, we can call it as
+follows:
+实例方法只可以在具体的类实例中被使用.静态方法可以被类自身所调用.两种都是有用的.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x = Math.sqrt(100);</span><br></pre></td></tr></table></figure>
+<p>If <code>sqrt</code> had been an instance method, we would have
+instead the awkward syntax below. Luckily <code>sqrt</code> is a static
+method so we don't have to do this in real programs.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Math m = new Math();</span><br><span class="line">x = m.sqrt(100);</span><br></pre></td></tr></table></figure>
+<p>Sometimes, it makes sense to have a class with both instance and
+static methods. For example, suppose want the ability to compare two
+dogs. One way to do this is to add a static method for comparing
+Dogs.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public static Dog maxDog(Dog d1, Dog d2) &#123;</span><br><span class="line">    if (d1.weightInPounds &gt; d2.weightInPounds) &#123;</span><br><span class="line">        return d1;</span><br><span class="line">    &#125;</span><br><span class="line">    return d2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>This method could be invoked by, for example:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Dog d = new Dog(15);</span><br><span class="line">Dog d2 = new Dog(100);</span><br><span class="line">Dog.maxDog(d, d2);</span><br></pre></td></tr></table></figure>
+<p>Observe that we've invoked using the class name, since this method is
+a static method.</p>
+<p>We could also have implemented <code>maxDog</code> as a non-static
+method, e.g.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public Dog maxDog(Dog d2) &#123;</span><br><span class="line">    if (this.weightInPounds &gt; d2.weightInPounds) &#123;</span><br><span class="line">        return this;</span><br><span class="line">    &#125;</span><br><span class="line">    return d2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Above, we use the keyword <code>this</code> to refer to the current
+object. This method could be invoked, for example, with:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Dog d = new Dog(15);</span><br><span class="line">Dog d2 = new Dog(100);</span><br><span class="line">d.maxDog(d2);</span><br></pre></td></tr></table></figure>
+<p>Here, we invoke the method using a specific instance variable.</p>
+<p><strong>Exercise 1.2.1</strong>: What would the following method do?
+If you're not sure, try it out.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public static Dog maxDog(Dog d1, Dog d2) &#123;</span><br><span class="line">    if (weightInPounds &gt; d2.weightInPounds) &#123;</span><br><span class="line">        return this;</span><br><span class="line">    &#125;</span><br><span class="line">    return d2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="static-variables">Static Variables</h4>
+<p>It is occasionally useful for classes to have static variables. These
+are properties inherent to the class itself, rather than the instance.
+For example, we might record that the scientific name (or binomen) for
+Dogs is "Canis familiaris":
+类中存在静态变量偶尔有用.这些是类自身继承的属性,而不是实例.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public class Dog &#123;</span><br><span class="line">    public int weightInPounds;</span><br><span class="line">    public static String binomen = &quot;Canis familiaris&quot;;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Static variables should be accessed using the name of the class
+rather than a specific instance, e.g. you should use
+<code>Dog.binomen</code>, not <code>d.binomen</code>.</p>
+<p>While Java technically allows you to access a static variable using
+an instance name, it is bad style, confusing, and in my opinion an error
+by the Java designers.
+尽管java技术上允许你使用实例名称访问静态变量,但这是错误的,让人困惑,并且在我看来是java设计者的错误</p>
+<p><strong>Exercise 1.2.2</strong>: Complete this exercise:</p>
+<ul>
+<li>Video: <a target="_blank" rel="noopener" href="https://youtu.be/8Gq-8mVbyFU">link</a></li>
+<li>Slide: <a
+target="_blank" rel="noopener" href="https://docs.google.com/presentation/d/10BFLHH8VaoYy7XaazwjaoTtLw3zvasX4HCssDruqw84/edit#slide=id.g6caa9a6fe_057">link</a></li>
+<li>Solution Video: <a target="_blank" rel="noopener" href="https://youtu.be/Osuy8UEH03M">link</a></li>
+</ul>
+<h3 id="public-static-void-mainstring-args">public static void
+main(String[] args)</h3>
+<p>With what we've learned so far, it's time to demystify(神秘面纱) the
+declaration we've been using for the main method. Breaking it into
+pieces, we have:</p>
+<ul>
+<li><code>public</code>: So far, all of our methods start with this
+keyword.</li>
+<li><code>static</code>: It is a static method, not associated with any
+particular instance.</li>
+<li><code>void</code>: It has no return type.</li>
+<li><code>main</code>: This is the name of the method.</li>
+<li><code>String[] args</code>: This is a parameter that is passed to
+the main method.</li>
+</ul>
+<h4 id="command-line-arguments">Command Line Arguments</h4>
+<p>Since main is called by the Java interpreter itself rather than
+another Java class, it is the interpreter's job to supply these
+arguments. They refer usually to the command line arguments. For
+example, consider the program <code>ArgsDemo</code> below:
+由于java解释器本身而不是另一个java类调用main,因此提供这些参数是解释器的工作.他们常常指命令行中的参数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public class ArgsDemo &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        System.out.println(args[0]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>This program prints out the 0th command line argument, e.g.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ java ArgsDemo these are command line arguments</span><br><span class="line">these</span><br></pre></td></tr></table></figure>
+<p>In the example above, <code>args</code> will be an array of Strings,
+where the entries are {"these", "are", "command", "line",
+"arguments"}.</p>
+<h4 id="summing-command-line-arguments">Summing Command Line
+Arguments</h4>
+<p><strong>Exercise 1.2.3</strong>: Try to write a program that sums up
+the command line arguments, assuming they are numbers. For a solution,
+see the webcast or the code provided on GitHub.</p>
+<h3 id="using-libraries">Using Libraries</h3>
+<p>One of the most important skills as a programmer is knowing how to
+find and use existing libraries. In the glorious modern era, it is often
+possible to save yourself tons of work and debugging by turning to the
+web for help.</p>
+<p>In this course, you're welcome to do this, with the following
+caveats(警告):</p>
+<ul>
+<li>Do not use libraries that we do not provide.
+不要使用我们未提供的库</li>
+<li>Cite your sources. 使用你的资源</li>
+<li>Do not search for solutions for specific homework or project
+problems. 不要搜具体的作业或项目问题</li>
+</ul>
+<p>For example, it's fine to search for"convert String integer Java".
+However, it is not OK to search for"nbody project berkeley".</p>
+<p>For more on collaboration and academic honesty policy, see the course
+syllabus.</p>
+<h4 id="what-next">What Next</h4>
+<ul>
+<li><a
+target="_blank" rel="noopener" href="http://sp19.datastructur.es/materials/proj/proj0/proj0">Project
+0</a></li>
+<li><a
+target="_blank" rel="noopener" href="http://sp19.datastructur.es/materials/discussion/disc02.pdf">Discussion
+2</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+            <!-- -->
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"><i class="fa fa-tag"></i> java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/09/04/1_1%20Hello'%20World/" rel="prev" title="results matching """>
+      <i class="fa fa-chevron-left"></i> results matching ""
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/09/06/%E9%AB%98%E6%96%AF%E6%B6%88%E5%85%83/" rel="next" title="高斯消元 - 高斯消元">
+      高斯消元 - 高斯消元 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#defining-and-using-classes"><span class="nav-number">1.</span> <span class="nav-text">Defining and Using Classes</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#static-vs.-non-static-methods"><span class="nav-number">1.1.</span> <span class="nav-text">Static vs. Non-Static
+Methods</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#static-methods"><span class="nav-number">1.1.1.</span> <span class="nav-text">Static Methods</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#instance-variables-and-object-instantiation"><span class="nav-number">1.1.2.</span> <span class="nav-text">Instance Variables
+and Object Instantiation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#constructors-in-java"><span class="nav-number">1.1.3.</span> <span class="nav-text">Constructors in Java</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#terminology-summary"><span class="nav-number">1.1.4.</span> <span class="nav-text">Terminology Summary</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#array-instantiation-arrays-of-objects"><span class="nav-number">1.1.5.</span> <span class="nav-text">Array Instantiation,
+Arrays of Objects</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#static-variables"><span class="nav-number">1.1.6.</span> <span class="nav-text">Static Variables</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#public-static-void-mainstring-args"><span class="nav-number">1.2.</span> <span class="nav-text">public static void
+main(String[] args)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#command-line-arguments"><span class="nav-number">1.2.1.</span> <span class="nav-text">Command Line Arguments</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#summing-command-line-arguments"><span class="nav-number">1.2.2.</span> <span class="nav-text">Summing Command Line
+Arguments</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#using-libraries"><span class="nav-number">1.3.</span> <span class="nav-text">Using Libraries</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#what-next"><span class="nav-number">1.3.1.</span> <span class="nav-text">What Next</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="XuandYu000"
+      src="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
+  <p class="site-author-name" itemprop="name">XuandYu000</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">64</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/XuandYu000" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;XuandYu000" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+     
+    <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+    <div class="widget-wrap">
+        <h3 class="widget-title">Tag Cloud</h3>
+        <div id="myCanvasContainer" class="widget tagcloud">
+            <canvas width="250" height="250" id="resCanvas" style="width:100%">
+                <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manacher/" rel="tag">Manacher</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bits/" rel="tag">bits</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/contest/" rel="tag">contest</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dp/" rel="tag">dp</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/exkmp/" rel="tag">exkmp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kmp/" rel="tag">kmp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/programming/" rel="tag">programming</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/py/" rel="tag">py</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sort/" rel="tag">sort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%89%E5%88%86/" rel="tag">三分</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%8C%E5%88%86/" rel="tag">二分</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%80%8D%E5%A2%9E/" rel="tag">倍增</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E6%B2%BB/" rel="tag">分治</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA/" rel="tag">博弈论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B3%E9%9D%A2%E4%B8%B4%E8%BF%91%E7%82%B9%E5%AF%B9/" rel="tag">平面临近点对</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E9%80%9F%E4%B9%98/" rel="tag">快速乘</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E9%80%9F%E5%B9%82/" rel="tag">快速幂</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/" rel="tag">滑动窗口</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A9%E9%98%B5%E4%B9%98/" rel="tag">矩阵乘</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A6%BB%E6%95%A3%E5%8C%96-%E5%89%8D%E7%BC%80%E5%92%8C-%E5%B7%AE%E5%88%86/" rel="tag">离散化,前缀和,差分</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag">线段树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/" rel="tag">组合数学</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E6%96%AF%E6%B6%88%E5%85%83/" rel="tag">高斯消元</a><span class="tag-list-count">1</span></li></ul>
+            </canvas>
+        </div>
+    </div>
+     
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XuandYu000</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+-->
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: '55px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+    </div>
+  <!--
+  
+  -->
+</body>
+</html>
+<!--动态title-->
+<script type="text/javascript" src="/js/src/activetitle.js"></script>
+
+

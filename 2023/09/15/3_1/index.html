@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <script src="/live2d-widget/autoload.js"></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/sailboat.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/sailboat.png">
+  <link rel="mask-icon" href="/images/sailboat.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="3_1 Testing and Selection Sort One of the most important skills an intermediate to advanced programmer can have is the ability to tell when your code is correct. In this chapter, we&#39;ll discuss how">
+<meta property="og:type" content="article">
+<meta property="og:title" content="31">
+<meta property="og:url" content="http://example.com/2023/09/15/3_1/index.html">
+<meta property="og:site_name" content="viewoverlook">
+<meta property="og:description" content="3_1 Testing and Selection Sort One of the most important skills an intermediate to advanced programmer can have is the ability to tell when your code is correct. In this chapter, we&#39;ll discuss how">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-14T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-09-21T02:40:51.537Z">
+<meta property="article:author" content="XuandYu000">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2023/09/15/3_1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>31 | viewoverlook</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">viewoverlook</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/XuandYu000" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/15/3_1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
+      <meta itemprop="name" content="XuandYu000">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="viewoverlook">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          31
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-09-15 00:00:00" itemprop="dateCreated datePublished" datetime="2023-09-15T00:00:00+08:00">2023-09-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-21 10:40:51" itemprop="dateModified" datetime="2023-09-21T10:40:51+08:00">2023-09-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/cs61b/" itemprop="url" rel="index"><span itemprop="name">cs61b</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/cs61b/csdiy/" itemprop="url" rel="index"><span itemprop="name">csdiy</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="section">3_1</h1>
+<h2 id="testing-and-selection-sort">Testing and Selection Sort</h2>
+<p>One of the most important skills an intermediate to advanced
+programmer can have is the ability to tell when your code is correct. In
+this chapter, we'll discuss how you can write tests to evaluate code
+correctness. Along the way, we'll also discuss an algorithm for sorting
+called Selection Sort.</p>
+<h3 id="a-new-way">A New Way</h3>
+<p>When you write a program, it may have errors. In a classroom setting,
+you gain confidence in your code's correctness through some combination
+of user interaction, code analysis, and autograder testing, with this
+last item being of the greatest importance in many cases, particularly
+as it is how you earn points.</p>
+<p>Autograders, of course, are not magic. They are code that the
+instructors write that is fundamentally not all that different from the
+code that you are writing. In the real world, these tests are written by
+the programmers themselves, rather than some benevolent Josh-Hug-like
+third party.</p>
+<p>In this chapter, we'll explore how we can write our own tests. Our
+goal will be to create a class called <code>Sort</code> that provides a
+method <code>sort(String[] x)</code> that destructively sorts the
+strings in the array <code>x</code>.</p>
+<p>As a totally new way of thinking, we'll start by writing
+<code>testSort()</code> first, and only after we've finished the test,
+we'll move on to writing the actual sorting code.</p>
+<span id="more"></span>
+<h3 id="ad-hoc-testing">Ad Hoc Testing</h3>
+<p>Writing a test for <code>Sort.sort</code> is relatively
+straightforward, albeit tedious. We simply need to create an input, call
+<code>sort</code>, and check that the output of the method is correct.
+If the output is not correct, we print out the first mismatch and
+terminate the test. For example, we might create a test class as
+follows:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public class TestSort &#123;</span><br><span class="line">    /** Tests the sort method of the Sort class. */</span><br><span class="line">    public static void testSort() &#123;</span><br><span class="line">        String[] input = &#123;&quot;i&quot;, &quot;have&quot;, &quot;an&quot;, &quot;egg&quot;&#125;;</span><br><span class="line">        String[] expected = &#123;&quot;an&quot;, &quot;egg&quot;, &quot;have&quot;, &quot;i&quot;&#125;;</span><br><span class="line">        Sort.sort(input);</span><br><span class="line">        for (int i = 0; i &lt; input.length; i += 1) &#123;</span><br><span class="line">            if (!input[i].equals(expected[i])) &#123;</span><br><span class="line">                System.out.println(&quot;Mismatch in position &quot; + i + &quot;, expected: &quot; + expected + &quot;, but got: &quot; + input[i] + &quot;.&quot;);</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        testSort();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>We can test out our test by creating a blank <code>Sort.sort</code>
+method as shown below:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class Sort &#123;</span><br><span class="line">    /** Sorts strings destructively. */</span><br><span class="line">    public static void sort(String[] x) &#123;        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>If we run the <code>testSort()</code> method with this blank
+<code>Sort.sort</code> method, we'd get:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Mismatch in position 0, expected: an, but got: i.</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>The fact that we're getting an error message is a good thing! This
+means our test is working. What's very interesting about this is that
+we've now created a little game for ourselves to play, where the goal is
+to modify the code for <code>Sort.sort</code> so that this error message
+no longer occurs. It's a bit of a psychological trick, but many
+programmers find the creation of these little mini-puzzles for
+themselves to be almost addictive.</p>
+<p>In fact, this is a lot like the situation where you have an
+autograder for a class, and you find yourself hooked on the idea of
+getting the autograder to give you its love and approval. You now have
+the ability to create a judge for your code, whose esteem you can only
+win by completing the code correctly.</p>
+<p><strong>Important note:</strong> You may be asking "Why are you
+looping through the entire array? Why don't you just check if the arrays
+are equal using <code>==</code>? ". The reason is, when we test for
+equality of two objects, we cannot simply use the <code>==</code>
+operator. The <code>==</code> operator compares the literal bits in the
+memory boxes, e.g. <code>input == expected</code> would test whether or
+not the addresses of <code>input</code> and <code>expected</code> are
+the same, not whether the values in the arrays are the same. Instead, we
+used a loop in <code>testSort</code>, and print out the first mismatch.
+You could also use the built-in method
+<code>java.util.Arrays.equals</code> instead of a loop.</p>
+<p>While the single test above wasn't a ton of work, writing a suite of
+such <em>ad hoc</em> tests would be very tedious, as it would entail
+writing a bunch of different loops and print statements. In the next
+section, we'll see how the <code>org.junit</code> library saves us a lot
+of work.</p>
+<h3 id="junit-testing">JUnit Testing</h3>
+<p>The <code>org.junit</code> library provides a number of helpful
+methods and useful capabilities for simplifying the writing of tests.
+For example, we can replace our simple <em>ad hoc</em> test from above
+with:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public static void testSort() &#123;</span><br><span class="line">    String[] input = &#123;&quot;i&quot;, &quot;have&quot;, &quot;an&quot;, &quot;egg&quot;&#125;;</span><br><span class="line">    String[] expected = &#123;&quot;an&quot;, &quot;egg&quot;, &quot;have&quot;, &quot;i&quot;&#125;;</span><br><span class="line">    Sort.sort(input);</span><br><span class="line">    org.junit.Assert.assertArrayEquals(expected, input);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>This code is much simpler</strong>, and does more or less the
+exact same thing, i.e. if the arrays are not equal, it will tell us the
+first mismatch. For example, if we run <code>testSort()</code> on a
+<code>Sort.sort</code> method that does nothing, we'd get:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread &quot;main&quot; arrays first differed at element [0]; expected:&lt;[an]&gt; but was:&lt;[i]&gt;</span><br><span class="line">    at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:55)</span><br><span class="line">    at org.junit.Assert.internalArrayEquals(Assert.java:532)</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>While this output is a little uglier than our <em>ad hoc</em> test,
+we'll see at the very end of this chapter how to make it nicer.</p>
+<h3 id="selection-sort">Selection Sort</h3>
+<p>Before we can write a <code>Sort.sort</code> method, we need some
+algorithm for sorting. Perhaps the simplest sorting algorithm around is
+"selection sort." Selection sort consists of three steps:</p>
+<ul>
+<li>Find the smallest item.</li>
+<li>Move it to the front.</li>
+<li>Selection sort the remaining N-1 items (without touching the front
+item).</li>
+</ul>
+<p>For example, suppose we have the array
+<code>&#123;6, 3, 7, 2, 8, 1&#125;</code>. The smallest item in this array is
+<code>1</code>, so we'd move the <code>1</code> to the front. There are
+two natural ways to do this: One is to stick the <code>1</code> at the
+front and slide all the numbers over, i.e.
+<code>&#123;1, 6, 3, 7, 2, 8&#125;</code>. However, the much more efficient way is
+to simply swap the <code>1</code> with the old front (in this case
+<code>6</code>), yielding <code>&#123;1, 3, 7, 2, 8, 6&#125;</code>.</p>
+<p>We'd simply repeat the same process for the remaining digits, i.e.
+the smallest item in <code>... 3, 7, 2, 8, 6&#125;</code> is <code>2</code>.
+Swapping to the front, we get <code>&#123;1, 2, 7, 3, 8, 6&#125;</code>. Repeating
+until we've got a sorted array, we'd get
+<code>&#123;1, 2, 3, 7, 8, 6&#125;</code>, then <code>&#123;1, 2, 3, 6, 8, 7&#125;</code>,
+then finally <code>&#123;1, 2, 3, 6, 7, 8&#125;</code>.</p>
+<p>We could mathematically prove the correctness of this sorting
+algorithm on any arrays by using the concept of invariants that was
+originally introduced in chapter 2.4, though we will not do so in this
+textbook. Before proceeding, try writing out your own short array of
+numbers and perform selection sort on it, so that you can make sure you
+get the idea.</p>
+<p>Now that we know how selection sort works, we can write in a few
+short comments in our blank <code>Sort.sort</code> method to guide our
+thinking:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class Sort &#123;</span><br><span class="line">    /** Sorts strings destructively. */</span><br><span class="line">    public static void sort(String[] x) &#123; </span><br><span class="line">           // find the smallest item</span><br><span class="line">           // move it to the front</span><br><span class="line">           // selection sort the rest (using recursion?)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>In the following sections, I will attempt to complete an
+implementation of selection sort. I'll do so in a way that resembles how
+a student might approach the problem, so <strong>I'll be making a few
+intentional errors along the way</strong>. These intentional errors are
+a good thing, as they'll help demonstrate the usefulness of testing. If
+you spot any of the errors while reading, don't worry, we'll eventually
+come around and correct them.</p>
+<h3 id="findsmallest">findSmallest</h3>
+<p>The most natural place to start is to write a method for finding the
+smallest item in a list. As with <code>Sort.sort</code>, we'll start by
+writing a test before we even complete the method. First, we'll create a
+dummy <code>findSmallest</code> method that simply returns some
+arbitrary value:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public class Sort &#123;</span><br><span class="line">    /** Sorts strings destructively. */</span><br><span class="line">    public static void sort(String[] x) &#123; </span><br><span class="line">           // find the smallest item</span><br><span class="line">           // move it to the front</span><br><span class="line">           // selection sort the rest (using recursion?)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /** Returns the smallest string in x. */</span><br><span class="line">    public static String findSmallest(String[] x) &#123;</span><br><span class="line">        return x[2];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Obviously this is not a correct implementation, but we've chosen to
+defer actually thinking about how <code>findSmallest</code> works until
+after we've written a test. Using the <code>org.junit</code> library,
+adding such a test to our <code>TestSort</code> class is very easy, as
+shown below:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public class TestSort &#123;</span><br><span class="line">    ...</span><br><span class="line">    public static void testFindSmallest() &#123;</span><br><span class="line">        String[] input = &#123;&quot;i&quot;, &quot;have&quot;, &quot;an&quot;, &quot;egg&quot;&#125;;</span><br><span class="line">        String expected = &quot;an&quot;;</span><br><span class="line"></span><br><span class="line">        String actual = Sort.findSmallest(input);</span><br><span class="line">        org.junit.Assert.assertEquals(expected, actual);        </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        testFindSmallest(); // note: we changed this from testSort!</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>As with <code>TestSort.testsort</code>, we then run our
+<code>TestSort.testFindSmallest</code> method to make sure that it
+fails. When we run this test, we'll see that it actually passes, i.e. no
+message appears. This is because we just happened to hard code the
+correct return value <code>x[2]</code>. Let's modify our
+<code>findSmallest</code> method so that it returns something that is
+definitely incorrect:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/** Returns the smallest string in x. */</span><br><span class="line">public static String findSmallest(String[] x) &#123;</span><br><span class="line">    return x[3];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>After making this change, when we run
+<code>TestSort.testFindSmallest</code>, we'll get an error, which is a
+good thing:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread &quot;main&quot; java.lang.AssertionError: expected:&lt;[an]&gt; but was:&lt;[null]&gt;</span><br><span class="line">    at org.junit.Assert.failNotEquals(Assert.juava:834)</span><br><span class="line">    at TestSort.testFindSmallest(TestSort.java:9)</span><br><span class="line">    at TestSort.main(TestSort.java:24)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>As before, we've set up for ourselves a little game to play, where
+our goal is now to modify the code for <code>Sort.findSmallest</code> so
+that this error no longer appears. This is a smaller goal than getting
+<code>Sort.sort</code> to work, which might be even more addictive.</p>
+<p>Side note: It might have seem rather contrived that I just happened
+to return the right value <code>x[2]</code>. However, when I was
+recording this lecture video, I actually did make this exact mistake
+without intending to do so!</p>
+<p>Next we turn to actually writing <code>findSmallest</code>. This
+seems like it should be relatively straightforward. If you're a Java
+novice, you might end up writing code that looks something like
+this:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">/**  Returns the smallest string in x. */</span><br><span class="line">public static String findSmallest(String[] x) &#123;</span><br><span class="line">    String smallest = x[0];</span><br><span class="line">    for (int i = 0; i &lt; x.length; i += 1) &#123;</span><br><span class="line">        if (x[i] &lt; smallest) &#123;</span><br><span class="line">            smallest = x[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return smallest;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>However, this will yield the compilation error "&lt; cannot be
+applied to'java.lang.String'". The issue is that Java does not allow
+comparisons between Strings using the &lt; operator.</p>
+<p>然而这会导致编译错误<code>&lt; cannot be applied to 'java.lang.String'</code>.
+这是因为java不允许Strings之间使用&lt;比较</p>
+<p>When you're programming and get stuck on an issue like this that is
+easily describable, it's probably best to turn to a search engine. For
+example, we might search "less than strings Java" with Google. Such a
+search might yield a Stack Overflow post like <a
+target="_blank" rel="noopener" href="https://stackoverflow.com/questions/5153496/how-can-i-compare-two-strings-in-java-and-define-which-of-them-is-smaller-than-t">this
+one</a>.</p>
+<p>One of the popular answers for this post explains that the
+<code>str1.compareTo(str2)</code> method will return a negative number
+if <code>str1 &lt; str2</code>, 0 if they are equal, and a positive
+number if <code>str1 &gt; str2</code>.</p>
+<p>Incorporating this into our code, we might end up with:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">/** Returns the smallest string in x. </span><br><span class="line">  * @source Got help with string compares from https://goo.gl/a7yBU5. */</span><br><span class="line">public static String findSmallest(String[] x) &#123;</span><br><span class="line">    String smallest = x[0];</span><br><span class="line">    for (int i = 0; i &lt; x.length; i += 1) &#123;</span><br><span class="line">        int cmp = x[i].compareTo(smallest);</span><br><span class="line">        if (cmp &lt; 0) &#123;</span><br><span class="line">            smallest = x[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return smallest;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Note that we've used a <code>@source</code> tag in order to cite our
+sources. I'm showing this by example for those of you who are taking 61B
+as a formal course. This is not a typical real world practice.</p>
+<p>Since we are using syntax features that are totally new to us, we
+might lack confidence in the correctness of our
+<code>findSmallest</code> method. Luckily, we just wrote that test a
+little while ago. If we try running it, we'll see that nothing gets
+printed, which means our code is probably correct.</p>
+<p>We can augment our test to increase our confidence by adding more
+test cases. For example, we might change <code>testFindSmallest</code>
+so that it reads as shown below:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public static void testFindSmallest() &#123;</span><br><span class="line">    String[] input = &#123;&quot;i&quot;, &quot;have&quot;, &quot;an&quot;, &quot;egg&quot;&#125;;</span><br><span class="line">    String expected = &quot;an&quot;;</span><br><span class="line"></span><br><span class="line">    String actual = Sort.findSmallest(input);</span><br><span class="line">    org.junit.Assert.assertEquals(expected, actual);        </span><br><span class="line"></span><br><span class="line">    String[] input2 = &#123;&quot;there&quot;, &quot;are&quot;, &quot;many&quot;, &quot;pigs&quot;&#125;;</span><br><span class="line">    String expected2 = &quot;are&quot;;</span><br><span class="line"></span><br><span class="line">    String actual2 = Sort.findSmallest(input2);</span><br><span class="line">    org.junit.Assert.assertEquals(expected2, actual2);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Rerunning the test, we see that it still passes. We are not
+absolutely certain that it works, but we are much more certain that we
+would have been without any tests.</p>
+<h3 id="swap">Swap</h3>
+<p>Looking at our <code>sort</code> method below, the next helper method
+we need to write is something to move an item to the front, which we'll
+call <code>swap</code>.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">/** Sorts strings destructively. */</span><br><span class="line">public static void sort(String[] x) &#123; </span><br><span class="line">       // find the smallest item</span><br><span class="line">       // move it to the front</span><br><span class="line">       // selection sort the rest (using recursion?)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Writing a <code>swap</code> method is very straightforward, and
+you've probably done so before. A correct implementation might look
+like:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public static void swap(String[] x, int a, int b) &#123;</span><br><span class="line">    String temp = x[a];</span><br><span class="line">    x[a] = x[b];</span><br><span class="line">    x[b] = temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>However, for the moment, let's introduce an intentional error so that
+we can demonstrate the utility of testing. A more naive programmer might
+have done something like:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public static void swap(String[] x, int a, int b) &#123;    </span><br><span class="line">    x[a] = x[b];</span><br><span class="line">    x[b] = x[a];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Writing a test for this method is quite easy with the help of JUnit.
+An example test is shown below. Note that we have also edited the main
+method so that it calls <code>testSwap</code> instead of
+<code>testFindSmallest</code> or <code>testSort</code>.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public class TestSort &#123;</span><br><span class="line">    ...    </span><br><span class="line"></span><br><span class="line">    /** Test the Sort.swap method. */</span><br><span class="line">    public static void testSwap() &#123;</span><br><span class="line">        String[] input = &#123;&quot;i&quot;, &quot;have&quot;, &quot;an&quot;, &quot;egg&quot;&#125;;</span><br><span class="line">        int a = 0;</span><br><span class="line">        int b = 2;</span><br><span class="line">        String[] expected = &#123;&quot;an&quot;, &quot;have&quot;, &quot;i&quot;, &quot;egg&quot;&#125;;</span><br><span class="line"></span><br><span class="line">        Sort.swap(input, a, b);</span><br><span class="line">        org.junit.Assert.assertArrayEquals(expected, input);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        testSwap();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Running this test on our buggy <code>swap</code> yields an error, as
+we'd expect.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread &quot;main&quot; arrays first differed in element [2]; expected:&lt;[i]&gt; but was:&lt;[an]&gt;</span><br><span class="line">    at TestSort.testSwap(TestSort.java:36)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>It's worth briefly noting that it is important that we call only
+<code>testSwap</code> and not <code>testSort</code> as well. For
+example, if our <code>main</code> method was as below, the entire
+<code>main</code> method will terminate execution as soon as
+<code>testSort</code> fails, and <code>testSwap</code> will never
+run:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    testSort();</span><br><span class="line">    testFindSmallest();</span><br><span class="line">    testSwap();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>We will learn a more elegant way to deal with multiple tests at the
+end of this chapter that will avoid the need to manually specify which
+tests to run.</p>
+<p>Now that we have a failing test, we can use it to help us debug. One
+way to do this is to set a breakpoint inside the <code>swap</code>
+method and use the visual debugging feature in IntelliJ. If you would
+like more information about and practice on debugging, check out <a
+target="_blank" rel="noopener" href="https://sp19.datastructur.es/materials/lab/lab3/lab3">Lab3</a>.
+Stepping through the code line-by-line makes it immediately clear what
+is wrong (see video or try it yourself), and we can fix it by updating
+our code to include a temporary variable as that the beginning of this
+section:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public static void swap(String[] x, int a, int b) &#123;</span><br><span class="line">    String temp = x[a];</span><br><span class="line">    x[a] = x[b];</span><br><span class="line">    x[b] = temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Rerunning the test, we see that it now passes.</p>
+<h3 id="revising-findsmallest">Revising findSmallest</h3>
+<p>Now that we have multiple pieces of our method done, we can start
+trying to connect them up together to create a <code>Sort</code>
+method.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">/** Sorts strings destructively. */</span><br><span class="line">public static void sort(String[] x) &#123; </span><br><span class="line">       // find the smallest item</span><br><span class="line">       // move it to the front</span><br><span class="line">       // selection sort the rest (using recursion?)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>It's clear how to use our <code>findSmallest</code> and
+<code>swap</code> methods, but when we do so, we immediately realize
+there is a bit of a mismatch: <code>findSmallest</code> returns a
+<code>String</code>, and <code>swap</code> expects two indices.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">/** Sorts strings destructively. */</span><br><span class="line">public static void sort(String[] x) &#123; </span><br><span class="line">       // find the smallest item</span><br><span class="line">       String smallest = findSmallest(x);</span><br><span class="line"></span><br><span class="line">       // move it to the front</span><br><span class="line">       swap(x, 0, smallest);</span><br><span class="line"></span><br><span class="line">       // selection sort the rest (using recursion?)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>In other words, what <code>findSmallest</code> should have been
+returning is the index of the smallest String, not the String itself.
+Making silly errors like this is normal and really easy to do, so don't
+sweat it if you find yourself doing something similar. Iterating on a
+design is part of the process of writing code.</p>
+<p>Luckily, this new design can be easily changed. We simply need to
+adjust <code>findSmallest</code> to return an <code>int</code>, as shown
+below:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public static int findSmallest(String[] x) &#123;</span><br><span class="line">    int smallestIndex = 0;</span><br><span class="line">    for (int i = 0; i &lt; x.length; i += 1) &#123;</span><br><span class="line">        int cmp = x[i].compareTo(x[smallestIndex]);</span><br><span class="line">        if (cmp &lt; 0) &#123;</span><br><span class="line">            smallestIndex = i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return smallestIndex;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Since this is a non-trivial change, we should also update
+<code>testFindSmallest</code> and make sure that
+<code>findSmallest</code> still works.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public static void testFindSmallest() &#123;</span><br><span class="line">    String[] input = &#123;&quot;i&quot;, &quot;have&quot;, &quot;an&quot;, &quot;egg&quot;&#125;;</span><br><span class="line">    int expected = 2;</span><br><span class="line"></span><br><span class="line">    int actual = Sort.findSmallest(input);</span><br><span class="line">    org.junit.Assert.assertEquals(expected, actual);        </span><br><span class="line"></span><br><span class="line">    String[] input2 = &#123;&quot;there&quot;, &quot;are&quot;, &quot;many&quot;, &quot;pigs&quot;&#125;;</span><br><span class="line">    int expected2 = 1;</span><br><span class="line"></span><br><span class="line">    int actual2 = Sort.findSmallest(input);</span><br><span class="line">    org.junit.Assert.assertEquals(expected2, actual2);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>After modifying <code>TestSort</code> so that this test is run, and
+running <code>TestSort.main</code>, we see that our code passes the
+tests. Now, revising sort, we can fill in the first two steps of our
+sorting algorithm.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/** Sorts strings destructively. */</span><br><span class="line">public static void sort(String[] x) &#123; </span><br><span class="line">   // find the smallest item</span><br><span class="line">   // move it to the front</span><br><span class="line">   // selection sort the rest (using recursion?)</span><br><span class="line">   int smallestIndex = findSmallest(x);</span><br><span class="line">   swap(x, 0, smallestIndex);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>All that's left is to somehow selection sort the remaining items,
+perhaps using recursion. We'll tackle this in the next section.</p>
+<p>Reflecting on what we've accomplished, it's worth noting how we
+created tests first, and used these to build confidence that the actual
+methods work before we ever tried to use them for anything. This is an
+incredibly important idea, and one that will serve you well if you
+decide to adopt it.</p>
+<h3 id="recursive-helper-methods">Recursive Helper Methods</h3>
+<p>To begin this section, consider how you might make the recursive call
+needed to complete <code>sort</code>:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">/** Sorts strings destructively. */</span><br><span class="line">public static void sort(String[] x) &#123; </span><br><span class="line">   int smallestIndex = findSmallest(x);</span><br><span class="line">   swap(x, 0, smallestIndex);</span><br><span class="line">   // recursive call??</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>For those of you who are used to a language like Python, it might be
+tempting to try and use something like slice notation, e.g.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">/** Sorts strings destructively. */</span><br><span class="line">public static void sort(String[] x) &#123; </span><br><span class="line">   int smallestIndex = findSmallest(x);</span><br><span class="line">   swap(x, 0, smallestIndex);</span><br><span class="line">   sort(x[1:])</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>However, there is no such thing in Java as a reference to a
+sub-array, i.e. we can't just pass the address of the next item in the
+array.</p>
+<p>This problem of needing to consider only a subset of a larger array
+is very common. A typical solution is to create a private helper method
+that has an additional parameter (or parameters) that delineate which
+part of the array to consider. For example, we might write a private
+helper method also called <code>sort</code> that consider only the items
+starting with item <code>start</code>.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/** Sorts strings destructively starting from item start. */</span><br><span class="line">private static void sort(String[] x, int start) &#123; </span><br><span class="line">    // TODO</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Unlike our public sort method, it's relatively straightforward to use
+recursion now that we have the additional parameter <code>start</code>,
+as shown below. We'll test this method in the next section.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">/** Sorts strings destructively starting from item start. */</span><br><span class="line">private static void sort(String[] x, int start) &#123; </span><br><span class="line">   int smallestIndex = findSmallest(x);</span><br><span class="line">   swap(x, start, smallestIndex);</span><br><span class="line">   sort(x, start + 1);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Now that we have a helper method, we need to set up the correct
+original call. If we set the start to 0, we effectively sort the entire
+array.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/** Sorts strings destructively. */</span><br><span class="line">public static void sort(String[] x) &#123; </span><br><span class="line">   sort(x, 0);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>This approach is quite common when trying to use recursion on a data
+structure that is not inherently recursive, e.g. arrays.</p>
+<h3 id="debugging-and-completing-sort">Debugging and Completing
+Sort</h3>
+<p>Running our <code>testSort</code> method, we immediately run into a
+problem:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread &quot;main&quot; java.lang.ArrayIndexOutOfBoundsException: 4</span><br><span class="line">    at Sort.swap(Sort.java:16)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Using the Java debugger, we see that the problem is that somehow
+<code>start</code> is reaching the value 4. Stepping through the code
+carefully (see video above), we find that the issue is that we forgot to
+include a base case in our recursive <code>sort</code> method. Fixing
+this is straightforward:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/** Sorts strings destructively starting from item start. */</span><br><span class="line">private static void sort(String[] x, int start) &#123; </span><br><span class="line">   if (start == x.length) &#123;</span><br><span class="line">       return;</span><br><span class="line">   &#125;</span><br><span class="line">   int smallestIndex = findSmallest(x);</span><br><span class="line">   swap(x, start, smallestIndex);</span><br><span class="line">   sort(x, start + 1);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Rerunning this test again, we get another error:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread &quot;main&quot; arrays first differed at element [0]; </span><br><span class="line">   expected&lt;[an]&gt; bit was:&lt;[have]&gt;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Again, with judicious use of the IntelliJ debugger (see video), we
+can identify a line of code whose result does not match our
+expectations. Of note is the fact that I debugged the code at a higher
+level of abstraction than you might have otherwise, which I achieve by
+using <code>Step Over</code> more than <code>Step Into</code>. As
+discussed in lab 3, debugging at a higher level of abstraction saves you
+a lot of time and energy, by allowing you to compare the results of
+entire function calls with your expectation.</p>
+<p>Specifically, we find that when sorting the last 3 (out of 4) items,
+the <code>findSmallest</code> method is giving as the 0th item
+(<code>"an"</code>) rather than the 3rd item (<code>"egg"</code>) when
+called on the input <code>&#123;"an", "have", "i", "egg"&#125;</code>. Looking
+carefully at the definition of <code>findSmallest</code>, this behavior
+is not a surprise, since <code>findSmallest</code> looks at the entire
+array, not just the items starting from position <code>start</code>.
+This sort of design flaw is very common, and writing tests and using the
+debugger is a great way to go about fixing them.</p>
+<p>To fix our code, we revise <code>findSmallest</code> so that it takes
+a second parameter <code>start</code>, i.e.
+<code>findSmallest(String[] x, int start)</code>. In this way, we ensure
+that we're finding the smallest item only out of the last however many
+are still unsorted. The revision is as shown below:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public static int findSmallest(String[] x, int start) &#123;</span><br><span class="line">    int smallestIndex = start;</span><br><span class="line">    for (int i = start; i &lt; x.length; i += 1) &#123;</span><br><span class="line">        int cmp = x[i].compareTo(x[smallestIndex]);</span><br><span class="line">        if (cmp &lt; 0) &#123;</span><br><span class="line">            smallestIndex = i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return smallestIndex;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Given that we've made a significant change to one of our building
+blocks, i.e. <code>findSmallest</code>, we should ensure that our
+changes are correct.</p>
+<p>We first modify <code>testFindSmallest</code> so that it uses our new
+parameter, as shown below:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public static void testFindSmallest() &#123;</span><br><span class="line">    String[] input = &#123;&quot;i&quot;, &quot;have&quot;, &quot;an&quot;, &quot;egg&quot;&#125;;</span><br><span class="line">    int expected = 2;</span><br><span class="line"></span><br><span class="line">    int actual = Sort.findSmallest(input, 0);</span><br><span class="line">    org.junit.Assert.assertEquals(expected, actual);        </span><br><span class="line"></span><br><span class="line">    String[] input2 = &#123;&quot;there&quot;, &quot;are&quot;, &quot;many&quot;, &quot;pigs&quot;&#125;;</span><br><span class="line">    int expected2 = 2;</span><br><span class="line"></span><br><span class="line">    int actual2 = Sort.findSmallest(input2, 2);</span><br><span class="line">    org.junit.Assert.assertEquals(expected2, actual2);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>We then modify <code>TestSort.main</code> so that it runs
+<code>testFindSmallest</code>. This test passes, strongly suggesting
+that our revisions to <code>findSmallest</code> were correct.</p>
+<p>We next modify <code>Sort.sort</code> so that it uses the new
+<code>start</code> parameter in <code>findSmallest</code>:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/** Sorts strings destructively starting from item start. */</span><br><span class="line">private static void sort(String[] x, int start) &#123; </span><br><span class="line">   if (start == x.length) &#123;</span><br><span class="line">       return;</span><br><span class="line">   &#125;</span><br><span class="line">   int smallestIndex = findSmallest(x, start);</span><br><span class="line">   swap(x, start, smallestIndex);</span><br><span class="line">   sort(x, start + 1);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>We then modify <code>TestSort</code> so that it runs
+<code>TestSort.sort</code> and voila, the method works. We are done! You
+have now seen the "new way" from the beginning of this lecture, which
+we'll reflect on for the remainder of this chapter.</p>
+<h3 id="reflections-on-the-development-process">Reflections on the
+Development Process</h3>
+<p>When you're writing and debugging a program, you'll often find
+yourself switching between different contexts. Trying to hold too much
+in your brain at once is a recipe for disaster at worst, and slow
+progress at best.</p>
+<p>Having a set of automated tests helps reduce this cognitive load. For
+example, we were in the middle of writing <code>sort</code> when we
+realized there was a bug in <code>findSmallest</code>. We were able to
+switch contexts to consider <code>findSmallest</code> and establish that
+it was correct using our <code>testFindSmallest</code> method, and then
+switch back to <code>sort</code>. This is in sharp contrast to a more
+naive approach where you would simply be calling <code>sort</code> over
+and over and trying to figure out if the behavior of the overall
+algorithm suggests that the <code>findSmallest</code> method is
+correct.</p>
+<p>As an analogy, you could test that a parachute's ripcord works by
+getting in an airplane, taking off, jumping out, and pulling the ripcord
+and seeing if the parachute comes out. However, you could also just pull
+it on the ground and see what happens. So, too, is it unnecessary to use
+<code>sort</code> to try out <code>findSmallest</code>.</p>
+<p>As mentioned earlier in this chapter, tests also allow you to gain
+confidence in the basic pieces of your program, so that if something
+goes wrong, you have a better idea of where to start looking.</p>
+<p>Lastly, tests make it easier to refactor your code. Suppose you
+decide to rewrite <code>findSmallest</code> so that it is faster or more
+readable. We can safely do so by making our desired changes and seeing
+if the tests still work.</p>
+<h3 id="better-junit">Better JUnit</h3>
+<p>First, let's reflect on the new syntax we've seen today, namely
+<code>org.junit.Assert.assertEquals(expected, actual)</code>. This
+method (with a very long name) tests that <code>expected</code> and
+<code>actual</code> are equal, and if they are not, terminates the
+program with a verbose error message.</p>
+<p>JUnit has many more such methods other than
+<code>assertEquals</code>, such as <code>assertFalse</code>,
+<code>assertNotNull</code>, <code>fail</code>, and so forth, and they
+can be found in the official <a
+target="_blank" rel="noopener" href="http://junit.org/junit4/javadoc/4.12/org/junit/Assert.html">JUnit
+documentation</a>. JUnit also has many other complex features we will
+not describe or teach in 61B, though you're free to use them.</p>
+<p>While JUnit certainly improved things, our test code from before was
+a bit clumsy in several ways. In the remainder of this section, we'll
+talk about two major enhancements you can make so that your code is
+cleaner and easier to use. These enhancements will seem very mysterious
+from a syntax point of view, so just copy what we're doing for now, and
+we'll explain some (but not all) of it in a later chapter.</p>
+<p>The first enhancement is to use what is known as a "test annotation".
+To do this, we:</p>
+<ul>
+<li>Precede each method with <code>@org.junit.Test</code> (no
+semi-colon).</li>
+<li>Change each test method to be non-static.</li>
+<li>Remove our <code>main</code> method from the <code>TestSort</code>
+class.</li>
+</ul>
+<p>Once we've done these three things, if we re-run our code in JUnit
+using the Run-&gt;Run command, all of the tests execute without having
+to be manually invoked. This annotation based approach has several
+advantages:</p>
+<ul>
+<li>No need to manually invoke tests.</li>
+<li>All tests are run, not just the ones we specify.</li>
+<li>If one test fails, the others still run.</li>
+<li>A count of how many tests were run and how many passed is
+provided.</li>
+<li>The error messages on a test failure are much nicer looking.</li>
+<li>If all tests pass, we get a nice message and a green bar appears,
+rather than simply getting no output.</li>
+</ul>
+<p>The second enhancement will let us use shorter names for some of the
+very lengthy method names, as well as the annotation name. Specifically,
+we'll use what is known as an"import statement".</p>
+<p>We first add the import statement <code>import org.junit.Test;</code>
+to the top of our file. After doing this, we can replace all instances
+of <code>@org.junit.Test</code> with simply <code>@Test</code>.</p>
+<p>We then add our second import statement
+<code>import static org.junit.Assert.*</code>. After doing this,
+anywhere we can omit anywhere we had <code>org.junit.Assert.</code>. For
+example, we can replace
+<code>org.junit.Assert.assertEquals(expected2, actual2);</code> with
+simply <code>assertEquals(expected2, actual2);</code></p>
+<p>We will explain exactly why import statements are in a later lecture.
+For now, just use and enjoy.</p>
+<h3 id="testing-philosophy">Testing Philosophy</h3>
+<h5 id="correctness-tool-1-autograder">Correctness Tool #1:
+Autograder</h5>
+<p>Let's go back to ground zero. The autograder was likely the first
+correctness tool you were exposed to. Our autograder is in fact based on
+JUnit plus some extra custom libraries.</p>
+<p>There are some great benefits to autograders. Perhaps most
+importantly, it verifies correctness for you, saving you from the
+tedious and non-instructive task of writing all of your own tests. It
+also gamifies the assessment process by providing juicy points as an
+incentive to acheiving correctness. This can also backfire if students
+spend undue amounts of time chasing final points that won't actually
+affect their grade or learning.</p>
+<p>However, autograders don't exist in the real world and relying on
+autograders can build bad habits. One's workflow is hindered by
+sporadically uploading your code and waiting for the autograder to run.
+<em>Autograder Driven Development</em> is an extreme version of this in
+which students write all their code, fix their compiler errors, and then
+submit to the autograder. After getting back errors, students may try to
+make some changes, sprinkle in print statements, and submit again. And
+repeat. Ultimately, you are not in control of either your workflow or
+your code if you rely on an autograder.</p>
+<h5 id="correctness-tool-2-junit-tests">Correctness Tool #2: JUnit
+Tests</h5>
+<p>JUnit testing, as we have seen, unlocks a new world for you. Rather
+than relying on an autograder written by someone else, you write tests
+for each piece of your program. We refer to each of these pieces as a
+unit. This allows you to have confidence in each unit of your code - you
+can depend on them. This also helps decrease debugging time as you can
+isolate attention to one unit of code at a time (often a single method).
+Unit testing also forces you to clarify what each unit of code should be
+accomplishing.</p>
+<p>There are some downsides to unit tests, however. First, writing
+thorough tests takes time. It's easy to write incomplete unit tests
+which give a false confidence to your code. It's also difficult to write
+tests for units that depend on other units (consider the
+<code>addFirst</code> method in your <code>LinkedListDeque</code>).</p>
+<p><strong><em>Test-Driven Development (TDD)</em></strong></p>
+<p>TDD is a development process in which we write tests for code before
+writing the code itself. The steps are as follows:</p>
+<ol type="1">
+<li>Identify a new feature.</li>
+<li>Write a unit test for that feature.</li>
+<li>Run the test. It should fail.</li>
+<li>Write code that passes the test. Yay!</li>
+<li>Optional: refactor code to make it faster, cleaner, etc. Except now
+we have a reference to tests that should pass.</li>
+</ol>
+<p>Test-Driven Development is not required in this class and may not be
+your style but unit testing in general is most definitely a good
+idea.</p>
+<h5 id="correctness-tool-3-integration-testing">Correctness Tool #3:
+Integration Testing</h5>
+<p>Unit tests are great but we should also make sure these units work
+properly together (<a
+target="_blank" rel="noopener" href="https://media.giphy.com/media/3o7rbPDRHIHwbmcOBy/giphy.gif">unlike
+this meme</a>). Integration testing verifies that components interact
+properly together. JUnit can in fact be used for this. You can imagine
+unit testing as the most nitty gritty, with integration testing a level
+of abstraction above this.</p>
+<p>The challenge with integration testing is that it is tedious to do
+manually yet challenging to automate. And at a high level of
+abstraction, it's easy to miss subtle or rare errors.</p>
+<p>As a summary, you should <strong>definitely write tests but only when
+they might be useful!</strong> Taking inspiration from TDD, writing your
+tests before writing code can also be very helpful in some cases.</p>
+<h3 id="whats-next">What's next?</h3>
+<ul>
+<li><a
+target="_blank" rel="noopener" href="https://sp19.datastructur.es/materials/proj/proj1b/proj1b">Project
+1b</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+            <!-- -->
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"><i class="fa fa-tag"></i> java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/09/08/2_4%20Arrays%20%20%20%20%20results%20matching%20No%20results%20matching/" rel="prev" title="2.4 Arrays results matching">
+      <i class="fa fa-chevron-left"></i> 2.4 Arrays results matching
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/09/15/2_5%20The%20AList%20%20%20%20%20results%20matching%20No%20results%20matching/" rel="next" title="2_5 The AList     results matching No results matching">
+      2_5 The AList     results matching No results matching <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#section"><span class="nav-number">1.</span> <span class="nav-text">3_1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#testing-and-selection-sort"><span class="nav-number">1.1.</span> <span class="nav-text">Testing and Selection Sort</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#a-new-way"><span class="nav-number">1.1.1.</span> <span class="nav-text">A New Way</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ad-hoc-testing"><span class="nav-number">1.1.2.</span> <span class="nav-text">Ad Hoc Testing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#junit-testing"><span class="nav-number">1.1.3.</span> <span class="nav-text">JUnit Testing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#selection-sort"><span class="nav-number">1.1.4.</span> <span class="nav-text">Selection Sort</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#findsmallest"><span class="nav-number">1.1.5.</span> <span class="nav-text">findSmallest</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#swap"><span class="nav-number">1.1.6.</span> <span class="nav-text">Swap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#revising-findsmallest"><span class="nav-number">1.1.7.</span> <span class="nav-text">Revising findSmallest</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#recursive-helper-methods"><span class="nav-number">1.1.8.</span> <span class="nav-text">Recursive Helper Methods</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#debugging-and-completing-sort"><span class="nav-number">1.1.9.</span> <span class="nav-text">Debugging and Completing
+Sort</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reflections-on-the-development-process"><span class="nav-number">1.1.10.</span> <span class="nav-text">Reflections on the
+Development Process</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#better-junit"><span class="nav-number">1.1.11.</span> <span class="nav-text">Better JUnit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#testing-philosophy"><span class="nav-number">1.1.12.</span> <span class="nav-text">Testing Philosophy</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#correctness-tool-1-autograder"><span class="nav-number">1.1.12.0.1.</span> <span class="nav-text">Correctness Tool #1:
+Autograder</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#correctness-tool-2-junit-tests"><span class="nav-number">1.1.12.0.2.</span> <span class="nav-text">Correctness Tool #2: JUnit
+Tests</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#correctness-tool-3-integration-testing"><span class="nav-number">1.1.12.0.3.</span> <span class="nav-text">Correctness Tool #3:
+Integration Testing</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#whats-next"><span class="nav-number">1.1.13.</span> <span class="nav-text">What&#39;s next?</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="XuandYu000"
+      src="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
+  <p class="site-author-name" itemprop="name">XuandYu000</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">64</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/XuandYu000" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;XuandYu000" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+     
+    <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+    <div class="widget-wrap">
+        <h3 class="widget-title">Tag Cloud</h3>
+        <div id="myCanvasContainer" class="widget tagcloud">
+            <canvas width="250" height="250" id="resCanvas" style="width:100%">
+                <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manacher/" rel="tag">Manacher</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bits/" rel="tag">bits</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/contest/" rel="tag">contest</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dp/" rel="tag">dp</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/exkmp/" rel="tag">exkmp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kmp/" rel="tag">kmp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/programming/" rel="tag">programming</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/py/" rel="tag">py</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sort/" rel="tag">sort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%89%E5%88%86/" rel="tag">三分</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%8C%E5%88%86/" rel="tag">二分</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%80%8D%E5%A2%9E/" rel="tag">倍增</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E6%B2%BB/" rel="tag">分治</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA/" rel="tag">博弈论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B3%E9%9D%A2%E4%B8%B4%E8%BF%91%E7%82%B9%E5%AF%B9/" rel="tag">平面临近点对</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E9%80%9F%E4%B9%98/" rel="tag">快速乘</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E9%80%9F%E5%B9%82/" rel="tag">快速幂</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/" rel="tag">滑动窗口</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A9%E9%98%B5%E4%B9%98/" rel="tag">矩阵乘</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A6%BB%E6%95%A3%E5%8C%96-%E5%89%8D%E7%BC%80%E5%92%8C-%E5%B7%AE%E5%88%86/" rel="tag">离散化,前缀和,差分</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag">线段树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/" rel="tag">组合数学</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E6%96%AF%E6%B6%88%E5%85%83/" rel="tag">高斯消元</a><span class="tag-list-count">1</span></li></ul>
+            </canvas>
+        </div>
+    </div>
+     
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XuandYu000</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+-->
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: '55px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+    </div>
+  <!--
+  
+  -->
+</body>
+</html>
+<!--动态title-->
+<script type="text/javascript" src="/js/src/activetitle.js"></script>
+
+

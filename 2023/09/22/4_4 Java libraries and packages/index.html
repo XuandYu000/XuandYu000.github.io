@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <script src="/live2d-widget/autoload.js"></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/sailboat.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/sailboat.png">
+  <link rel="mask-icon" href="/images/sailboat.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="4_4 Java libraries and packages Abstract Data Types (ADTS) Despite not talking about them explicitly, we have actually seen a few Abstract Data types already in class! Two examples are List61B an">
+<meta property="og:type" content="article">
+<meta property="og:title" content="4_4 Java libraries and packages">
+<meta property="og:url" content="http://example.com/2023/09/22/4_4%20Java%20libraries%20and%20packages/index.html">
+<meta property="og:site_name" content="viewoverlook">
+<meta property="og:description" content="4_4 Java libraries and packages Abstract Data Types (ADTS) Despite not talking about them explicitly, we have actually seen a few Abstract Data types already in class! Two examples are List61B an">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-22T11:37:52.133Z">
+<meta property="article:modified_time" content="2023-09-22T11:35:32.153Z">
+<meta property="article:author" content="XuandYu000">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2023/09/22/4_4%20Java%20libraries%20and%20packages/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>4_4 Java libraries and packages | viewoverlook</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">viewoverlook</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/XuandYu000" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/22/4_4%20Java%20libraries%20and%20packages/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
+      <meta itemprop="name" content="XuandYu000">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="viewoverlook">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          4_4 Java libraries and packages
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-09-22 19:37:52 / 修改时间：19:35:32" itemprop="dateCreated datePublished" datetime="2023-09-22T19:37:52+08:00">2023-09-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/cs61b/" itemprop="url" rel="index"><span itemprop="name">cs61b</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/cs61b/csdiy/" itemprop="url" rel="index"><span itemprop="name">csdiy</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="java-libraries-and-packages">4_4 Java libraries and
+packages</h1>
+<h2 id="abstract-data-types-adts">Abstract Data Types (ADTS)</h2>
+<p>Despite not talking about them explicitly, we have actually seen a
+few Abstract Data types already in class!</p>
+<p>Two examples are List61B and Deque. Let's hone in on Deque.</p>
+<p><img
+src="https://joshhug.gitbooks.io/hug61b/content/assets/deque.png" /></p>
+<p>We have this interface <code>deque</code> that both ArrayDeque and
+LinkedListDeque implement. What is the relationship between Deque and
+its implementing classes? Well, deque simply provides a list of methods
+(behaviors):</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public void addFirst(T item);</span><br><span class="line">public void addLast(T item);</span><br><span class="line">public boolean isEmpty();</span><br><span class="line">public int size();</span><br><span class="line">public void printDeque();</span><br><span class="line">public T removeFirst();</span><br><span class="line">public T removeLast();</span><br><span class="line">public T get(int index);</span><br></pre></td></tr></table></figure>
+<p>These methods are actually <strong>implemented</strong> by ArrayDeque
+and LinkedListDeque.</p>
+<p>In Java, Deque is called an interface. Conceptually, we call deque an
+<strong>Abstract data type</strong>. Deque only comes with behaviors,
+not any concrete ways to exhibit those behaviors. In this way, it is
+abstract.</p>
+<span id="more"></span>
+<h2 id="java-libraries">Java Libraries</h2>
+<p>Java has certain built-in Abstract data types that you can use. These
+are packaged in Java Libraries.</p>
+<p>The three most important ADTs come in the java.util library:</p>
+<ul>
+<li><a
+target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html">List</a>:
+an ordered collection of items
+<ul>
+<li>A popular implementation is the <a
+target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html">ArrayList</a></li>
+</ul></li>
+<li><a
+target="_blank" rel="noopener" href="https://docs.oracle.com/javase/7/docs/api/java/util/Set.html">Set</a>:
+an unordered collection of strictly unique items (no repeats)
+<ul>
+<li>A popular implementation is the <a
+target="_blank" rel="noopener" href="https://docs.oracle.com/javase/7/docs/api/java/util/HashSet.html">HashSet</a></li>
+</ul></li>
+<li><a
+target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html">Map</a>:
+a collection of key/value pairs. You access the value via the key.
+<ul>
+<li>A popular implementation is the <a
+target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html">HashMap</a></li>
+</ul></li>
+</ul>
+<p>Finish the exercises below by using the above three ADT's. Reading
+the documentations linked above will help immensely.</p>
+<p><strong>Exercise 4.4.1</strong> Write a method <code>getWords</code>
+that takes in a <code>String inputFileName</code> and puts every word
+from the input file into a list. Recall how we read words from a file in
+proj0. _*Hint_: use <code>In</code></p>
+<p><strong>Exercise 4.4.2</strong> Write a method
+<code>countUniqueWords</code> that takes in a
+<code>List&lt;String&gt;</code> and counts how many
+<strong>unique</strong> words there are in the file.</p>
+<p>We used a list for the first exercise and set for the second.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public static List&lt;String&gt; getWords(String inputFileName) &#123;</span><br><span class="line">    List&lt;String&gt; lst = new ArrayList&lt;String&gt;();</span><br><span class="line">    In in = new In();</span><br><span class="line">    while (!in.isEmpty()) &#123;</span><br><span class="line">        lst.add(in.readString()); //optionally, define a cleanString() method that cleans the string first. </span><br><span class="line">    &#125;</span><br><span class="line">    return lst;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static int countUniqueWords(List&lt;String&gt; words) &#123;</span><br><span class="line">    Set&lt;String&gt; ss = new HashSet&lt;&gt;();</span><br><span class="line">    for (String s : words) &#123;</span><br><span class="line">           ss.add(s);        </span><br><span class="line">    &#125;</span><br><span class="line">    return ss.size();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>Exercise 4.4.3</strong> Write a method
+<code>collectWordCount</code> that takes in a
+<code>List&lt;String&gt; targets</code> and a
+<code>List&lt;String&gt; words</code> and finds the number of times each
+target word appears in the word list.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public static Map&lt;String, Integer&gt; collectWordCount(List&lt;String&gt; words) &#123;</span><br><span class="line">    Map&lt;String, Integer&gt; counts = new HashMap&lt;String, Integer&gt;();</span><br><span class="line">    for (String t: target) &#123;</span><br><span class="line">        counts.put(s, 0);</span><br><span class="line">    &#125;</span><br><span class="line">    for (String s: words) &#123;</span><br><span class="line">        if (counts.containsKey(s)) &#123;</span><br><span class="line">            counts.put(word, counts.get(s)+1);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return counts;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>We used a map because it makes an association between two things. In
+our case, we need an association between word and number.</p>
+<p>These three ADT's all extend from the Collection Interface. The
+collection interface is super vague. Java says collections"represent a
+group of objects, known as its elements".</p>
+<p><img
+src="https://joshhug.gitbooks.io/hug61b/content/assets/collection_hierarchy.png" /></p>
+<p>In the diagram above, the white boxes are interfaces. The blue boxes
+are concrete classes.</p>
+<h2 id="java-vs-python">Java vs Python</h2>
+<p>Java is pretty verbose. The java code below looks a lot more
+cumbersome than the corresponding python code. Java非常繁琐.
+下面的Java代码和python比起来看起来相当繁琐.</p>
+<p><img
+src="https://joshhug.gitbooks.io/hug61b/content/assets/java.png" /></p>
+<p><img
+src="https://joshhug.gitbooks.io/hug61b/content/assets/python.png" /></p>
+<p>But, Java has its upsides too! It gives you a lot of choices and
+freedom. For example, python only has one dictionary type which is
+declared using curly brackets {}. With Java, if you want to use an ADT
+like a Map, you can choose what kind of map you want: a Hashmap? a
+Treemap? etc. 但是Java也有自己的好处! 它给你选择的自由. 比如,
+python只有一种字典, 这由花括号<code>&#123;&#125;</code>生命. 在Java中,
+如果你想使用ADT,
+你可以从<code>Hashmap</code>和<code>Treemap</code>中选择你想要的类型.</p>
+<p>We like Java in 61B! Here are some reasons why:</p>
+<ul>
+<li><p>Arguably, takes less time to write programs(减少写程序的时间),
+due to features like:</p>
+<ul>
+<li>Static types (provides type checking and helps guide
+programmer).静态类型(提供类型检查并且帮助程序员理解)</li>
+<li>Bias towards interface inheritance leading to cleaner subtype
+polymorphism.(通过接口继承来实现简洁的子类型多态)</li>
+<li>Access control modifiers make abstraction barriers more
+solid.(访问控制修饰符使抽象障碍更加坚固。)</li>
+</ul></li>
+<li><p>More efficient code(更有效率的代码), due to features like:</p>
+<ul>
+<li>Ability to have more control over engineering tradeoffs.</li>
+<li>Single valued arrays lead to better performance.</li>
+</ul></li>
+<li><p>Basic data structures more closely resemble underlying
+hardware:</p>
+<ul>
+<li>Would be weird to do ArrayDeque in Python, since there is no need
+for array resizing. However, in hardware (see 61C), variable length
+arrays don’t exist.</li>
+</ul></li>
+</ul>
+<h2 id="abstract-classes">Abstract classes</h2>
+<p>We've seen interfaces that can do a lot of cool things! They allow
+you to take advantage of interface inheritance and implementation
+inheritance. As a refresher, these are the qualities of interfaces:
+我们已经看到接口可以做很多很酷的事!
+你会在接口继承和实现继承中体会实际的便利. 作为一个初学者,
+这里有些接口的性质你需要知道:</p>
+<ul>
+<li>All methods must be public.(所有的方法必须是公共的)</li>
+<li>All variables must be public static
+final.(所有的变量必须是常量)</li>
+<li>Cannot be instantiated(不能被实例化)</li>
+<li>All methods are by default abstract unless specified to be
+<code>default</code>(所有的方法都默认是抽象类型除非被<code>default</code>指明)</li>
+<li>Can implement more than one interface per
+class(每个类可以实现多个接口)</li>
+</ul>
+<p>We will now introduce a new class that lies somewhere in between
+interfaces and concrete classes: the abstract class. Below are the
+characteristics of abstract classes:
+我们将会介绍一种介于接口和实际类的新的类: 抽象类. 下面是抽象类的特征</p>
+<ul>
+<li>Methods can be public or private(方法可以是公共或私有的)</li>
+<li>Can have any types of variables(可以有任意类型的变量)</li>
+<li>Cannot be instantiated(不能被实例化)</li>
+<li>Methods are by default concrete unless specified to be
+<code>abstract</code>(方法默认是明确的除非用<code>abstract</code>指明)</li>
+<li>Can only implement one per class(每个类只能实现一个抽象类)</li>
+</ul>
+<p>Basically, abstract classes can do everything interfaces can do and
+more. 可以说, 抽象类型可以做任何接口可以做的事甚至更多</p>
+<p><strong>When in doubt, try to use interfaces</strong> in order to
+reduce complexity. 当陷入疑惑时, 尝试使用接口,
+这样做是为了减小复杂性</p>
+<h2 id="packages">Packages</h2>
+<p>Package names give <strong>give a canonical name for
+everything</strong>. Canonical means a <em>unique representation</em>
+for a thing. 包名给所有事物命名.
+典范意味着对一件事都有一个独特的名字.</p>
+<p>Why? Well, in Java, we could have multiple classes with the same
+name. We need a way to differentiate between these different classes. In
+industry, this differentiation happens by appending the class to a
+website address (backwards) like below:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">But... this means we have to type out that entire name every time we want to instantiate something of that class.</span><br><span class="line"></span><br><span class="line">```ug.joshh.animal.Dog d = new ug.joshh.animal.Dog()</span><br></pre></td></tr></table></figure>
+<p>This is annoying. We can remedy this by importing the package.</p>
+<p><code>import ug.joshh.animal</code></p>
+<p>Now we can use dogs as we please.</p>
+<p>This is just a brief preview of packages. We will get to more of this
+during later weeks of the course.</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+            <!-- -->
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"><i class="fa fa-tag"></i> java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/09/22/4_3%20Subtype%20Polymorphism%20vs_%20HOFs/" rel="prev" title="4_3 Subtype Polymorphism vs_ HOFs">
+      <i class="fa fa-chevron-left"></i> 4_3 Subtype Polymorphism vs_ HOFs
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/09/22/128%20!=%20128%EF%BC%9F%E5%8E%9F%E6%9D%A5%E6%AF%94%E8%BE%83%E7%9A%84%E4%B8%8D%E6%98%AF%E6%95%B0%E5%80%BC%EF%BC%81%EF%BC%81/" rel="next" title="CS61B 学习记录：128！_128？原来比较的不是数值！！">
+      CS61B 学习记录：128！_128？原来比较的不是数值！！ <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#java-libraries-and-packages"><span class="nav-number">1.</span> <span class="nav-text">4_4 Java libraries and
+packages</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#abstract-data-types-adts"><span class="nav-number">1.1.</span> <span class="nav-text">Abstract Data Types (ADTS)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java-libraries"><span class="nav-number">1.2.</span> <span class="nav-text">Java Libraries</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java-vs-python"><span class="nav-number">1.3.</span> <span class="nav-text">Java vs Python</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#abstract-classes"><span class="nav-number">1.4.</span> <span class="nav-text">Abstract classes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#packages"><span class="nav-number">1.5.</span> <span class="nav-text">Packages</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="XuandYu000"
+      src="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
+  <p class="site-author-name" itemprop="name">XuandYu000</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">64</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/XuandYu000" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;XuandYu000" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+     
+    <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+    <div class="widget-wrap">
+        <h3 class="widget-title">Tag Cloud</h3>
+        <div id="myCanvasContainer" class="widget tagcloud">
+            <canvas width="250" height="250" id="resCanvas" style="width:100%">
+                <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manacher/" rel="tag">Manacher</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bits/" rel="tag">bits</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/contest/" rel="tag">contest</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dp/" rel="tag">dp</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/exkmp/" rel="tag">exkmp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kmp/" rel="tag">kmp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/programming/" rel="tag">programming</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/py/" rel="tag">py</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sort/" rel="tag">sort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%89%E5%88%86/" rel="tag">三分</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%8C%E5%88%86/" rel="tag">二分</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%80%8D%E5%A2%9E/" rel="tag">倍增</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E6%B2%BB/" rel="tag">分治</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA/" rel="tag">博弈论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B3%E9%9D%A2%E4%B8%B4%E8%BF%91%E7%82%B9%E5%AF%B9/" rel="tag">平面临近点对</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E9%80%9F%E4%B9%98/" rel="tag">快速乘</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E9%80%9F%E5%B9%82/" rel="tag">快速幂</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/" rel="tag">滑动窗口</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A9%E9%98%B5%E4%B9%98/" rel="tag">矩阵乘</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A6%BB%E6%95%A3%E5%8C%96-%E5%89%8D%E7%BC%80%E5%92%8C-%E5%B7%AE%E5%88%86/" rel="tag">离散化,前缀和,差分</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag">线段树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/" rel="tag">组合数学</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E6%96%AF%E6%B6%88%E5%85%83/" rel="tag">高斯消元</a><span class="tag-list-count">1</span></li></ul>
+            </canvas>
+        </div>
+    </div>
+     
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XuandYu000</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+-->
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: '55px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+    </div>
+  <!--
+  
+  -->
+</body>
+</html>
+<!--动态title-->
+<script type="text/javascript" src="/js/src/activetitle.js"></script>
+
+
