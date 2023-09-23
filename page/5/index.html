@@ -372,94 +372,6 @@ returned.</p>
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/Higher%20Order%20Funcrtions/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
-      <meta itemprop="name" content="XuandYu000">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="viewoverlook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/07/02/Higher%20Order%20Funcrtions/" class="post-title-link" itemprop="url">Higher Order Funcrtions</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:12:33" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/csdiy/" itemprop="url" rel="index"><span itemprop="name">csdiy</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/csdiy/cs61A/" itemprop="url" rel="index"><span itemprop="name">cs61A</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="higher-order-funcrtions">Higher Order Funcrtions</h1>
-<p>让我们做一个功能组合 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">combine_funcs</span>(<span class="params">op</span>):</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;&quot;&quot;combine funcs(OP)(f,g)(x)=OP(f(x),g(x))&quot;&quot;&quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>	<span class="keyword">def</span> <span class="title function_">combine</span>(<span class="params">f,g</span>):</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>		<span class="keyword">def</span> <span class="title function_">val</span>(<span class="params">x</span>):</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>			<span class="keyword">return</span> op(f(x),g(x))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>		<span class="keyword">return</span> val</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>	<span class="keyword">return</span> combined</span><br></pre></td></tr></table></figure></p>
-<p>功能实例</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">combine_func</span>(<span class="params">op</span>):</span><br><span class="line">	<span class="keyword">def</span> <span class="title function_">combined</span>(<span class="params">f,g</span>):</span><br><span class="line">		<span class="keyword">def</span> <span class="title function_">val</span>(<span class="params">x</span>):</span><br><span class="line">			<span class="keyword">return</span> op(f(x),g(x))</span><br><span class="line">		<span class="keyword">return</span> val</span><br><span class="line">	<span class="keyword">return</span> combined</span><br><span class="line"><span class="keyword">from</span> operator <span class="keyword">import</span> add</span><br><span class="line">add_func=combine_func(add)</span><br><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> sin,cos,pi</span><br><span class="line">h=add_func(sin,cos)</span><br><span class="line">h(pi/<span class="number">4</span>)</span><br></pre></td></tr></table></figure>
-<p>为什么要返回val和combined，而不是val(x),combined(f,g)?
-combined直至<code>h=add_func(sin,cos)</code>之前都没有赋值，这里的<code>return combined</code>是返回combined函数本身而不是调用后的结果，同样的在没对val赋值时返回的也只是函数val</p>
-<h4 id="challenge-conditional-function">challenge: Conditional
-Function</h4>
-<p>是否可以写一个python函数<code>if_func</code>:
-<code>if_func(x/1,x&gt;0,0)</code>
-使得返回值和条件语句<code>1/x if x&gt;0 else 0</code> -
-答案是不行的，函数调用时会计算操作数也就是已经计算好了<code>1/x</code></p>
-<p>但是我们可以这样写 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">define if_func(then_expr,condition,else_expr):</span><br><span class="line">	<span class="keyword">return</span> then_expr() <span class="keyword">if</span> condition <span class="keyword">else</span> else_expr()</span><br></pre></td></tr></table></figure></p>
-<p>之后这样调用: <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if_func(<span class="keyword">lambda</span>: <span class="number">1</span>/x,x&gt;<span class="number">0</span>,<span class="keyword">lambda</span>:<span class="number">0</span>)</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">到目前为止，每当我们想要定义一个新函数时，都需要给它取一个名字。但是对于其他类型的表达式，我们不需要将中间值与名称相关联。也就是说，我们可以计算 `a * b + c * d` 而不必命名子表达式 `a*b` 或 `c*d` 或完整的表达式。在 Python 中，我们可以使用 lambda 表达式临时创建函数，这些表达式会计算为未命名的函数。一个 lambda 表达式的计算结果是一个函数，它仅有一个返回表达式作为主体。不允许使用赋值和控制语句。</span><br></pre></td></tr></table></figure>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">compose1</span>(<span class="params">f,g</span>):</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">return</span> <span class="keyword">lambda</span> x: f(g(x))</span><br></pre></td></tr></table></figure>
-<p>可以构造相应的句子理解: <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">lambda</span>           x       :           f(g(x))</span><br><span class="line">A function that  takes x <span class="keyword">and</span> returns f(g(x))</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/Intro/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -539,6 +451,94 @@ Function</h4>
 <p>表达式描绘计算过程并且执行得出计算结果
 事实证明在诸多表达式中函数可以表示出其他代数表达式，这是计算机所需要的</p>
 <p>推荐教材: http://www.composingprograms.com/</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/Higher%20Order%20Funcrtions/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
+      <meta itemprop="name" content="XuandYu000">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="viewoverlook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/07/02/Higher%20Order%20Funcrtions/" class="post-title-link" itemprop="url">Higher Order Funcrtions</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:12:33" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/csdiy/" itemprop="url" rel="index"><span itemprop="name">csdiy</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/csdiy/cs61A/" itemprop="url" rel="index"><span itemprop="name">cs61A</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="higher-order-funcrtions">Higher Order Funcrtions</h1>
+<p>让我们做一个功能组合 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">combine_funcs</span>(<span class="params">op</span>):</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;&quot;&quot;combine funcs(OP)(f,g)(x)=OP(f(x),g(x))&quot;&quot;&quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>	<span class="keyword">def</span> <span class="title function_">combine</span>(<span class="params">f,g</span>):</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>		<span class="keyword">def</span> <span class="title function_">val</span>(<span class="params">x</span>):</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>			<span class="keyword">return</span> op(f(x),g(x))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>		<span class="keyword">return</span> val</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>	<span class="keyword">return</span> combined</span><br></pre></td></tr></table></figure></p>
+<p>功能实例</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">combine_func</span>(<span class="params">op</span>):</span><br><span class="line">	<span class="keyword">def</span> <span class="title function_">combined</span>(<span class="params">f,g</span>):</span><br><span class="line">		<span class="keyword">def</span> <span class="title function_">val</span>(<span class="params">x</span>):</span><br><span class="line">			<span class="keyword">return</span> op(f(x),g(x))</span><br><span class="line">		<span class="keyword">return</span> val</span><br><span class="line">	<span class="keyword">return</span> combined</span><br><span class="line"><span class="keyword">from</span> operator <span class="keyword">import</span> add</span><br><span class="line">add_func=combine_func(add)</span><br><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> sin,cos,pi</span><br><span class="line">h=add_func(sin,cos)</span><br><span class="line">h(pi/<span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+<p>为什么要返回val和combined，而不是val(x),combined(f,g)?
+combined直至<code>h=add_func(sin,cos)</code>之前都没有赋值，这里的<code>return combined</code>是返回combined函数本身而不是调用后的结果，同样的在没对val赋值时返回的也只是函数val</p>
+<h4 id="challenge-conditional-function">challenge: Conditional
+Function</h4>
+<p>是否可以写一个python函数<code>if_func</code>:
+<code>if_func(x/1,x&gt;0,0)</code>
+使得返回值和条件语句<code>1/x if x&gt;0 else 0</code> -
+答案是不行的，函数调用时会计算操作数也就是已经计算好了<code>1/x</code></p>
+<p>但是我们可以这样写 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">define if_func(then_expr,condition,else_expr):</span><br><span class="line">	<span class="keyword">return</span> then_expr() <span class="keyword">if</span> condition <span class="keyword">else</span> else_expr()</span><br></pre></td></tr></table></figure></p>
+<p>之后这样调用: <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if_func(<span class="keyword">lambda</span>: <span class="number">1</span>/x,x&gt;<span class="number">0</span>,<span class="keyword">lambda</span>:<span class="number">0</span>)</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">到目前为止，每当我们想要定义一个新函数时，都需要给它取一个名字。但是对于其他类型的表达式，我们不需要将中间值与名称相关联。也就是说，我们可以计算 `a * b + c * d` 而不必命名子表达式 `a*b` 或 `c*d` 或完整的表达式。在 Python 中，我们可以使用 lambda 表达式临时创建函数，这些表达式会计算为未命名的函数。一个 lambda 表达式的计算结果是一个函数，它仅有一个返回表达式作为主体。不允许使用赋值和控制语句。</span><br></pre></td></tr></table></figure>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">def</span> <span class="title function_">compose1</span>(<span class="params">f,g</span>):</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">return</span> <span class="keyword">lambda</span> x: f(g(x))</span><br></pre></td></tr></table></figure>
+<p>可以构造相应的句子理解: <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">lambda</span>           x       :           f(g(x))</span><br><span class="line">A function that  takes x <span class="keyword">and</span> returns f(g(x))</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -731,200 +731,6 @@ files by recency?
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/Lecture%203%20vim/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
-      <meta itemprop="name" content="XuandYu000">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="viewoverlook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/07/02/Lecture%203%20vim/" class="post-title-link" itemprop="url">Lecture 3 vim</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:07:09" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/csdiy/" itemprop="url" rel="index"><span itemprop="name">csdiy</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/csdiy/missing-semester/" itemprop="url" rel="index"><span itemprop="name">missing semester</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="lecture-3-vim">Lecture 3 vim</h1>
-<ol type="1">
-<li><p>完成 vimtutor。 备注： 它在一个 80x24（80 列，24 行）
-终端窗口看起来最好。 直接执行 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vimtutor</span><br></pre></td></tr></table></figure></p></li>
-<li><p>下载我们的vimrc，然后把它保存到 ~/.vimrc。 通读这个注释详细的文件
-（用 Vim!）， 然后观察 Vim
-在这个新的设置下看起来和使用起来有哪些细微的区别。
-下载后他禁用了上下左右键使用hjkl代替，挺反人类的但是用习惯还可以</p></li>
-<li><p>安装和配置一个插件： ctrlp.vim</p>
-<ul>
-<li>这里建议使用vim-plug，在.vimrc添加：Plug ‘插件名称’ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">call plug#begin(&#x27;~/.vim/plugged&#x27;)</span><br><span class="line"> Plug &#x27;vim-airline/vim-airline&#x27;</span><br><span class="line"> call plug#end()</span><br></pre></td></tr></table></figure>
-之后重新打开vim，执行 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:PlugInstall</span><br></pre></td></tr></table></figure> *删除插件 删除插件，只需要将写在
-.vimrc 配置文件内的插件删除，重启 vim 并执行命令 :PlugClean</li>
-</ul>
-<p>练习使用 Vim, 在你自己的机器上重做 演示。</p></li>
-<li><p>下个月用 Vim 完成所有的文件编辑。每当不够高效的时候，或者你感觉
-“一定有一个更好的方式”时，
-尝试求助搜索引擎，很有可能有一个更好的方式。如果你遇到难题，可以来我们的答疑时间或者给我们发邮件。</p></li>
-<li><p>在其他工具中设置 Vim 快捷键 （见上面的操作指南）。</p></li>
-<li><p>进一步自定义你的 ~/.vimrc 和安装更多插件。</p></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/Lecture%204%20%E6%95%B0%E6%8D%AE%E6%95%B4%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
-      <meta itemprop="name" content="XuandYu000">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="viewoverlook">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/07/02/Lecture%204%20%E6%95%B0%E6%8D%AE%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">Lecture 4 数据整理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:06:51" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/csdiy/" itemprop="url" rel="index"><span itemprop="name">csdiy</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/csdiy/missing-semester/" itemprop="url" rel="index"><span itemprop="name">missing semester</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="lecture-4-数据整理">Lecture 4 数据整理</h1>
-<h3 id="练习">练习</h3>
-<ol type="1">
-<li>学习一下这篇简短的 <a
-target="_blank" rel="noopener" href="https://regexone.com/">交互式正则表达式教程</a>.</li>
-<li>统计words文件 (/usr/share/dict/words) 中包含至少三个a 且不以's
-结尾的单词个数。这些单词中，出现频率前三的末尾两个字母是什么？ sed的
-y命令，或者 tr
-程序也许可以帮你解决大小写的问题。共存在多少种词尾两字母组合？还有一个很
-有挑战性的问题：哪个组合从未出现过？ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat /usr/share/dict/words | tr &quot;[:upper:]&quot; &quot;[:lower:]&quot; | grep -E &quot;^([^a]*a)&#123;3&#125;.*$&quot; | grep -v &quot;&#x27;s$&quot; | wc -l </span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; cat /usr/share/dict/words 打开这个文件</span><br><span class="line">&gt; tr &quot;[:upper:]&quot; &quot;[:lower:]&quot; tr命令将所有大写都转化为小写</span><br><span class="line">&gt; grep -E &quot;^([^a]*a)&#123;3&#125;.*$&quot; -E 使用正则表达式，([^a]*a)&#123;3&#125; 匹配零个或多个非&quot;a&quot;字符，后跟一个&quot;a&quot;字符匹配3次，之后匹配任意字符</span><br><span class="line">&gt; grep -v &quot;&#x27;s$&quot; &quot;&#x27;s$&quot; 匹配以&#x27;s结尾的字符，grep -v 不显示匹配字符</span><br><span class="line">&gt; wc -l 这个命令计算输出的行数，输出结果为符合要求的单词数。</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /usr/share/dict/words | tr &quot;[:upper:]&quot; &quot;[:lower:]&quot; | grep -E &quot;^([^a]*a)&#123;3&#125;.*$&quot; | grep -v &quot;&#x27;s$&quot; | sed -E &quot;s/.*([a-z]&#123;2&#125;)$/\1/&quot; | sort | uniq -c | sort | tail -n3</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -E &quot;s/.*([a-z]&#123;2&#125;)$/\1/&quot; &quot;s/&quot;进入替换模式 .*匹配任意字符 ([a-z]&#123;2&#125;)$ 结尾处捕获两字符 &quot;\1&quot;使用捕获的字符替换</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">for i in &#123;a..z&#125;;do</span><br><span class="line"> for j in &#123;a..z&#125;;do</span><br><span class="line">    echo  &quot;$i$j&quot;</span><br><span class="line"> done</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./all.sh &gt; all.txt</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /usr/share/dict/words | tr &quot;[:upper:]&quot; &quot;[:lower:]&quot; | grep -E &quot;^([^a]*a)&#123;3&#125;.*$&quot; | grep -v &quot;&#x27;s$&quot; | sed -E &quot;s/.*([a-z]&#123;2&#125;)$/\1/&quot; | sort | uniq &gt; occurance.txt</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diff --unchanged-group-format=&#x27;&#x27; &lt;(cat occurance.txt) &lt;(cat all.txt) | wc -l</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">diff --unchanged-group-format=&#x27;&#x27; </span><br><span class="line">将两个文件中相同的部分设置为空字符串，剩下的就是不相同的部分，之后输出行数即可</span><br></pre></td></tr></table></figure>
-<ol start="3" type="1">
-<li>进行原地替换听上去很有诱惑力，例如： sed s/REGEX/SUBSTITUTION/
-input.txt &gt;
-input.txt。但是这并不是一个明智的做法，为什么呢？还是说只有 sed是这样的?
-查看 man sed 来完成这个问题</li>
-</ol>
-<ul>
-<li>sed s/REGEX/SUBSTITUTION/ input.txt &gt; input.txt 表达式中后一个
-input.txt会首先被清空，而且是发生在前的。所以前面一个input.txt在还没有被
-sed 处理时已经为空了。在使用正则处理文件前最好是首先备份文件。
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i.bak s/REGEX/SUBSTITION/ input.txt</span><br></pre></td></tr></table></figure> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这段命令如果数据没有备份会自动创建.bak备份文件，直接对文件进行修改</span><br></pre></td></tr></table></figure></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/Lecture%205%20%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%8E%AF%E5%A2%83/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1039,6 +845,98 @@ shell 脚本对每个文件使用 ln
 密钥对。如果不存在，请使用ssh-keygen -o -a 100 -t
 ed25519来创建一个。建议为密钥设置密码然后使用ssh-agent 这里；</li>
 <li>在.ssh/config加入下面内容： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Host vm #ssh连接的别名</span><br><span class="line">   User username_goes_here #用户名</span><br><span class="line">   HostName ip_goes_here #ip地址</span><br><span class="line">   IdentityFile ~/.ssh/id_ed25519 #密钥文件</span><br><span class="line">   LocalForward 9999 localhost:8888  #本地端口转发</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/Lecture%203%20vim/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
+      <meta itemprop="name" content="XuandYu000">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="viewoverlook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/07/02/Lecture%203%20vim/" class="post-title-link" itemprop="url">Lecture 3 vim</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:07:09" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/csdiy/" itemprop="url" rel="index"><span itemprop="name">csdiy</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/csdiy/missing-semester/" itemprop="url" rel="index"><span itemprop="name">missing semester</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="lecture-3-vim">Lecture 3 vim</h1>
+<ol type="1">
+<li><p>完成 vimtutor。 备注： 它在一个 80x24（80 列，24 行）
+终端窗口看起来最好。 直接执行 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vimtutor</span><br></pre></td></tr></table></figure></p></li>
+<li><p>下载我们的vimrc，然后把它保存到 ~/.vimrc。 通读这个注释详细的文件
+（用 Vim!）， 然后观察 Vim
+在这个新的设置下看起来和使用起来有哪些细微的区别。
+下载后他禁用了上下左右键使用hjkl代替，挺反人类的但是用习惯还可以</p></li>
+<li><p>安装和配置一个插件： ctrlp.vim</p>
+<ul>
+<li>这里建议使用vim-plug，在.vimrc添加：Plug ‘插件名称’ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">call plug#begin(&#x27;~/.vim/plugged&#x27;)</span><br><span class="line"> Plug &#x27;vim-airline/vim-airline&#x27;</span><br><span class="line"> call plug#end()</span><br></pre></td></tr></table></figure>
+之后重新打开vim，执行 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:PlugInstall</span><br></pre></td></tr></table></figure> *删除插件 删除插件，只需要将写在
+.vimrc 配置文件内的插件删除，重启 vim 并执行命令 :PlugClean</li>
+</ul>
+<p>练习使用 Vim, 在你自己的机器上重做 演示。</p></li>
+<li><p>下个月用 Vim 完成所有的文件编辑。每当不够高效的时候，或者你感觉
+“一定有一个更好的方式”时，
+尝试求助搜索引擎，很有可能有一个更好的方式。如果你遇到难题，可以来我们的答疑时间或者给我们发邮件。</p></li>
+<li><p>在其他工具中设置 Vim 快捷键 （见上面的操作指南）。</p></li>
+<li><p>进一步自定义你的 ~/.vimrc 和安装更多插件。</p></li>
 </ol>
 
       
@@ -1230,6 +1128,108 @@ class="math inline">\(c^i\)</span>),前为质因子，后为所有数中质因�
 class="math inline">\(\sum_i{ci/2}\)</span>,剩下个数r=<span
 class="math inline">\(\sum_i(ci\%2)\)</span><br />
 res+=<span class="math inline">\(\sum_i{ci/2}\)</span>+r/3即可</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/02/Lecture%204%20%E6%95%B0%E6%8D%AE%E6%95%B4%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
+      <meta itemprop="name" content="XuandYu000">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="viewoverlook">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/07/02/Lecture%204%20%E6%95%B0%E6%8D%AE%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">Lecture 4 数据整理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-07-02 00:00:00 / 修改时间：16:06:51" itemprop="dateCreated datePublished" datetime="2023-07-02T00:00:00+08:00">2023-07-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/csdiy/" itemprop="url" rel="index"><span itemprop="name">csdiy</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/csdiy/missing-semester/" itemprop="url" rel="index"><span itemprop="name">missing semester</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="lecture-4-数据整理">Lecture 4 数据整理</h1>
+<h3 id="练习">练习</h3>
+<ol type="1">
+<li>学习一下这篇简短的 <a
+target="_blank" rel="noopener" href="https://regexone.com/">交互式正则表达式教程</a>.</li>
+<li>统计words文件 (/usr/share/dict/words) 中包含至少三个a 且不以's
+结尾的单词个数。这些单词中，出现频率前三的末尾两个字母是什么？ sed的
+y命令，或者 tr
+程序也许可以帮你解决大小写的问题。共存在多少种词尾两字母组合？还有一个很
+有挑战性的问题：哪个组合从未出现过？ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat /usr/share/dict/words | tr &quot;[:upper:]&quot; &quot;[:lower:]&quot; | grep -E &quot;^([^a]*a)&#123;3&#125;.*$&quot; | grep -v &quot;&#x27;s$&quot; | wc -l </span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; cat /usr/share/dict/words 打开这个文件</span><br><span class="line">&gt; tr &quot;[:upper:]&quot; &quot;[:lower:]&quot; tr命令将所有大写都转化为小写</span><br><span class="line">&gt; grep -E &quot;^([^a]*a)&#123;3&#125;.*$&quot; -E 使用正则表达式，([^a]*a)&#123;3&#125; 匹配零个或多个非&quot;a&quot;字符，后跟一个&quot;a&quot;字符匹配3次，之后匹配任意字符</span><br><span class="line">&gt; grep -v &quot;&#x27;s$&quot; &quot;&#x27;s$&quot; 匹配以&#x27;s结尾的字符，grep -v 不显示匹配字符</span><br><span class="line">&gt; wc -l 这个命令计算输出的行数，输出结果为符合要求的单词数。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /usr/share/dict/words | tr &quot;[:upper:]&quot; &quot;[:lower:]&quot; | grep -E &quot;^([^a]*a)&#123;3&#125;.*$&quot; | grep -v &quot;&#x27;s$&quot; | sed -E &quot;s/.*([a-z]&#123;2&#125;)$/\1/&quot; | sort | uniq -c | sort | tail -n3</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -E &quot;s/.*([a-z]&#123;2&#125;)$/\1/&quot; &quot;s/&quot;进入替换模式 .*匹配任意字符 ([a-z]&#123;2&#125;)$ 结尾处捕获两字符 &quot;\1&quot;使用捕获的字符替换</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">for i in &#123;a..z&#125;;do</span><br><span class="line"> for j in &#123;a..z&#125;;do</span><br><span class="line">    echo  &quot;$i$j&quot;</span><br><span class="line"> done</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./all.sh &gt; all.txt</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /usr/share/dict/words | tr &quot;[:upper:]&quot; &quot;[:lower:]&quot; | grep -E &quot;^([^a]*a)&#123;3&#125;.*$&quot; | grep -v &quot;&#x27;s$&quot; | sed -E &quot;s/.*([a-z]&#123;2&#125;)$/\1/&quot; | sort | uniq &gt; occurance.txt</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diff --unchanged-group-format=&#x27;&#x27; &lt;(cat occurance.txt) &lt;(cat all.txt) | wc -l</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">diff --unchanged-group-format=&#x27;&#x27; </span><br><span class="line">将两个文件中相同的部分设置为空字符串，剩下的就是不相同的部分，之后输出行数即可</span><br></pre></td></tr></table></figure>
+<ol start="3" type="1">
+<li>进行原地替换听上去很有诱惑力，例如： sed s/REGEX/SUBSTITUTION/
+input.txt &gt;
+input.txt。但是这并不是一个明智的做法，为什么呢？还是说只有 sed是这样的?
+查看 man sed 来完成这个问题</li>
+</ol>
+<ul>
+<li>sed s/REGEX/SUBSTITUTION/ input.txt &gt; input.txt 表达式中后一个
+input.txt会首先被清空，而且是发生在前的。所以前面一个input.txt在还没有被
+sed 处理时已经为空了。在使用正则处理文件前最好是首先备份文件。
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i.bak s/REGEX/SUBSTITION/ input.txt</span><br></pre></td></tr></table></figure> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这段命令如果数据没有备份会自动创建.bak备份文件，直接对文件进行修改</span><br></pre></td></tr></table></figure></li>
+</ul>
 
       
     </div>
@@ -1470,7 +1470,7 @@ class="math inline">\(e_5=d_5-d_4=a_1+a_2+a_3+a_4\)</span></p>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
