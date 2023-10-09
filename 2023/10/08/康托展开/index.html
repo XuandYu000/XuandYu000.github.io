@@ -23,15 +23,15 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="康托展开 康托展开是一个全排列到一个自然数的双射，常用于构建哈希表时的空间压缩。 康托展开的实质是计算当前排列在所有由小到大全排列中的顺序，因此是可逆的。 康托展开康托展开运算  其中,  为整数, 并且  。  表示原数的第 i 位在当前未出现的元素中是排在第几个 z 康托展开的逆运算 既然康托展开是一个双射，那么一定可以通过康托展开值求出原排列，即可以求出 n 的全">
+  <meta name="description" content="康托展开 康托展开是一个全排列到一个自然数的双射，常用于构建哈希表时的空间压缩。 康托展开的实质是计算当前排列在所有由小到大全排列中的顺序，因此是可逆的。 康托展开康托展开运算 \[ X &#x3D;a_{n}(n-1)! + a_{n-1}(n-2)! + \dots + a_{1}*0! \] 其中, \[ a_i \] 为整数, 并且 \[ 0 \leq a_{i} &lt;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="康托展开 - 康托展开 - 康托展开">
 <meta property="og:url" content="http://example.com/2023/10/08/%E5%BA%B7%E6%89%98%E5%B1%95%E5%BC%80/index.html">
 <meta property="og:site_name" content="viewoverlook">
-<meta property="og:description" content="康托展开 康托展开是一个全排列到一个自然数的双射，常用于构建哈希表时的空间压缩。 康托展开的实质是计算当前排列在所有由小到大全排列中的顺序，因此是可逆的。 康托展开康托展开运算  其中,  为整数, 并且  。  表示原数的第 i 位在当前未出现的元素中是排在第几个 z 康托展开的逆运算 既然康托展开是一个双射，那么一定可以通过康托展开值求出原排列，即可以求出 n 的全">
+<meta property="og:description" content="康托展开 康托展开是一个全排列到一个自然数的双射，常用于构建哈希表时的空间压缩。 康托展开的实质是计算当前排列在所有由小到大全排列中的顺序，因此是可逆的。 康托展开康托展开运算 \[ X &#x3D;a_{n}(n-1)! + a_{n-1}(n-2)! + \dots + a_{1}*0! \] 其中, \[ a_i \] 为整数, 并且 \[ 0 \leq a_{i} &lt;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-10-08T11:15:05.390Z">
-<meta property="article:modified_time" content="2023-10-09T03:54:15.276Z">
+<meta property="article:modified_time" content="2023-10-09T04:04:04.433Z">
 <meta property="article:author" content="XuandYu000">
 <meta property="article:tag" content="康托展开">
 <meta name="twitter:card" content="summary">
@@ -224,7 +224,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-10-09 11:54:15" itemprop="dateModified" datetime="2023-10-09T11:54:15+08:00">2023-10-09</time>
+                <time title="修改时间：2023-10-09 12:04:04" itemprop="dateModified" datetime="2023-10-09T12:04:04+08:00">2023-10-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -254,17 +254,20 @@ target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%8F%8C%E5%B
 target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%93%88%E5%B8%8C%E8%A1%A8?fromModule=lemma_inlink">哈希表</a>时的空间压缩。
 康托展开的实质是计算当前排列在所有由小到大全排列中的顺序，因此是可逆的。</p>
 <h3 id="康托展开康托展开运算">康托展开康托展开运算</h3>
-<p><img
-src="https://bkimg.cdn.bcebos.com/formula/043735c6e57ded6ec6d3b9132e6c506b.svg" /></p>
+<p><span class="math display">\[
+X =a_{n}(n-1)! + a_{n-1}(n-2)! + \dots + a_{1}*0!
+\]</span></p>
 <p>其中,</p>
-<p><img
-src="https://bkimg.cdn.bcebos.com/formula/d63672a409fb3da91a0107e3778273d0.svg" /></p>
+<p><span class="math display">\[
+a_i
+\]</span></p>
 <p>为整数, 并且</p>
-<p><img
-src="https://bkimg.cdn.bcebos.com/formula/1365906766f5ad9ce1c44aeaefb92551.svg" /></p>
-<p>。</p>
-<p><img
-src="https://bkimg.cdn.bcebos.com/formula/d63672a409fb3da91a0107e3778273d0.svg" /></p>
+<p><span class="math display">\[
+0 \leq a_{i} &lt; i, 1 \leq i \leq n
+\]</span></p>
+<p><span class="math display">\[
+a_i
+\]</span></p>
 <p>表示原数的第 i 位在当前未出现的元素中是排在第几个</p>
 <p>z 康托展开的逆运算</p>
 <p>既然康托展开是一个双射，那么一定可以通过康托展开值求出原排列，即可以求出
@@ -281,66 +284,51 @@ n 的全排列中第 x 大排列。</p>
 <h3 id="康托展开康托展开举例">康托展开康托展开举例</h3>
 <p>再举个例子说明。</p>
 <p>在</p>
-<p><img
-src="https://bkimg.cdn.bcebos.com/formula/4dd5c8c744e48958b5daaa18f2d3dcc5.svg" /></p>
+<p><span class="math display">\[
+(1, 2, 3, 4, 5)
+\]</span></p>
 <p>5 个数的排列组合中，计算 34152 的康托展开值。</p>
 <p>首位是 3，则小于 3 的数有两个，为 1 和 2，</p>
-<p><img
-src="https://bkimg.cdn.bcebos.com/formula/63ef9694b4df652acc6d5f6f856c580d.svg" /></p>
-<p>，则首位小于 3 的所有排列组合为</p>
-<p><img
-src="https://bkimg.cdn.bcebos.com/formula/776a141c29ecde0918101d27d7b5d13e.svg" /></p>
-<p>第二位是 4，由于第一位小于 4，1、2、3 中一定会有 1
-个充当第一位，所以排在 4 之下的只剩 2
-个，所以其实计算的是在第二位之后小于 4 的个数。因此</p>
-<p><img
-src="https://bkimg.cdn.bcebos.com/formula/2711e32de6d6e13d9e288291febe54bc.svg" /></p>
-<p>。</p>
+<p><span class="math inline">\(a[5] = 2\)</span> ，则首位小于 3
+的所有排列组合为</p>
+<p><span class="math inline">\(a[5]*(5-1)!\)</span> 第二位是
+4，由于第一位小于 4，1、2、3 中一定会有 1 个充当第一位，所以排在 4
+之下的只剩 2 个，所以其实计算的是在第二位之后小于 4 的个数。因此</p>
+<p><span class="math inline">\(a[4] = 2\)</span> 。</p>
 <p>第三位是 1，则在其之后小于 1 的数有 0 个，所以</p>
-<p><img
-src="https://bkimg.cdn.bcebos.com/formula/2795bf02701623f61345956de9e126d7.svg" /></p>
-<p>。</p>
+<p><span class="math inline">\(a[3]=\)</span> 。</p>
 <p>第四位是 5，则在其之后小于 5 的数有 1 个，为 2，所以</p>
-<p><img
-src="https://bkimg.cdn.bcebos.com/formula/8609ce7b34d590f8515d0e7e5596b752.svg" /></p>
-<p>。</p>
+<p><span class="math inline">\(a[2] =1\)</span> 。</p>
 <p>最后一位就不用计算啦，因为在它之后已经没有数了，所以</p>
-<p><img
-src="https://bkimg.cdn.bcebos.com/formula/d1d74f7b70e2ba6097215b82725b7b0f.svg" /></p>
-<p>固定为 0</p>
+<p><span class="math inline">\(a[1]\)</span> 固定为 0</p>
 <p>根据公式：</p>
-<p><img
-src="https://bkimg.cdn.bcebos.com/formula/020e9b258d25110ca4a395d4086e3b7b.svg" /></p>
-<p>所以比 34152 小的组合有 61 个，即 34152 是排第 62。</p>
+<p><span class="math inline">\(X = 2*4! + 2 * 3! +
+0*2!+1*1!+0*0!=61\)</span> 所以比 34152 小的组合有 61 个，即 34152
+是排第 62。</p>
 <h3 id="康托展开代码实现">康托展开代码实现</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int factorial[]=&#123;1,1,2,6,24,120,720,5040,40320,362880,3628800&#125;;//阶乘0-10</span><br><span class="line">int cantor(int a[],int n)&#123;//cantor展开,n表示是n位的全排列，a[]表示全排列的数（用数组表示）</span><br><span class="line">    int ans=0,sum=0;</span><br><span class="line">    for(int i=1;i&lt;n;i++)&#123;</span><br><span class="line">        for(int j=i+1;j&lt;=n;j++)</span><br><span class="line">            if(a[j]&lt;a[i])</span><br><span class="line">                sum++;</span><br><span class="line">        ans+=sum*factorial[n-i];//累积</span><br><span class="line">        sum=0;//计数器归零</span><br><span class="line">    &#125;</span><br><span class="line">    return ans+1;</span><br><span class="line">&#125;</span><br><span class="line">int main()&#123;</span><br><span class="line">    int sb[12],gs;</span><br><span class="line">    cin&gt;&gt;gs;</span><br><span class="line">    for(int i=1;i&lt;=gs;i++)</span><br><span class="line">        cin&gt;&gt;sb[i];</span><br><span class="line">    cout&lt;&lt;cantor(sb,gs);//输出该集合在全排列所在位置 </span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> factorial[]=&#123;<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">6</span>,<span class="number">24</span>,<span class="number">120</span>,<span class="number">720</span>,<span class="number">5040</span>,<span class="number">40320</span>,<span class="number">362880</span>,<span class="number">3628800</span>&#125;;<span class="comment">//阶乘0-10</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">cantor</span><span class="params">(<span class="type">int</span> a[],<span class="type">int</span> n)</span></span>&#123;<span class="comment">//cantor展开,n表示是n位的全排列，a[]表示全排列的数（用数组表示）</span></span><br><span class="line">    <span class="type">int</span> ans=<span class="number">0</span>,sum=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;n;i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=i+<span class="number">1</span>;j&lt;=n;j++)</span><br><span class="line">            <span class="keyword">if</span>(a[j]&lt;a[i])</span><br><span class="line">                sum++;</span><br><span class="line">        ans+=sum*factorial[n-i];<span class="comment">//累积</span></span><br><span class="line">        sum=<span class="number">0</span>;<span class="comment">//计数器归零</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans+<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> sb[<span class="number">12</span>],gs;</span><br><span class="line">    cin&gt;&gt;gs;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=gs;i++)</span><br><span class="line">        cin&gt;&gt;sb[i];</span><br><span class="line">    cout&lt;&lt;<span class="built_in">cantor</span>(sb,gs);<span class="comment">//输出该集合在全排列所在位置 </span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="康托展开逆康托展开举例">康托展开逆康托展开举例</h3>
 <p>一开始已经提过了，康托展开是一个全排列到一个自然数的双射，因此是可逆的。即对于上述例子，在</p>
-<p><img
-src="https://bkimg.cdn.bcebos.com/formula/4dd5c8c744e48958b5daaa18f2d3dcc5.svg" /></p>
-<p>给出 61 可以算出起排列组合为
+<p><span class="math inline">\((1,2,3,4,5)\)</span> 给出 61
+可以算出起排列组合为
 34152。由上述的计算过程可以容易的逆推回来，具体过程如下：</p>
 <p>用 61 / 4! = 2 余 13，说明</p>
-<p><img
-src="https://bkimg.cdn.bcebos.com/formula/63ef9694b4df652acc6d5f6f856c580d.svg" /></p>
-<p>, 说明比首位小的数有 2 个，所以首位为 3。</p>
+<p><span class="math inline">\(a[5]=2\)</span> , 说明比首位小的数有 2
+个，所以首位为 3。</p>
 <p>用 13 / 3! = 2 余 1，说明</p>
-<p><img
-src="https://bkimg.cdn.bcebos.com/formula/2711e32de6d6e13d9e288291febe54bc.svg" /></p>
-<p>，说明在第二位之后小于第二位的数有 2 个，所以第二位为 4。</p>
+<p><span class="math inline">\(a[4]=2\)</span>
+，说明在第二位之后小于第二位的数有 2 个，所以第二位为 4。</p>
 <p>用 1 / 2! = 0 余 1，说明</p>
-<p><img
-src="https://bkimg.cdn.bcebos.com/formula/2795bf02701623f61345956de9e126d7.svg" /></p>
-<p>，说明在第三位之后没有小于第三位的数，所以第三位为 1。</p>
+<p><span class="math inline">\(a[3]=0\)</span>
+，说明在第三位之后没有小于第三位的数，所以第三位为 1。</p>
 <p>用 1 / 1! = 1 余 0，说明</p>
-<p><img
-src="https://bkimg.cdn.bcebos.com/formula/8609ce7b34d590f8515d0e7e5596b752.svg" /></p>
-<p>，说明在第四位之后小于第四位的数有 1 个，所以第四位为 5。</p>
+<p><span class="math inline">\(a[2]=1\)</span>
+，说明在第四位之后小于第四位的数有 1 个，所以第四位为 5。</p>
 <p>最后一位自然就是剩下的数 2。</p>
 <p>通过以上分析，所求排列组合为 34152。</p>
 <h3 id="康托展开代码实现-1">康托展开代码实现</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">static const int FAC[] = &#123;1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880&#125;;   // 阶乘</span><br><span class="line">//康托展开逆运算</span><br><span class="line">void decantor(int x, int n) &#123;</span><br><span class="line">    vector&lt;int&gt; v;  // 存放当前可选数</span><br><span class="line">    vector&lt;int&gt; a;  // 所求排列组合</span><br><span class="line">    for(int i=1;i&lt;=n;i++)</span><br><span class="line">        v.push_back(i);</span><br><span class="line">    for(int i=n;i&gt;=1;i--)</span><br><span class="line">    &#123;</span><br><span class="line">        int r = x % FAC[i-1];</span><br><span class="line">        int t = x / FAC[i-1];</span><br><span class="line">        x = r;</span><br><span class="line">        sort(v.begin(),v.end());// 从小到大排序</span><br><span class="line">        a.push_back(v[t]);      // 剩余数里第t+1个数为当前位</span><br><span class="line">        v.erase(v.begin()+t);   // 移除选做当前位的数</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cmath&gt;//pow的头文件 </span><br><span class="line">using namespace std;</span><br><span class="line">const int factorial[]=&#123;1,1,2,6,24,120,720,5040,40320,362880,3628800&#125;;//阶乘0-9</span><br><span class="line">int gs,rank;//gs表示gs位的全排列，rank排列位置 </span><br><span class="line">bool used[11];//判断是否用过 </span><br><span class="line">int decantor(int x,int gs)&#123;//逆cantor展开，x就是rank </span><br><span class="line">    int ans=0;//存放答案 </span><br><span class="line">    int sum=0;//暂时的计数 </span><br><span class="line">    int quotient,remainder;//quotient商，remainder余数 </span><br><span class="line">    for(int i=gs-1;i&gt;=1;i--)&#123;</span><br><span class="line">        quotient=x/factorial[i];</span><br><span class="line">        remainder=x%factorial[i];</span><br><span class="line">        for(int j=1;j&lt;=gs;j++)&#123;</span><br><span class="line">            if(!used[j])</span><br><span class="line">                sum++;</span><br><span class="line">            if(sum==quotient+1)&#123;//找到该位 </span><br><span class="line">                ans+=j*pow(10,i);//pow幂运算 </span><br><span class="line">                sum=0;//清零 </span><br><span class="line">                x=remainder;</span><br><span class="line">                used[j]=true;//标记为用过 </span><br><span class="line">                break; </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    for(int i=1;i&lt;=gs;i++)&#123;</span><br><span class="line">        if(!used[i])&#123;</span><br><span class="line">            ans+=i;</span><br><span class="line">            break;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;//最后一位 </span><br><span class="line">    return ans;//答案 </span><br><span class="line">&#125;//逆推过程 </span><br><span class="line">int main()&#123;//（signed main也可以） </span><br><span class="line">    for(int i=1;i&lt;=10;i++)</span><br><span class="line">        used[11]=false;//初始化为未用过 </span><br><span class="line">    cin&gt;&gt;gs; </span><br><span class="line">    cin&gt;&gt;rank;</span><br><span class="line">    rank--;//原rank前的个数 </span><br><span class="line">    cout&lt;&lt;decantor(rank,gs);//输出该排列 </span><br><span class="line">    return 0;//建议加上 </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">const</span> <span class="type">int</span> FAC[] = &#123;<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">6</span>, <span class="number">24</span>, <span class="number">120</span>, <span class="number">720</span>, <span class="number">5040</span>, <span class="number">40320</span>, <span class="number">362880</span>&#125;;   <span class="comment">// 阶乘</span></span><br><span class="line"><span class="comment">//康托展开逆运算</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">decantor</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; v;  <span class="comment">// 存放当前可选数</span></span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; a;  <span class="comment">// 所求排列组合</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        v.<span class="built_in">push_back</span>(i);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=n;i&gt;=<span class="number">1</span>;i--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> r = x % FAC[i<span class="number">-1</span>];</span><br><span class="line">        <span class="type">int</span> t = x / FAC[i<span class="number">-1</span>];</span><br><span class="line">        x = r;</span><br><span class="line">        <span class="built_in">sort</span>(v.<span class="built_in">begin</span>(),v.<span class="built_in">end</span>());<span class="comment">// 从小到大排序</span></span><br><span class="line">        a.<span class="built_in">push_back</span>(v[t]);      <span class="comment">// 剩余数里第t+1个数为当前位</span></span><br><span class="line">        v.<span class="built_in">erase</span>(v.<span class="built_in">begin</span>()+t);   <span class="comment">// 移除选做当前位的数</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cmath&gt;</span><span class="comment">//pow的头文件 </span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> factorial[]=&#123;<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">6</span>,<span class="number">24</span>,<span class="number">120</span>,<span class="number">720</span>,<span class="number">5040</span>,<span class="number">40320</span>,<span class="number">362880</span>,<span class="number">3628800</span>&#125;;<span class="comment">//阶乘0-9</span></span><br><span class="line"><span class="type">int</span> gs,rank;<span class="comment">//gs表示gs位的全排列，rank排列位置 </span></span><br><span class="line"><span class="type">bool</span> used[<span class="number">11</span>];<span class="comment">//判断是否用过 </span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">decantor</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> gs)</span></span>&#123;<span class="comment">//逆cantor展开，x就是rank </span></span><br><span class="line">    <span class="type">int</span> ans=<span class="number">0</span>;<span class="comment">//存放答案 </span></span><br><span class="line">    <span class="type">int</span> sum=<span class="number">0</span>;<span class="comment">//暂时的计数 </span></span><br><span class="line">    <span class="type">int</span> quotient,remainder;<span class="comment">//quotient商，remainder余数 </span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=gs<span class="number">-1</span>;i&gt;=<span class="number">1</span>;i--)&#123;</span><br><span class="line">        quotient=x/factorial[i];</span><br><span class="line">        remainder=x%factorial[i];</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;=gs;j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(!used[j])</span><br><span class="line">                sum++;</span><br><span class="line">            <span class="keyword">if</span>(sum==quotient+<span class="number">1</span>)&#123;<span class="comment">//找到该位 </span></span><br><span class="line">                ans+=j*<span class="built_in">pow</span>(<span class="number">10</span>,i);<span class="comment">//pow幂运算 </span></span><br><span class="line">                sum=<span class="number">0</span>;<span class="comment">//清零 </span></span><br><span class="line">                x=remainder;</span><br><span class="line">                used[j]=<span class="literal">true</span>;<span class="comment">//标记为用过 </span></span><br><span class="line">                <span class="keyword">break</span>; </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=gs;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(!used[i])&#123;</span><br><span class="line">            ans+=i;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="comment">//最后一位 </span></span><br><span class="line">    <span class="keyword">return</span> ans;<span class="comment">//答案 </span></span><br><span class="line">&#125;<span class="comment">//逆推过程 </span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;<span class="comment">//（signed main也可以） </span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">10</span>;i++)</span><br><span class="line">        used[<span class="number">11</span>]=<span class="literal">false</span>;<span class="comment">//初始化为未用过 </span></span><br><span class="line">    cin&gt;&gt;gs; </span><br><span class="line">    cin&gt;&gt;rank;</span><br><span class="line">    rank--;<span class="comment">//原rank前的个数 </span></span><br><span class="line">    cout&lt;&lt;<span class="built_in">decantor</span>(rank,gs);<span class="comment">//输出该排列 </span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;<span class="comment">//建议加上 </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>显然，n 位（0~n-1）全排列后，其康托展开唯一且最大约为
 n!，因此可以由更小的空间来储存这些排列。由公式可将 X
 逆推出唯一的一个排列。</p>
