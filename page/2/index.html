@@ -668,7 +668,7 @@ alt="image.png" />
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/07/2_3%20The%20DLList%20%20%20%20%20results%20matching%20No%20results%20matching/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/07/2_2%20The%20SLList%20%20%20%20Improvement%205%EF%BC%9A%20Caching%20results%20matching%20No%20results%20matching/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
@@ -682,7 +682,7 @@ alt="image.png" />
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/09/07/2_3%20The%20DLList%20%20%20%20%20results%20matching%20No%20results%20matching/" class="post-title-link" itemprop="url">23</a>
+            <a href="/2023/09/07/2_2%20The%20SLList%20%20%20%20Improvement%205%EF%BC%9A%20Caching%20results%20matching%20No%20results%20matching/" class="post-title-link" itemprop="url">Improvement #1: Caching</a>
         </h2>
 
         <div class="post-meta">
@@ -699,7 +699,7 @@ alt="image.png" />
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-09-17 10:10:50" itemprop="dateModified" datetime="2023-09-17T10:10:50+08:00">2023-09-17</time>
+                <time title="修改时间：2023-09-17 10:10:27" itemprop="dateModified" datetime="2023-09-17T10:10:27+08:00">2023-09-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -726,20 +726,27 @@ alt="image.png" />
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="dllists">DLLists</h2>
-<p>In Chapter 2.2, we built the <code>SLList</code> class, which was
-better than our earlier naked recursive <code>IntList</code> data
-structure. In this section, we'll wrap up our discussion of linked
-lists, and also start learning the foundations of arrays that we'll need
-for an array based list we'll call an <code>AList</code>. Along the way,
-we'll also reveal the secret of why we used the awkward name
-<code>SLList</code> in the previous chapter.</p>
-<h3 id="addlast">addLast</h3>
-<p>Consider the <code>addLast(int x)</code> method from the previous
-chapter.</p>
+          <h2 id="sllists">SLLists</h2>
+<p>In Chapter 2.1, we built the <code>IntList</code> class, a list data
+structure that can technically do all the things a list can do. However,
+in practice, the <code>IntList</code> suffers from the fact that it is
+fairly awkward to use, resulting in code that is hard to read and
+maintain.</p>
+<p>Fundamentally, the issue is that the <code>IntList</code> is what I
+call a <strong>naked recursive</strong> data structure. In order to use
+an <code>IntList</code> correctly, the programmer must understand and
+utilize recursion even for simple list related tasks. This limits its
+usefulness to novice programmers, and potentially introduces a whole new
+class of tricky errors that programmers might run into, depending on
+what sort of helper methods are provided by the <code>IntList</code>
+class.</p>
+<p>Inspired by our experience with the <code>IntList</code>, we'll now
+build a new class <code>SLList</code>, which much more closely resembles
+the list implementations that programmers use in modern languages. We'll
+do so by iteratively adding a sequence of improvements.</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/09/07/2_3%20The%20DLList%20%20%20%20%20results%20matching%20No%20results%20matching/#more" rel="contents">
+              <a class="btn" href="/2023/09/07/2_2%20The%20SLList%20%20%20%20Improvement%205%EF%BC%9A%20Caching%20results%20matching%20No%20results%20matching/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -859,7 +866,7 @@ scratch, along the way learning some key features of Java.</p>
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/07/2_2%20The%20SLList%20%20%20%20Improvement%205%EF%BC%9A%20Caching%20results%20matching%20No%20results%20matching/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/07/2_3%20The%20DLList%20%20%20%20%20results%20matching%20No%20results%20matching/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://raw.githubusercontent.com/XuandYu000/picture/main/avatar_1.gif">
@@ -873,7 +880,7 @@ scratch, along the way learning some key features of Java.</p>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/09/07/2_2%20The%20SLList%20%20%20%20Improvement%205%EF%BC%9A%20Caching%20results%20matching%20No%20results%20matching/" class="post-title-link" itemprop="url">Improvement #1: Caching</a>
+            <a href="/2023/09/07/2_3%20The%20DLList%20%20%20%20%20results%20matching%20No%20results%20matching/" class="post-title-link" itemprop="url">23</a>
         </h2>
 
         <div class="post-meta">
@@ -890,7 +897,7 @@ scratch, along the way learning some key features of Java.</p>
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-09-17 10:10:27" itemprop="dateModified" datetime="2023-09-17T10:10:27+08:00">2023-09-17</time>
+                <time title="修改时间：2023-09-17 10:10:50" itemprop="dateModified" datetime="2023-09-17T10:10:50+08:00">2023-09-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -917,27 +924,20 @@ scratch, along the way learning some key features of Java.</p>
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="sllists">SLLists</h2>
-<p>In Chapter 2.1, we built the <code>IntList</code> class, a list data
-structure that can technically do all the things a list can do. However,
-in practice, the <code>IntList</code> suffers from the fact that it is
-fairly awkward to use, resulting in code that is hard to read and
-maintain.</p>
-<p>Fundamentally, the issue is that the <code>IntList</code> is what I
-call a <strong>naked recursive</strong> data structure. In order to use
-an <code>IntList</code> correctly, the programmer must understand and
-utilize recursion even for simple list related tasks. This limits its
-usefulness to novice programmers, and potentially introduces a whole new
-class of tricky errors that programmers might run into, depending on
-what sort of helper methods are provided by the <code>IntList</code>
-class.</p>
-<p>Inspired by our experience with the <code>IntList</code>, we'll now
-build a new class <code>SLList</code>, which much more closely resembles
-the list implementations that programmers use in modern languages. We'll
-do so by iteratively adding a sequence of improvements.</p>
+          <h2 id="dllists">DLLists</h2>
+<p>In Chapter 2.2, we built the <code>SLList</code> class, which was
+better than our earlier naked recursive <code>IntList</code> data
+structure. In this section, we'll wrap up our discussion of linked
+lists, and also start learning the foundations of arrays that we'll need
+for an array based list we'll call an <code>AList</code>. Along the way,
+we'll also reveal the secret of why we used the awkward name
+<code>SLList</code> in the previous chapter.</p>
+<h3 id="addlast">addLast</h3>
+<p>Consider the <code>addLast(int x)</code> method from the previous
+chapter.</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/09/07/2_2%20The%20SLList%20%20%20%20Improvement%205%EF%BC%9A%20Caching%20results%20matching%20No%20results%20matching/#more" rel="contents">
+              <a class="btn" href="/2023/09/07/2_3%20The%20DLList%20%20%20%20%20results%20matching%20No%20results%20matching/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>

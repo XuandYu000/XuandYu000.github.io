@@ -202,7 +202,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/10/08/%E5%BA%B7%E6%89%98%E5%B1%95%E5%BC%80/" class="post-title-link" itemprop="url">康托展开 - 康托展开</a>
+            <a href="/2023/10/08/%E5%BA%B7%E6%89%98%E5%B1%95%E5%BC%80/" class="post-title-link" itemprop="url">康托展开 - 康托展开 - 康托展开</a>
         </h2>
 
         <div class="post-meta">
@@ -219,7 +219,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-10-07 13:51:55" itemprop="dateModified" datetime="2023-10-07T13:51:55+08:00">2023-10-07</time>
+                <time title="修改时间：2023-10-09 11:54:15" itemprop="dateModified" datetime="2023-10-09T11:54:15+08:00">2023-10-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -272,83 +272,14 @@ n 的全排列中第 x 大排列。</p>
 去除 1! 得到 1 余 0，这一位是 2. 最后一位只能是 1. 所以这个数是
 45321。</p>
 <p>按以上方法可以得出通用的算法。 [1]</p>
-<h3 id="康托展开康托展开举例">康托展开康托展开举例</h3>
-<p>再举个例子说明。</p>
-<p>在</p>
-<p><img
-src="https://bkimg.cdn.bcebos.com/formula/4dd5c8c744e48958b5daaa18f2d3dcc5.svg" /></p>
-<p>5 个数的排列组合中，计算 34152 的康托展开值。</p>
-<p>首位是 3，则小于 3 的数有两个，为 1 和 2，</p>
-<p><img
-src="https://bkimg.cdn.bcebos.com/formula/63ef9694b4df652acc6d5f6f856c580d.svg" /></p>
-<p>，则首位小于 3 的所有排列组合为</p>
-<p><img
-src="https://bkimg.cdn.bcebos.com/formula/776a141c29ecde0918101d27d7b5d13e.svg" /></p>
-<p>第二位是 4，由于第一位小于 4，1、2、3 中一定会有 1
-个充当第一位，所以排在 4 之下的只剩 2
-个，所以其实计算的是在第二位之后小于 4 的个数。因此</p>
-<p><img
-src="https://bkimg.cdn.bcebos.com/formula/2711e32de6d6e13d9e288291febe54bc.svg" /></p>
-<p>。</p>
-<p>第三位是 1，则在其之后小于 1 的数有 0 个，所以</p>
-<p><img
-src="https://bkimg.cdn.bcebos.com/formula/2795bf02701623f61345956de9e126d7.svg" /></p>
-<p>。</p>
-<p>第四位是 5，则在其之后小于 5 的数有 1 个，为 2，所以</p>
-<p><img
-src="https://bkimg.cdn.bcebos.com/formula/8609ce7b34d590f8515d0e7e5596b752.svg" /></p>
-<p>。</p>
-<p>最后一位就不用计算啦，因为在它之后已经没有数了，所以</p>
-<p><img
-src="https://bkimg.cdn.bcebos.com/formula/d1d74f7b70e2ba6097215b82725b7b0f.svg" /></p>
-<p>固定为 0</p>
-<p>根据公式：</p>
-<p><img
-src="https://bkimg.cdn.bcebos.com/formula/020e9b258d25110ca4a395d4086e3b7b.svg" /></p>
-<p>所以比 34152 小的组合有 61 个，即 34152 是排第 62。</p>
-<h3 id="康托展开代码实现">康托展开代码实现</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int factorial[]=&#123;1,1,2,6,24,120,720,5040,40320,362880,3628800&#125;;//阶乘0-10</span><br><span class="line">int cantor(int a[],int n)&#123;//cantor展开,n表示是n位的全排列，a[]表示全排列的数（用数组表示）</span><br><span class="line">    int ans=0,sum=0;</span><br><span class="line">    for(int i=1;i&lt;n;i++)&#123;</span><br><span class="line">        for(int j=i+1;j&lt;=n;j++)</span><br><span class="line">            if(a[j]&lt;a[i])</span><br><span class="line">                sum++;</span><br><span class="line">        ans+=sum*factorial[n-i];//累积</span><br><span class="line">        sum=0;//计数器归零</span><br><span class="line">    &#125;</span><br><span class="line">    return ans+1;</span><br><span class="line">&#125;</span><br><span class="line">int main()&#123;</span><br><span class="line">    int sb[12],gs;</span><br><span class="line">    cin&gt;&gt;gs;</span><br><span class="line">    for(int i=1;i&lt;=gs;i++)</span><br><span class="line">        cin&gt;&gt;sb[i];</span><br><span class="line">    cout&lt;&lt;cantor(sb,gs);//输出该集合在全排列所在位置 </span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="康托展开逆康托展开举例">康托展开逆康托展开举例</h3>
-<p>一开始已经提过了，康托展开是一个全排列到一个自然数的双射，因此是可逆的。即对于上述例子，在</p>
-<p><img
-src="https://bkimg.cdn.bcebos.com/formula/4dd5c8c744e48958b5daaa18f2d3dcc5.svg" /></p>
-<p>给出 61 可以算出起排列组合为
-34152。由上述的计算过程可以容易的逆推回来，具体过程如下：</p>
-<p>用 61 / 4! = 2 余 13，说明</p>
-<p><img
-src="https://bkimg.cdn.bcebos.com/formula/63ef9694b4df652acc6d5f6f856c580d.svg" /></p>
-<p>, 说明比首位小的数有 2 个，所以首位为 3。</p>
-<p>用 13 / 3! = 2 余 1，说明</p>
-<p><img
-src="https://bkimg.cdn.bcebos.com/formula/2711e32de6d6e13d9e288291febe54bc.svg" /></p>
-<p>，说明在第二位之后小于第二位的数有 2 个，所以第二位为 4。</p>
-<p>用 1 / 2! = 0 余 1，说明</p>
-<p><img
-src="https://bkimg.cdn.bcebos.com/formula/2795bf02701623f61345956de9e126d7.svg" /></p>
-<p>，说明在第三位之后没有小于第三位的数，所以第三位为 1。</p>
-<p>用 1 / 1! = 1 余 0，说明</p>
-<p><img
-src="https://bkimg.cdn.bcebos.com/formula/8609ce7b34d590f8515d0e7e5596b752.svg" /></p>
-<p>，说明在第四位之后小于第四位的数有 1 个，所以第四位为 5。</p>
-<p>最后一位自然就是剩下的数 2。</p>
-<p>通过以上分析，所求排列组合为 34152。</p>
-<h3 id="康托展开代码实现-1">康托展开代码实现</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">static const int FAC[] = &#123;1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880&#125;;   // 阶乘</span><br><span class="line">//康托展开逆运算</span><br><span class="line">void decantor(int x, int n) &#123;</span><br><span class="line">    vector&lt;int&gt; v;  // 存放当前可选数</span><br><span class="line">    vector&lt;int&gt; a;  // 所求排列组合</span><br><span class="line">    for(int i=1;i&lt;=n;i++)</span><br><span class="line">        v.push_back(i);</span><br><span class="line">    for(int i=n;i&gt;=1;i--)</span><br><span class="line">    &#123;</span><br><span class="line">        int r = x % FAC[i-1];</span><br><span class="line">        int t = x / FAC[i-1];</span><br><span class="line">        x = r;</span><br><span class="line">        sort(v.begin(),v.end());// 从小到大排序</span><br><span class="line">        a.push_back(v[t]);      // 剩余数里第t+1个数为当前位</span><br><span class="line">        v.erase(v.begin()+t);   // 移除选做当前位的数</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cmath&gt;//pow的头文件 </span><br><span class="line">using namespace std;</span><br><span class="line">const int factorial[]=&#123;1,1,2,6,24,120,720,5040,40320,362880,3628800&#125;;//阶乘0-9</span><br><span class="line">int gs,rank;//gs表示gs位的全排列，rank排列位置 </span><br><span class="line">bool used[11];//判断是否用过 </span><br><span class="line">int decantor(int x,int gs)&#123;//逆cantor展开，x就是rank </span><br><span class="line">    int ans=0;//存放答案 </span><br><span class="line">    int sum=0;//暂时的计数 </span><br><span class="line">    int quotient,remainder;//quotient商，remainder余数 </span><br><span class="line">    for(int i=gs-1;i&gt;=1;i--)&#123;</span><br><span class="line">        quotient=x/factorial[i];</span><br><span class="line">        remainder=x%factorial[i];</span><br><span class="line">        for(int j=1;j&lt;=gs;j++)&#123;</span><br><span class="line">            if(!used[j])</span><br><span class="line">                sum++;</span><br><span class="line">            if(sum==quotient+1)&#123;//找到该位 </span><br><span class="line">                ans+=j*pow(10,i);//pow幂运算 </span><br><span class="line">                sum=0;//清零 </span><br><span class="line">                x=remainder;</span><br><span class="line">                used[j]=true;//标记为用过 </span><br><span class="line">                break; </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    for(int i=1;i&lt;=gs;i++)&#123;</span><br><span class="line">        if(!used[i])&#123;</span><br><span class="line">            ans+=i;</span><br><span class="line">            break;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;//最后一位 </span><br><span class="line">    return ans;//答案 </span><br><span class="line">&#125;//逆推过程 </span><br><span class="line">int main()&#123;//（signed main也可以） </span><br><span class="line">    for(int i=1;i&lt;=10;i++)</span><br><span class="line">        used[11]=false;//初始化为未用过 </span><br><span class="line">    cin&gt;&gt;gs; </span><br><span class="line">    cin&gt;&gt;rank;</span><br><span class="line">    rank--;//原rank前的个数 </span><br><span class="line">    cout&lt;&lt;decantor(rank,gs);//输出该排列 </span><br><span class="line">    return 0;//建议加上 </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>显然，n 位（0~n-1）全排列后，其康托展开唯一且最大约为
-n!，因此可以由更小的空间来储存这些排列。由公式可将 X
-逆推出唯一的一个排列。</p>
-<h3 id="例题">例题</h3>
-<p><a
-target="_blank" rel="noopener" href="https://vjudge.net/problem/%E6%B4%9B%E8%B0%B7-P5367">康托展开</a>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Problem: P5367 【模板】康托展开</span></span><br><span class="line"><span class="comment">// Contest: Luogu</span></span><br><span class="line"><span class="comment">// URL: https://www.luogu.com.cn/problem/P5367</span></span><br><span class="line"><span class="comment">// Memory Limit: 64 MB</span></span><br><span class="line"><span class="comment">// Time Limit: 1200 ms</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Powered by CP Editor (https://cpeditor.org)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;array&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> x first</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> y second</span></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; PII;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">1e6</span> + <span class="number">10</span>;</span><br><span class="line"><span class="type">const</span> LL mod = <span class="number">998244353</span>;</span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line">LL tr[N];</span><br><span class="line">LL fac[N] = &#123;<span class="number">1</span>, <span class="number">1</span>&#125;;</span><br><span class="line"><span class="type">int</span> a[N];</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">lowbit</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123; <span class="keyword">return</span> x &amp; -x; &#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">update</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">while</span> (x &lt;= n) &#123;</span><br><span class="line">    tr[x] += y;</span><br><span class="line">    x += <span class="built_in">lowbit</span>(x);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">LL <span class="title">query</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">  LL sum = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span> (x) &#123;</span><br><span class="line">    sum += tr[x];</span><br><span class="line">    x -= <span class="built_in">lowbit</span>(x);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">    fac[i] = (fac[i - <span class="number">1</span>] % mod) * i % mod;</span><br><span class="line">    <span class="built_in">update</span>(i, <span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  cin &gt;&gt; n;</span><br><span class="line">  <span class="built_in">init</span>();</span><br><span class="line">  LL res = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">    cin &gt;&gt; a[i];</span><br><span class="line">    <span class="comment">// cout &lt;&lt; query(a[i] - 1) &lt;&lt; endl;</span></span><br><span class="line">    res = (res + ((<span class="built_in">query</span>(a[i] - <span class="number">1</span>) * fac[n - i]) % mod)) % mod;</span><br><span class="line">    <span class="built_in">update</span>(a[i], <span class="number">-1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;%lld&quot;</span>, res + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>参考资料</p>
-<ul>
-<li>1 <a href="#ref_1_437641">  </a> Calude C S, Staiger L, Svozil K.
-Randomness relative to Cantor expansions[J]. Communications in Nonlinear
-Science &amp; Numerical Simulation, 2005, 10(8):921-930.</li>
-</ul>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/10/08/%E5%BA%B7%E6%89%98%E5%B1%95%E5%BC%80/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
