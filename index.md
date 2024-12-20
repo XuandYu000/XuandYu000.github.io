@@ -7,7 +7,7 @@ layout: page
 
 ***
 
-My name is **Xu Zhiyu**. I am now a fourth-year student at the [College Of Intelligence And Computing](https://cic.tju.edu.cn/), [Tianjin University](https://www.tju.edu.cn/) majoring in Computer Science. <br>I will continue my postgraduate studies at the [College Of Intelligence And Computing](https://cic.tju.edu.cn/), [Tianjin University](https://www.tju.edu.cn/) supervised by Prof. [Dongwei REN](https://csdwren.github.io/).<br>If you want to know more about me. Here is my [resume](https://xuandyu000.github.io/online-cv/).<br>
+My name is **Xu Zhiyu**. I am now a fourth-year student at the [College Of Intelligence And Computing](https://cic.tju.edu.cn/), [Tianjin University](https://www.tju.edu.cn/) majoring in Computer Science. <br>I will continue my postgraduate studies at the [College Of Intelligence And Computing](https://cic.tju.edu.cn/), [Tianjin University](https://www.tju.edu.cn/) supervised by Prof. [Dongwei REN](https://csdwren.github.io/).<br>If you want to know more about me. Here is my [resume]().<br>
 
 ## Academic Interests
 
