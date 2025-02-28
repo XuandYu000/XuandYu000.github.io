@@ -20,4 +20,4 @@ Recording the Prof. Liantang Wang' lecture notes
 
 ## *tools*
 
-- [zsh安装与配置，使用oh-my-zsh美化](https://github.com/XuandYu000/XuandYu000.github.io/tree/main/blogs/zsh 安装与配置，使用 oh-my-zsh 美化终端.html)
+- [zsh安装与配置，使用oh-my-zsh美化](./blogs/zsh 安装与配置，使用 oh-my-zsh 美化终端.html)
