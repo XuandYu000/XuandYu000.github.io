@@ -21,3 +21,4 @@ Recording the Prof. Liantang Wang' lecture notes
 ## *tools*
 
 - [zsh安装与配置，使用oh-my-zsh美化](./blogs/zsh 安装与配置，使用 oh-my-zsh 美化终端.html)
+- [读论文](./blogs/读paper（李沐法）.html)
