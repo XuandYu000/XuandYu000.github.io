@@ -18,6 +18,10 @@ Recording the Prof. Liantang Wang' lecture notes
 
 <br>
 
+## *Java*
+
+- [static关键字](./blogs/static关键字.html)
+
 ## *tools*
 
 - [zsh安装与配置，使用oh-my-zsh美化](./blogs/zsh 安装与配置，使用 oh-my-zsh 美化终端.html)
